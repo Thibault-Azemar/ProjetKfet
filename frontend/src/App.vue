@@ -1,18 +1,20 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <!--<img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js App"/>
-  <h1>Test</h1>
-  <test/>
-
+  <h1>Test</h1>-->
+  <test></test>
+  test test
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+//import HelloWorld from './components/HelloWorld.vue';
+import test from './components/test.vue';
 
 export default defineComponent({
   components:{
-    HelloWorld
+    //HelloWorld,
+    test
   }
 })
 </script>
