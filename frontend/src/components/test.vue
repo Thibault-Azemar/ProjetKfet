@@ -29,17 +29,7 @@ import test from '../services/test'
         test
       }
     },
-    methods: {
-      getTest(){
-          test.getTest().then((response) =>{
-            this.datatest = response.data
-          });
-      }
-
-    },
-    created(){
-        this.getTest()
-    }
+    
   }
 
 </script>
