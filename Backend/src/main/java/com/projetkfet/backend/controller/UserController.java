@@ -18,14 +18,6 @@ public class UserController {
 
 //  Get
 
-//    Retourne l'id de l'utilisateur avec lequel on se connecte
-    @GetMapping(path="/connect")
-    public @ResponseBody
-    Integer connectUser (@RequestParam("name") String name, @RequestParam("password") String password)
-    {
-        return userRepository.findByNameAndPassword(name, password).getId();
-    }
-
 //    Retourne la liste de tous les utilisateurs
     @GetMapping(path="/all")
     public @ResponseBody Iterable<User> getAllUsers()
@@ -34,6 +26,14 @@ public class UserController {
     }
 
 //  Post
+
+//    Retourne l'id de l'utilisateur avec lequel on se connecte
+    @PostMapping()
+    public @ResponseBody
+    Integer connectUser (@RequestParam("name") String name, @RequestParam("password") String password)
+    {
+        return userRepository.findByNameAndPassword(name, password).getId();
+    }
 
 //    Permet d'ajouter un nouvel utilisateur
     @PostMapping(path="/add")
@@ -67,6 +67,8 @@ public class UserController {
             {
                 user.setPassword(password);
             }
+
+            userRepository.save(user);
         }
     }
 
