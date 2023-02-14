@@ -26,13 +26,11 @@ public class UserController {
         return "Saved";
     }
 
-    @PostMapping(path="/connect")
+    @GetMapping(path="/connect")
     public @ResponseBody
-    String connectUser (@RequestParam String name
+    User connectUser (@RequestParam String name
             , @RequestParam String password) {
-        userRepository.findById();
-
-        return "Saved";
+        return userRepository.findByNameAndPassword(name, password);
     }
 
     @GetMapping(path="/all")
