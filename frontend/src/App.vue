@@ -3,16 +3,21 @@
   <HelloWorld msg="Welcome to Your Vue.js App"/>
   <h1>Test</h1>-->
   <test></test>
-  test test
+  <MenuComponent></MenuComponent>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 //import HelloWorld from './components/HelloWorld.vue';
 import test from './components/test.vue';
+//import MenuComponent from "./services/MenuComponent";
+import MenuComponent from './components/MenuComponent.vue'
+
+
 
 export default defineComponent({
   components:{
+    MenuComponent,
     //HelloWorld,
     test
   }
