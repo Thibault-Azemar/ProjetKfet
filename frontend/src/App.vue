@@ -1,15 +1,16 @@
 <template>
   <!--<img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js App"/>
-  <h1>Test</h1>-->
-  <test></test>
-  <MenuComponent></MenuComponent>
+  <h1>Test</h1>
+  <test></test>-->
+  <router-view/>
+  <MenuComponent/>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 //import HelloWorld from './components/HelloWorld.vue';
-import test from './components/test.vue';
+//import test from './components/test.vue';
 //import MenuComponent from "./services/MenuComponent";
 import MenuComponent from './components/MenuComponent.vue'
 
@@ -19,7 +20,7 @@ export default defineComponent({
   components:{
     MenuComponent,
     //HelloWorld,
-    test
+    //test
   }
 })
 </script>

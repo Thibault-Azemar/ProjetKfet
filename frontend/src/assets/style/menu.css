@@ -27,18 +27,21 @@
     margin-right: 10px;
 }
 
-router-link{
+.router-menu{
     width: 25px;
     height: 25px;
 }
 
+svg:hover{
+    color: red ;
+}
 @media screen and (min-width: 700px){
     .menu{
         height: 70px;
         top : calc(100% - 70px);
     }
 
-    router-link{
+    .router-menu{
         width: 30px;
         height: 30px;
     }
@@ -60,7 +63,7 @@ router-link{
         height: calc(100% - 108px);
     }
 
-    router-link{
+    .router-menu{
         margin-top: 30px;
         margin-bottom: 30px;
     }

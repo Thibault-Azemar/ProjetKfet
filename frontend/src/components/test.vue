@@ -6,7 +6,7 @@
   <button class="secondary-button">Annuler</button>
   <button class="tertiary-button"></button>
   <button class="delete-button">Supprimer</button>
-  <input class="search">
+  <input type="text" class="search">
   <label>Choose a pet:</label>
   <select name="pets" id="pet-select">
     <option value="">--Please choose an option--</option>
@@ -30,15 +30,10 @@ import test from '../services/test'
       }
     },
     methods: {
-      getTest(){
-          test.getTest().then((response) =>{
-            this.datatest = response.data
-          });
-      }
+
 
     },
     created(){
-        this.getTest()
     }
   }
 

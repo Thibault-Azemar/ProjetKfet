@@ -1,19 +1,13 @@
-import MenuComponent from '../components/MenuComponent.vue'
+import GestionComponent from '../components/GestionComponent.vue'
 import { defineComponent } from 'vue'
-import '../assets/style/menu.css'
-import { useRouter } from 'vue-router'
-const router = useRouter()
-
-function showPopUpRole(): void{
-    console.log("test")
-}
+import '../assets/style/gestion.css'
 
 // @ts-ignore
 // @ts-ignore
 export default defineComponent({
 
     components:{
-        MenuComponent
+        GestionComponent
     },
     // type inference enabled
     /*props: {
@@ -22,14 +16,12 @@ export default defineComponent({
     },*/
     data() {
         return {
-            count: 1
+
         }
     },
     methods:{
-        showPopUpRole: function (){
-            showPopUpRole()
-        },
-        }
+
+    }
     /*mounted() {
         this.name // type: string | undefined
         this.msg // type: string
@@ -37,5 +29,3 @@ export default defineComponent({
     }*/
 
 })
-
-
