@@ -8,8 +8,6 @@ function showPopUpRole(): void{
     console.log("test")
 }
 
-// @ts-ignore
-// @ts-ignore
 export default defineComponent({
 
     components:{
@@ -37,5 +35,3 @@ export default defineComponent({
     }*/
 
 })
-
-

@@ -1,7 +1,6 @@
 <script lang="ts" src="../services/MenuComponent.ts"></script>
 
 <template>
-
   <div class="menu">
     <div id="items">
       <router-link to="/commande" class="router-menu"><img src="../assets/pictures/pen-to-square.svg"></router-link>
