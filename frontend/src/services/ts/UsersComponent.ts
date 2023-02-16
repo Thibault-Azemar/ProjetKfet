@@ -1,23 +1,20 @@
-import GestionComponent from '../components/GestionComponent.vue'
+import UsersComponent from '../../components/UsersComponent.vue'
 import { defineComponent } from 'vue'
-import '../assets/style/gestion.css'
+import '../../assets/style/users.css'
 
 // @ts-ignore
 // @ts-ignore
 export default defineComponent({
 
     components:{
-        GestionComponent
+        UsersComponent
     },
     // type inference enabled
-    /*props: {
-        name: String ,
-        msg: { type: String, required: true, default:'test'}
-    },*/
+    props: {
+        //value: String ,
+    },
     data() {
-        return {
 
-        }
     },
     methods:{
 

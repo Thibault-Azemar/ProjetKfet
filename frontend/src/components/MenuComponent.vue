@@ -1,4 +1,4 @@
-<script lang="ts" src="../services/MenuComponent.ts"></script>
+<script lang="ts" src="../services/ts/MenuComponent.ts"></script>
 
 <template>
   <div class="menu">

@@ -17,6 +17,7 @@
     <option value="spider">Spider</option>
     <option value="goldfish">Goldfish</option>
   </select>
+  <button class="icon-button"><img src="../assets/pictures/user.svg"></button>
 </template>
 
 <script>
