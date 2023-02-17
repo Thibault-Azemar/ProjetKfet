@@ -1,6 +1,7 @@
 package com.projetkfet.backend;
 
-import org.slf4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("http://localhost:8081/")
 public class BackendApplication {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LogManager.getLogger("UserLogger");
 
     public static void main(String[] args) {
         SpringApplication.run(BackendApplication.class, args);
