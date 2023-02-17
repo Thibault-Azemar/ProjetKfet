@@ -8,8 +8,8 @@
             <PatternLayout pattern="${LOG_PATTERN}" />
         </Console>
         <RollingFile name="appLog"
-                     fileName="./logs/application.log"
-                     filePattern="./logs/application-%d{yyyy-MM-dd}-%i.log">
+                     fileName="logs/application.log"
+                     filePattern="logs/application-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout pattern="${LOG_PATTERN}" />
             <Policies>
                 <SizeBasedTriggeringPolicy size="19500KB" />
@@ -22,7 +22,7 @@
             <AppenderRef ref="appLog" />
             <AppenderRef ref="Console" />
         </Logger>
-        <Root level="debug">
+        <Root level="info">
             <AppenderRef ref="Console" />
             <AppenderRef ref="appLog" />
         </Root>
