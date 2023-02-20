@@ -9,8 +9,8 @@
         <Console name="Console" target="SYSTEM_OUT" follow="true">
             <PatternLayout disableAnsi="false" pattern="%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} %highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=green bold, TRACE=blue} %style{}{magenta} [%M] %style{%40C}{cyan} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%xEx}" />
         </Console>
-        <RollingFile name="UserAppender" fileName="logs/user.log"
-                     filePattern="logs/user-%d{yyyy-MM-dd}-%i.log.gz">
+        <RollingFile name="UserAppender" fileName="logs/users/users.log"
+                     filePattern="logs/users/users-%d{yyyy-MM-dd}-%i.log.gz">
             <ThresholdFilter level="INFO"/>
             <PatternLayout>
                 <Pattern>${LOG_PATTERN}</Pattern>
