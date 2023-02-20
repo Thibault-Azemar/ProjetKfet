@@ -2,6 +2,7 @@ package com.projetkfet.backend.controller;
 
 import com.projetkfet.backend.data.UserRepository;
 import com.projetkfet.backend.model.User;
+import com.projetkfet.backend.util.JwtTokenUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +37,12 @@ public class UserController {
 //    Retourne l'id de l'utilisateur avec lequel on se connecte
     @PostMapping()
     public @ResponseBody
-    Integer connectUser (@RequestParam("name") String name, @RequestParam("password") String password)
+    String connectUser (@RequestParam("name") String name, @RequestParam("password") String password)
     {
         logger.info("Connect User");
-        return userRepository.findByNameAndPassword(name, password).getId();
+        User user = userRepository.findByNameAndPassword(name, password);
+
+        return JwtTokenUtil.generateToken(user);
     }
 
 //    Permet d'ajouter un nouvel utilisateur
