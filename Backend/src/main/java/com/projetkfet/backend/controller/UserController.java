@@ -22,6 +22,10 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
+
 //  Get
 
 //    Retourne la liste de tous les utilisateurs
