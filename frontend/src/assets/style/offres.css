@@ -3,6 +3,7 @@
     padding-left: 10px;
     display: grid;
     grid-template-columns: 25% auto 15% 40px 40px;
+    grid-auto-rows: min-content;
     align-items: center;
 }
 
@@ -19,6 +20,8 @@
 @media screen and (min-width: 700px) {
 
     .offres-grid{
+        padding-right: 0px;
+        padding-left: 20px;
         grid-template-columns: 20% auto 15% 50px 50px;
     }
 }
