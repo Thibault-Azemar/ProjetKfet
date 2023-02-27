@@ -3,14 +3,14 @@ package com.projetkfet.backend.model.stock;
 import jakarta.persistence.*;
 
 @Entity
-public class Produit {
+public class Product {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
     @ManyToOne
     @JoinColumn(name="sscat_id", nullable=false)
-    private SousCategorie ssCategorie;
+    private SubCategory subCategorie;
 //  Nom du produit
     private String name;
 //  Prix de vente
@@ -22,6 +22,16 @@ public class Produit {
 //  Stock de l'item
     private Integer stock;
 
+    public Product(Integer id, SubCategory subCategorie, String name, float sellingPrice, float sellingPriceMembers, float purchasePrice, Integer stock) {
+        this.id = id;
+        this.subCategorie = subCategorie;
+        this.name = name;
+        this.sellingPrice = sellingPrice;
+        this.sellingPriceMembers = sellingPriceMembers;
+        this.purchasePrice = purchasePrice;
+        this.stock = stock;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -30,12 +40,12 @@ public class Produit {
         this.id = id;
     }
 
-    public SousCategorie getSsCategorie() {
-        return ssCategorie;
+    public SubCategory getSubCategorie() {
+        return subCategorie;
     }
 
-    public void setSsCategorie(SousCategorie ssCategorie) {
-        this.ssCategorie = ssCategorie;
+    public void setSubCategorie(SubCategory subCategorie) {
+        this.subCategorie = subCategorie;
     }
 
     public String getName() {

@@ -5,19 +5,21 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-public class SousCategorie {
+public class Category {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    //  Nom de la sous catégorie
+//  Nom de la catégorie
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name="cat_id", nullable=false)
-    private Categorie categorie;
+    @OneToMany(mappedBy="category")
+    private Set<SubCategory> items;
 
-    @OneToMany(mappedBy="ssCategorie")
-    private Set<Produit> items;
+    public Category(Integer id, String name, Set<SubCategory> items) {
+        this.id = id;
+        this.name = name;
+        this.items = items;
+    }
 
     public Integer getId() {
         return id;
@@ -35,19 +37,11 @@ public class SousCategorie {
         this.name = name;
     }
 
-    public Categorie getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
-    }
-
-    public Set<Produit> getItems() {
+    public Set<SubCategory> getItems() {
         return items;
     }
 
-    public void setItems(Set<Produit> items) {
+    public void setItems(Set<SubCategory> items) {
         this.items = items;
     }
 }
