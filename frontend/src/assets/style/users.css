@@ -1,0 +1,14 @@
+.users-grid{
+    padding-right: 10px;
+    padding-left: 10px;
+    display: grid;
+    grid-template-columns: auto auto 20% 40px 40px;
+    grid-auto-rows: min-content;
+    align-items: center;
+}
+
+@media screen and (min-width: 700px) {
+    .users-grid{
+        grid-template-columns: auto auto 20% 50px 50px;
+    }
+}

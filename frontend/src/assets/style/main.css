@@ -1,6 +1,6 @@
 @font-face {
     font-family: Delight;
-    src: url('../fonts/Delight_Coffee.otf')
+    src: url('../fonts/PapernotesBold.otf')
     format('opentype');
 }
 html{
@@ -24,7 +24,7 @@ body{
 }
 
 .page{
-    height: calc(100vh - 70px);
+    height: calc(100vh - 120px);
     padding: 10px 5px;
     position: relative;
     text-align: left;
@@ -36,6 +36,7 @@ p{
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 5px;
+    font-size: 1.1em;
 }
 
 button{
@@ -70,14 +71,15 @@ button{
 
 .tertiary-button{
     background-color: #FFFFFF;
-    min-width: 250px;
+    /*min-width: 250px;*/
+    width: calc(100% - 20px);
     aspect-ratio: 1 / 1;
     box-shadow: 0px 5px 15px 3px #a3998b;
-    margin : 15px;
+    margin : 10px;
 }
 
 .tertiary-button:hover{
-    box-shadow: 0px 5px 15px 5px #a3998b;
+    box-shadow: 0px 5px 15px 5px #857c6f;
 }
 
 .delete-button{
@@ -113,6 +115,15 @@ button{
 h1, h2, h3{
     font-family: 'Delight', serif;
 }
+
+h3{
+    font-size: 1.7em;
+}
+
+h2{
+    font-size: 1.9em;
+}
+
 
 input[type=text] {
     min-height: 30px;
@@ -156,6 +167,75 @@ option{
 label{
     font-size: 1.2em;
 }
+
+
+/*-------------------------|
+|         SNACKBAR         |
+|-------------------------*/
+
+.snackbar {
+    min-height: 50px;
+    width: 500px;
+    border-radius: 10px;
+    background-color: #22d788;
+    position: absolute;
+    z-index: 2;
+    bottom: 0px;
+    opacity: 0;
+    left: 50%;
+    max-width: calc(100vw - 60px);
+    transform: translateX(-50%);
+    box-shadow: 0 0 60px #888;
+    display: flex;
+    animation: snackbar 3s;
+}
+
+.snack-success {
+    background-color: #22d788;
+}
+
+.snack-fail {
+    background-color: #f53669;
+}
+
+.snack-warning {
+    background-color: #f3ce28;
+}
+
+.snackbar p {
+    color: white;
+    margin-left: 40px;
+    margin-top: 16px;
+}
+.snackbar img {
+    filter: invert(1);
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+}
+
+@keyframes snackbar {
+    0% {
+        opacity: 0;
+        bottom: 0px;
+    }
+    20% {
+        opacity: 100%;
+        bottom: 50px;
+    }
+    80% {
+        opacity: 100%;
+        bottom: 50px;
+    }
+    100% {
+        opacity: 0;
+        bottom: 0px;
+    }
+}
+
 
 @media screen and (min-width: 700px){
     .page{

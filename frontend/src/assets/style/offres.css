@@ -3,6 +3,7 @@
     padding-left: 10px;
     display: grid;
     grid-template-columns: 25% auto 15% 40px 40px;
+    grid-auto-rows: min-content;
     align-items: center;
 }
 

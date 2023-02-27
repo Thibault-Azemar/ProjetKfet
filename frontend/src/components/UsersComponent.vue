@@ -1,6 +1,20 @@
 <script lang="ts" src="../services/ts/UsersComponent.ts"></script>
 <template>
-  <div>
-    Users
+  <div class="content">
+    <div class="users-grid header ">
+      <h3>Nom</h3>
+      <h3>Prénom</h3>
+      <h3>Rôle</h3>
+    </div>
+    <div class="body">
+      <div class="users-grid "> <!-- v for utilisateurs-->
+        <p>Thuriot</p>
+        <p>Aurélie</p>
+        <p>sans role</p>
+        <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
+        <button class="icon-button"><img src="../assets/pictures/trash.svg"></button>
+      </div>
+
+    </div>
   </div>
 </template>
