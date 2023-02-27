@@ -41,12 +41,12 @@ public class UserController {
 //    Retourne l'id de l'utilisateur avec lequel on se connecte
     @PostMapping()
     public @ResponseBody
-    String connectUser (@RequestParam("name") String name, @RequestParam("password") String password)
+    Integer connectUser (@RequestParam("name") String name, @RequestParam("password") String password)
     {
         logger.info("Connect User");
         User user = userRepository.findByNameAndPassword(name, password);
-
-        return JwtTokenUtil.generateToken(user);
+        return user.getId();
+//        return JwtTokenUtil.generateToken(user);
     }
 
 //    Permet d'ajouter un nouvel utilisateur
