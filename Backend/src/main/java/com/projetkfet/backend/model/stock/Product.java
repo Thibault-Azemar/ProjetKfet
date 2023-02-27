@@ -22,16 +22,6 @@ public class Product {
 //  Stock de l'item
     private Integer stock;
 
-    public Product(Integer id, SubCategory subCategorie, String name, float sellingPrice, float sellingPriceMembers, float purchasePrice, Integer stock) {
-        this.id = id;
-        this.subCategorie = subCategorie;
-        this.name = name;
-        this.sellingPrice = sellingPrice;
-        this.sellingPriceMembers = sellingPriceMembers;
-        this.purchasePrice = purchasePrice;
-        this.stock = stock;
-    }
-
     public Integer getId() {
         return id;
     }

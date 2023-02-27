@@ -19,13 +19,6 @@ public class SubCategory {
     @OneToMany(mappedBy="subCategorie")
     private Set<Product> items;
 
-    public SubCategory(Integer id, String name, Category category, Set<Product> items) {
-        this.id = id;
-        this.name = name;
-        this.category = category;
-        this.items = items;
-    }
-
     public Integer getId() {
         return id;
     }

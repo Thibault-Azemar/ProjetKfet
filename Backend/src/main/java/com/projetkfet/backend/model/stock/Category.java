@@ -15,11 +15,6 @@ public class Category {
     @OneToMany(mappedBy="category")
     private Set<SubCategory> items;
 
-    public Category(Integer id, String name, Set<SubCategory> items) {
-        this.id = id;
-        this.name = name;
-        this.items = items;
-    }
 
     public Integer getId() {
         return id;
