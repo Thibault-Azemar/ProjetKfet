@@ -13,6 +13,7 @@ import java.util.Optional;
 
 
 // Classe contrôlleur des requêtes pour la classe User
+@CrossOrigin(origins = "http://127.0.0.1:8081")
 @Controller
 @RequestMapping(path="/user")
 public class UserController {
