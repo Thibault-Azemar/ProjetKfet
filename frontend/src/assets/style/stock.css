@@ -1,0 +1,32 @@
+.stock{
+    padding-right: 10px;
+    padding-left: 10px;
+    display: grid;
+    grid-template-columns: auto 15% 15% 8% 40px 40px;
+    align-items: center;
+}
+
+
+h3 {
+    margin-bottom: 0px;
+}
+
+.icon-button img{
+    width: 20px;
+}
+
+.content{
+    overflow-y: auto;
+    height: calc(100% - 50px);
+}
+
+@media screen  and (min-width: 700px) {
+
+    .stock{
+        grid-template-columns: auto 10% 10% 10% 50px 50px;
+    }
+
+    .content{
+        height: 100%;
+    }
+}

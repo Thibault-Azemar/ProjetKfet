@@ -1,0 +1,13 @@
+.options-header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-height: 80px;
+}
+
+#entry-stock{
+    position: absolute;
+    right: 0;
+}
+
+

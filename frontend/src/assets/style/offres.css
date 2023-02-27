@@ -1,0 +1,25 @@
+.offres-grid{
+    padding-right: 10px;
+    padding-left: 10px;
+    display: grid;
+    grid-template-columns: 25% auto 15% 40px 40px;
+    align-items: center;
+}
+
+.header{
+    height: 50px;
+}
+
+.body{
+    overflow-y: auto;
+    height: calc(100% - 50px);
+}
+
+
+@media screen and (min-width: 700px) {
+
+    .offres-grid{
+        grid-template-columns: 20% auto 15% 50px 50px;
+    }
+}
+

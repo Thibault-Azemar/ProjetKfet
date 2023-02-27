@@ -1,0 +1,77 @@
+.menu{
+    width:100%;
+    height: 50px;
+    top : calc(100% - 50px);
+    left:0;
+    position: fixed;
+    background-color: #FFFFFF;
+    display : flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    box-shadow: 0px 0px 7px #A3998B;
+}
+
+#items{
+    display : flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: calc(100% - 58px);
+}
+
+#roles{
+    width: 48px;
+    aspect-ratio: 1 / 1;
+    background-image: url('../pictures/circle_48.svg');
+    margin-right: 10px;
+}
+
+.router-menu{
+    width: 25px;
+    height: 25px;
+}
+
+svg:hover{
+    color: red ;
+}
+@media screen and (min-width: 700px){
+    .menu{
+        height: 70px;
+        top : calc(100% - 70px);
+    }
+
+    .router-menu{
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .menu{
+        width:70px;
+        height:100%;
+        top:0;
+        flex-direction: column;
+    }
+
+    #items{
+        flex-direction: column;
+        justify-content: start;
+        width: 70px;
+        top: 50px;
+        height: calc(100% - 108px);
+    }
+
+    .router-menu{
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    #roles{
+        margin-right: 0;
+        margin-bottom: 10px;
+        bottom: 0;
+    }
+
+}
