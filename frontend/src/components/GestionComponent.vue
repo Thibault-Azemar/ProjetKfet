@@ -10,7 +10,7 @@
         <option value="Users">Utilisateurs</option>
       </select>
       <button v-if="value==='Stock'" class="primary-button" id="entry-stock">Entrée de Stock</button>
-      <button v-if="value!=='Stock'" class="icon-button"><img src="../assets/pictures/plus.svg"></button>
+      <button class="icon-button"><img src="../assets/pictures/plus.svg"></button>
     </div>
     <StockComponent v-if="value==='Stock'"/>
     <OffresComponent v-if="value==='Offres'"/>

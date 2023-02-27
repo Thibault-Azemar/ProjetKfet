@@ -24,7 +24,7 @@ body{
 }
 
 .page{
-    height: calc(100vh - 70px);
+    height: calc(100vh - 120px);
     padding: 10px 5px;
     position: relative;
     text-align: left;
@@ -72,10 +72,10 @@ button{
 .tertiary-button{
     background-color: #FFFFFF;
     /*min-width: 250px;*/
-    width: calc(100% - 10px);
+    width: calc(100% - 20px);
     aspect-ratio: 1 / 1;
     box-shadow: 0px 5px 15px 3px #a3998b;
-    margin : 5px;
+    margin : 10px;
 }
 
 .tertiary-button:hover{

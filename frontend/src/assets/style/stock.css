@@ -18,7 +18,8 @@ h3 {
 
 .content{
     overflow-y: auto;
-    height: calc(100% - 50px);
+    /*height: calc(100% - 50px);*/
+    height: 100%;
 }
 
 @media screen  and (min-width: 700px) {
