@@ -6,7 +6,6 @@ import UsersComponent from "../../components/UsersComponent.vue";
 import CategoriesComponent from "../../components/CategoriesComponent.vue";
 import StockComponent from "../../components/StockComponent.vue";
 
-
 // @ts-ignore
 // @ts-ignore
 export default defineComponent({

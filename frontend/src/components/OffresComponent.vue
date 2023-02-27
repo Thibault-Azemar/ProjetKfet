@@ -12,7 +12,7 @@
         <p>Description</p>
         <p>Prix</p>
         <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
-        <button class="icon-button"><img src="../assets/pictures/trash.svg"></button>
+        <button class="icon-button" :onclick="showPopUpDelete(true,2)"><img src="../assets/pictures/trash.svg"></button>
       </div>
       <div class="offres-grid">
         <p>Goûter</p>
@@ -22,6 +22,6 @@
         <button class="icon-button"><img src="../assets/pictures/trash.svg"></button>
       </div>
     </div>
-
   </div>
+  <SimpleModalComponent del="true" buttons="2" message="test test test"/>
 </template>

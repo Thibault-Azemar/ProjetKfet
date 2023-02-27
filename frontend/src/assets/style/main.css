@@ -168,6 +168,97 @@ label{
     font-size: 1.2em;
 }
 
+/*-------------------------|
+|          CARDS           |
+|-------------------------*/
+
+.card {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #bbb;
+}
+
+.card h2 {
+    margin: 20px;
+}
+
+/*-------------------------|
+|        ScrollBar         |
+|-------------------------*/
+
+/* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #bbb;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: none;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #0c273e;
+    border-radius: 20px;
+    border: 3px solid rgb(221, 215, 215);
+    transition: all 0.3s ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #001a70;
+}
+
+#menu::-webkit-scrollbar-thumb,
+.card::-webkit-scrollbar-thumb,
+.tableau-dispo main::-webkit-scrollbar-thumb {
+    border: 3px solid white;
+}
+.card,
+#menu,
+.tableau-dispo main {
+    scrollbar-width: thin;
+    scrollbar-color: #fff;
+}
+
+/*-------------------------|
+|           Modal          |
+|-------------------------*/
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0c273e55;
+    z-index: 10;
+}
+
+.modal .card {
+    position: absolute;
+    z-index: 3;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
+
+.modal .card form {
+    margin: 10px;
+    margin-top: 0;
+}
+
+.modal .card form .main {
+    padding: 0 10px;
+    max-height: calc(80vh - 120px);
+    overflow-y: auto;
+}
+
+
 
 /*-------------------------|
 |         SNACKBAR         |
