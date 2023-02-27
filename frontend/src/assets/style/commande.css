@@ -1,0 +1,22 @@
+.page{
+    padding: 0;
+}
+
+.commande-header{
+    height: 70px;
+    width: 100%;
+}
+
+.commande-grid{
+    display: grid;
+    width: 100%;
+    grid-template-columns: 50% 50%;
+    grid-auto-rows: min-content;
+    height: calc(100% - 40px);
+    overflow-y: auto;
+}
+
+.commande-footer{
+    height: 70px;
+    width: 100%;
+}

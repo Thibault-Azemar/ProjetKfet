@@ -8,16 +8,16 @@ const router = createRouter({
         },
         {
             path:"/commande",
-            component: ()=> import("../components/test.vue")
+            component: ()=> import("../components/CommandeComponent.vue")
         },
         {
             path:"/gestion",
             component: ()=> import("../components/GestionComponent.vue")
+        },
+        {
+            path: "/suivi",
+            component: () => import("../components/test.vue"),
         }
-        // {
-        //     path: "/pageName",
-        //     component: () => import("../views/pageName.vue"),
-        // }
     ],
 });
 export default router;

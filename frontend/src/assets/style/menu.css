@@ -32,9 +32,17 @@
     height: 25px;
 }
 
-svg:hover{
-    color: red ;
+
+/** permet le changement de couleur de l'icon de la page active */
+.active img {
+    filter: brightness(0) hue-rotate(121deg) saturate(1) contrast(0.1)
+    invert(80%) sepia(80%);
+    -webkit-filter: brightness(0) hue-rotate(121deg) saturate(1) contrast(0.1)
+    invert(80%) sepia(80%);
+    -moz-filter:brightness(0) hue-rotate(121deg) saturate(1) contrast(0.1)
+    invert(80%) sepia(80%);
 }
+
 @media screen and (min-width: 700px){
     .menu{
         height: 70px;

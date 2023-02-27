@@ -6,17 +6,15 @@
       <h3>Prénom</h3>
       <h3>Rôle</h3>
     </div>
-    <div class="users-grid body">
-      <p>Thuriot</p>
-      <p>Aurélie</p>
-      <p>sans role</p>
-      <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
-      <button class="icon-button"><img src="../assets/pictures/trash.svg"></button>
-      <p>Thuriot</p>
-      <p>Aurélie</p>
-      <p>sans role</p>
-      <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
-      <button class="icon-button"><img src="../assets/pictures/trash.svg"></button>
+    <div class="body">
+      <div class="users-grid "> <!-- v for utilisateurs-->
+        <p>Thuriot</p>
+        <p>Aurélie</p>
+        <p>sans role</p>
+        <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
+        <button class="icon-button"><img src="../assets/pictures/trash.svg"></button>
+      </div>
+
     </div>
   </div>
 </template>
