@@ -45,3 +45,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+Backend/src/main/resources/application.properties

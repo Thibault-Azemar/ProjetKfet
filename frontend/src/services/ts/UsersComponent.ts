@@ -1,6 +1,7 @@
 import UsersComponent from '../../components/UsersComponent.vue'
 import { defineComponent } from 'vue'
 import '../../assets/style/users.css'
+import Users from '../Crontroller/Users'
 
 // @ts-ignore
 // @ts-ignore
@@ -14,7 +15,10 @@ export default defineComponent({
         //value: String ,
     },
     data() {
-
+        const users=new Users();
+        return {
+        users
+        }
     },
     methods:{
 
