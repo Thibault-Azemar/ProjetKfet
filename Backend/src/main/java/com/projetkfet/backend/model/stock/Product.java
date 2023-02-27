@@ -9,7 +9,6 @@ public class Product {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name="sscat_id", nullable=false)
     private SubCategory subCategorie;
 //  Nom du produit
     private String name;

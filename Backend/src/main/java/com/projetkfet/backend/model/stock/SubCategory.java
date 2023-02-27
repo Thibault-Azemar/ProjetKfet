@@ -13,7 +13,6 @@ public class SubCategory {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name="cat_id", nullable=false)
     private Category category;
 
     @OneToMany(mappedBy="subCategorie")
