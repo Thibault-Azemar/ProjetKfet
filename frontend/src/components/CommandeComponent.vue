@@ -18,8 +18,15 @@
       <button class="tertiary-button"></button>
     </div>
     <div class="commande-footer">
-      <h3>10,25 €</h3>
-      <button class="primary-button" id="check-cart">Valider</button>
+      <div class="commande-resume">
+        <h2>Résumé de la commande :</h2>
+      </div>
+      <div class="commande-checked">
+        <p>Total : </p>
+        <h2> 10,25 €</h2>
+        <button class="primary-button" id="check-cart">Encaisser</button>
+      </div>
+
     </div>
   </div>
 

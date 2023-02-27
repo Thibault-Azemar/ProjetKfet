@@ -1,6 +1,6 @@
 @font-face {
     font-family: Delight;
-    src: url('../fonts/Delight_Coffee.otf')
+    src: url('../fonts/PapernotesBold.otf')
     format('opentype');
 }
 html{
@@ -115,6 +115,15 @@ button{
 h1, h2, h3{
     font-family: 'Delight', serif;
 }
+
+h3{
+    font-size: 1.7em;
+}
+
+h2{
+    font-size: 1.9em;
+}
+
 
 input[type=text] {
     min-height: 30px;
