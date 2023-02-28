@@ -28,6 +28,21 @@ public class UserController {
 
 //  Get
 
+    //    Retourne un utilisateur
+    @GetMapping()
+    public @ResponseBody
+    User getUser(@RequestParam("id") Integer id) {
+        logger.info("Get User");
+        Optional<User> u = userRepository.findById(id);
+
+        User user = null;
+        // if n est non null
+        if (u.isPresent()) {
+            user = u.get();
+        }
+        return user;
+    }
+
     //    Retourne la liste de tous les utilisateurs
     @GetMapping(path = "/all")
     public @ResponseBody
