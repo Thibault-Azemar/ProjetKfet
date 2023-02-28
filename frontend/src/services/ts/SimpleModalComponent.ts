@@ -29,7 +29,15 @@ export default defineComponent({
         }
     },
     methods:{
-
+        test(){
+            console.log(this.buttons, typeof this.buttons, this.message, this.del, typeof this.del)
+        },
+        unshowPopUp(popUpId:string){
+            const modal = document.getElementById(popUpId);
+            if(modal !== null){
+                modal.style.display="none";
+            }
+        }
     }
     /*mounted() {
         this.name // type: string | undefined

@@ -16,6 +16,7 @@ export default defineComponent({
     },
     data() {
         const users=new Users();
+        console.log(this.users)
         return {
         users
         }

@@ -112,6 +112,22 @@ button{
     box-shadow: 0px 0px 7px #A3998B;
 }
 
+.close-button {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    padding: 0%;
+    background-color: #eee;
+    background-image: url(../pictures/close.svg);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 2px;
+}
+
 h1, h2, h3{
     font-family: 'Delight', serif;
 }
@@ -168,6 +184,11 @@ label{
     font-size: 1.2em;
 }
 
+.row-align{
+    display: flex;
+    flex-direction: row;
+}
+
 /*-------------------------|
 |          CARDS           |
 |-------------------------*/
@@ -176,10 +197,17 @@ label{
     background-color: white;
     border-radius: 20px;
     box-shadow: 0 0 10px #bbb;
+    padding: 10px;
+    flex-direction: column;
+    width: fit-content;
 }
 
 .card h2 {
     margin: 20px;
+}
+
+.card p{
+    text-align: center;
 }
 
 /*-------------------------|
@@ -237,6 +265,7 @@ label{
     height: 100vh;
     background-color: #0c273e55;
     z-index: 10;
+    display: none;
 }
 
 .modal .card {
@@ -248,8 +277,7 @@ label{
 }
 
 .modal .card form {
-    margin: 10px;
-    margin-top: 0;
+    margin: 0 10px 10px;
 }
 
 .modal .card form .main {
@@ -343,6 +371,10 @@ label{
         height: calc(100vh - 20px);
         width: calc(100% - 90px);
         left: 70px;
+    }
+
+    .modal{
+        left : -70px;
     }
 }
 

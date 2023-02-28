@@ -1,5 +1,5 @@
 import OffresComponent from '../../components/OffresComponent.vue'
-import { defineComponent } from 'vue'
+import {defineComponent} from 'vue'
 import '../../assets/style/offres.css'
 import SimpleModalComponent from "../../components/SimpleModalComponent.vue";
 
@@ -7,7 +7,7 @@ import SimpleModalComponent from "../../components/SimpleModalComponent.vue";
 // @ts-ignore
 export default defineComponent({
 
-    components:{
+    components: {
         OffresComponent,
         SimpleModalComponent
     },
@@ -19,22 +19,24 @@ export default defineComponent({
         let popUpMessage: String | undefined;
         let popUpButtons: Number | undefined;
         let popUpDelete: Boolean | undefined;
-        return{
+        return {
             popUpMessage,
             popUpButtons,
             popUpDelete
         }
     },
-    methods:{
-        showPopUpDelete(/*mettre id de l'offre*/ del:boolean, buttons:number){
-            this.popUpMessage = "Voulez vous supprimer ça ?";
+    methods: {
+        showSimplePopUp(idProduit: string, del: boolean, buttons: number) {
+            //ajouter id offre à la place de nom produit + passé l'id quelque part dans la modal pour pouvoir supprimer
+            this.popUpMessage = "Voulez vous supprimer " + idProduit + " ?";
             this.popUpButtons = buttons;
             this.popUpDelete = del;
             const modal = document.getElementById("simple-modal");
-            if(modal !== null){
-                modal.style.display="block";
+            if (modal !== null) {
+                modal.style.display = "block";
             }
         }
+
     }
     /*mounted() {
         this.name // type: string | undefined

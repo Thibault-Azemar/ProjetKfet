@@ -8,9 +8,9 @@
     </div>
     <div class="body">
       <div class="users-grid "> <!-- v for utilisateurs-->
-        <p>Thuriot</p>
-        <p>Aurélie</p>
-        <p>sans role</p>
+        <p>user.id</p>
+        <p>user.username</p>
+        <p>user.role</p>
         <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
         <button class="icon-button"><img src="../assets/pictures/trash.svg"></button>
       </div>
