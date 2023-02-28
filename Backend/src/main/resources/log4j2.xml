@@ -20,10 +20,25 @@
                 <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
         </RollingFile>
+        <RollingFile name="ProductAppender" fileName="logs/products/products.log"
+                     filePattern="logs/products/products-%d{yyyy-MM-dd}-%i.log.gz">
+            <ThresholdFilter level="INFO"/>
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="7" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+        </RollingFile>
     </Appenders>
     <Loggers>
         <Logger name="UserLogger" level="info" additivity="false">
             <AppenderRef ref="UserAppender"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="ProductLogger" level="info" additivity="false">
+            <AppenderRef ref="ProductAppender"/>
             <AppenderRef ref="Console"/>
         </Logger>
         <Root level="info">

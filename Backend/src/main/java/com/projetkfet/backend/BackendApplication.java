@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-//@CrossOrigin(origins = "http://127.0.0.1:8081")
+@CrossOrigin("http://localhost:8081/")
 public class BackendApplication {
 
 //    @Autowired

@@ -15,7 +15,7 @@ import java.util.Optional;
 // Classe contrôlleur des requêtes pour la classe User
 @CrossOrigin(origins = "http://127.0.0.1:8081")
 @Controller
-@RequestMapping(path="/user")
+@RequestMapping(path = "/user")
 public class UserController {
 
     private static final Logger logger = LogManager.getLogger("UserLogger");
@@ -29,61 +29,70 @@ public class UserController {
 
 //  Get
 
-//    Retourne la liste de tous les utilisateurs
-    @GetMapping(path="/all")
-    public @ResponseBody Iterable<User> getAllUsers()
-    {
+    //    Retourne la liste de tous les utilisateurs
+    @GetMapping(path = "/all")
+    public @ResponseBody
+    Iterable<User> getAllUsers() {
         logger.info("All Users");
         return userRepository.findAll();
     }
 
 //  Post
 
-//    Retourne l'id de l'utilisateur avec lequel on se connecte
+    //    Retourne l'id de l'utilisateur avec lequel on se connecte
     @PostMapping()
     public @ResponseBody
-    Integer connectUser (@RequestParam("name") String name, @RequestParam("password") String password)
-    {
+    Integer connectUser(@RequestParam("email") String email, @RequestParam("password") String password) {
         logger.info("Connect User");
-        User user = userRepository.findByNameAndPassword(name, password);
+        User user = userRepository.findByEmailAndPassword(email, password);
         return user.getId();
 //        return JwtTokenUtil.generateToken(user);
     }
 
-//    Permet d'ajouter un nouvel utilisateur
-    @PostMapping(path="/add")
+    //    Permet d'ajouter un nouvel utilisateur
+    @PostMapping(path = "/add")
     public @ResponseBody
-    String addNewUser (@RequestParam("name") String name, @RequestParam("password") String password)
-    {
+    Integer addNewUser(@RequestParam("name") String name, @RequestParam("firstname") String firstname, @RequestParam("role") String role, @RequestParam("email") String email, @RequestParam("password") String password) {
 //        TODO: Vérifier que le name n'est pas déjà utilisé
         logger.info("New User");
 
         User n = new User();
         n.setName(name);
+        n.setFirstname(firstname);
+        n.setRole(role);
+        n.setEmail(email);
         n.setPassword(password);
         userRepository.save(n);
-        return "Saved";
+
+        User user = userRepository.findByEmailAndPassword(email, password);
+        return user.getId();
     }
 
-//  Update
+    //  Update
     @PatchMapping()
-    public @ResponseBody void updateUser(@RequestParam("id") Integer id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "password") String password)
-    {
+    public @ResponseBody
+    void updateUser(@RequestParam("id") Integer id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "firstname") String firstname, @RequestParam(required = false, name = "role") String role, @RequestParam(required = false, name = "email") String email, @RequestParam(required = false, name = "password") String password) {
         logger.info("Update User");
 
         Optional<User> n = userRepository.findById(id);
 
         // if n est non null
-        if (n.isPresent())
-        {
+        if (n.isPresent()) {
             User user = n.get();
 
-            if (name != null)
-            {
+            if (name != null && !name.equals("")) {
                 user.setName(name);
             }
-            if (password != null)
-            {
+            if (firstname != null && !firstname.equals("")) {
+                user.setFirstname(firstname);
+            }
+            if (role != null && !role.equals("")) {
+                user.setRole(role);
+            }
+            if (email != null && !email.equals("")) {
+                user.setEmail(email);
+            }
+            if (password != null && !password.equals("")) {
                 user.setPassword(password);
             }
 
@@ -91,10 +100,10 @@ public class UserController {
         }
     }
 
-//    Delete
+    //    Delete
     @DeleteMapping()
-    public @ResponseBody void deleteUser(@RequestParam("id") Integer id)
-    {
+    public @ResponseBody
+    void deleteUser(@RequestParam("id") Integer id) {
         logger.info("Delete User");
         userRepository.deleteById(id);
     }
