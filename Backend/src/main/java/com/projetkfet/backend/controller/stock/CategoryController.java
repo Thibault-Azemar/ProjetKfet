@@ -19,13 +19,12 @@ public class CategoryController {
 
 //    GET
 
-//    Retourne la liste de tous les utilisateurs
+//    Retourne la liste de toutes les catégories
     @GetMapping(path="/all")
     public @ResponseBody
-    Iterable<Category> getAllCategories()
+    String getAllCategories()
     {
-        logger.info("All Category");
-        return categoryRepository.findAll();
+        return "Oh nion!";
     }
 
 //    POST

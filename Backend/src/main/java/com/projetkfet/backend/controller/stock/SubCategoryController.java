@@ -28,10 +28,9 @@ public class SubCategoryController {
 
 //    Récupère la liste des sous Catégories
     @GetMapping(path="/all")
-    public @ResponseBody Iterable<SubCategory> getAllSubCategories()
+    public @ResponseBody String getAllSubCategories()
     {
-        logger.info("All SubCategory");
-        return subCategoryRepository.findAll();
+        return "Nope";
     }
 
 //    POST
