@@ -39,7 +39,7 @@ public class SubCategoryController {
 //    Permet d'ajouter une nouvelle catégorie
     @PostMapping(path="/add")
     public @ResponseBody
-    String addNewSubCategory (@RequestParam("name") String name, @RequestParam("idCategory") String id)
+    String addNewSubCategory (@RequestParam("name") String name, @RequestParam(required = false, name = "image") String image, @RequestParam("idCategory") String id)
     {
         logger.info("New SubCategorie");
 
@@ -49,6 +49,9 @@ public class SubCategoryController {
         {
             SubCategory c = new SubCategory();
             c.setName(name);
+            if (image != null && !image.equals("")) {
+                c.setImage(image);
+            }
             c.setCategory(cat.get());
             subCategoryRepository.save(c);
             return "Saved";

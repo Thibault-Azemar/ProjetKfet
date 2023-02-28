@@ -24,6 +24,8 @@ public class Product {
     private float sellingPriceMembers;
 //  Prix d'achat'
     private float purchasePrice;
+//  Image du produit
+    private String image;
 //  Stock de l'item
     private Integer stock;
 
@@ -73,6 +75,14 @@ public class Product {
 
     public void setPurchasePrice(float purchasePrice) {
         this.purchasePrice = purchasePrice;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Integer getStock() {

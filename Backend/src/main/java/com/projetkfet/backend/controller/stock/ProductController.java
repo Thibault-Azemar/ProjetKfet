@@ -40,7 +40,7 @@ public class ProductController {
 //    Permet d'ajouter une nouvelle catégorie
     @PostMapping(path="/add")
     public @ResponseBody
-    String addNewProduct (@RequestParam("name") String name, @RequestParam(required = false, name = "purchasePrice") float purchasePrice, @RequestParam(required = false, name = "sellingPrice") float sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") float sellingPriceMembers, @RequestParam("idSubCategory") String id)
+    String addNewProduct (@RequestParam("name") String name, @RequestParam(required = false, name = "purchasePrice") float purchasePrice, @RequestParam(required = false, name = "sellingPrice") float sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") float sellingPriceMembers, @RequestParam(required = false, name = "image") String image , @RequestParam("idSubCategory") String id)
     {
         logger.info("New Product");
 
@@ -48,13 +48,24 @@ public class ProductController {
 
         if (subCat.isPresent())
         {
+//            TODO: gérer les champs non obligatoires / Gérer les champs floats non nulls
             Product p = new Product();
             p.setName(name);
-            p.setPurchasePrice(purchasePrice);
-            p.setSellingPrice(sellingPrice);
-            p.setSellingPriceMembers(sellingPriceMembers);
             p.setStock(0);
             p.setSubCategorie(subCat.get());
+
+            if (purchasePrice > 0) {
+                p.setPurchasePrice(purchasePrice);
+            }
+            if (sellingPrice > 0) {
+                p.setSellingPrice(sellingPrice);
+            }
+            if (sellingPriceMembers > 0) {
+                p.setSellingPriceMembers(sellingPriceMembers);
+            }
+            if (image != null && !image.equals("")) {
+                p.setImage(image);
+            }
             productRepository.save(p);
         }
 

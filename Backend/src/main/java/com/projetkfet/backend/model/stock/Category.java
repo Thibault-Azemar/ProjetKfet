@@ -15,6 +15,8 @@ public class Category {
     private UUID id;
 //  Nom de la catégorie
     private String name;
+//  Image du produit
+    private String image;
 
     @OneToMany(mappedBy="category")
     @JsonIgnoreProperties("category")
@@ -34,6 +36,14 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Set<SubCategory> getSubCategories() {
