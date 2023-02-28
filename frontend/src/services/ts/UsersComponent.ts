@@ -7,7 +7,7 @@ import Users from '../Crontroller/UsersController'
 // @ts-ignore
 export default defineComponent({
 
-    components:{
+    components: {
         UsersComponent
     },
     // type inference enabled
@@ -15,13 +15,13 @@ export default defineComponent({
         //value: String ,
     },
     data() {
-        const users=new Users();
-        console.log(this.users)
+        const users = new Users();
+        console.log(users)
         return {
-        users
+            users
         }
     },
-    methods:{
+    methods: {
 
     }
     /*mounted() {

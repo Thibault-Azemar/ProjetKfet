@@ -2,7 +2,7 @@ import User from './UserController';
 import Config from './Config';
 
 export default class Users {
-    users: User[] = []
+    users: User[] = [];
 
     public constructor() {
         const API_URL = Config.API_URL;
@@ -15,9 +15,12 @@ export default class Users {
             .then(response => response.json())
             .then(data =>
                 data.forEach((data: any) => {
+                    console.log(data)
                     const user = new User(data.id, data.name, data.firstname, data.email, data.role);
                     this.users.push(user);
+                    console.log(this.users)
                 })
+
             )
             .catch(error => {
                 console.error('Error:', error);
@@ -54,7 +57,7 @@ export default class Users {
             );
 
     }
-    public deleteUser(id: number): void {
+    public deleteUser(id: string): void {
         const API_URL = Config.API_URL;
         fetch(API_URL + 'user/' + id, {
 
@@ -74,8 +77,8 @@ export default class Users {
             }
             );
     }
-    public updateUser(id: number, name?: string, firstname?: string, email?: string, role?: string): void {
-        let params = { id: id.toString(), role: "", email: "", name: "", firstname: "" }
+    public updateUser(id: string, name?: string, firstname?: string, email?: string, role?: string): void {
+        let params = { id: id, role: "", email: "", name: "", firstname: "" }
         if (name) {
             params = { ...params, name: name }
         }

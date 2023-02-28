@@ -1,8 +1,5 @@
-import Users from "./UsersController";
-
-
 export default class User {
-    id: number;
+    id: string;
     name: string;
     firstname: string;
     email: string;
@@ -11,7 +8,7 @@ export default class User {
     /**
     * constructor
     */
-    public constructor(id: number, username: string, password: string, email: string, role: string = "USER") {
+    public constructor(id: string, username: string, password: string, email: string, role: string = "USER") {
 
         this.id = id
         this.name = username
