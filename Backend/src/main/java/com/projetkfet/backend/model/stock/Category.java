@@ -1,8 +1,9 @@
 package com.projetkfet.backend.model.stock;
 
-import jakarta.persistence.*;
-
-import java.util.Set;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Category {
@@ -11,10 +12,6 @@ public class Category {
     private Integer id;
 //  Nom de la catégorie
     private String name;
-
-    @OneToMany(mappedBy="category")
-    private Set<SubCategory> items;
-
 
     public Integer getId() {
         return id;
@@ -32,11 +29,4 @@ public class Category {
         this.name = name;
     }
 
-    public Set<SubCategory> getItems() {
-        return items;
-    }
-
-    public void setItems(Set<SubCategory> items) {
-        this.items = items;
-    }
 }

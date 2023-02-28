@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping(path="/category")
 public class CategoryController {
@@ -24,17 +22,10 @@ public class CategoryController {
 //    Retourne la liste de tous les utilisateurs
     @GetMapping(path="/all")
     public @ResponseBody
-    List<String> getAllCategories()
+    Iterable<Category> getAllCategories()
     {
         logger.info("All Category");
-        Iterable<Category> categories = categoryRepository.findAll();
-
-        List<String> test = null;
-
-        for (Category category : categories) {
-            test = categoryRepository.getSubCategoryNamesByCategory(category);
-        }
-        return test;
+        return categoryRepository.findAll();
     }
 
 //    POST

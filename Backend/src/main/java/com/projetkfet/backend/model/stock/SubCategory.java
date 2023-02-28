@@ -2,8 +2,6 @@ package com.projetkfet.backend.model.stock;
 
 import jakarta.persistence.*;
 
-import java.util.Set;
-
 @Entity
 public class SubCategory {
     @Id
@@ -14,9 +12,6 @@ public class SubCategory {
 
     @ManyToOne
     private Category category;
-
-    @OneToMany(mappedBy="subCategorie")
-    private Set<Product> items;
 
     public Integer getId() {
         return id;
@@ -42,11 +37,4 @@ public class SubCategory {
         this.category = category;
     }
 
-    public Set<Product> getItems() {
-        return items;
-    }
-
-    public void setItems(Set<Product> items) {
-        this.items = items;
-    }
 }
