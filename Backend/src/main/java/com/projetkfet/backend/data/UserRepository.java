@@ -12,5 +12,4 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
     Optional<User> findById(UUID id);
 
-    void deleteById(UUID id);
 }
