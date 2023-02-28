@@ -1,7 +1,7 @@
 import UsersComponent from '../../components/UsersComponent.vue'
 import { defineComponent } from 'vue'
 import '../../assets/style/users.css'
-import Users from '../Crontroller/Users'
+import Users from '../Crontroller/UsersController'
 
 // @ts-ignore
 // @ts-ignore
