@@ -1,5 +1,6 @@
 package com.projetkfet.backend.model.stock;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,6 +10,7 @@ public class Product {
     private Integer id;
 
     @ManyToOne
+    @JsonIgnoreProperties("products")
     private SubCategory subCategorie;
 //  Nom du produit
     private String name;

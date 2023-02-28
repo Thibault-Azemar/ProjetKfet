@@ -1,9 +1,9 @@
 package com.projetkfet.backend.model.stock;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 public class Category {
@@ -12,6 +12,10 @@ public class Category {
     private Integer id;
 //  Nom de la catégorie
     private String name;
+
+    @OneToMany(mappedBy="category")
+    @JsonIgnoreProperties("category")
+    private Set<SubCategory> subCategories;
 
     public Integer getId() {
         return id;
@@ -29,4 +33,11 @@ public class Category {
         this.name = name;
     }
 
+    public Set<SubCategory> getSubCategories() {
+        return subCategories;
+    }
+
+    public void setSubCategories(Set<SubCategory> subCategories) {
+        this.subCategories = subCategories;
+    }
 }
