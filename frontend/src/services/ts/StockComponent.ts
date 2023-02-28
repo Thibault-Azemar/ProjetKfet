@@ -16,6 +16,13 @@ export default defineComponent({
     data() {
     },
     methods:{
+        showModalProduit(){
+
+        },
+        unshowModal(idModal:string){
+            const modal = document.getElementById(idModal);
+            if(modal) modal.style.display="none";
+        }
 
     }
     /*mounted() {

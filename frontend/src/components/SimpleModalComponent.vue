@@ -5,7 +5,7 @@
     <div class="card">
       <header>
         <h2>Suppression</h2>
-        <button class="icon-button close-button" @click="unshowPopUp('simple-modal')"></button>
+        <button class="icon-button close-button" @click="unshowModal('simple-modal')"></button>
       </header>
       <div v-if="buttons === 1">
         <p>{{ message }}</p>

@@ -5,38 +5,31 @@ import SimpleModalComponent from "@/components/SimpleModalComponent.vue";
 // @ts-ignore
 export default defineComponent({
 
-    components:{
+    components: {
         SimpleModalComponent
     },
     // type inference enabled
     props: {
         buttons: {
             type: Number,
-            require : true
+            require: true
         },
-        message:{
+        message: {
             type: String,
             require: true
         },
-        del:{
+        del: {
             type: Boolean,
             value: false
         }
     },
     data() {
-        return{
-
-        }
+        return {}
     },
-    methods:{
-        test(){
-            console.log(this.buttons, typeof this.buttons, this.message, this.del, typeof this.del)
-        },
-        unshowPopUp(popUpId:string){
+    methods: {
+        unshowModal(popUpId: string) {
             const modal = document.getElementById(popUpId);
-            if(modal !== null){
-                modal.style.display="none";
-            }
+            if (modal) modal.style.display = "none";
         }
     }
     /*mounted() {

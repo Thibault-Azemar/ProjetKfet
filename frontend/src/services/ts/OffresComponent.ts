@@ -28,7 +28,12 @@ export default defineComponent({
     methods: {
         showSimplePopUp(idProduit: string, del: boolean, buttons: number) {
             //ajouter id offre à la place de nom produit + passé l'id quelque part dans la modal pour pouvoir supprimer
-            this.popUpMessage = "Voulez vous supprimer " + idProduit + " ?";
+            if(del) {
+                this.popUpMessage = "Voulez vous supprimer " + idProduit + " ?";
+            }
+            else {
+                this.popUpMessage = "test";
+            }
             this.popUpButtons = buttons;
             this.popUpDelete = del;
             const modal = document.getElementById("simple-modal");
