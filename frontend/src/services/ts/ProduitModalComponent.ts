@@ -9,15 +9,17 @@ export default defineComponent({
         ProduitModalComponent
     },
     // type inference enabled
-    props: {
-
-    },
+    props: {},
     data() {
 
     },
     methods: {
-
+        unshowModal(idModal:string) {
+            const modal = document.getElementById(idModal);
+            if(modal) modal.style.display = "none";
+        }
     }
+
     /*mounted() {
         this.name // type: string | undefined
         this.msg // type: string

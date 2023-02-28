@@ -39,7 +39,7 @@ p{
     font-size: 1.1em;
 }
 
-button{
+button, input[type=submit]{
     border: none;
     color: #FFFFFF;
     border-radius: 10px;
@@ -114,18 +114,20 @@ button{
 
 .close-button {
     position: absolute;
-    right: 0px;
-    top: 0px;
-    width: 30px;
-    height: 30px;
-    border-radius: 20px;
+    right: -5px;
+    top: -5px;
     padding: 0%;
-    background-color: #eee;
     background-image: url(../pictures/close.svg);
-    background-size: 20px;
+    background-size: 30px;
     background-repeat: no-repeat;
     background-position: center;
     padding: 2px;
+}
+
+.submit-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 h1, h2, h3{
@@ -141,39 +143,46 @@ h2{
 }
 
 
-input[type=text] {
+input[type=text],input[type=number], input[type=file],select {
     min-height: 30px;
     max-width: 200px;
-    font-size: 1em;
+    min-width: 150px;
     border-radius: 10px;
-    border-color: #a3998b;
     margin: 10px;
     outline: none;
+    font-size: 1.2em;
+    border : none;
+    vertical-align: baseline;
+    padding: 5px 35px 5px 5px;
+    box-shadow: 0 0 7px #A3998B;
 }
 
-input[type=text]:focus {
+input[type=text]:focus, input[type=number]:focus {
     border: 2px solid #a3998b;
+}
+
+.input-label{
+    font-size: 0.8em;
+    font-weight: bolder;
 }
 
 
 select{
-    min-height: 30px;
-    min-width: 150px;
-    max-width: 300px;
-    width: fit-content;
-    font-size: 1.5em;
-    /*font-family: 'Delight', serif;*/
-    border : none;
-    vertical-align: baseline;
-    padding: 5px 35px 5px 5px;
-    margin : 10px;
-    outline: none;
     background: url("../pictures/select.svg") 96% no-repeat;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     box-shadow: 0px 0px 7px #A3998B;
     border-radius: 10px;
+    min-width: 240px;
+    min-height: 40px;
+}
+
+.big-select{
+    font-size: 1.5em;
+    width: fit-content;
+    min-height: 30px;
+    min-width: 150px;
 }
 
 option{
@@ -202,8 +211,9 @@ label{
     width: fit-content;
 }
 
-.card h2 {
+.card h3 {
     margin: 20px;
+    margin-top: 30px;
 }
 
 .card p{
@@ -286,6 +296,11 @@ label{
     overflow-y: auto;
 }
 
+.main{
+    display: flex;
+    flex-direction: column;
+}
+
 
 
 /*-------------------------|
@@ -363,6 +378,10 @@ label{
     }
     .icon-button{
         width: 45px;
+    }
+
+    .input-label{
+        font-size: 1.2em;
     }
 }
 

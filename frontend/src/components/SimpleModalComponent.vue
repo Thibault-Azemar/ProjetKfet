@@ -4,7 +4,7 @@
   <div class="modal" id="simple-modal">
     <div class="card">
       <header>
-        <h2>Suppression</h2>
+        <h3>Suppression</h3>
         <button class="icon-button close-button" @click="unshowModal('simple-modal')"></button>
       </header>
       <div v-if="buttons === 1">

@@ -5,6 +5,7 @@ import OffresComponent from "../../components/OffresComponent.vue";
 import UsersComponent from "../../components/UsersComponent.vue";
 import CategoriesComponent from "../../components/CategoriesComponent.vue";
 import StockComponent from "../../components/StockComponent.vue";
+import ProduitModalComponent from "../../components/ProduitModalComponents.vue";
 
 // @ts-ignore
 // @ts-ignore
@@ -15,7 +16,8 @@ export default defineComponent({
         OffresComponent,
         UsersComponent,
         CategoriesComponent,
-        StockComponent
+        StockComponent,
+        ProduitModalComponent
     },
     // type inference enabled
     props: {
@@ -28,7 +30,25 @@ export default defineComponent({
         }
     },
     methods:{
-
+        showAddModal(){
+            let modal;
+            if(this.value === "Stock"){
+                modal = document.getElementById("produitModal");
+                if(modal) modal.style.display = "block";
+            }
+            if(this.value === "Offres"){
+                modal = document.getElementById("produitOffres");
+                if(modal) modal.style.display = "block";
+            }
+            if(this.value === "Categories"){
+                modal = document.getElementById("produitCategories");
+                if(modal) modal.style.display = "block";
+            }
+            if(this.value === "Users"){
+                modal = document.getElementById("produitUsers");
+                if(modal) modal.style.display = "block";
+            }
+        }
     }
     /*mounted() {
         this.name // type: string | undefined
