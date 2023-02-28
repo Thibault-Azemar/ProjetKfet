@@ -52,7 +52,7 @@ public class UserController {
 //    Permet d'ajouter un nouvel utilisateur
     @PostMapping(path="/add")
     public @ResponseBody
-    String addNewUser (@RequestParam("name") String name, @RequestParam("password") String password)
+    Integer addNewUser (@RequestParam("name") String name, @RequestParam("password") String password)
     {
 //        TODO: Vérifier que le name n'est pas déjà utilisé
         logger.info("New User");
@@ -61,7 +61,9 @@ public class UserController {
         n.setName(name);
         n.setPassword(password);
         userRepository.save(n);
-        return "Saved";
+        
+        User user = userRepository.findByNameAndPassword(name, password);
+        return user.getId();
     }
 
 //  Update
