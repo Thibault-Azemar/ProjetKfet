@@ -2,7 +2,6 @@ package com.projetkfet.backend.controller;
 
 import com.projetkfet.backend.data.UserRepository;
 import com.projetkfet.backend.model.User;
-import com.projetkfet.backend.util.JwtTokenUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.UUID;
 
 
 // Classe contrôlleur des requêtes pour la classe User
@@ -22,8 +22,8 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+//    @Autowired
+//    private JwtTokenUtil jwtTokenUtil;
 
 
 //  Get
@@ -31,9 +31,10 @@ public class UserController {
     //    Retourne un utilisateur
     @GetMapping()
     public @ResponseBody
-    User getUser(@RequestParam("id") Integer id) {
+    User getUser(@RequestParam("id") String id) {
         logger.info("Get User");
-        Optional<User> u = userRepository.findById(id);
+
+        Optional<User> u = userRepository.findById(UUID.fromString(id));
 
         User user = null;
         // if n est non null
@@ -56,7 +57,7 @@ public class UserController {
     //    Retourne l'id de l'utilisateur avec lequel on se connecte
     @PostMapping()
     public @ResponseBody
-    Integer connectUser(@RequestParam("email") String email, @RequestParam("password") String password) {
+    UUID connectUser(@RequestParam("email") String email, @RequestParam("password") String password) {
         logger.info("Connect User");
         User user = userRepository.findByEmailAndPassword(email, password);
         return user.getId();
@@ -66,7 +67,7 @@ public class UserController {
     //    Permet d'ajouter un nouvel utilisateur
     @PostMapping(path = "/add")
     public @ResponseBody
-    Integer addNewUser(@RequestParam("name") String name, @RequestParam("firstname") String firstname, @RequestParam("role") String role, @RequestParam("email") String email, @RequestParam("password") String password) {
+    UUID addNewUser(@RequestParam("name") String name, @RequestParam("firstname") String firstname, @RequestParam("role") String role, @RequestParam("email") String email, @RequestParam("password") String password) {
 //        TODO: Vérifier que le name n'est pas déjà utilisé
         logger.info("New User");
 
@@ -85,10 +86,10 @@ public class UserController {
     //  Update
     @PatchMapping()
     public @ResponseBody
-    void updateUser(@RequestParam("id") Integer id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "firstname") String firstname, @RequestParam(required = false, name = "role") String role, @RequestParam(required = false, name = "email") String email, @RequestParam(required = false, name = "password") String password) {
+    void updateUser(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "firstname") String firstname, @RequestParam(required = false, name = "role") String role, @RequestParam(required = false, name = "email") String email, @RequestParam(required = false, name = "password") String password) {
         logger.info("Update User");
 
-        Optional<User> n = userRepository.findById(id);
+        Optional<User> n = userRepository.findById(UUID.fromString(id));
 
         // if n est non null
         if (n.isPresent()) {
@@ -117,9 +118,12 @@ public class UserController {
     //    Delete
     @DeleteMapping()
     public @ResponseBody
-    void deleteUser(@RequestParam("id") Integer id) {
+    void deleteUser(@RequestParam("id") String id) {
         logger.info("Delete User");
-        userRepository.deleteById(id);
+        Optional<User> n = userRepository.findById(UUID.fromString(id));
+
+        // if n est non null
+        n.ifPresent(user -> userRepository.delete(user));
     }
 
 }

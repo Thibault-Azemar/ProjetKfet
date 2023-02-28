@@ -2,14 +2,17 @@ package com.projetkfet.backend.model.stock;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 public class Category {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue
+    @UuidGenerator
+    private UUID id;
 //  Nom de la catégorie
     private String name;
 
@@ -17,11 +20,11 @@ public class Category {
     @JsonIgnoreProperties("category")
     private Set<SubCategory> subCategories;
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

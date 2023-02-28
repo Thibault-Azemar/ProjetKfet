@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 @RequestMapping(path="/product")
@@ -39,11 +40,11 @@ public class ProductController {
 //    Permet d'ajouter une nouvelle catégorie
     @PostMapping(path="/add")
     public @ResponseBody
-    String addNewProduct (@RequestParam("name") String name, @RequestParam(required = false, name = "purchasePrice") float purchasePrice, @RequestParam(required = false, name = "sellingPrice") float sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") float sellingPriceMembers, @RequestParam("idSubCategory") Integer id)
+    String addNewProduct (@RequestParam("name") String name, @RequestParam(required = false, name = "purchasePrice") float purchasePrice, @RequestParam(required = false, name = "sellingPrice") float sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") float sellingPriceMembers, @RequestParam("idSubCategory") String id)
     {
         logger.info("New Product");
 
-        Optional<SubCategory> subCat = subCategoryRepository.findById(id);
+        Optional<SubCategory> subCat = subCategoryRepository.findById(UUID.fromString(id));
 
         if (subCat.isPresent())
         {

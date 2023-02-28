@@ -3,14 +3,17 @@ package com.projetkfet.backend.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.hibernate.annotations.UuidGenerator;
+
+import java.util.UUID;
 
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue
+    @UuidGenerator
+    private UUID id;
 
     private String name;
 
@@ -23,11 +26,11 @@ public class User {
     @JsonIgnoreProperties
     private String password;
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
