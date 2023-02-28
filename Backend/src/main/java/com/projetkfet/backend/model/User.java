@@ -1,6 +1,6 @@
 package com.projetkfet.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -23,7 +23,7 @@ public class User {
 
     private String email;
 
-    @JsonIgnoreProperties
+    @JsonIgnore
     private String password;
 
     public UUID getId() {
