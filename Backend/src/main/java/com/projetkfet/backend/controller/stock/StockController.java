@@ -34,7 +34,7 @@ public class StockController {
     //    Récupère la liste du stock par Catégories
     @GetMapping(path="/cat/all")
     public @ResponseBody
-    Iterable<Category> getAllCategories()
+    Iterable<Category> getAllStockByCategories()
     {
         logger.info("All Stock by Category");
         return categoryRepository.findAll();
