@@ -9,20 +9,20 @@
       </header>
       <div v-if="buttons === 1">
         <p>{{ message }}</p>
-        <button class="primary-button">Ok</button>
+        <button class="primary-button" @click="unshowModal('simple-modal')">Ok</button>
       </div>
       <div v-if="buttons === 2 && !del">
         <p>{{ message }}</p>
         <div class="row-align">
           <button class="primary-button">Valider</button>
-          <button class="secondary-button">Annuler</button>
+          <button class="secondary-button" @click="unshowModal('simple-modal')">Annuler</button>
         </div>
       </div>
       <div v-if="buttons === 2 && del">
         <p>{{ message }}</p>
         <div class="row-align">
           <button class="delete-button">Supprimer</button>
-          <button class="secondary-button">Annuler</button>
+          <button class="secondary-button" @click="unshowModal('simple-modal')">Annuler</button>
         </div>
       </div>
       <div v-if="buttons === 3 ">
@@ -30,7 +30,7 @@
         <div class="row-align">
           <button class="primary-button">Oui</button>
           <button class="secondary-button">Non</button>
-          <button class="secondary-button">Annuler</button>
+          <button class="secondary-button" @click="unshowModal('simple-modal')">Annuler</button>
         </div>
       </div>
     </div>

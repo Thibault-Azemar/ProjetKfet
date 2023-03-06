@@ -14,8 +14,8 @@
         </div>
         <div>
           <label class="input-label" for="prenom-user">Prénom</label>
-          <input name="prenom-user" class="input-field" type="text" placeholder="prénom de l'utilisateur"
-            id="prenom-user">
+          <input name="prenom-user" class="input-field" type="text" placeholder="prénom de l'utilisateur" id="prenom-user"
+            required>
         </div>
         <div>
           <label class="input-label" for="email-user">Email</label>
@@ -25,13 +25,13 @@
           <label class="input-label" for="role-user">Rôle</label>
           <select name="role-user" class="input-field" id="role-user" required>
             <option value="" selected>Choisir sous-catégorie</option>
-            <option value="admin">Admininstrateur</option>
+            <option value="admin">Administrateur</option>
             <option value="kfetier">Kfetier</option>
           </select>
         </div>
         <div>
           <label class="input-label" for="password-user">Mot de Passe</label>
-          <input type="password" name="password-user" id="password-user">
+          <input type="password" name="password-user" id="password-user" required>
         </div>
         <div class="submit-button">
           <input type="" class="primary-button" id="creer-produit" value="Créer utilisateur" @click="addUser()">
