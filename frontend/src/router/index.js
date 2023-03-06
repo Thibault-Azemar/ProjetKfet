@@ -18,6 +18,11 @@ const router = createRouter({
             path: "/suivi",
             component: () => import("../components/test.vue"),
         }
+        ,
+        {
+            path: "/comptes",
+            component: () => import("../components/ClientsComponent.vue"),
+        }
     ],
 });
 export default router;

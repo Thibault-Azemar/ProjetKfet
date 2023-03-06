@@ -301,7 +301,9 @@ label{
     flex-direction: column;
 }
 
-
+#simple-modal{
+    z-index: 20;
+}
 
 /*-------------------------|
 |         SNACKBAR         |
