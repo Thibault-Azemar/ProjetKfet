@@ -34,7 +34,7 @@ export default class UserRepository {
         const API_URL = Config.API_URL;
         const params = { role: role, email: email, name: name, firstname: firstname, password: firstname }
 
-        return fetch(API_URL + 'user/add' + new URLSearchParams(params), {
+        return fetch(API_URL + 'user/add?' + new URLSearchParams(params), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
