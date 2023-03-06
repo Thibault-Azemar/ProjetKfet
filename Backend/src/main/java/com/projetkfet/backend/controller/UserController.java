@@ -31,8 +31,8 @@ public class UserController {
     //    Retourne un utilisateur
     @GetMapping()
     public @ResponseBody
-    User getUser(@RequestParam("id") String id) {
-        logger.info("Get User");
+    User getUser(@RequestParam("id") String id) throws Exception {
+        logger.info("Get User : " + id);
 
         Optional<User> u = userRepository.findById(UUID.fromString(id));
 
@@ -41,6 +41,11 @@ public class UserController {
         if (u.isPresent()) {
             user = u.get();
         }
+        else
+        {
+            logger.info("No existing account for this ID");
+            throw new Exception("No existing account for this ID");
+        }
         return user;
     }
 
@@ -48,7 +53,7 @@ public class UserController {
     @GetMapping(path = "/all")
     public @ResponseBody
     Iterable<User> getAllUsers() {
-        logger.info("All Users");
+        logger.info("Get all Users");
         return userRepository.findAll();
     }
 
@@ -57,8 +62,8 @@ public class UserController {
     //    Retourne l'id de l'utilisateur avec lequel on se connecte
     @PostMapping()
     public @ResponseBody
-    UUID connectUser(@RequestParam("email") String email, @RequestParam("password") String password) {
-        logger.info("Connect User");
+    UUID connectUser(@RequestParam("email") String email, @RequestParam("password") String password) throws Exception {
+        logger.info("Connect User : "+ email);
         Optional<User> u = userRepository.findByEmailAndPassword(email, password);
 
         UUID id = null;
@@ -66,6 +71,13 @@ public class UserController {
         {
             User user = u.get();
             id = user.getId();
+            logger.info("Successful connection");
+        }
+        else
+        {
+//            TODO : améliorer la gestion d'erreur
+            logger.info("Wrong email/password");
+            throw new Exception("Wrong email/password");
         }
         return id;
     }
@@ -73,8 +85,8 @@ public class UserController {
     //    Permet d'ajouter un nouvel utilisateur
     @PostMapping(path = "/add")
     public @ResponseBody
-    UUID addNewUser(@RequestParam("name") String name, @RequestParam("firstname") String firstname, @RequestParam("role") String role, @RequestParam("email") String email, @RequestParam("password") String password) {
-        logger.info("New User");
+    UUID addNewUser(@RequestParam("name") String name, @RequestParam("firstname") String firstname, @RequestParam("role") String role, @RequestParam("email") String email, @RequestParam("password") String password) throws Exception {
+        logger.info("Create User");
 
         UUID id = null;
 
@@ -87,6 +99,7 @@ public class UserController {
             n.setEmail(email);
             n.setPassword(password);
             userRepository.save(n);
+            logger.info("User saved");
 
             Optional<User> u = userRepository.findByEmailAndPassword(email, password);
 
@@ -94,10 +107,15 @@ public class UserController {
             {
                 User user = u.get();
                 id = user.getId();
+                logger.info("Id user : "+ id);
+            }
+            else
+            {
+                throw new Exception("User creation error");
             }
         }
         else {
-            throw new Exception("Item not available");
+            throw new Exception("Email already used");
         }
         return id;
     }
@@ -105,8 +123,8 @@ public class UserController {
     //  Update
     @PatchMapping()
     public @ResponseBody
-    void updateUser(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "firstname") String firstname, @RequestParam(required = false, name = "role") String role, @RequestParam(required = false, name = "email") String email, @RequestParam(required = false, name = "password") String password) {
-        logger.info("Update User");
+    void updateUser(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "firstname") String firstname, @RequestParam(required = false, name = "role") String role, @RequestParam(required = false, name = "email") String email, @RequestParam(required = false, name = "password") String password) throws Exception {
+        logger.info("Update User : " + id);
 
         Optional<User> n = userRepository.findById(UUID.fromString(id));
 
@@ -131,18 +149,30 @@ public class UserController {
             }
 
             userRepository.save(user);
+            logger.info("Successful User Update");
+        }
+        else {
+            logger.info("No account for this ID");
+            throw new Exception("No account for this ID");
         }
     }
 
     //    Delete
     @DeleteMapping()
     public @ResponseBody
-    void deleteUser(@RequestParam("id") String id) {
+    void deleteUser(@RequestParam("id") String id) throws Exception {
         logger.info("Delete User");
         Optional<User> n = userRepository.findById(UUID.fromString(id));
 
-        // if n est non null
-        n.ifPresent(user -> userRepository.delete(user));
+        if (n.isPresent())
+        {
+            userRepository.delete(n.get());
+        }
+        else
+        {
+            throw new Exception("No account for this ID");
+        }
+
     }
 
 }
