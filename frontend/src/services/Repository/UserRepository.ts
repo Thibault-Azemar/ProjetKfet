@@ -16,7 +16,6 @@ export default class UserRepository {
             .then(data =>
                 data.forEach((data: any) => {
                     const user = new User(data.id, data.name, data.firstname, data.email, data.role);
-                    console.log('cc')
                     users.push(user);
                 })
             )
@@ -35,7 +34,7 @@ export default class UserRepository {
         const API_URL = Config.API_URL;
         const params = { role: role, email: email, name: name, firstname: firstname, password: firstname }
 
-        fetch(API_URL + 'user/add' + new URLSearchParams(params), {
+        return fetch(API_URL + 'user/add' + new URLSearchParams(params), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -44,20 +43,19 @@ export default class UserRepository {
             .then(response => response.json())
             .then(data => {
                 const user = new User(data.id, name, firstname, email, role);
-                return user;
+                return Promise.resolve(user);
             }
             )
             .catch(error => {
                 console.error('Error:', error);
-                return 500;
+                return Promise.reject(error);
             }
             );
-        return Promise.reject(new User("", "", "", "", ""));
     }
 
     public deleteUser(id: string): Promise<number> {
         const API_URL = Config.API_URL;
-        fetch(API_URL + 'user/' + id, {
+        return fetch(API_URL + 'user/' + id, {
 
             method: 'DELETE',
             headers: {
@@ -75,7 +73,6 @@ export default class UserRepository {
                 return 500;
             }
             );
-        return Promise.resolve(0);
     }
     public updateUser(id: string, name?: string, firstname?: string, email?: string, password?: string, role?: string): Promise<number> {
         let params = { id: id, role: "", email: "", name: "", firstname: "" }
@@ -93,7 +90,7 @@ export default class UserRepository {
         }
 
         const API_URL = Config.API_URL;
-        fetch(API_URL + 'user/' + id + new URLSearchParams(params), {
+        return fetch(API_URL + 'user/' + id + new URLSearchParams(params), {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -111,7 +108,6 @@ export default class UserRepository {
                 return 500;
             }
             );
-        return Promise.resolve(0);
     }
 
 }

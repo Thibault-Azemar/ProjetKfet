@@ -25,7 +25,6 @@ export default defineComponent({
         getUsers(): User[] {
             const userRepo = new UserRepository();
             userRepo.getUsers().then((users: User[]) => {
-                console.log(users);
                 this.users = users;
             });
             return this.users;
@@ -33,8 +32,7 @@ export default defineComponent({
 
     },
     beforeMount() {
-        console.log(this.getUsers());
-        console.log(this.users);
+        this.getUsers();
     }
 
 })
