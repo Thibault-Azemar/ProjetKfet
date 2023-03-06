@@ -7,7 +7,7 @@
       <h3>Rôle</h3>
     </div>
     <div class="body">
-      <div v-for="(user,index) in users" :key="index" :id="user.id" class="users-grid "> <!-- v for utilisateurs-->
+      <div v-for="(user, index) in users" :key="index" :id="user.id" class="users-grid "> <!-- v for utilisateurs-->
         <p>{{ user.name }}</p>
         <p>{{ user.firstname }}</p>
         <p>{{ user.role }}</p>

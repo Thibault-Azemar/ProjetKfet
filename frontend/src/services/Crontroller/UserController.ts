@@ -22,13 +22,6 @@ export default class User {
         this.role = role
     }
 
-    public getUsers(): User[] {
-        this.userRepo.getUsers().then((users: User[]) => {
-            this.users = users;
-            return this.users;
-        });
-        return this.users;
-    }
 
     public addUser(name: string, firstname: string, email: string, password: string, role: string): void {
         this.userRepo.addUser(name, firstname, email, password, role).then((user: User) => {

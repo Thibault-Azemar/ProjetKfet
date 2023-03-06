@@ -16,19 +16,17 @@ export default defineComponent({
         //value: String ,
     },
     data() {
-        const users = User.getUsers;
+        const users: User[] = this.getUsers();
         return {
             users
         }
     },
     methods: {
-
-        getUsers(): User[] {
-            this.userRepo.getUsers().then((users: User[]) => {
+        getUsers(): void {
+            const userRepo = new UserRepository();
+            userRepo.getUsers().then((users: User[]) => {
                 this.users = users;
-                return this.users;
             });
-            return this.users;
         }
 
     }
