@@ -6,7 +6,7 @@ export default class UserRepository {
     public getUsers(): Promise<User[]> {
         const API_URL = Config.API_URL;
         const users: User[] = [];
-        fetch(API_URL + 'user/all', {
+        return fetch(API_URL + 'user/all', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -15,18 +15,20 @@ export default class UserRepository {
             .then(response => response.json())
             .then(data =>
                 data.forEach((data: any) => {
-                    console.log(data)
                     const user = new User(data.id, data.name, data.firstname, data.email, data.role);
+                    console.log('cc')
                     users.push(user);
                 })
-
+            )
+            .then(() => {
+                return Promise.resolve(users);
+            }
             )
             .catch(error => {
                 console.error('Error:', error);
-                return 500;
+                return Promise.reject(error);
             }
             );
-        return Promise.resolve(users);
     }
 
     public addUser(name: string, firstname: string, email: string, password: string, role: string): Promise<User> {

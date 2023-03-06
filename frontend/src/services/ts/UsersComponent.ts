@@ -16,24 +16,25 @@ export default defineComponent({
         //value: String ,
     },
     data() {
-        const users: User[] = this.getUsers();
+        const users: User[] = [];
         return {
             users
         }
     },
     methods: {
-        getUsers(): void {
+        getUsers(): User[] {
             const userRepo = new UserRepository();
             userRepo.getUsers().then((users: User[]) => {
+                console.log(users);
                 this.users = users;
             });
+            return this.users;
         }
 
+    },
+    beforeMount() {
+        console.log(this.getUsers());
+        console.log(this.users);
     }
-    /*mounted() {
-        this.name // type: string | undefined
-        this.msg // type: string
-        this.count // type: number
-    }*/
 
 })
