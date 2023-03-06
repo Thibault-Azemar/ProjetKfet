@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Controller
 @RequestMapping(path="/category")
 public class CategoryController {
@@ -22,9 +25,8 @@ public class CategoryController {
 //    Retourne la liste de toutes les catégories
     @GetMapping(path="/all")
     public @ResponseBody
-    String getAllCategories()
-    {
-        return "Oh nion!";
+    String getAllCategories() throws Exception {
+        throw new Exception("Oh nion");
     }
 
 //    POST
@@ -32,9 +34,10 @@ public class CategoryController {
 //    Permet d'ajouter une nouvelle catégorie
     @PostMapping(path="/add")
     public @ResponseBody
-    String addNewCategory (@RequestParam("name") String name, @RequestParam(required = false, name = "image") String image)
-    {
-        logger.info("New Categorie");
+    UUID addNewCategory (@RequestParam("name") String name, @RequestParam(required = false, name = "image") String image) throws Exception {
+        logger.info("New Categorie : " + name);
+
+        UUID id = null;
 
         Category c = new Category();
         c.setName(name);
@@ -43,7 +46,21 @@ public class CategoryController {
         }
         categoryRepository.save(c);
 
-        return "Saved";
+        Optional<Category> cat = categoryRepository.findByName(name);
+
+        if (cat.isPresent())
+        {
+            Category category = cat.get();
+            id = category.getId();
+            logger.info("Id category : "+ id);
+        }
+        else
+        {
+            logger.info("Error create Category");
+            throw new Exception("Error create Category");
+        }
+
+        return id;
     }
 
 //    UPDATE

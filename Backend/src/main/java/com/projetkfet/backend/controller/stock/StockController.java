@@ -58,8 +58,7 @@ public class StockController {
 //    On enlève une valeur du stock d'un produit identifié par un produit
     @PatchMapping(path="/product")
     public @ResponseBody
-    String TakeOneProduct(@RequestParam("id") String id)
-    {
+    String TakeOneProduct(@RequestParam("id") String id) throws Exception {
         logger.info("Take one product");
 
         Optional<Product> p = productRepository.findById(UUID.fromString(id));
@@ -74,16 +73,19 @@ public class StockController {
                 stock--;
                 product.setStock(stock);
                 productRepository.save(product);
+                logger.info("Update stock for "+ product.getName()+ " : " + stock);
                 return stock.toString();
             }
             else
             {
-                return "Plus assez de stock";
+                logger.info("No more stock for "+ product.getName()+ " : " + product.getId());
+                throw new Exception("No more stock for "+ product.getName()+ " : " + product.getId());
             }
         }
         else
         {
-            return "le produit n'existe pas";
+            logger.info("Product doesn't exist");
+            throw new Exception("Product doesn't exist");
         }
     }
 

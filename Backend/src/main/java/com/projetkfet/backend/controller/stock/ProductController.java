@@ -36,8 +36,7 @@ public class ProductController {
     }
 
     @GetMapping()
-    public @ResponseBody Product getProduct(@RequestParam("id") String id)
-    {
+    public @ResponseBody Product getProduct(@RequestParam("id") String id) throws Exception {
         logger.info("Get product");
 
         Optional<Product> p = productRepository.findById(UUID.fromString(id));
@@ -47,6 +46,11 @@ public class ProductController {
         if (p.isPresent()) {
             product = p.get();
         }
+        else
+        {
+            logger.info("Product doesn't exist");
+            throw new Exception("Product doesn't exist");
+        }
         return product;
     }
 
@@ -55,9 +59,10 @@ public class ProductController {
 //    Permet d'ajouter une nouvelle catégorie
     @PostMapping(path="/add")
     public @ResponseBody
-    String addNewProduct (@RequestParam("name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestParam(required = false, name = "image") String image , @RequestParam("idSubCategory") String id)
-    {
+    UUID addNewProduct (@RequestParam("name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestParam(required = false, name = "image") String image , @RequestParam("idSubCategory") String id) throws Exception {
         logger.info("New Product");
+
+        UUID idproduct = null;
 
         Optional<SubCategory> subCat = subCategoryRepository.findById(UUID.fromString(id));
 
@@ -85,17 +90,34 @@ public class ProductController {
                 p.setImage(image);
             }
             productRepository.save(p);
-        }
 
-        return "Saved";
+            Optional<Product> product = productRepository.findByName(name);
+
+            if (product.isPresent())
+            {
+                Product prod = product.get();
+                idproduct = prod.getId();
+                logger.info("Id category : "+ idproduct);
+            }
+            else
+            {
+                logger.info("Error create Product");
+                throw new Exception("Error create Product");
+            }
+        }
+        else
+        {
+            logger.info("Error id SubCategory");
+            throw new Exception("Error id SubCategory");
+        }
+        return idproduct;
     }
 
 //    UPDATE
     @PatchMapping()
     public @ResponseBody
-    void UpdateProduct(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestParam(required = false, name = "stock") String stock, @RequestParam(required = false, name = "image") String image)
-    {
-        logger.info("Update Product");
+    void UpdateProduct(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestParam(required = false, name = "stock") String stock, @RequestParam(required = false, name = "image") String image) throws Exception {
+        logger.info("Update Product : " + id);
 
         Optional<Product> p = productRepository.findById(UUID.fromString(id));
 
@@ -124,9 +146,16 @@ public class ProductController {
             if (image != null && !image.equals("")) {
                 product.setImage(image);
             }
+            logger.info("Update Product successful: " + id);
 
             productRepository.save(product);
         }
+        else
+        {
+            logger.info("Error update Product");
+            throw new Exception("Error update Product");
+        }
+
     }
 
 //    DELETE

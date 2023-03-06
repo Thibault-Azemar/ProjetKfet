@@ -9,4 +9,6 @@ import java.util.UUID;
 public interface SubCategoryRepository extends CrudRepository<SubCategory, Integer> {
 
     Optional<SubCategory> findById(UUID id);
+
+    Optional<SubCategory> findByName(String name);
 }
