@@ -5,7 +5,8 @@ import OffresComponent from "../../components/OffresComponent.vue";
 import UsersComponent from "../../components/UsersComponent.vue";
 import CategoriesComponent from "../../components/CategoriesComponent.vue";
 import StockComponent from "../../components/StockComponent.vue";
-import ProduitModalComponent from "../../components/ProduitModalComponents.vue";
+import ProduitModalComponent from "../../components/ProduitModalComponent.vue";
+import UserModalComponent from "../../components/UserModalComponent.vue";
 
 // @ts-ignore
 // @ts-ignore
@@ -17,7 +18,8 @@ export default defineComponent({
         UsersComponent,
         CategoriesComponent,
         StockComponent,
-        ProduitModalComponent
+        ProduitModalComponent,
+        UserModalComponent
     },
     // type inference enabled
     props: {
@@ -37,15 +39,15 @@ export default defineComponent({
                 if(modal) modal.style.display = "block";
             }
             if(this.value === "Offres"){
-                modal = document.getElementById("produitOffres");
+                modal = document.getElementById("offreModal");
                 if(modal) modal.style.display = "block";
             }
             if(this.value === "Categories"){
-                modal = document.getElementById("produitCategories");
+                modal = document.getElementById("categorieModal");
                 if(modal) modal.style.display = "block";
             }
             if(this.value === "Users"){
-                modal = document.getElementById("produitUsers");
+                modal = document.getElementById("userModal");
                 if(modal) modal.style.display = "block";
             }
         }
