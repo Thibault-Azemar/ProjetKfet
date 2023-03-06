@@ -1,13 +1,14 @@
 import UsersComponent from '../../components/UsersComponent.vue'
 import { defineComponent } from 'vue'
 import '../../assets/style/users.css'
-import Users from '../Crontroller/UsersController'
+import User from '../Crontroller/UserController'
+import UserRepository from '../Repository/UserRepository'
 
 // @ts-ignore
 // @ts-ignore
 export default defineComponent({
 
-    components:{
+    components: {
         UsersComponent
     },
     // type inference enabled
@@ -15,13 +16,18 @@ export default defineComponent({
         //value: String ,
     },
     data() {
-        const users=new Users();
-        console.log(this.users)
+        const users: User[] = this.getUsers();
         return {
-        users
+            users
         }
     },
-    methods:{
+    methods: {
+        getUsers(): void {
+            const userRepo = new UserRepository();
+            userRepo.getUsers().then((users: User[]) => {
+                this.users = users;
+            });
+        }
 
     }
     /*mounted() {
