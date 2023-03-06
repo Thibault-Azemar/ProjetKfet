@@ -34,7 +34,7 @@ export default defineComponent({
             else {
                 this.popUpMessage = "test";
             }
-            this.popUpButtons = buttons;
+            this.popUpButtons = 1;
             this.popUpDelete = del;
             const modal = document.getElementById("simple-modal");
             if (modal !== null) {

@@ -2,7 +2,7 @@
     padding-right: 10px;
     padding-left: 10px;
     display: grid;
-    grid-template-columns: auto auto 20% 40px 40px;
+    grid-template-columns: calc(40% - 40px) auto 20% 40px 40px;
     grid-auto-rows: min-content;
     align-items: center;
 }
@@ -10,7 +10,7 @@
 .invisible-button{
     background: none;
     border : none;
-    width: 100%;
+    width: fit-content;
     height: 90%;
     color: black;
     font-size: 1.1em;
@@ -18,7 +18,13 @@
     padding: 1px;
     box-shadow: none;
 }
-/*
+
 .invisible-button:hover{
-    background-color: #a3998b;
-}*/
+    background-color: #dcd5cc;
+}
+
+@media screen and (min-width: 700px) {
+    .comptes-grid{
+        grid-template-columns: calc(40% - 50px) auto 20% 50px 50px;
+    }
+}
