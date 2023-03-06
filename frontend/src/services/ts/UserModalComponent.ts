@@ -1,4 +1,4 @@
-import ProduitModalComponent from "../../components/ProduitModalComponent.vue"
+import UserModalComponent from "../../components/UserModalComponent.vue"
 import {defineComponent} from 'vue'
 
 // @ts-ignore
@@ -6,7 +6,7 @@ import {defineComponent} from 'vue'
 export default defineComponent({
 
     components: {
-        ProduitModalComponent
+        UserModalComponent
     },
     // type inference enabled
     props: {},
@@ -19,4 +19,11 @@ export default defineComponent({
             if(modal) modal.style.display = "none";
         }
     }
+
+    /*mounted() {
+        this.name // type: string | undefined
+        this.msg // type: string
+        this.count // type: number
+    }*/
+
 })

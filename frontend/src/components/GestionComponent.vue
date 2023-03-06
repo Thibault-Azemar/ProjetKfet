@@ -17,5 +17,6 @@
     <CategoriesComponent v-if="value==='Categories'"/>
     <UsersComponent v-if="value==='Users'"/>
     <ProduitModalComponent/>
+    <UserModalComponent/>
   </div>
 </template>
