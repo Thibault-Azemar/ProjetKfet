@@ -32,12 +32,15 @@ public class CategoryController {
 //    Permet d'ajouter une nouvelle catégorie
     @PostMapping(path="/add")
     public @ResponseBody
-    String addNewCategory (@RequestParam("name") String name)
+    String addNewCategory (@RequestParam("name") String name, @RequestParam(required = false, name = "image") String image)
     {
         logger.info("New Categorie");
 
         Category c = new Category();
         c.setName(name);
+        if (image != null && !image.equals("")) {
+            c.setImage(image);
+        }
         categoryRepository.save(c);
 
         return "Saved";

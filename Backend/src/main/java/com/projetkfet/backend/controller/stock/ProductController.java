@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 @RequestMapping(path="/product")
@@ -34,26 +35,55 @@ public class ProductController {
         return productRepository.findAll();
     }
 
+    @GetMapping()
+    public @ResponseBody Product getProduct(@RequestParam("id") String id)
+    {
+        logger.info("Get product");
+
+        Optional<Product> p = productRepository.findById(UUID.fromString(id));
+
+        Product product = null;
+        // if n est non null
+        if (p.isPresent()) {
+            product = p.get();
+        }
+        return product;
+    }
+
 //    POST
 
 //    Permet d'ajouter une nouvelle catégorie
     @PostMapping(path="/add")
     public @ResponseBody
-    String addNewProduct (@RequestParam("name") String name, @RequestParam(required = false, name = "purchasePrice") float purchasePrice, @RequestParam(required = false, name = "sellingPrice") float sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") float sellingPriceMembers, @RequestParam("idSubCategory") Integer id)
+    String addNewProduct (@RequestParam("name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestParam(required = false, name = "image") String image , @RequestParam("idSubCategory") String id)
     {
         logger.info("New Product");
 
-        Optional<SubCategory> subCat = subCategoryRepository.findById(id);
+        Optional<SubCategory> subCat = subCategoryRepository.findById(UUID.fromString(id));
 
         if (subCat.isPresent())
         {
+//            TODO: gérer les champs non obligatoires / Gérer les champs floats non nulls
             Product p = new Product();
             p.setName(name);
-            p.setPurchasePrice(purchasePrice);
-            p.setSellingPrice(sellingPrice);
-            p.setSellingPriceMembers(sellingPriceMembers);
             p.setStock(0);
             p.setSubCategorie(subCat.get());
+
+            if (purchasePrice != null && !purchasePrice.equals("")) {
+                float price = Float.parseFloat(purchasePrice);
+                p.setPurchasePrice(price);
+            }
+            if (sellingPrice != null && !sellingPrice.equals("")) {
+                float price = Float.parseFloat(sellingPrice);
+                p.setSellingPrice(price);
+            }
+            if (sellingPriceMembers != null && !sellingPriceMembers.equals("")) {
+                float price = Float.parseFloat(sellingPriceMembers);
+                p.setSellingPriceMembers(price);
+            }
+            if (image != null && !image.equals("")) {
+                p.setImage(image);
+            }
             productRepository.save(p);
         }
 
@@ -61,6 +91,43 @@ public class ProductController {
     }
 
 //    UPDATE
+    @PatchMapping()
+    public @ResponseBody
+    void UpdateProduct(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestParam(required = false, name = "stock") String stock, @RequestParam(required = false, name = "image") String image)
+    {
+        logger.info("Update Product");
+
+        Optional<Product> p = productRepository.findById(UUID.fromString(id));
+
+        if (p.isPresent()) {
+            Product product = p.get();
+
+            if (name != null && !name.equals("")) {
+                product.setName(name);
+            }
+            if (purchasePrice != null && !purchasePrice.equals("")) {
+                float price = Float.parseFloat(purchasePrice);
+                product.setPurchasePrice(price);
+            }
+            if (sellingPrice != null && !sellingPrice.equals("")) {
+                float price = Float.parseFloat(sellingPrice);
+                product.setSellingPrice(price);
+            }
+            if (sellingPriceMembers != null && !sellingPriceMembers.equals("")) {
+                float price = Float.parseFloat(sellingPriceMembers);
+                product.setSellingPriceMembers(price);
+            }
+            if (stock != null && !stock.equals("")) {
+                Integer amount = Integer.parseInt(stock);
+                product.setStock(amount);
+            }
+            if (image != null && !image.equals("")) {
+                product.setImage(image);
+            }
+
+            productRepository.save(product);
+        }
+    }
 
 //    DELETE
 }

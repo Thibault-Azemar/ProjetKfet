@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 @RequestMapping(path="/subcategory")
@@ -38,16 +39,19 @@ public class SubCategoryController {
 //    Permet d'ajouter une nouvelle catégorie
     @PostMapping(path="/add")
     public @ResponseBody
-    String addNewSubCategory (@RequestParam("name") String name, @RequestParam("idCategory") Integer id)
+    String addNewSubCategory (@RequestParam("name") String name, @RequestParam(required = false, name = "image") String image, @RequestParam("idCategory") String id)
     {
         logger.info("New SubCategorie");
 
-        Optional<Category> cat = categoryRepository.findById(id);
+        Optional<Category> cat = categoryRepository.findById(UUID.fromString(id));
 
         if (cat.isPresent())
         {
             SubCategory c = new SubCategory();
             c.setName(name);
+            if (image != null && !image.equals("")) {
+                c.setImage(image);
+            }
             c.setCategory(cat.get());
             subCategoryRepository.save(c);
             return "Saved";

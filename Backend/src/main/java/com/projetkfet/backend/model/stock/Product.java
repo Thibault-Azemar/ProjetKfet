@@ -2,12 +2,16 @@ package com.projetkfet.backend.model.stock;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
+
+import java.util.UUID;
 
 @Entity
 public class Product {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue
+    @UuidGenerator
+    private UUID id;
 
     @ManyToOne
     @JsonIgnoreProperties("products")
@@ -20,14 +24,16 @@ public class Product {
     private float sellingPriceMembers;
 //  Prix d'achat'
     private float purchasePrice;
+//  Image du produit
+    private String image;
 //  Stock de l'item
     private Integer stock;
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -69,6 +75,14 @@ public class Product {
 
     public void setPurchasePrice(float purchasePrice) {
         this.purchasePrice = purchasePrice;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Integer getStock() {
