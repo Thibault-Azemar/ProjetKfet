@@ -59,28 +59,44 @@ public class UserController {
     public @ResponseBody
     UUID connectUser(@RequestParam("email") String email, @RequestParam("password") String password) {
         logger.info("Connect User");
-        User user = userRepository.findByEmailAndPassword(email, password);
-        return user.getId();
-//        return JwtTokenUtil.generateToken(user);
+        Optional<User> u = userRepository.findByEmailAndPassword(email, password);
+
+        UUID id = null;
+        if (u.isPresent())
+        {
+            User user = u.get();
+            id = user.getId();
+        }
+        return id;
     }
 
     //    Permet d'ajouter un nouvel utilisateur
     @PostMapping(path = "/add")
     public @ResponseBody
     UUID addNewUser(@RequestParam("name") String name, @RequestParam("firstname") String firstname, @RequestParam("role") String role, @RequestParam("email") String email, @RequestParam("password") String password) {
-//        TODO: Vérifier que le name n'est pas déjà utilisé
         logger.info("New User");
 
-        User n = new User();
-        n.setName(name);
-        n.setFirstname(firstname);
-        n.setRole(role);
-        n.setEmail(email);
-        n.setPassword(password);
-        userRepository.save(n);
+        UUID id = null;
 
-        User user = userRepository.findByEmailAndPassword(email, password);
-        return user.getId();
+        if (userRepository.findByEmail(email).isEmpty())
+        {
+            User n = new User();
+            n.setName(name);
+            n.setFirstname(firstname);
+            n.setRole(role);
+            n.setEmail(email);
+            n.setPassword(password);
+            userRepository.save(n);
+
+            Optional<User> u = userRepository.findByEmailAndPassword(email, password);
+
+            if (u.isPresent())
+            {
+                User user = u.get();
+                id = user.getId();
+            }
+        }
+        return id;
     }
 
     //  Update

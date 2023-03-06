@@ -55,7 +55,7 @@ public class ProductController {
 //    Permet d'ajouter une nouvelle catégorie
     @PostMapping(path="/add")
     public @ResponseBody
-    String addNewProduct (@RequestParam("name") String name, @RequestParam(required = false, name = "purchasePrice") float purchasePrice, @RequestParam(required = false, name = "sellingPrice") float sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") float sellingPriceMembers, @RequestParam(required = false, name = "image") String image , @RequestParam("idSubCategory") String id)
+    String addNewProduct (@RequestParam("name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestParam(required = false, name = "image") String image , @RequestParam("idSubCategory") String id)
     {
         logger.info("New Product");
 
@@ -69,14 +69,17 @@ public class ProductController {
             p.setStock(0);
             p.setSubCategorie(subCat.get());
 
-            if (purchasePrice > 0) {
-                p.setPurchasePrice(purchasePrice);
+            if (purchasePrice != null && !purchasePrice.equals("")) {
+                float price = Float.parseFloat(purchasePrice);
+                p.setPurchasePrice(price);
             }
-            if (sellingPrice > 0) {
-                p.setSellingPrice(sellingPrice);
+            if (sellingPrice != null && !sellingPrice.equals("")) {
+                float price = Float.parseFloat(sellingPrice);
+                p.setSellingPrice(price);
             }
-            if (sellingPriceMembers > 0) {
-                p.setSellingPriceMembers(sellingPriceMembers);
+            if (sellingPriceMembers != null && !sellingPriceMembers.equals("")) {
+                float price = Float.parseFloat(sellingPriceMembers);
+                p.setSellingPriceMembers(price);
             }
             if (image != null && !image.equals("")) {
                 p.setImage(image);
@@ -90,7 +93,7 @@ public class ProductController {
 //    UPDATE
     @PatchMapping()
     public @ResponseBody
-    void UpdateProduct(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "purchasePrice") float purchasePrice, @RequestParam(required = false, name = "sellingPrice") float sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") float sellingPriceMembers, @RequestParam(required = false, name = "stock") Integer stock, @RequestParam(required = false, name = "image") String image)
+    void UpdateProduct(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestParam(required = false, name = "stock") String stock, @RequestParam(required = false, name = "image") String image)
     {
         logger.info("Update Product");
 
@@ -102,17 +105,21 @@ public class ProductController {
             if (name != null && !name.equals("")) {
                 product.setName(name);
             }
-            if (purchasePrice > 0) {
-                product.setPurchasePrice(purchasePrice);
+            if (purchasePrice != null && !purchasePrice.equals("")) {
+                float price = Float.parseFloat(purchasePrice);
+                product.setPurchasePrice(price);
             }
-            if (sellingPrice > 0) {
-                product.setSellingPrice(sellingPrice);
+            if (sellingPrice != null && !sellingPrice.equals("")) {
+                float price = Float.parseFloat(sellingPrice);
+                product.setSellingPrice(price);
             }
-            if (sellingPriceMembers > 0) {
-                product.setSellingPriceMembers(sellingPriceMembers);
+            if (sellingPriceMembers != null && !sellingPriceMembers.equals("")) {
+                float price = Float.parseFloat(sellingPriceMembers);
+                product.setSellingPriceMembers(price);
             }
-            if (stock > 0) {
-                product.setStock(stock);
+            if (stock != null && !stock.equals("")) {
+                Integer amount = Integer.parseInt(stock);
+                product.setStock(amount);
             }
             if (image != null && !image.equals("")) {
                 product.setImage(image);
