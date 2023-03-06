@@ -1,7 +1,8 @@
 import UsersComponent from '../../components/UsersComponent.vue'
 import { defineComponent } from 'vue'
 import '../../assets/style/users.css'
-import Users from '../Crontroller/UsersController'
+import User from '../Crontroller/UserController'
+import UserRepository from '../Repository/UserRepository'
 
 // @ts-ignore
 // @ts-ignore
@@ -15,13 +16,20 @@ export default defineComponent({
         //value: String ,
     },
     data() {
-        const users = new Users();
-        console.log(users)
+        const users = User.getUsers;
         return {
             users
         }
     },
     methods: {
+
+        getUsers(): User[] {
+            this.userRepo.getUsers().then((users: User[]) => {
+                this.users = users;
+                return this.users;
+            });
+            return this.users;
+        }
 
     }
     /*mounted() {
