@@ -96,6 +96,9 @@ public class UserController {
                 id = user.getId();
             }
         }
+        else {
+            throw new Exception("Item not available");
+        }
         return id;
     }
 
