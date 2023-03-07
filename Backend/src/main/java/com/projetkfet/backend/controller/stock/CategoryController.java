@@ -1,6 +1,7 @@
 package com.projetkfet.backend.controller.stock;
 
 import com.projetkfet.backend.data.stock.CategoryRepository;
+import com.projetkfet.backend.dto.stock.CategoryProjection;
 import com.projetkfet.backend.model.stock.Category;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,8 +27,8 @@ public class CategoryController {
 //    Retourne la liste de toutes les catégories
     @GetMapping(path="/all")
     public @ResponseBody
-    String getAllCategories() throws Exception {
-        throw new Exception("Oh nion");
+    List<CategoryProjection> getAllCategories() throws Exception {
+        return categoryRepository.findAllProjectedBy();
     }
 
 //    POST
