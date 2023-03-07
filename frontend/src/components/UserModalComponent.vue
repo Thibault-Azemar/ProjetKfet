@@ -34,7 +34,7 @@
           <input type="password" name="password-user" id="password-user" required>
         </div>
         <div class="submit-button">
-          <input type="" class="primary-button" id="creer-produit" value="Créer utilisateur" @click="addUser()">
+          <input class="primary-button" id="creer-produit" value="Créer utilisateur" @click="addUser()">
         </div>
       </form>
     </div>

@@ -29,6 +29,15 @@ export default defineComponent({
         }
     },
     methods: {
+        updateFromModal(popUpMessage: String, popUpButtons: Number, popUpDelete: Boolean) {
+            this.popUpMessage = popUpMessage;
+            this.popUpButtons = popUpButtons;
+            this.popUpDelete = popUpDelete;
+            const modal = document.getElementById("simple-modal");
+            if (modal !== null) {
+                modal.style.display = "block";
+            }
+        },
         deleteUser(id: string, firstname: string, name: string) {
             this.popUpMessage = "Voulez vous supprimer " + firstname + " " + name + " ?";
             this.popUpButtons = 2;
@@ -49,6 +58,14 @@ export default defineComponent({
     },
     beforeMount() {
         this.getUsers();
+    },
+    mounted() {
+        // if (this.$root !== null) {
+        //     this.$root.$on('messageFromModal', (popUpMessage: String, popUpButtons: Number, popUpDelete: Boolean) => {
+        //         this.updateFromModal(popUpMessage, popUpButtons, popUpDelete);
+        //     }
+        //     )
+        // }
     }
 
 })

@@ -32,8 +32,9 @@ export default class UserRepository {
 
     public addUser(name: string, firstname: string, email: string, password: string, role: string): Promise<User> {
         const API_URL = Config.API_URL;
-        const params = { role: role, email: email, name: name, firstname: firstname, password: firstname }
-
+        const CryptoJS = require("crypto-js")
+        const passhash = CryptoJS.AES.encrypt(password, Config.AES_KEY).toString();
+        const params = { role: role, email: email, name: name, firstname: firstname, password: passhash }
         return fetch(API_URL + 'user/add?' + new URLSearchParams(params), {
             method: 'POST',
             headers: {
