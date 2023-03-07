@@ -16,7 +16,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping(path="/subcategory")
+@CrossOrigin(origins = "*")
+@RequestMapping(path = "/subcategory")
 public class SubCategoryController {
 
     private static final Logger logger = LogManager.getLogger("ProductLogger");
@@ -27,29 +28,28 @@ public class SubCategoryController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-//    GET
+    // GET
 
-//    Récupère la liste des sous Catégories
-    @GetMapping(path="/all")
-    public @ResponseBody
-    List<SubCategoryProjection> getAllSubCategories() throws Exception {
+    // Récupère la liste des sous Catégories
+    @GetMapping(path = "/all")
+    public @ResponseBody List<SubCategoryProjection> getAllSubCategories() throws Exception {
         return subCategoryRepository.findAllProjectedBy();
     }
 
-//    POST
+    // POST
 
-//    Permet d'ajouter une nouvelle catégorie
-    @PostMapping(path="/add")
-    public @ResponseBody
-    UUID addNewSubCategory (@RequestParam("name") String name, @RequestParam(required = false, name = "image") String image, @RequestParam("idCategory") String id) throws Exception {
-        logger.info("New SubCategorie : "+ name);
+    // Permet d'ajouter une nouvelle catégorie
+    @PostMapping(path = "/add")
+    public @ResponseBody UUID addNewSubCategory(@RequestParam("name") String name,
+            @RequestParam(required = false, name = "image") String image, @RequestParam("idCategory") String id)
+            throws Exception {
+        logger.info("New SubCategorie : " + name);
 
         UUID idsubcat = null;
 
         Optional<Category> cat = categoryRepository.findById(UUID.fromString(id));
 
-        if (cat.isPresent())
-        {
+        if (cat.isPresent()) {
             SubCategory c = new SubCategory();
             c.setName(name);
             if (image != null && !image.equals("")) {
@@ -60,14 +60,11 @@ public class SubCategoryController {
 
             Optional<SubCategory> sc = subCategoryRepository.findByName(name);
 
-            if (sc.isPresent())
-            {
+            if (sc.isPresent()) {
                 SubCategory subcategory = sc.get();
                 idsubcat = subcategory.getId();
-                logger.info("Id subcategory : "+ idsubcat);
-            }
-            else
-            {
+                logger.info("Id subcategory : " + idsubcat);
+            } else {
                 logger.info("Error create SubCategory");
                 throw new Exception("Error create SubCategory");
             }
@@ -78,23 +75,19 @@ public class SubCategoryController {
         throw new Exception("Error id Category");
     }
 
-//    UPDATE
+    // UPDATE
 
-//    DELETE
+    // DELETE
 
     @DeleteMapping()
-    public @ResponseBody
-    void deleteSubCategory(@RequestParam("id") String id) throws Exception {
+    public @ResponseBody void deleteSubCategory(@RequestParam("id") String id) throws Exception {
         logger.info("Delete User");
         Optional<SubCategory> sc = subCategoryRepository.findById(UUID.fromString(id));
 
-        if (sc.isPresent())
-        {
+        if (sc.isPresent()) {
             logger.info("SubCategory deleted : " + id);
             subCategoryRepository.delete(sc.get());
-        }
-        else
-        {
+        } else {
             logger.info("No subcategory for this ID");
             throw new Exception("No subcategory for this ID");
         }

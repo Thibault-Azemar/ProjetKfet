@@ -1,6 +1,5 @@
 package com.projetkfet.backend.controller.customer;
 
-
 import com.projetkfet.backend.data.customer.GroupRepository;
 import com.projetkfet.backend.model.customer.Group;
 import org.apache.logging.log4j.LogManager;
@@ -13,7 +12,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping(path="/group")
+@CrossOrigin(origins = "*")
+@RequestMapping(path = "/group")
 public class GroupController {
 
     private static final Logger logger = LogManager.getLogger("CustomerLogger");
@@ -21,20 +21,18 @@ public class GroupController {
     @Autowired
     private GroupRepository groupRepository;
 
-    //    GET
+    // GET
 
-    @GetMapping(path="/all")
-    public @ResponseBody
-    Iterable<Group> getAllGroups() {
+    @GetMapping(path = "/all")
+    public @ResponseBody Iterable<Group> getAllGroups() {
         logger.info("All groups");
         return groupRepository.findAll();
     }
 
-    //    POST
+    // POST
 
-    @PostMapping(path="/add")
-    public @ResponseBody
-    UUID addNewGroup(@RequestParam("name") String name) throws Exception {
+    @PostMapping(path = "/add")
+    public @ResponseBody UUID addNewGroup(@RequestParam("name") String name) throws Exception {
         logger.info("New group : " + name);
 
         UUID id = null;
@@ -46,14 +44,11 @@ public class GroupController {
 
         Optional<Group> gr = groupRepository.findByName(name);
 
-        if (gr.isPresent())
-        {
+        if (gr.isPresent()) {
             Group group = gr.get();
             id = group.getId();
-            logger.info("Id Group : "+ id);
-        }
-        else
-        {
+            logger.info("Id Group : " + id);
+        } else {
             logger.info("Error create Group");
             throw new Exception("Error create Group");
         }
@@ -61,23 +56,19 @@ public class GroupController {
         return id;
     }
 
-    //    UPDATE
+    // UPDATE
 
-    //    DELETE
+    // DELETE
 
     @DeleteMapping()
-    public @ResponseBody
-    void deleteUser(@RequestParam("id") String id) throws Exception {
+    public @ResponseBody void deleteUser(@RequestParam("id") String id) throws Exception {
         logger.info("Delete Group");
         Optional<Group> g = groupRepository.findById(UUID.fromString(id));
 
-        if (g.isPresent())
-        {
+        if (g.isPresent()) {
             logger.info("Group deleted : " + id);
             groupRepository.delete(g.get());
-        }
-        else
-        {
+        } else {
             logger.info("No group for this ID");
             throw new Exception("No group for this ID");
         }

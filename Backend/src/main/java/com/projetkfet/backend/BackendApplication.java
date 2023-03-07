@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-@CrossOrigin("http://localhost:8081/")
+@CrossOrigin("*")
 public class BackendApplication {
 
-//    @Autowired
-//    private JwtRequestFilter jwtRequestFilter;
+    // @Autowired
+    // private JwtRequestFilter jwtRequestFilter;
 
     private static final Logger logger = LogManager.getLogger("UserLogger");
 
@@ -23,15 +23,17 @@ public class BackendApplication {
         SpringApplication.run(BackendApplication.class, args);
     }
 
-    /*@Bean
-    public FilterRegistrationBean<JwtRequestFilter> jwtRequestFilterRegistration() {
-        FilterRegistrationBean<JwtRequestFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(jwtRequestFilter);
-        registrationBean.addUrlPatterns("/*");
-        return registrationBean;
-    }*/
-
-
+    /*
+     * @Bean
+     * public FilterRegistrationBean<JwtRequestFilter>
+     * jwtRequestFilterRegistration() {
+     * FilterRegistrationBean<JwtRequestFilter> registrationBean = new
+     * FilterRegistrationBean<>();
+     * registrationBean.setFilter(jwtRequestFilter);
+     * registrationBean.addUrlPatterns("/*");
+     * return registrationBean;
+     * }
+     */
 
     @GetMapping("/hello")
     public String sayHello(@RequestParam(value = "myName", defaultValue = "World") String name) {

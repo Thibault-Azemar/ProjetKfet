@@ -12,7 +12,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping(path="/category")
+@CrossOrigin(origins = "*")
+@RequestMapping(path = "/category")
 public class CategoryController {
 
     private static final Logger logger = LogManager.getLogger("ProductLogger");
@@ -20,21 +21,20 @@ public class CategoryController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-//    GET
+    // GET
 
-//    Retourne la liste de toutes les catégories
-    @GetMapping(path="/all")
-    public @ResponseBody
-    String getAllCategories() throws Exception {
+    // Retourne la liste de toutes les catégories
+    @GetMapping(path = "/all")
+    public @ResponseBody String getAllCategories() throws Exception {
         throw new Exception("Oh nion");
     }
 
-//    POST
+    // POST
 
-//    Permet d'ajouter une nouvelle catégorie
-    @PostMapping(path="/add")
-    public @ResponseBody
-    UUID addNewCategory (@RequestParam("name") String name, @RequestParam(required = false, name = "image") String image) throws Exception {
+    // Permet d'ajouter une nouvelle catégorie
+    @PostMapping(path = "/add")
+    public @ResponseBody UUID addNewCategory(@RequestParam("name") String name,
+            @RequestParam(required = false, name = "image") String image) throws Exception {
         logger.info("New Categorie : " + name);
 
         UUID id = null;
@@ -48,14 +48,11 @@ public class CategoryController {
 
         Optional<Category> cat = categoryRepository.findByName(name);
 
-        if (cat.isPresent())
-        {
+        if (cat.isPresent()) {
             Category category = cat.get();
             id = category.getId();
-            logger.info("Id category : "+ id);
-        }
-        else
-        {
+            logger.info("Id category : " + id);
+        } else {
             logger.info("Error create Category");
             throw new Exception("Error create Category");
         }
@@ -63,23 +60,19 @@ public class CategoryController {
         return id;
     }
 
-//    UPDATE
+    // UPDATE
 
-//    DELETE
+    // DELETE
 
     @DeleteMapping()
-    public @ResponseBody
-    void deleteCategory(@RequestParam("id") String id) throws Exception {
+    public @ResponseBody void deleteCategory(@RequestParam("id") String id) throws Exception {
         logger.info("Delete User");
         Optional<Category> c = categoryRepository.findById(UUID.fromString(id));
 
-        if (c.isPresent())
-        {
+        if (c.isPresent()) {
             logger.info("Category deleted : " + id);
             categoryRepository.delete(c.get());
-        }
-        else
-        {
+        } else {
             logger.info("No category for this ID");
             throw new Exception("No category for this ID");
         }
