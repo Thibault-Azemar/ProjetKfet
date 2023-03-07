@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 import java.util.UUID;
 
-
 // Classe contrôlleur des requêtes pour la classe User
-@CrossOrigin(origins = "http://127.0.0.1:8081")
+@CrossOrigin(origins = "*")
 @Controller
 @RequestMapping(path = "/user")
 public class UserController {
@@ -23,16 +22,14 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-//    @Autowired
-//    private JwtTokenUtil jwtTokenUtil;
+    // @Autowired
+    // private JwtTokenUtil jwtTokenUtil;
 
+    // Get
 
-//  Get
-
-    //    Retourne un utilisateur
+    // Retourne un utilisateur
     @GetMapping()
-    public @ResponseBody
-    User getUser(@RequestParam("id") String id) throws Exception {
+    public @ResponseBody User getUser(@RequestParam("id") String id) throws Exception {
         logger.info("Get User : " + id);
 
         Optional<User> u = userRepository.findById(UUID.fromString(id));
@@ -41,58 +38,52 @@ public class UserController {
         // if n est non null
         if (u.isPresent()) {
             user = u.get();
-        }
-        else
-        {
+        } else {
             logger.info("No existing account for this ID");
             throw new Exception("No existing account for this ID");
         }
         return user;
     }
 
-    //    Retourne la liste de tous les utilisateurs
+    // Retourne la liste de tous les utilisateurs
     @GetMapping(path = "/all")
-    public @ResponseBody
-    Iterable<User> getAllUsers() {
+    public @ResponseBody Iterable<User> getAllUsers() {
         logger.info("Get all Users");
         return userRepository.findAll();
     }
 
-//  Post
+    // Post
 
-    //    Retourne l'id de l'utilisateur avec lequel on se connecte
+    // Retourne l'id de l'utilisateur avec lequel on se connecte
     @PostMapping()
-    public @ResponseBody
-    UUID connectUser(@RequestParam("email") String email, @RequestParam("password") String password) throws Exception {
-        logger.info("Connect User : "+ email);
+    public @ResponseBody UUID connectUser(@RequestParam("email") String email,
+            @RequestParam("password") String password) throws Exception {
+        logger.info("Connect User : " + email);
         Optional<User> u = userRepository.findByEmailAndPassword(email, password);
 
         UUID id = null;
-        if (u.isPresent())
-        {
+        if (u.isPresent()) {
             User user = u.get();
             id = user.getId();
             logger.info("Successful connection");
-        }
-        else
-        {
-//            TODO : améliorer la gestion d'erreur
+        } else {
+            // TODO : améliorer la gestion d'erreur
             logger.info("Wrong email/password");
             throw new Exception("Wrong email/password");
         }
         return id;
     }
 
-    //    Permet d'ajouter un nouvel utilisateur
+    // Permet d'ajouter un nouvel utilisateur
     @PostMapping(path = "/add")
-    public @ResponseBody
-    UUID addNewUser(@RequestParam("name") String name, @RequestParam("firstname") String firstname, @RequestParam("role") String role, @RequestParam("email") String email, @RequestParam("password") String password) throws Exception {
+    public @ResponseBody UUID addNewUser(@RequestParam("name") String name, @RequestParam("firstname") String firstname,
+            @RequestParam("role") String role, @RequestParam("email") String email,
+            @RequestParam("password") String password) throws Exception {
         logger.info("Create User");
 
         UUID id = null;
 
-        if (userRepository.findByEmail(email).isEmpty())
-        {
+        if (userRepository.findByEmail(email).isEmpty()) {
             User n = new User();
             n.setName(name);
             n.setFirstname(firstname);
@@ -104,27 +95,27 @@ public class UserController {
 
             Optional<User> u = userRepository.findByEmailAndPassword(email, password);
 
-            if (u.isPresent())
-            {
+            if (u.isPresent()) {
                 User user = u.get();
                 id = user.getId();
-                logger.info("Id user : "+ id);
-            }
-            else
-            {
+                logger.info("Id user : " + id);
+            } else {
                 throw new Exception("User creation error");
             }
-        }
-        else {
+        } else {
             throw new Exception("Email already used");
         }
         return id;
     }
 
-    //  Update
+    // Update
     @PatchMapping()
-    public @ResponseBody
-    void updateUser(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "firstname") String firstname, @RequestParam(required = false, name = "role") String role, @RequestParam(required = false, name = "email") String email, @RequestParam(required = false, name = "password") String password) throws Exception {
+    public @ResponseBody void updateUser(@RequestParam("id") String id,
+            @RequestParam(required = false, name = "name") String name,
+            @RequestParam(required = false, name = "firstname") String firstname,
+            @RequestParam(required = false, name = "role") String role,
+            @RequestParam(required = false, name = "email") String email,
+            @RequestParam(required = false, name = "password") String password) throws Exception {
         logger.info("Update User : " + id);
 
         Optional<User> n = userRepository.findById(UUID.fromString(id));
@@ -151,26 +142,21 @@ public class UserController {
 
             userRepository.save(user);
             logger.info("Successful User Update");
-        }
-        else {
+        } else {
             logger.info("No account for this ID");
             throw new Exception("No account for this ID");
         }
     }
 
-    //    Delete
+    // Delete
     @DeleteMapping()
-    public @ResponseBody
-    void deleteUser(@RequestParam("id") String id) throws Exception {
+    public @ResponseBody void deleteUser(@RequestParam("id") String id) throws Exception {
         logger.info("Delete User");
         Optional<User> n = userRepository.findById(UUID.fromString(id));
 
-        if (n.isPresent())
-        {
+        if (n.isPresent()) {
             userRepository.delete(n.get());
-        }
-        else
-        {
+        } else {
             throw new Exception("No account for this ID");
         }
 

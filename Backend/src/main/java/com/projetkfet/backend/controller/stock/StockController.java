@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@CrossOrigin(origins = "http://127.0.0.1:8081")
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "/stock")
 public class StockController {
 
