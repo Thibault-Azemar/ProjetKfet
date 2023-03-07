@@ -66,4 +66,20 @@ public class CategoryController {
 //    UPDATE
 
 //    DELETE
+    @DeleteMapping()
+    public @ResponseBody
+    void deleteCategory(@RequestParam("id") String id) throws Exception {
+        logger.info("Delete User");
+        Optional<Category> c = categoryRepository.findById(UUID.fromString(id));
+
+        if (c.isPresent())
+        {
+            categoryRepository.delete(c.get());
+        }
+        else
+        {
+            throw new Exception("No account for this ID");
+        }
+
+    }
 }
