@@ -78,4 +78,24 @@ public class SubCategoryController {
 //    UPDATE
 
 //    DELETE
+
+    @DeleteMapping()
+    public @ResponseBody
+    void deleteSubCategory(@RequestParam("id") String id) throws Exception {
+        logger.info("Delete User");
+        Optional<SubCategory> sc = subCategoryRepository.findById(UUID.fromString(id));
+
+        if (sc.isPresent())
+        {
+            logger.info("SubCategory deleted : " + id);
+            subCategoryRepository.delete(sc.get());
+        }
+        else
+        {
+            logger.info("No subcategory for this ID");
+            throw new Exception("No subcategory for this ID");
+        }
+
+    }
+
 }

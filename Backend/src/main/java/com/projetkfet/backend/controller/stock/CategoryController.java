@@ -66,6 +66,7 @@ public class CategoryController {
 //    UPDATE
 
 //    DELETE
+
     @DeleteMapping()
     public @ResponseBody
     void deleteCategory(@RequestParam("id") String id) throws Exception {
@@ -74,11 +75,13 @@ public class CategoryController {
 
         if (c.isPresent())
         {
+            logger.info("Category deleted : " + id);
             categoryRepository.delete(c.get());
         }
         else
         {
-            throw new Exception("No account for this ID");
+            logger.info("No category for this ID");
+            throw new Exception("No category for this ID");
         }
 
     }
