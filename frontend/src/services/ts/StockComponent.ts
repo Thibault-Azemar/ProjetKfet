@@ -42,7 +42,6 @@ export default defineComponent({
     },
     beforeMount() {
         this.getStocks();
-        console.log(this.stock)
     },
     /*mounted() {
         this.name // type: string | undefined
