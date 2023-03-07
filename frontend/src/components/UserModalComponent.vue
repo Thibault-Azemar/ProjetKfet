@@ -24,7 +24,7 @@
         <div>
           <label class="input-label" for="role-user">Rôle</label>
           <select name="role-user" class="input-field" id="role-user" required>
-            <option value="" selected>Choisir sous-catégorie</option>
+            <option value="" selected disabled>Choisir Rôle</option>
             <option value="admin">Administrateur</option>
             <option value="kfetier">Kfetier</option>
           </select>
