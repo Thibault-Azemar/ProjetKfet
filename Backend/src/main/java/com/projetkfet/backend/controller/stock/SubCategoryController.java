@@ -29,9 +29,8 @@ public class SubCategoryController {
 
 //    Récupère la liste des sous Catégories
     @GetMapping(path="/all")
-    public @ResponseBody String getAllSubCategories()
-    {
-        return "Nope";
+    public @ResponseBody String getAllSubCategories() throws Exception {
+        throw new Exception("Nope");
     }
 
 //    POST
@@ -39,9 +38,10 @@ public class SubCategoryController {
 //    Permet d'ajouter une nouvelle catégorie
     @PostMapping(path="/add")
     public @ResponseBody
-    String addNewSubCategory (@RequestParam("name") String name, @RequestParam(required = false, name = "image") String image, @RequestParam("idCategory") String id)
-    {
-        logger.info("New SubCategorie");
+    UUID addNewSubCategory (@RequestParam("name") String name, @RequestParam(required = false, name = "image") String image, @RequestParam("idCategory") String id) throws Exception {
+        logger.info("New SubCategorie : "+ name);
+
+        UUID idsubcat = null;
 
         Optional<Category> cat = categoryRepository.findById(UUID.fromString(id));
 
@@ -54,9 +54,25 @@ public class SubCategoryController {
             }
             c.setCategory(cat.get());
             subCategoryRepository.save(c);
-            return "Saved";
+
+            Optional<SubCategory> sc = subCategoryRepository.findByName(name);
+
+            if (sc.isPresent())
+            {
+                SubCategory subcategory = sc.get();
+                idsubcat = subcategory.getId();
+                logger.info("Id subcategory : "+ idsubcat);
+            }
+            else
+            {
+                logger.info("Error create SubCategory");
+                throw new Exception("Error create SubCategory");
+            }
+
+            return idsubcat;
         }
-        return "UnSaved";
+        logger.info("Error id Category");
+        throw new Exception("Error id Category");
     }
 
 //    UPDATE

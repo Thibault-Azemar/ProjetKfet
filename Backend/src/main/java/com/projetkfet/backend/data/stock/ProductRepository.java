@@ -9,4 +9,6 @@ import java.util.UUID;
 public interface ProductRepository extends CrudRepository<Product, Integer> {
 
     Optional<Product> findById(UUID fromString);
+
+    Optional<Product> findByName(String name);
 }
