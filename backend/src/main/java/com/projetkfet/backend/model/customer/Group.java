@@ -1,16 +1,14 @@
 package com.projetkfet.backend.model.customer;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@Table(name = "groupes")
 public class Group {
     @Id
     @GeneratedValue

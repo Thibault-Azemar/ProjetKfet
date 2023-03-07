@@ -9,4 +9,6 @@ import java.util.UUID;
 public interface GroupRepository extends CrudRepository<Group, UUID> {
 
     Optional<Group> findById(UUID id);
+
+    Optional<Group> findByName(String name);
 }
