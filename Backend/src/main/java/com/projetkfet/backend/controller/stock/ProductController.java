@@ -159,4 +159,23 @@ public class ProductController {
     }
 
 //    DELETE
+
+    @DeleteMapping()
+    public @ResponseBody
+    void deleteProduct(@RequestParam("id") String id) throws Exception {
+        logger.info("Delete User");
+        Optional<Product> p = productRepository.findById(UUID.fromString(id));
+
+        if (p.isPresent())
+        {
+            logger.info("Product deleted : " + id);
+            productRepository.delete(p.get());
+        }
+        else
+        {
+            logger.info("No product for this ID");
+            throw new Exception("No product for this ID");
+        }
+
+    }
 }

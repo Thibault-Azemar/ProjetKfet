@@ -149,14 +149,17 @@ public class UserController {
     }
 
     // Delete
+
     @DeleteMapping()
     public @ResponseBody void deleteUser(@RequestParam("id") String id) throws Exception {
         logger.info("Delete User");
         Optional<User> n = userRepository.findById(UUID.fromString(id));
 
         if (n.isPresent()) {
+            logger.info("User deleted : " + id);
             userRepository.delete(n.get());
         } else {
+            logger.info("No account for this ID");
             throw new Exception("No account for this ID");
         }
 
