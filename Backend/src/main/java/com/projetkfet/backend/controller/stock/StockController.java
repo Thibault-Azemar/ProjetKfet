@@ -16,7 +16,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping(path="/stock")
+@CrossOrigin(origins = "http://127.0.0.1:8081")
+@RequestMapping(path = "/stock")
 public class StockController {
 
     private static final Logger logger = LogManager.getLogger("ProductLogger");
@@ -30,35 +31,29 @@ public class StockController {
     @Autowired
     private ProductRepository productRepository;
 
+    // GET
 
-    //    GET
-
-    //    Récupère la liste du stock par Catégories
-    @GetMapping(path="/cat/all")
-    public @ResponseBody
-    Iterable<Category> getAllStockByCategories()
-    {
+    // Récupère la liste du stock par Catégories
+    @GetMapping(path = "/cat/all")
+    public @ResponseBody Iterable<Category> getAllStockByCategories() {
         logger.info("All Stock by Category");
         return categoryRepository.findAll();
     }
 
-    //    Récupère la liste du stock par sous Catégories
-    @GetMapping(path="/subcat/all")
-    public @ResponseBody
-    Iterable<SubCategory> getAllStockBySubCategories()
-    {
+    // Récupère la liste du stock par sous Catégories
+    @GetMapping(path = "/subcat/all")
+    public @ResponseBody Iterable<SubCategory> getAllStockBySubCategories() {
         logger.info("All Stock by SubCategory");
         return subCategoryRepository.findAll();
     }
 
-    //    POST
+    // POST
 
-    //    UPDATE
+    // UPDATE
 
-//    On enlève une valeur du stock d'un produit identifié par un produit
-    @PatchMapping(path="/product")
-    public @ResponseBody
-    String TakeOneProduct(@RequestParam("id") String id) throws Exception {
+    // On enlève une valeur du stock d'un produit identifié par un produit
+    @PatchMapping(path = "/product")
+    public @ResponseBody String TakeOneProduct(@RequestParam("id") String id) throws Exception {
         logger.info("Take one product");
 
         Optional<Product> p = productRepository.findById(UUID.fromString(id));
@@ -68,28 +63,22 @@ public class StockController {
 
             Integer stock = product.getStock();
 
-            if (stock > 0)
-            {
+            if (stock > 0) {
                 stock--;
                 product.setStock(stock);
                 productRepository.save(product);
-                logger.info("Update stock for "+ product.getName()+ " : " + stock);
+                logger.info("Update stock for " + product.getName() + " : " + stock);
                 return stock.toString();
+            } else {
+                logger.info("No more stock for " + product.getName() + " : " + product.getId());
+                throw new Exception("No more stock for " + product.getName() + " : " + product.getId());
             }
-            else
-            {
-                logger.info("No more stock for "+ product.getName()+ " : " + product.getId());
-                throw new Exception("No more stock for "+ product.getName()+ " : " + product.getId());
-            }
-        }
-        else
-        {
+        } else {
             logger.info("Product doesn't exist");
             throw new Exception("Product doesn't exist");
         }
     }
 
-    //    DELETE
-
+    // DELETE
 
 }
