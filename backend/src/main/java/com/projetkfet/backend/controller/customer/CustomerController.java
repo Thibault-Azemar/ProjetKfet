@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(path="/customer")
 public class CustomerController {
 
-    private static final Logger logger = LogManager.getLogger("ProductLogger");
+    private static final Logger logger = LogManager.getLogger("CustomerLogger");
 
     @Autowired
     private CustomerRepository customerRepository;

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(path="/group")
 public class GroupController {
 
-    private static final Logger logger = LogManager.getLogger("ProductLogger");
+    private static final Logger logger = LogManager.getLogger("CustomerLogger");
 
     @Autowired
     private GroupRepository groupRepository;
