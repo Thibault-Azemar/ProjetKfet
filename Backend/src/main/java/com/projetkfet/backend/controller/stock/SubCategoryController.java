@@ -2,6 +2,7 @@ package com.projetkfet.backend.controller.stock;
 
 import com.projetkfet.backend.data.stock.CategoryRepository;
 import com.projetkfet.backend.data.stock.SubCategoryRepository;
+import com.projetkfet.backend.dto.stock.SubCategoryProjection;
 import com.projetkfet.backend.model.stock.Category;
 import com.projetkfet.backend.model.stock.SubCategory;
 import org.apache.logging.log4j.LogManager;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,8 +31,9 @@ public class SubCategoryController {
 
 //    Récupère la liste des sous Catégories
     @GetMapping(path="/all")
-    public @ResponseBody String getAllSubCategories() throws Exception {
-        throw new Exception("Nope");
+    public @ResponseBody
+    List<SubCategoryProjection> getAllSubCategories() throws Exception {
+        return subCategoryRepository.findAllProjectedBy();
     }
 
 //    POST
