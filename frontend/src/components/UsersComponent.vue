@@ -11,10 +11,9 @@
         <p>{{ user.name }}</p>
         <p>{{ user.firstname }}</p>
         <p>{{ user.role }}</p>
-        <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
+        <button class="icon-button" @click="updateUser(user)"><img src="../assets/pictures/pen.svg"></button>
         <button class="icon-button"><img src="../assets/pictures/trash.svg"></button>
       </div>
-
     </div>
   </div>
 </template>

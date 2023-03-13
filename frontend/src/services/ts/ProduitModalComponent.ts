@@ -1,4 +1,5 @@
 import ProduitModalComponent from "../../components/ProduitModalComponent.vue"
+import Produit from "../Crontroller/StockController"
 import {defineComponent} from 'vue'
 
 // @ts-ignore
@@ -9,7 +10,12 @@ export default defineComponent({
         ProduitModalComponent
     },
     // type inference enabled
-    props: {},
+    props: {
+        produit :{
+            type : Produit,
+            require : false
+        }
+    },
     data() {
 
     },
@@ -17,6 +23,9 @@ export default defineComponent({
         unshowModal(idModal:string) {
             const modal = document.getElementById(idModal);
             if(modal) modal.style.display = "none";
+        },
+        updateStock(produit:Produit){
+            this.$emit('updateStock',produit);
         }
     }
 })

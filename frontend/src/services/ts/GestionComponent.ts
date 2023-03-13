@@ -7,6 +7,8 @@ import CategoriesComponent from "../../components/CategoriesComponent.vue";
 import StockComponent from "../../components/StockComponent.vue";
 import ProduitModalComponent from "../../components/ProduitModalComponent.vue";
 import UserModalComponent from "../../components/UserModalComponent.vue";
+import User from "../Crontroller/UserController"
+import Stock from "@/services/Crontroller/StockController";
 
 // @ts-ignore
 // @ts-ignore
@@ -27,8 +29,12 @@ export default defineComponent({
     },
     data() {
         const value = 'Stock';
+        let isUser : User | undefined;
+        let isProduit : Stock | undefined;
         return {
-            value
+            value,
+            isUser,
+            isProduit
         }
     },
     methods:{
@@ -50,6 +56,14 @@ export default defineComponent({
                 modal = document.getElementById("userModal");
                 if(modal) modal.style.display = "block";
             }
+        },
+        updateUser(user:User){
+            this.isUser = user;
+            this.showAddModal();
+        },
+        updateStock(produit: Stock){
+            this.isProduit = produit;
+            this.showAddModal();
         }
     }
     /*mounted() {

@@ -1,7 +1,7 @@
 <script lang="ts" src="../services/ts/SimpleModalComponent.ts"></script>
 
 <template>
-  <div class="modal" id="simple-modal">
+  <div class="modal index" id="simple-modal">
     <div class="card">
       <header>
         <h3>Suppression</h3>

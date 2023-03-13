@@ -1,4 +1,5 @@
 import UserModalComponent from "../../components/UserModalComponent.vue"
+import User from "../Crontroller/UserController"
 import {defineComponent} from 'vue'
 
 // @ts-ignore
@@ -9,7 +10,12 @@ export default defineComponent({
         UserModalComponent
     },
     // type inference enabled
-    props: {},
+    props: {
+        user: {
+            type : User,
+            require : false
+        }
+    },
     data() {
 
     },

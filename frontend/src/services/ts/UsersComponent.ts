@@ -27,6 +27,9 @@ export default defineComponent({
             userRepo.getUsers().then((users: User[]) => {
                 this.users = users;
             });
+        },
+        updateUser(user :User){
+            this.$emit('updateUser',user)
         }
 
     }
