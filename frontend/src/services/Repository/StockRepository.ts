@@ -21,7 +21,7 @@ export default class StockRepository {
                     data.subCategories.forEach((data: any) => {
                         const subcategory = new Subcategory(data.id, data.name, data.image);
                         data.products.forEach((data: any) => {
-                            const product = new Product(data.id, data.name, data.purchasePrice, data.sellingPrice, data.sellingPriceMembers, data.stock, data.image);
+                            const product = new Product(data.id, data.name, data.purchasePrice, data.sellingPrice, data.sellingPriceMembers, data.stock, subcategory.name, data.image);
                             subcategory.addProduct(product);
                         })
                         category.addSubcategory(subcategory);
