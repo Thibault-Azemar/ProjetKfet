@@ -10,7 +10,7 @@
             <PatternLayout disableAnsi="false" pattern="%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} %highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=green bold, TRACE=blue} %style{}{magenta} [%M] %style{%40C}{cyan} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%xEx}" />
         </Console>
         <RollingFile name="UserAppender" fileName="logs/users/users.log"
-                     filePattern="logs/users/users-%d{yyyy-MM-dd}-%i.log.gz">
+                     filePattern="logs/users/users-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="INFO"/>
             <PatternLayout>
                 <Pattern>${LOG_PATTERN}</Pattern>
@@ -21,7 +21,18 @@
             </Policies>
         </RollingFile>
         <RollingFile name="ProductAppender" fileName="logs/products/products.log"
-                     filePattern="logs/products/products-%d{yyyy-MM-dd}-%i.log.gz">
+                     filePattern="logs/products/products-%d{yyyy-MM-dd}-%i.log">
+            <ThresholdFilter level="INFO"/>
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="7" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="CustomerAppender" fileName="logs/customers/customers.log"
+                     filePattern="logs/customers/customers-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="INFO"/>
             <PatternLayout>
                 <Pattern>${LOG_PATTERN}</Pattern>
@@ -39,6 +50,10 @@
         </Logger>
         <Logger name="ProductLogger" level="info" additivity="false">
             <AppenderRef ref="ProductAppender"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="CustomerLogger" level="info" additivity="false">
+            <AppenderRef ref="CustomerAppender"/>
             <AppenderRef ref="Console"/>
         </Logger>
         <Root level="info">

@@ -2,6 +2,7 @@ package com.projetkfet.backend.controller.stock;
 
 import com.projetkfet.backend.data.stock.CategoryRepository;
 import com.projetkfet.backend.data.stock.SubCategoryRepository;
+import com.projetkfet.backend.dto.stock.SubCategoryProjection;
 import com.projetkfet.backend.model.stock.Category;
 import com.projetkfet.backend.model.stock.SubCategory;
 import org.apache.logging.log4j.LogManager;
@@ -10,10 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Controller
-@RequestMapping(path="/subcategory")
+@CrossOrigin(origins = "*")
+@RequestMapping(path = "/subcategory")
 public class SubCategoryController {
 
     private static final Logger logger = LogManager.getLogger("ProductLogger");
@@ -24,38 +28,70 @@ public class SubCategoryController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-//    GET
+    // GET
 
-//    Récupère la liste des sous Catégories
-    @GetMapping(path="/all")
-    public @ResponseBody String getAllSubCategories()
-    {
-        return "Nope";
+    // Récupère la liste des sous Catégories
+    @GetMapping(path = "/all")
+    public @ResponseBody List<SubCategoryProjection> getAllSubCategories() throws Exception {
+        return subCategoryRepository.findAllProjectedBy();
     }
 
-//    POST
+    // POST
 
-//    Permet d'ajouter une nouvelle catégorie
-    @PostMapping(path="/add")
-    public @ResponseBody
-    String addNewSubCategory (@RequestParam("name") String name, @RequestParam("idCategory") Integer id)
-    {
-        logger.info("New SubCategorie");
+    // Permet d'ajouter une nouvelle catégorie
+    @PostMapping(path = "/add")
+    public @ResponseBody UUID addNewSubCategory(@RequestParam("name") String name,
+            @RequestParam(required = false, name = "image") String image, @RequestParam("idCategory") String id)
+            throws Exception {
+        logger.info("New SubCategorie : " + name);
 
-        Optional<Category> cat = categoryRepository.findById(id);
+        UUID idsubcat = null;
 
-        if (cat.isPresent())
-        {
+        Optional<Category> cat = categoryRepository.findById(UUID.fromString(id));
+
+        if (cat.isPresent()) {
             SubCategory c = new SubCategory();
             c.setName(name);
+            if (image != null && !image.equals("")) {
+                c.setImage(image);
+            }
             c.setCategory(cat.get());
             subCategoryRepository.save(c);
-            return "Saved";
+
+            Optional<SubCategory> sc = subCategoryRepository.findByName(name);
+
+            if (sc.isPresent()) {
+                SubCategory subcategory = sc.get();
+                idsubcat = subcategory.getId();
+                logger.info("Id subcategory : " + idsubcat);
+            } else {
+                logger.info("Error create SubCategory");
+                throw new Exception("Error create SubCategory");
+            }
+
+            return idsubcat;
         }
-        return "UnSaved";
+        logger.info("Error id Category");
+        throw new Exception("Error id Category");
     }
 
-//    UPDATE
+    // UPDATE
 
-//    DELETE
+    // DELETE
+
+    @DeleteMapping()
+    public @ResponseBody void deleteSubCategory(@RequestParam("id") String id) throws Exception {
+        logger.info("Delete User");
+        Optional<SubCategory> sc = subCategoryRepository.findById(UUID.fromString(id));
+
+        if (sc.isPresent()) {
+            logger.info("SubCategory deleted : " + id);
+            subCategoryRepository.delete(sc.get());
+        } else {
+            logger.info("No subcategory for this ID");
+            throw new Exception("No subcategory for this ID");
+        }
+
+    }
+
 }

@@ -6,7 +6,7 @@
         <h3>Créer un nouvel utilisateur</h3>
         <button class="icon-button close-button" @click="unshowModal('userModal')"></button>
       </header>
-      <form method="post">
+      <form>
         <div>
           <label class="input-label" for="nom-user">Nom</label>
           <input name="nom-user" class="input-field" type="text" :value="user.name" placeholder="nom de l'utilisateur" id="nom-user"
@@ -26,7 +26,7 @@
           <label class="input-label" for="role-user">Rôle</label>
           <select name="role-user" class="input-field"
                   id="role-user" required>
-            <option value="" v-if="!user" selected>Choisir sous-catégorie</option>
+            <option value="" v-if="!user" selected disabled>Choisir sous-catégorie</option>
             <option value="admin" >Administrateur</option>
             <option value="kfetier">Kfetier</option>
           </select>
@@ -36,7 +36,7 @@
           <input type="password" name="password-user" id="password-user" required>
         </div>
         <div class="submit-button">
-          <input type="submit" class="primary-button" id="creer-utilisateur" value="Créer utilisateur">
+          <input class="primary-button" id="creer-produit" value="Créer utilisateur" @click="addUser()">
         </div>
       </form>
     </div>
