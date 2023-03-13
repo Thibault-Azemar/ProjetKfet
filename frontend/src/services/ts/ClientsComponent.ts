@@ -34,7 +34,13 @@ export default defineComponent({
         },
         updateSolde(){
 
-        }
+        },
+        addCompte(){
+
+        },
+        editCompte(){
+
+        },
     }
     /*mounted() {
         this.name // type: string | undefined

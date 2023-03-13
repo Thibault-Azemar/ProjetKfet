@@ -23,18 +23,8 @@
           <p> Thuriot </p>
           <p> Aurélie </p>
           <button class="invisible-button" @click="updateSolde()"> test</button>
-          <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button" ><img src="../assets/pictures/trash.svg"></button>
-          <p> Blumstein </p>
-          <p> Thomas </p>
-          <button class="invisible-button" @click="updateSolde()"> test</button>
-          <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button" ><img src="../assets/pictures/trash.svg"></button>
-          <p> Azemar </p>
-          <p> Thibault </p>
-          <button class="invisible-button" @click="updateSolde()"> test</button>
-          <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button" ><img src="../assets/pictures/trash.svg"></button>
+          <button class="icon-button" @click="editCompte()"><img src="../assets/pictures/pen.svg"></button>
+          <button class="icon-button" @click="deleteCompte()" ><img src="../assets/pictures/trash.svg"></button>
         </div>
       </div>
     </div>
