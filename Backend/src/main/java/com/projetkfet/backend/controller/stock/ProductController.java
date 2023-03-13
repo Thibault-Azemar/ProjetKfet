@@ -68,7 +68,6 @@ public class ProductController {
 
         if (subCat.isPresent())
         {
-//            TODO: gérer les champs non obligatoires / Gérer les champs floats non nulls
             Product p = new Product();
             p.setName(name);
             p.setStock(0);

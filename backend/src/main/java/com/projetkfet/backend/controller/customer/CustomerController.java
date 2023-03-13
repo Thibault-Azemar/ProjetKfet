@@ -76,6 +76,47 @@ public class CustomerController {
 
     //    UPDATE
 
+    @PatchMapping()
+    public @ResponseBody
+    void UpdateCustoomer(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "firstname") String firstname, @RequestParam(required = false, name = "money") String money, @RequestParam(required = false, name = "idgroup") String idgroup) throws Exception {
+        logger.info("Update Group : " + id);
+
+        Optional<Customer> c = customerRepository.findById(UUID.fromString(id));
+
+        if (c.isPresent()) {
+            Customer customer = c.get();
+
+            if (name != null && !name.equals("")) {
+                customer.setName(name);
+            }
+            if (firstname != null && !firstname.equals("")) {
+                customer.setFirstname(name);
+            }
+            if (money != null && !money.equals("")) {
+                float price = Float.parseFloat(money);
+                customer.setMoney(price);
+            }
+            if (idgroup != null && !idgroup.equals("")) {
+                Optional<Group> gr = groupRepository.findById(UUID.fromString(idgroup));
+                if (gr.isPresent()) {
+                    customer.setGroup(gr.get());
+                }
+                else {
+                    logger.info("Error update Customer group");
+                    throw new Exception("Error update Customer group");
+                }
+            }
+            logger.info("Update Customer successful: " + id);
+
+            customerRepository.save(customer);
+        }
+        else
+        {
+            logger.info("Error update Customer");
+            throw new Exception("Error update Customer");
+        }
+    }
+
     //    DELETE
 
     @DeleteMapping()

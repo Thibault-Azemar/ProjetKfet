@@ -63,6 +63,30 @@ public class GroupController {
 
     //    UPDATE
 
+    @PatchMapping()
+    public @ResponseBody
+    void UpdateGroup(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name) throws Exception {
+        logger.info("Update Group : " + id);
+
+        Optional<Group> g = groupRepository.findById(UUID.fromString(id));
+
+        if (g.isPresent()) {
+            Group group = g.get();
+
+            if (name != null && !name.equals("")) {
+                group.setName(name);
+            }
+            logger.info("Update Group successful: " + id);
+
+            groupRepository.save(group);
+        }
+        else
+        {
+            logger.info("Error update Group");
+            throw new Exception("Error update Group");
+        }
+    }
+
     //    DELETE
 
     @DeleteMapping()
