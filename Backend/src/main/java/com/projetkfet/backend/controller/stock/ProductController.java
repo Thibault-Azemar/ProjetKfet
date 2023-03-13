@@ -115,7 +115,7 @@ public class ProductController {
 //    UPDATE
     @PatchMapping()
     public @ResponseBody
-    void UpdateProduct(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestParam(required = false, name = "stock") String stock, @RequestParam(required = false, name = "image") String image) throws Exception {
+    void UpdateProduct(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestParam(required = false, name = "stock") String stock, @RequestParam(required = false, name = "image") String image, @RequestParam(required = false, name = "idsubcat") String idsubcat) throws Exception {
         logger.info("Update Product : " + id);
 
         Optional<Product> p = productRepository.findById(UUID.fromString(id));
@@ -144,6 +144,17 @@ public class ProductController {
             }
             if (image != null && !image.equals("")) {
                 product.setImage(image);
+            }
+            if (idsubcat != null && !idsubcat.equals("")) {
+                Optional<SubCategory> subCat = subCategoryRepository.findById(UUID.fromString(idsubcat));
+
+                if (subCat.isPresent()) {
+                    product.setSubCategorie(subCat.get());
+                }
+                else {
+                    logger.info("Error update Product Subcategory");
+                    throw new Exception("Error update Product Subcategory");
+                }
             }
             logger.info("Update Product successful: " + id);
 
