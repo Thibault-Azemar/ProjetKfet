@@ -1,6 +1,9 @@
 import ClientsComponent from '../../components/ClientsComponent.vue'
 import { defineComponent } from 'vue'
 import '../../assets/style/comptes.css'
+import AccountsRepository from '../Repository/AccountsRepository'
+import Group from '../model/GroupModel';
+import Customers from '../model/CustomerModel';
 //import OffresComponent from "../../components/OffresComponent.vue";
 
 
@@ -8,31 +11,62 @@ import '../../assets/style/comptes.css'
 // @ts-ignore
 export default defineComponent({
 
-    components:{
+    components: {
         ClientsComponent,
     },
     // type inference enabled
     props: {
     },
     data() {
-        const value = "DI5";
+        const groupToDisplay = "DI5";
+        const accounts: Group[] = [];
+        const accountsToDisplay: Customers[] = [];
         return {
-            value,
+            groupToDisplay,
+            accounts,
+            accountsToDisplay
         }
 
     },
-    methods:{
-        showAddModal(){
+    methods: {
+        showAddModal() {
 
         },
-        updateSolde(){
+        updateSolde() {
 
+        },
+        getCustomers(): Promise<number> {
+            const accountsRepo = new AccountsRepository();
+            accountsRepo.getAccounts().then((accounts: Group[]) => {
+                this.accounts = accounts;
+                return Promise.resolve(0);
+            })
+                .catch(error => {
+                    console.error('Error:', error);
+                    return Promise.reject(error);
+                }
+                );
+            return Promise.resolve(1);
+        },
+        changeGroup() {
+            this.accounts.forEach((account: Group) => {
+                if (account.name === this.groupToDisplay) {
+                    this.accountsToDisplay = account.customers;
+                }
+            })
         }
+    },
+    mounted() {
+        this.getCustomers().then((response: number) => {
+            if (response === 0) {
+                this.changeGroup();
+            }
+            else {
+                setTimeout(() => {
+                    this.changeGroup();
+                }, 100)
+            }
+        })
     }
-    /*mounted() {
-        this.name // type: string | undefined
-        this.msg // type: string
-        this.count // type: number
-    }*/
 
 })
