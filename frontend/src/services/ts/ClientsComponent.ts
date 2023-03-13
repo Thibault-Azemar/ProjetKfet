@@ -13,9 +13,12 @@ export default defineComponent({
     },
     // type inference enabled
     props: {
-        //value: String ,
     },
     data() {
+        const value = "DI5";
+        return {
+            value,
+        }
 
     },
     methods:{

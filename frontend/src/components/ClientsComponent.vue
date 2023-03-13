@@ -27,12 +27,12 @@
           <button class="icon-button" ><img src="../assets/pictures/trash.svg"></button>
           <p> Blumstein </p>
           <p> Thomas </p>
-          <p> test</p>
+          <button class="invisible-button" @click="updateSolde()"> test</button>
           <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
           <button class="icon-button" ><img src="../assets/pictures/trash.svg"></button>
           <p> Azemar </p>
           <p> Thibault </p>
-          <p> test</p>
+          <button class="invisible-button" @click="updateSolde()"> test</button>
           <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
           <button class="icon-button" ><img src="../assets/pictures/trash.svg"></button>
         </div>

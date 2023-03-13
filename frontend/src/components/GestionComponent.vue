@@ -12,11 +12,11 @@
       <button v-if="value==='Stock'" class="primary-button" id="entry-stock">Entrée de Stock</button>
       <button class="icon-button" @click="showAddModal()"><img src="../assets/pictures/plus.svg"></button>
     </div>
-    <StockComponent @update-stock="updateStock" v-if="value==='Stock'"/>
+    <StockComponent @update-product="updateProduct" v-if="value==='Stock'"/>
     <OffresComponent v-if="value==='Offres'"/>
     <CategoriesComponent v-if="value==='Categories'"/>
     <UsersComponent @update-user="updateUser" v-if="value==='Users'"/>
-    <ProduitModalComponent :produit="isProduit"/>
-    <UserModalComponent :user="isUser"/>
+    <ProduitModalComponent @unshow-modal="unshowModal" :produit="isProduit"/>
+    <UserModalComponent @unshow-modal="unshowModal" :user="isUser"/>
   </div>
 </template>

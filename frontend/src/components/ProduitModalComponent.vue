@@ -3,26 +3,27 @@
   <div class="modal" id="produitModal">
     <div class="card">
       <header>
-        <h3>Créer un nouveau produit</h3>
+        <h3 v-if="!produit">Créer un nouveau produit</h3>
+        <h3 v-if="produit">Modifier un produit</h3>
         <button class="icon-button close-button" @click="unshowModal('produitModal')"></button>
       </header>
       <form method="post">
         <div>
-          <label class="input-label" for="input-ref-label">Nom</label>
-          <input name="nom-produit" class="input-field" type="text" placeholder="nom du produit" id="nom-produit"
+          <label class="input-label" for="nom-produit">Nom</label>
+          <input name="nom-produit" class="input-field" type="text" :value="produit ? produit.name : ''" placeholder="nom du produit" id="nom-produit"
             required>
         </div>
         <div>
           <label class="input-label" for="prix-achat">Prix d'achat</label>
-          <input name="prix-achat" class="input-field" type="number" placeholder="prix d'achat" id="prix-achat">
+          <input name="prix-achat" class="input-field" type="number" :value="produit ? produit.purchasePrice : ''" placeholder="prix d'achat" id="prix-achat">
         </div>
         <div>
           <label class="input-label" for="prix-vente">Prix de vente</label>
-          <input name="prix-vente" class="input-field" type="number" placeholder="prix de vente" id="prix-vente" required>
+          <input name="prix-vente" class="input-field" type="number" :value="produit ? produit.sellingPrice : ''" placeholder="prix de vente" id="prix-vente" required>
         </div>
         <div>
           <label class="input-label" for="prix-vente-member">Prix k'fetier</label>
-          <input name="prix-vente-member" class="input-field" type="number" placeholder="prix-k'fetier"
+          <input name="prix-vente-member" class="input-field" type="number" :value="produit ? produit.sellingPriceMembers : ''" placeholder="prix-k'fetier"
             id="prix-vente-member" required>
         </div>
         <div>
@@ -37,7 +38,7 @@
           <input type="file" id="image-produit" accept=".jpg,.jpeg.png" size="1000000">
         </div>
         <div class="submit-button">
-          <input class="primary-button" id="creer-produit" value="Créer produit" @click="addProduct()">
+          <input class="primary-button" id="creer-produit" :value="produit ? 'Modifer produit' : 'Créer produit'" @click="produit ? editProduct(produit) : addProduct()">
         </div>
       </form>
     </div>

@@ -41,9 +41,11 @@ export default defineComponent({
                     })
                 }
             },
+            editUser(user : User){
+
+            },
             unshowModal(idModal: string) {
-                const modal = document.getElementById(idModal);
-            if (modal) modal.style.display = "none";
+                this.$emit('unshowModal',idModal);
             }
         }
     }

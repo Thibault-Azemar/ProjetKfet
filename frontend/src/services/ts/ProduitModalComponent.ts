@@ -3,6 +3,7 @@ import Produit from "../model/ProductModel"
 import {defineComponent} from 'vue'
 import StockRepository from '../Repository/StockRepository'
 import Subcategory from '../model/SubcategoryModel';
+import Product from "../model/ProductModel";
 
 // @ts-ignore
 // @ts-ignore
@@ -27,11 +28,7 @@ export default defineComponent({
     },
     methods: {
         unshowModal(idModal: string) {
-            const modal = document.getElementById(idModal);
-            if(modal) modal.style.display = "none";
-        },
-        updateStock(produit:Produit){
-            this.$emit('updateStock',produit);
+            this.$emit('unshowModal',idModal);
         },
         getSubcategories() {
             const stockRepo = new StockRepository();
@@ -52,6 +49,9 @@ export default defineComponent({
             stockRepo.addProduct(name, +buyPrice, +sellPrice, +sellPriceMember, subcategory, image).then((response: any) => {
                 console.log(response);
             });
+        },
+        editProduct(produit : Produit){
+
         }
     },
 

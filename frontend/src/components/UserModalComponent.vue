@@ -28,8 +28,8 @@
           <select name="role-user" class="input-field"
                   id="role-user" required>
             <option value="" v-if="!user" selected disabled>Choisir sous-catégorie</option>
-            <option value="admin">Administrateur</option>
-            <option value="kfetier">Kfetier</option>
+            <option value="admin" :selected="user ? user.role === 'admin' : false">Administrateur</option>
+            <option value="kfetier" :selected="user ? user.role === 'kfetier' : false">Kfetier</option>
           </select>
         </div>
         <div v-if="!user">
@@ -37,7 +37,7 @@
           <input type="password" name="password-user" id="password-user" required>
         </div>
         <div class="submit-button">
-          <input class="primary-button" id="creer-produit" value="Créer utilisateur" @click="addUser()">
+          <input class="primary-button" id="creer-produit" :value="user ? 'Modifier utilisateur' : 'Créer utilisateur'" @click="user ? editUser(user) : addUser()">
         </div>
       </form>
     </div>

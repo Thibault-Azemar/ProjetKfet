@@ -61,9 +61,15 @@ export default defineComponent({
             this.isUser = user;
             this.showAddModal();
         },
-        updateStock(produit: Produit){
+        updateProduct(produit: Produit){
             this.isProduit = produit;
             this.showAddModal();
+        },
+        unshowModal(idModal : string){
+            const modal = document.getElementById(idModal);
+            if(modal) modal.style.display = "none";
+            this.isUser = undefined;
+            this.isProduit = undefined;
         }
     }
     /*mounted() {

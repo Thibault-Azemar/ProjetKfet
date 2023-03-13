@@ -3,6 +3,8 @@ import { defineComponent } from 'vue'
 import '../../assets/style/stock.css'
 import Category from '../model/CategoryModel';
 import StockRepository from '../Repository/StockRepository'
+import Product from "@/services/model/ProductModel";
+import User from "@/services/Crontroller/UserController";
 
 // @ts-ignore
 // @ts-ignore
@@ -36,6 +38,13 @@ export default defineComponent({
             });
 
             return this.stock;
+        },
+        deleteProduct(){
+
+        },
+        updateProduct(produit : Product){
+            this.$emit('updateProduct',produit)
+
         }
 
 
