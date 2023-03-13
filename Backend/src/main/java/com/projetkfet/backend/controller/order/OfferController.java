@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -47,22 +46,16 @@ public class OfferController {
         offer.setPriceMembers(Float.parseFloat(priceMember));
         offer.setNbproducts(Integer.parseInt(nbproducts));
 
-        if (productIds != null) {
-            for (UUID productId : productIds) {
-                offer.addProductId(productId);
-            }
+        if (offerList.getProductIds() != null) {
+            offer.setProductIds(offerList.getProductIds());
         }
 
-        if (subcatsIds != null) {
-            for (UUID subcatsId : subcatsIds) {
-                offer.addSubcatId(subcatsId);
-            }
+        if (offerList.getSubcatIds() != null) {
+            offer.setSubcatIds(offerList.getSubcatIds());
         }
 
-        if (catIds != null) {
-            for (UUID catId : catIds) {
-                offer.addCatId(catId);
-            }
+        if (offerList.getCatIds() != null) {
+            offer.setCatIds(offerList.getCatIds());
         }
 
         offerRepository.save(offer);

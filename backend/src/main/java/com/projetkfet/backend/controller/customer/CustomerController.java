@@ -78,7 +78,7 @@ public class CustomerController {
 
     @PatchMapping()
     public @ResponseBody
-    void UpdateCustoomer(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "firstname") String firstname, @RequestParam(required = false, name = "money") String money, @RequestParam(required = false, name = "idgroup") String idgroup) throws Exception {
+    void UpdateCustomer(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "firstname") String firstname, @RequestParam(required = false, name = "money") String money, @RequestParam(required = false, name = "idgroup") String idgroup) throws Exception {
         logger.info("Update Group : " + id);
 
         Optional<Customer> c = customerRepository.findById(UUID.fromString(id));
