@@ -7,7 +7,7 @@
         <option v-for="group in accounts" :key="group.id" :value="group.name">{{ group.name }}</option>
 
       </select>
-      <button class="icon-button" @click="showAddModal('clientModal')"><img src="../assets/pictures/plus.svg"></button>
+      <button class="icon-button" @click="showAddModal()"><img src="../assets/pictures/plus.svg"></button>
     </div>
     <div class="content">
       <div class="comptes-grid header ">
@@ -21,12 +21,12 @@
           <p>{{ customers.name }}</p>
           <p>{{ customers.firstname }}</p>
           <button class="invisible-button" @click="updateSolde()"> {{ customers.money }}</button>
-          <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button"><img src="../assets/pictures/trash.svg"></button>
+          <button class="icon-button" @click="editCompte()"><img src="../assets/pictures/pen.svg"></button>
+          <button class="icon-button" @click="deleteCompte()"><img src="../assets/pictures/trash.svg"></button>
 
         </div>
-
       </div>
     </div>
+    <ClientModalComponent @unshow-modal="unshowModal" />
   </div>
 </template>

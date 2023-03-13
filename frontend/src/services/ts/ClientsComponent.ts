@@ -1,4 +1,5 @@
 import ClientsComponent from '../../components/ClientsComponent.vue'
+import ClientModalComponent from '../../components/ClientModalComponent.vue'
 import { defineComponent } from 'vue'
 import '../../assets/style/comptes.css'
 import AccountsRepository from '../Repository/AccountsRepository'
@@ -13,6 +14,7 @@ export default defineComponent({
 
     components: {
         ClientsComponent,
+        ClientModalComponent
     },
     // type inference enabled
     props: {
@@ -30,9 +32,21 @@ export default defineComponent({
     },
     methods: {
         showAddModal() {
+            const modal = document.getElementById("compteModal");
+            if (modal) modal.style.display = "block";
 
         },
+        unshowModal(idModal: string) {
+            const modal = document.getElementById(idModal);
+            if (modal) modal.style.display = "none";
+        },
         updateSolde() {
+
+        },
+        addCompte() {
+
+        },
+        editCompte() {
 
         },
         getCustomers(): Promise<number> {
@@ -68,5 +82,4 @@ export default defineComponent({
             }
         })
     }
-
 })

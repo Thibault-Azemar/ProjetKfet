@@ -30,12 +30,12 @@
           <label class="input-label" for="sous-cat">Sous Catégorie</label>
           <select name="sous-cat" class="input-field" id="sous-cat" required>
             <option value="" selected disabled>Choisir sous-catégorie</option>
-            <option v-for="subcat in subcategories" :key="subcat.id" :value="subcat.id">{{ subcat.name }}</option>
+            <option v-for="subcat in subcategories" :key="subcat.id" :value="subcat.id" :selected="produit ? produit.subcategory === subcat.name : false ">{{ subcat.name }}</option>
           </select>
         </div>
         <div>
           <label class="input-label" for="image-produit">Image</label>
-          <input type="file" id="image-produit" accept=".jpg,.jpeg.png" size="1000000">
+          <input type="file" id="image-produit" accept=".jpg,.jpeg.png" size="1000000" :value="produit ? produit.image : ''">
         </div>
         <div class="submit-button">
           <input class="primary-button" id="creer-produit" :value="produit ? 'Modifer produit' : 'Créer produit'" @click="produit ? editProduct(produit) : addProduct()">

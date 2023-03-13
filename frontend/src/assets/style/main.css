@@ -193,6 +193,13 @@ option {
     background-color: #F0EBE4;
 }
 
+.options-header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-height: 80px;
+}
+
 label {
     font-size: 1.2em;
 }
