@@ -8,7 +8,7 @@ import StockComponent from "../../components/StockComponent.vue";
 import ProduitModalComponent from "../../components/ProduitModalComponent.vue";
 import UserModalComponent from "../../components/UserModalComponent.vue";
 import User from "../Crontroller/UserController"
-import Stock from "@/services/Crontroller/StockController";
+import Produit from "../model/ProductModel";
 
 // @ts-ignore
 // @ts-ignore
@@ -30,7 +30,7 @@ export default defineComponent({
     data() {
         const value = 'Stock';
         let isUser : User | undefined;
-        let isProduit : Stock | undefined;
+        let isProduit : Produit | undefined;
         return {
             value,
             isUser,
@@ -61,7 +61,7 @@ export default defineComponent({
             this.isUser = user;
             this.showAddModal();
         },
-        updateStock(produit: Stock){
+        updateStock(produit: Produit){
             this.isProduit = produit;
             this.showAddModal();
         }

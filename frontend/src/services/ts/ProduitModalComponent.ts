@@ -1,5 +1,5 @@
 import ProduitModalComponent from "../../components/ProduitModalComponent.vue"
-import Produit from "../Crontroller/StockController"
+import Produit from "../model/ProductModel"
 import {defineComponent} from 'vue'
 import StockRepository from '../Repository/StockRepository'
 import Subcategory from '../model/SubcategoryModel';
@@ -32,7 +32,6 @@ export default defineComponent({
         },
         updateStock(produit:Produit){
             this.$emit('updateStock',produit);
-            if (modal) modal.style.display = "none";
         },
         getSubcategories() {
             const stockRepo = new StockRepository();
