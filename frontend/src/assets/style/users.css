@@ -2,13 +2,13 @@
     padding-right: 10px;
     padding-left: 10px;
     display: grid;
-    grid-template-columns: auto auto 20% 40px 40px;
+    grid-template-columns: calc(40% - 40px) calc(40% - 40px) 20% 40px 40px;
     grid-auto-rows: min-content;
     align-items: center;
 }
 
 @media screen and (min-width: 700px) {
     .users-grid{
-        grid-template-columns: auto auto 20% 50px 50px;
+        grid-template-columns: calc(40% - 50px) calc(40% - 50px) 20% 50px 50px;
     }
 }

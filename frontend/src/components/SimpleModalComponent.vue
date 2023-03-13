@@ -14,23 +14,23 @@
       <div v-if="buttons === 2 && !del">
         <p>{{ message }}</p>
         <div class="row-align">
-          <button class="primary-button">Valider</button>
           <button class="secondary-button" @click="unshowModal('simple-modal')">Annuler</button>
+          <button class="primary-button">Valider</button>
         </div>
       </div>
       <div v-if="buttons === 2 && del">
         <p>{{ message }}</p>
         <div class="row-align">
-          <button class="delete-button">Supprimer</button>
           <button class="secondary-button" @click="unshowModal('simple-modal')">Annuler</button>
+          <button class="delete-button">Supprimer</button>
         </div>
       </div>
       <div v-if="buttons === 3 ">
         <p>{{ message }}</p>
         <div class="row-align">
-          <button class="primary-button">Oui</button>
-          <button class="secondary-button">Non</button>
           <button class="secondary-button" @click="unshowModal('simple-modal')">Annuler</button>
+          <button class="secondary-button">Non</button>
+          <button class="primary-button">Oui</button>
         </div>
       </div>
     </div>

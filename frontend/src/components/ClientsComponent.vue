@@ -10,7 +10,7 @@
         <option value="Peip">Peip</option>
         <option value="Kfetier">Kfetier</option>
       </select>
-      <button class="icon-button" @click="showAddModal('clientModal')"><img src="../assets/pictures/plus.svg"></button>
+      <button class="icon-button" @click="showAddModal()"><img src="../assets/pictures/plus.svg"></button>
     </div>
     <div class="content">
       <div class="comptes-grid header ">
@@ -36,8 +36,8 @@
           <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
           <button class="icon-button" ><img src="../assets/pictures/trash.svg"></button>
         </div>
-
       </div>
     </div>
+    <ClientModalComponent @unshow-modal="unshowModal"/>
   </div>
 </template>

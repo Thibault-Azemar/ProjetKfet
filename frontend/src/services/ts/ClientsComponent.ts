@@ -1,7 +1,7 @@
 import ClientsComponent from '../../components/ClientsComponent.vue'
+import ClientModalComponent from '../../components/ClientModalComponent.vue'
 import { defineComponent } from 'vue'
 import '../../assets/style/comptes.css'
-//import OffresComponent from "../../components/OffresComponent.vue";
 
 
 // @ts-ignore
@@ -10,6 +10,7 @@ export default defineComponent({
 
     components:{
         ClientsComponent,
+        ClientModalComponent
     },
     // type inference enabled
     props: {
@@ -23,7 +24,13 @@ export default defineComponent({
     },
     methods:{
         showAddModal(){
+            const modal = document.getElementById("compteModal");
+            if(modal) modal.style.display = "block";
 
+        },
+        unshowModal(idModal : string){
+            const modal = document.getElementById(idModal);
+            if(modal) modal.style.display = "none";
         },
         updateSolde(){
 

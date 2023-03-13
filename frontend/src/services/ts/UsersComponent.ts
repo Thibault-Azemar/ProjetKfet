@@ -55,6 +55,7 @@ export default defineComponent({
             return this.users;
         },
         updateUser(user :User){
+            console.log(user)
             this.$emit('updateUser',user)
 
         }
