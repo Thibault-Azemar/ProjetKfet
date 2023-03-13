@@ -9,4 +9,6 @@ import java.util.UUID;
 public interface OfferRepository extends CrudRepository<Offer, UUID> {
 
     Optional<Offer> findById(UUID id);
+
+    Optional<Offer> findByName(String name);
 }

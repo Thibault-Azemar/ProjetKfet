@@ -1,7 +1,7 @@
 package com.projetkfet.backend.controller.stock;
 
 import com.projetkfet.backend.data.stock.CategoryRepository;
-import com.projetkfet.backend.dto.stock.CategoryProjection;
+import com.projetkfet.backend.projection.stock.CategoryProjection;
 import com.projetkfet.backend.model.stock.Category;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

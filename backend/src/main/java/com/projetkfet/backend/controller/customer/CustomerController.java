@@ -31,7 +31,7 @@ public class CustomerController {
     @GetMapping(path="/all")
     public @ResponseBody
     Iterable<Customer> getAllCustomers() {
-        logger.info("All groups");
+        logger.info("All customers");
         return customerRepository.findAll();
     }
 

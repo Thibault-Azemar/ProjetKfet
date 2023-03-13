@@ -1,6 +1,6 @@
 package com.projetkfet.backend.data.stock;
 
-import com.projetkfet.backend.dto.stock.CategoryProjection;
+import com.projetkfet.backend.projection.stock.CategoryProjection;
 import com.projetkfet.backend.model.stock.Category;
 import org.springframework.data.repository.CrudRepository;
 
