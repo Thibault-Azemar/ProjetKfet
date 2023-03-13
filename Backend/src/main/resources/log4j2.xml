@@ -42,6 +42,17 @@
                 <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
         </RollingFile>
+        <RollingFile name="OrderAppender" fileName="logs/orders/orders.log"
+                     filePattern="logs/orders/orders-%d{yyyy-MM-dd}-%i.log">
+            <ThresholdFilter level="INFO"/>
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="7" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+        </RollingFile>
     </Appenders>
     <Loggers>
         <Logger name="UserLogger" level="info" additivity="false">
@@ -54,6 +65,10 @@
         </Logger>
         <Logger name="CustomerLogger" level="info" additivity="false">
             <AppenderRef ref="CustomerAppender"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="OrderLogger" level="info" additivity="false">
+            <AppenderRef ref="OrderAppender"/>
             <AppenderRef ref="Console"/>
         </Logger>
         <Root level="info">
