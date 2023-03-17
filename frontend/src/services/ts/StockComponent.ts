@@ -39,11 +39,15 @@ export default defineComponent({
 
             return this.stock;
         },
-        deleteProduct(){
-
+        deleteProduct(product: Product) {
+            const stockRepo = new StockRepository();
+            stockRepo.deleteProduct(product).then(() => {
+                this.getStocks();
+            });
+            this.getStocks();
         },
-        updateProduct(produit : Product){
-            this.$emit('updateProduct',produit)
+        updateProduct(produit: Product) {
+            this.$emit('updateProduct', produit)
 
         }
 

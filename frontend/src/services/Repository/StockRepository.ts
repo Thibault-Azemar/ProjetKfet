@@ -92,4 +92,55 @@ export default class StockRepository {
             }
             );
     }
+
+    public editProduct(id: string, name: string, buyPrice: number, sellPrice: number, sellPriceMember: number, subcategory: string, image?: string): Promise<Product> {
+        const API_URL = Config.API_URL;
+        let imageParam = image ? image : '';
+        const buyPriceParam = buyPrice.toString();
+        const sellPriceParam = sellPrice.toString();
+        const sellPriceMemberParam = sellPriceMember.toString();
+        if (image) {
+            imageParam = image;
+        }
+        const params = { id: id, name: name, purchasePrice: buyPriceParam, sellingPrice: sellPriceParam, sellingPriceMembers: sellPriceMemberParam, idSubCategory: subcategory, image: imageParam }
+        return fetch(API_URL + 'product?' + new URLSearchParams(params), {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log("ccbis")
+                return Promise.resolve(data);
+            }
+            )
+            .catch(error => {
+                console.log("cc")
+                console.error('Error:', error);
+                return Promise.reject(error);
+            }
+            );
+    }
+
+    public deleteProduct(product: Product): Promise<Product> {
+        const API_URL = Config.API_URL;
+        const params = { id: product.id }
+        return fetch(API_URL + 'product?' + new URLSearchParams(params), {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                return Promise.resolve(data);
+            }
+            )
+            .catch(error => {
+                console.error('Error:', error);
+                return Promise.reject(error);
+            }
+            );
+    }
 }
