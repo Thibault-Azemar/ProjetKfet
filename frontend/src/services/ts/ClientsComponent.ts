@@ -12,7 +12,7 @@ import Customers from '../model/CustomerModel';
 // @ts-ignore
 export default defineComponent({
 
-    components:{
+    components: {
         ClientsComponent,
         ClientModalComponent
     },
@@ -30,23 +30,23 @@ export default defineComponent({
         }
 
     },
-    methods:{
-        showAddModal(){
+    methods: {
+        showAddModal() {
             const modal = document.getElementById("compteModal");
-            if(modal) modal.style.display = "block";
+            if (modal) modal.style.display = "block";
 
         },
-        unshowModal(idModal : string){
+        unshowModal(idModal: string) {
             const modal = document.getElementById(idModal);
-            if(modal) modal.style.display = "none";
+            if (modal) modal.style.display = "none";
         },
         updateSolde() {
 
         },
-        addCompte(){
+        addCompte() {
 
         },
-        editCompte(){
+        editCompte() {
 
         },
         getCustomers(): Promise<number> {
@@ -70,7 +70,7 @@ export default defineComponent({
             })
         }
     },
-    mounted(){
+    mounted() {
         this.getCustomers().then((response: number) => {
             if (response === 0) {
                 this.changeGroup();
@@ -82,4 +82,5 @@ export default defineComponent({
             }
         })
     }
+
 })

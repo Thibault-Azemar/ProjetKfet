@@ -21,13 +21,13 @@
           <p>{{ customers.name }}</p>
           <p>{{ customers.firstname }}</p>
           <button class="invisible-button" @click="updateSolde()"> {{ customers.money }}</button>
-          <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button"><img src="../assets/pictures/trash.svg"></button>
+          <button class="icon-button" @click="editCompte()"><img src="../assets/pictures/pen.svg"></button>
+          <button class="icon-button" @click="deleteCompte()"><img src="../assets/pictures/trash.svg"></button>
 
         </div>
 
       </div>
     </div>
-    <ClientModalComponent @unshow-modal="unshowModal"/>
+    <ClientModalComponent @unshow-modal="unshowModal" />
   </div>
 </template>
