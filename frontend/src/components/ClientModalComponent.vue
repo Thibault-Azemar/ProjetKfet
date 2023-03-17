@@ -27,7 +27,7 @@
           </select>
         </div>
         <div class="submit-button">
-          <input class="primary-button" id="creer-produit" :value="customer ?'Modifier le compte' : 'Créer un compte'" @click="addCompte()">
+          <input class="primary-button" id="creer-produit" :value="customer ?'Modifier le compte' : 'Créer un compte'" @click="customer ? editCompte() : addCompte()">
         </div>
       </form>
     </div>
