@@ -1,3 +1,4 @@
+
 <template>
   <h1> ceci est un h1 </h1>
   <h2> ceci est un h2 </h2>
@@ -16,26 +17,28 @@
     <option value="parrot">Parrot</option>
     <option value="spider">Spider</option>
     <option value="goldfish">Goldfish</option>
+    <div id="QRCodeImg" ></div>
   </select>
   <button class="icon-button"><img src="../assets/pictures/user.svg"></button>
 </template>
 
 <script>
 import test from '../services/test'
-  export default{
-    // eslint-disable-next-line vue/multi-word-component-names
-    name: 'Test',
-    data(){
-      return{
-        test
-      }
-    },
-    methods: {
 
-
-    },
-    created(){
+export default {
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: 'Test',
+  data() {
+    return {
+      test
     }
+  },
+  methods: {
+
+  },
+  created() {
   }
+}
+
 
 </script>

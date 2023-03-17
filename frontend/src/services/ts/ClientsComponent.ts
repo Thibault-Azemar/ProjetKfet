@@ -23,10 +23,12 @@ export default defineComponent({
         const groupToDisplay = "DI5";
         const accounts: Group[] = [];
         const accountsToDisplay: Customers[] = [];
+        let isCustomer: Customers | undefined;
         return {
             groupToDisplay,
             accounts,
-            accountsToDisplay
+            accountsToDisplay,
+            isCustomer
         }
 
     },
@@ -107,4 +109,5 @@ export default defineComponent({
             }
         })
     }
+
 })

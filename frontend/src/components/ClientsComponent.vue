@@ -16,17 +16,19 @@
         <h3>Solde</h3>
       </div>
       <div class="body">
-        <div class="comptes-grid " v-for="customers in accountsToDisplay" :key="customers" :id="customers.id">
+        <div class="comptes-grid " v-for="customer in accountsToDisplay" :key="customer" :id="customer.id">
           <!-- v for clients-->
-          <p>{{ customers.name }}</p>
-          <p>{{ customers.firstname }}</p>
-          <button class="invisible-button" @click="updateSolde()"> {{ customers.money }}</button>
-          <button class="icon-button" @click="editCompte()"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button" @click="deleteCompte()"><img src="../assets/pictures/trash.svg"></button>
+          <p>{{ customer.name }}</p>
+          <p>{{ customer.firstname }}</p>
+          <button class="invisible-button" @click="updateSolde()"> {{ customer.money }}</button>
+          <button class="icon-button" @click="editCompte(customer)"><img src="../assets/pictures/pen.svg"></button>
+          <button class="icon-button" @click="deleteCompte(customer)"><img src="../assets/pictures/trash.svg"></button>
 
         </div>
+
       </div>
     </div>
-    <ClientModalComponent @unshow-modal="unshowModal" />
+    <ClientModalComponent @unshow-modal="unshowModal" :customer="isCustomer"/>
+
   </div>
 </template>
