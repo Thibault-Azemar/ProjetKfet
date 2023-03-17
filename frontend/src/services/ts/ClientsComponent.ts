@@ -49,7 +49,6 @@ export default defineComponent({
         editCompte(){
 
         },
-        },
         getCustomers(): Promise<number> {
             const accountsRepo = new AccountsRepository();
             accountsRepo.getAccounts().then((accounts: Group[]) => {
@@ -71,7 +70,7 @@ export default defineComponent({
             })
         }
     },
-    mounted() {
+    mounted(){
         this.getCustomers().then((response: number) => {
             if (response === 0) {
                 this.changeGroup();
