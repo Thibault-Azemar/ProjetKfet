@@ -41,13 +41,38 @@ export default defineComponent({
             if (modal) modal.style.display = "none";
         },
         updateSolde() {
+            const accountsRepo = new AccountsRepository();
+            accountsRepo.addAccount("test", "test", 100, "DI5").then((customer: Customers) => {
+                this.accounts.forEach((account: Group) => {
+                    if (account.name === this.groupToDisplay) {
+                        account.addCustomer(customer);
+                    }
+                })
+                this.changeGroup();
+            })
 
         },
         addCompte() {
-
+            const accountsRepo = new AccountsRepository();
+            accountsRepo.addAccount("test", "test", 100, "DI5").then((customer: Customers) => {
+                this.accounts.forEach((account: Group) => {
+                    if (account.name === this.groupToDisplay) {
+                        account.addCustomer(customer);
+                    }
+                })
+                this.changeGroup();
+            })
         },
         editCompte() {
-
+            const accountsRepo = new AccountsRepository();
+            accountsRepo.addAccount("test", "test", 100, "DI5").then((customer: Customers) => {
+                this.accounts.forEach((account: Group) => {
+                    if (account.name === this.groupToDisplay) {
+                        account.addCustomer(customer);
+                    }
+                })
+                this.changeGroup();
+            })
         },
         getCustomers(): Promise<number> {
             const accountsRepo = new AccountsRepository();
