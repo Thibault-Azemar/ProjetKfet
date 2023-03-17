@@ -1,7 +1,7 @@
 import ClientModalComponent from '../../components/ClientModalComponent.vue'
 import { defineComponent } from 'vue'
 import '../../assets/style/comptes.css'
-import User from "@/services/Crontroller/UserController";
+import Customer from "../model/CustomerModel"
 
 
 // @ts-ignore
@@ -12,6 +12,10 @@ export default defineComponent({
         ClientModalComponent,
     },
     props: {
+        customer : {
+            type : Customer,
+            require : false
+        }
     },
     data() {
 

@@ -23,10 +23,12 @@ export default defineComponent({
         const groupToDisplay = "DI5";
         const accounts: Group[] = [];
         const accountsToDisplay: Customers[] = [];
+        let isCustomer : Customers | undefined;
         return {
             groupToDisplay,
             accounts,
-            accountsToDisplay
+            accountsToDisplay,
+            isCustomer
         }
 
     },
@@ -46,7 +48,12 @@ export default defineComponent({
         addCompte() {
 
         },
-        editCompte() {
+        editCompte(customer : Customers) {
+            this.isCustomer = customer;
+            console.log(customer)
+            this.showAddModal();
+        },
+        deleteCompte( customer : Customers){
 
         },
         getCustomers(): Promise<number> {
