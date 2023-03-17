@@ -117,4 +117,29 @@ export default class AccountsRepository {
             }
             );
     }
+
+    public getGroups(): Promise<Group[]> {
+        const API_URL = Config.API_URL;
+        const groups: Group[] = [];
+        return fetch(API_URL + 'group/all', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                data.forEach((data: any) => {
+                    const group = new Group(data.name, data.id);
+                    groups.push(group);
+                })
+                return Promise.resolve(groups);
+            }
+            )
+            .catch(error => {
+                console.error('Error:', error);
+                return Promise.reject(error);
+            }
+            );
+    }
 }
