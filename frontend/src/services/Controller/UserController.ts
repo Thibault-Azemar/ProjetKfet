@@ -22,7 +22,6 @@ export default class User {
         this.role = role
     }
 
-
     public addUser(name: string, firstname: string, email: string, password: string, role: string): void {
         this.userRepo.addUser(name, firstname, email, password, role).then((user: User) => {
             this.users.push(user);
@@ -40,17 +39,4 @@ export default class User {
         });
     }
 
-    public updateUser(id: string, name: string, firstname: string, email: string, password: string, role: string): void {
-        this.userRepo.updateUser(id, name, firstname, email, password, role).then((status: number) => {
-            if (status === 200) {
-                const user = this.users.find(user => user.id === id);
-                if (user) {
-                    user.name = name;
-                    user.firstname = firstname;
-                    user.email = email;
-                    user.role = role;
-                }
-            }
-        });
-    }
 }
