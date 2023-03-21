@@ -35,7 +35,7 @@ export default class AccountsRepository {
     public addAccount(name: string, firstname: string, money: number, group: string): Promise<Customer> {
         const API_URL = Config.API_URL;
         const moneyStr = money.toString();
-        const params = { name: name, firstname: firstname, money: moneyStr, group: group }
+        const params = { name: name, firstname: firstname, money: moneyStr, idgroup: group }
         return fetch(API_URL + 'customer/add?' + new URLSearchParams(params), {
             method: 'POST',
             headers: {
