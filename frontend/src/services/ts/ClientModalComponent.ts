@@ -38,8 +38,11 @@ export default defineComponent({
             this.$emit('unshowModal', idModal);
         },
         addCompte() {
+            const name = (document.getElementById("nom-compte") as HTMLInputElement).value;
+            const firstname = (document.getElementById("prenom-compte") as HTMLInputElement).value;
+            const group = (document.getElementById("groupe") as HTMLInputElement).value;
             const accountsRepo = new AccountsRepository();
-            accountsRepo.addAccount("test", "test", 100, "DI5").then((customer: Customer) => {
+            accountsRepo.addAccount(name, firstname, 0, group).then((customer: Customer) => {
                 //location.reload();
             });
         },
