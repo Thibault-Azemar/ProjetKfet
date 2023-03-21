@@ -1,5 +1,5 @@
 import Config from '../../config';
-import User from '../Crontroller/UserController';
+import User from '../Controller/UserController';
 
 export default class UserRepository {
 
@@ -75,30 +75,21 @@ export default class UserRepository {
             }
             );
     }
-    public updateUser(id: string, name?: string, firstname?: string, email?: string, password?: string, role?: string): Promise<number> {
-        let params = { id: id, role: "", email: "", name: "", firstname: "" }
-        if (name) {
-            params = { ...params, name: name }
-        }
-        if (firstname) {
-            params = { ...params, firstname: firstname }
-        }
-        if (email) {
-            params = { ...params, email: email }
-        }
-        if (role) {
-            params = { ...params, role: role }
-        }
+    public editUser(user: User, name: string, firstname: string, email: string, role: string): Promise<number> {
+
+        const params = { id: user.id, role: role, email: email, name: name, firstname: firstname }
 
         const API_URL = Config.API_URL;
-        return fetch(API_URL + 'user/' + id + new URLSearchParams(params), {
+        return fetch(API_URL + 'user?' + new URLSearchParams(params), {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(params)
         })
-            .then(response => response.json())
+            .then(response => {
+                console.log(response)
+            })
             .then(data => {
                 console.log(data);
                 return 200
