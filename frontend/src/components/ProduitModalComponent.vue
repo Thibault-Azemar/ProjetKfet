@@ -39,7 +39,7 @@
         </div>
         <div>
           <label class="input-label" for="image-produit">Image</label>
-          <input type="file" id="image-produit" accept=".jpg,.jpeg.png" size="1000000"
+          <input type="file" id="image-produit" accept=".jpg,.jpeg,.png" size="1000000"
             :value="produit ? produit.image : ''">
         </div>
         <div class="submit-button">
