@@ -23,7 +23,7 @@ export default class Product {
             this.image = image
         }
         else {
-            this.image = "https://via.placeholder.com/150"
+            this.image = "./src/assets/pictures/product/default_meal.jpg"
         }
     }
 
