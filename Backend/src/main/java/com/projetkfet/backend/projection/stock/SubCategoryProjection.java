@@ -1,4 +1,4 @@
-package com.projetkfet.backend.dto.stock;
+package com.projetkfet.backend.projection.stock;
 
 import java.util.UUID;
 

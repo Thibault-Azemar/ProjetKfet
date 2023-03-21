@@ -110,7 +110,7 @@ public class UserController {
 
     // Update
     @PatchMapping()
-    public @ResponseBody void updateUser(@RequestParam("id") String id,
+    public @ResponseBody String updateUser(@RequestParam("id") String id,
             @RequestParam(required = false, name = "name") String name,
             @RequestParam(required = false, name = "firstname") String firstname,
             @RequestParam(required = false, name = "role") String role,
@@ -142,6 +142,7 @@ public class UserController {
 
             userRepository.save(user);
             logger.info("Successful User Update");
+            return "Confirm";
         } else {
             logger.info("No account for this ID");
             throw new Exception("No account for this ID");
@@ -151,13 +152,14 @@ public class UserController {
     // Delete
 
     @DeleteMapping()
-    public @ResponseBody void deleteUser(@RequestParam("id") String id) throws Exception {
+    public @ResponseBody String deleteUser(@RequestParam("id") String id) throws Exception {
         logger.info("Delete User");
         Optional<User> n = userRepository.findById(UUID.fromString(id));
 
         if (n.isPresent()) {
             logger.info("User deleted : " + id);
             userRepository.delete(n.get());
+            return "Confirm";
         } else {
             logger.info("No account for this ID");
             throw new Exception("No account for this ID");

@@ -68,7 +68,6 @@ public class ProductController {
         Optional<SubCategory> subCat = subCategoryRepository.findById(UUID.fromString(id));
 
         if (subCat.isPresent()) {
-            // TODO: gérer les champs non obligatoires / Gérer les champs floats non nulls
             Product p = new Product();
             p.setName(name);
             p.setStock(0);
@@ -110,13 +109,14 @@ public class ProductController {
 
     // UPDATE
     @PatchMapping()
-    public @ResponseBody void UpdateProduct(@RequestParam("id") String id,
+    public @ResponseBody String UpdateProduct(@RequestParam("id") String id,
             @RequestParam(required = false, name = "name") String name,
             @RequestParam(required = false, name = "purchasePrice") String purchasePrice,
             @RequestParam(required = false, name = "sellingPrice") String sellingPrice,
             @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers,
             @RequestParam(required = false, name = "stock") String stock,
-            @RequestParam(required = false, name = "image") String image) throws Exception {
+            @RequestParam(required = false, name = "image") String image,
+            @RequestParam(required = false, name = "idsubcat") String idsubcat) throws Exception {
         logger.info("Update Product : " + id);
 
         Optional<Product> p = productRepository.findById(UUID.fromString(id));
@@ -146,9 +146,20 @@ public class ProductController {
             if (image != null && !image.equals("")) {
                 product.setImage(image);
             }
+            if (idsubcat != null && !idsubcat.equals("")) {
+                Optional<SubCategory> subCat = subCategoryRepository.findById(UUID.fromString(idsubcat));
+
+                if (subCat.isPresent()) {
+                    product.setSubCategorie(subCat.get());
+                } else {
+                    logger.info("Error update Product Subcategory");
+                    throw new Exception("Error update Product Subcategory");
+                }
+            }
             logger.info("Update Product successful: " + id);
 
             productRepository.save(product);
+            return "Confirm";
         } else {
             logger.info("Error update Product");
             throw new Exception("Error update Product");
@@ -159,13 +170,14 @@ public class ProductController {
     // DELETE
 
     @DeleteMapping()
-    public @ResponseBody void deleteProduct(@RequestParam("id") String id) throws Exception {
+    public @ResponseBody String deleteProduct(@RequestParam("id") String id) throws Exception {
         logger.info("Delete User");
         Optional<Product> p = productRepository.findById(UUID.fromString(id));
 
         if (p.isPresent()) {
             logger.info("Product deleted : " + id);
             productRepository.delete(p.get());
+            return "Confirm";
         } else {
             logger.info("No product for this ID");
             throw new Exception("No product for this ID");
