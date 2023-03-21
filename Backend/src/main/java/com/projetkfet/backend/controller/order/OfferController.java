@@ -34,7 +34,7 @@ public class OfferController {
 
     @PostMapping(path="/add")
     public @ResponseBody
-    UUID addNewOffer(@RequestParam("name") String name, @RequestParam("price") String price, @RequestParam("priceMember") String priceMember, @RequestParam("nbproducts") String nbproducts, @RequestBody(required = false) OfferListDTO offerList) throws Exception {
+    UUID addNewOffer(@RequestParam("name") String name, @RequestParam("price") String price, @RequestParam("priceMember") String priceMember, @RequestParam("nbProducts") String nbproducts, @RequestBody(required = false) OfferListDTO offerList) throws Exception {
         logger.info("New Offer : " + name);
 
         UUID id = null;
@@ -46,17 +46,22 @@ public class OfferController {
         offer.setPriceMembers(Float.parseFloat(priceMember));
         offer.setNbproducts(Integer.parseInt(nbproducts));
 
-        if (offerList.getProductIds() != null) {
-            offer.setProductIds(offerList.getProductIds());
+        if (offerList != null)
+        {
+            if (offerList.getProductIds() != null) {
+                offer.setProductIds(offerList.getProductIds());
+            }
+
+            if (offerList.getSubcatIds() != null) {
+                offer.setSubcatIds(offerList.getSubcatIds());
+            }
+
+            if (offerList.getCatIds() != null) {
+                offer.setCatIds(offerList.getCatIds());
+            }
         }
 
-        if (offerList.getSubcatIds() != null) {
-            offer.setSubcatIds(offerList.getSubcatIds());
-        }
 
-        if (offerList.getCatIds() != null) {
-            offer.setCatIds(offerList.getCatIds());
-        }
 
         offerRepository.save(offer);
 
@@ -78,6 +83,138 @@ public class OfferController {
     }
 
     //    UPDATE
+
+    @PatchMapping(path="/category/add")
+    public @ResponseBody
+    String addOneCategory(@RequestParam("id") String id, @RequestParam("catId") String catId) throws Exception {
+        logger.info("Add one category to offer : " + id);
+
+        Optional<Offer> o = offerRepository.findById(UUID.fromString(id));
+
+        if (o.isPresent())
+        {
+            Offer offer = o.get();
+            offer.addCatId(UUID.fromString(catId));
+            offerRepository.save(offer);
+            logger.info("Offer updated : " + id);
+            return "Confirm";
+        }
+        else
+        {
+            logger.info("No offer for this ID");
+            throw new Exception("No offer for this ID");
+        }
+    }
+
+    @PatchMapping(path="/subcat/add")
+    public @ResponseBody
+    String addOneSubCategory(@RequestParam("id") String id, @RequestParam("subcatId") String subcatId) throws Exception {
+        logger.info("Add one subcategory to offer : " + id);
+
+        Optional<Offer> o = offerRepository.findById(UUID.fromString(id));
+
+        if (o.isPresent())
+        {
+            Offer offer = o.get();
+            offer.addSubcatId(UUID.fromString(subcatId));
+            offerRepository.save(offer);
+            logger.info("Offer updated : " + id);
+            return "Confirm";
+        }
+        else
+        {
+            logger.info("No offer for this ID");
+            throw new Exception("No offer for this ID");
+        }
+    }
+
+    @PatchMapping(path="/product/add")
+    public @ResponseBody
+    String addOneProduct(@RequestParam("id") String id, @RequestParam("productId") String productId) throws Exception {
+        logger.info("Add one product to offer : " + id);
+
+        Optional<Offer> o = offerRepository.findById(UUID.fromString(id));
+
+        if (o.isPresent())
+        {
+            Offer offer = o.get();
+            offer.addProductId(UUID.fromString(productId));
+            offerRepository.save(offer);
+            logger.info("Offer updated : " + id);
+            return "Confirm";
+        }
+        else
+        {
+            logger.info("No offer for this ID");
+            throw new Exception("No offer for this ID");
+        }
+    }
+
+    @PatchMapping(path="/category/remove")
+    public @ResponseBody
+    String removeOneCategory(@RequestParam("id") String id, @RequestParam("catId") String catId) throws Exception {
+        logger.info("Remove one category to offer : " + id);
+
+        Optional<Offer> o = offerRepository.findById(UUID.fromString(id));
+
+        if (o.isPresent())
+        {
+            Offer offer = o.get();
+            offer.removeCatId(UUID.fromString(catId));
+            offerRepository.save(offer);
+            logger.info("Offer updated : " + id);
+            return "Confirm";
+        }
+        else
+        {
+            logger.info("No offer for this ID");
+            throw new Exception("No offer for this ID");
+        }
+    }
+
+    @PatchMapping(path="/subcat/remove")
+    public @ResponseBody
+    String removeOneSubCategory(@RequestParam("id") String id, @RequestParam("subcatId") String subcatId) throws Exception {
+        logger.info("Remove one subcategory to offer : " + id);
+
+        Optional<Offer> o = offerRepository.findById(UUID.fromString(id));
+
+        if (o.isPresent())
+        {
+            Offer offer = o.get();
+            offer.removeSubcatId(UUID.fromString(subcatId));
+            offerRepository.save(offer);
+            logger.info("Offer updated : " + id);
+            return "Confirm";
+        }
+        else
+        {
+            logger.info("No offer for this ID");
+            throw new Exception("No offer for this ID");
+        }
+    }
+
+    @PatchMapping(path="/product/remove")
+    public @ResponseBody
+    String removeOneProduct(@RequestParam("id") String id, @RequestParam("productId") String productId) throws Exception {
+        logger.info("Remove one product to offer : " + id);
+
+        Optional<Offer> o = offerRepository.findById(UUID.fromString(id));
+
+        if (o.isPresent())
+        {
+            Offer offer = o.get();
+            offer.removeProductId(UUID.fromString(productId));
+            offerRepository.save(offer);
+            logger.info("Offer updated : " + id);
+            return "Confirm";
+        }
+        else
+        {
+            logger.info("No offer for this ID");
+            throw new Exception("No offer for this ID");
+        }
+    }
 
     //    DELETE
 
