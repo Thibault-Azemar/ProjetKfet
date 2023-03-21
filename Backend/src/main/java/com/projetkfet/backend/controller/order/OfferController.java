@@ -83,7 +83,7 @@ public class OfferController {
 
     @DeleteMapping()
     public @ResponseBody
-    void deleteOffer(@RequestParam("id") String id) throws Exception {
+    String deleteOffer(@RequestParam("id") String id) throws Exception {
         logger.info("Delete Offer");
         Optional<Offer> o = offerRepository.findById(UUID.fromString(id));
 
@@ -91,6 +91,7 @@ public class OfferController {
         {
             offerRepository.delete(o.get());
             logger.info("Offer deleted : " + id);
+            return "Confirm";
         }
         else
         {

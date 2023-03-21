@@ -78,7 +78,7 @@ public class CustomerController {
 
     @PatchMapping()
     public @ResponseBody
-    void UpdateCustomer(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "firstname") String firstname, @RequestParam(required = false, name = "money") String money, @RequestParam(required = false, name = "idgroup") String idgroup) throws Exception {
+    String UpdateCustomer(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "firstname") String firstname, @RequestParam(required = false, name = "money") String money, @RequestParam(required = false, name = "idgroup") String idgroup) throws Exception {
         logger.info("Update Group : " + id);
 
         Optional<Customer> c = customerRepository.findById(UUID.fromString(id));
@@ -109,6 +109,7 @@ public class CustomerController {
             logger.info("Update Customer successful: " + id);
 
             customerRepository.save(customer);
+            return "Confirm";
         }
         else
         {
@@ -121,7 +122,7 @@ public class CustomerController {
 
     @DeleteMapping()
     public @ResponseBody
-    void deleteUser(@RequestParam("id") String id) throws Exception {
+    String deleteUser(@RequestParam("id") String id) throws Exception {
         logger.info("Delete Customer");
         Optional<Customer> c = customerRepository.findById(UUID.fromString(id));
 
@@ -129,6 +130,7 @@ public class CustomerController {
         {
             logger.info("Customer deleted : " + id);
             customerRepository.delete(c.get());
+            return "Confirm";
         }
         else
         {

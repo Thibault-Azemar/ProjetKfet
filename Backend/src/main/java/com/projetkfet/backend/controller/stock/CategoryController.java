@@ -71,7 +71,7 @@ public class CategoryController {
 
     @DeleteMapping()
     public @ResponseBody
-    void deleteCategory(@RequestParam("id") String id) throws Exception {
+    String deleteCategory(@RequestParam("id") String id) throws Exception {
         logger.info("Delete User");
         Optional<Category> c = categoryRepository.findById(UUID.fromString(id));
 
@@ -79,6 +79,7 @@ public class CategoryController {
         {
             logger.info("Category deleted : " + id);
             categoryRepository.delete(c.get());
+            return "Confirm";
         }
         else
         {

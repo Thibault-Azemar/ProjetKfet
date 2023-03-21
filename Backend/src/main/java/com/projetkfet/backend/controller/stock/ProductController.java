@@ -115,7 +115,7 @@ public class ProductController {
 //    UPDATE
     @PatchMapping()
     public @ResponseBody
-    void UpdateProduct(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestParam(required = false, name = "stock") String stock, @RequestParam(required = false, name = "image") String image, @RequestParam(required = false, name = "idsubcat") String idsubcat) throws Exception {
+    String UpdateProduct(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestParam(required = false, name = "stock") String stock, @RequestParam(required = false, name = "image") String image, @RequestParam(required = false, name = "idsubcat") String idsubcat) throws Exception {
         logger.info("Update Product : " + id);
 
         Optional<Product> p = productRepository.findById(UUID.fromString(id));
@@ -159,6 +159,7 @@ public class ProductController {
             logger.info("Update Product successful: " + id);
 
             productRepository.save(product);
+            return "Confirm";
         }
         else
         {
@@ -172,7 +173,7 @@ public class ProductController {
 
     @DeleteMapping()
     public @ResponseBody
-    void deleteProduct(@RequestParam("id") String id) throws Exception {
+    String deleteProduct(@RequestParam("id") String id) throws Exception {
         logger.info("Delete User");
         Optional<Product> p = productRepository.findById(UUID.fromString(id));
 
@@ -180,6 +181,7 @@ public class ProductController {
         {
             logger.info("Product deleted : " + id);
             productRepository.delete(p.get());
+            return "Confirm";
         }
         else
         {

@@ -47,7 +47,7 @@ public class OrderController {
 
     @DeleteMapping()
     public @ResponseBody
-    void deleteOrder(@RequestParam("id") String id) throws Exception {
+    String deleteOrder(@RequestParam("id") String id) throws Exception {
         logger.info("Delete Order");
         Optional<Order> o = orderRepository.findById(UUID.fromString(id));
 
@@ -55,6 +55,7 @@ public class OrderController {
         {
             orderRepository.delete(o.get());
             logger.info("Offer Order : " + id);
+            return "Confirm";
         }
         else
         {

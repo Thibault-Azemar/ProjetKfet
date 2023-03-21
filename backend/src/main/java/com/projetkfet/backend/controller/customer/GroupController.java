@@ -65,7 +65,7 @@ public class GroupController {
 
     @PatchMapping()
     public @ResponseBody
-    void UpdateGroup(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name) throws Exception {
+    String UpdateGroup(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name) throws Exception {
         logger.info("Update Group : " + id);
 
         Optional<Group> g = groupRepository.findById(UUID.fromString(id));
@@ -79,6 +79,7 @@ public class GroupController {
             logger.info("Update Group successful: " + id);
 
             groupRepository.save(group);
+            return "Confirm";
         }
         else
         {
@@ -91,7 +92,7 @@ public class GroupController {
 
     @DeleteMapping()
     public @ResponseBody
-    void deleteUser(@RequestParam("id") String id) throws Exception {
+    String deleteUser(@RequestParam("id") String id) throws Exception {
         logger.info("Delete Group");
         Optional<Group> g = groupRepository.findById(UUID.fromString(id));
 
@@ -99,6 +100,7 @@ public class GroupController {
         {
             logger.info("Group deleted : " + id);
             groupRepository.delete(g.get());
+            return "Confirm";
         }
         else
         {

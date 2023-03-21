@@ -84,7 +84,7 @@ public class SubCategoryController {
 
     @DeleteMapping()
     public @ResponseBody
-    void deleteSubCategory(@RequestParam("id") String id) throws Exception {
+    String deleteSubCategory(@RequestParam("id") String id) throws Exception {
         logger.info("Delete User");
         Optional<SubCategory> sc = subCategoryRepository.findById(UUID.fromString(id));
 
@@ -92,6 +92,7 @@ public class SubCategoryController {
         {
             logger.info("SubCategory deleted : " + id);
             subCategoryRepository.delete(sc.get());
+            return "Confirm";
         }
         else
         {
