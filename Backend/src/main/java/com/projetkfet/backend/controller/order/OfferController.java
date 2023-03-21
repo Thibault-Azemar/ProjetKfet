@@ -1,7 +1,6 @@
 package com.projetkfet.backend.controller.order;
 
 import com.projetkfet.backend.data.order.OfferRepository;
-import com.projetkfet.backend.dto.order.OfferListDTO;
 import com.projetkfet.backend.model.order.Offer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,7 +33,7 @@ public class OfferController {
 
     @PostMapping(path="/add")
     public @ResponseBody
-    UUID addNewOffer(@RequestParam("name") String name, @RequestParam("price") String price, @RequestParam("priceMember") String priceMember, @RequestParam("nbProducts") String nbproducts, @RequestBody(required = false) OfferListDTO offerList) throws Exception {
+    UUID addNewOffer(@RequestParam("name") String name, @RequestParam("price") String price, @RequestParam("priceMember") String priceMember, @RequestParam("nbProducts") String nbproducts) throws Exception {
         logger.info("New Offer : " + name);
 
         UUID id = null;
@@ -45,23 +44,6 @@ public class OfferController {
         offer.setPrice(Float.parseFloat(price));
         offer.setPriceMembers(Float.parseFloat(priceMember));
         offer.setNbproducts(Integer.parseInt(nbproducts));
-
-        if (offerList != null)
-        {
-            if (offerList.getProductIds() != null) {
-                offer.setProductIds(offerList.getProductIds());
-            }
-
-            if (offerList.getSubcatIds() != null) {
-                offer.setSubcatIds(offerList.getSubcatIds());
-            }
-
-            if (offerList.getCatIds() != null) {
-                offer.setCatIds(offerList.getCatIds());
-            }
-        }
-
-
 
         offerRepository.save(offer);
 
@@ -205,6 +187,36 @@ public class OfferController {
         {
             Offer offer = o.get();
             offer.removeProductId(UUID.fromString(productId));
+            offerRepository.save(offer);
+            logger.info("Offer updated : " + id);
+            return "Confirm";
+        }
+        else
+        {
+            logger.info("No offer for this ID");
+            throw new Exception("No offer for this ID");
+        }
+    }
+
+    @PatchMapping()
+    public @ResponseBody
+    String updateOffer(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "price") String price, @RequestParam(required = false, name = "priceMember") String priceMember, @RequestParam(required = false, name = "nbProducts") String nbproducts) throws Exception {
+        logger.info("Update Offer : " + id);
+
+        Optional<Offer> o = offerRepository.findById(UUID.fromString(id));
+
+        if (o.isPresent())
+        {
+            Offer offer = o.get();
+            if (name != null && !name.isEmpty())
+                offer.setName(name);
+            if (price != null && !price.isEmpty())
+                offer.setPrice(Float.parseFloat(price));
+            if (priceMember != null && !priceMember.isEmpty())
+                offer.setPriceMembers(Float.parseFloat(priceMember));
+            if (nbproducts != null && !nbproducts.isEmpty())
+                offer.setNbproducts(Integer.parseInt(nbproducts));
+
             offerRepository.save(offer);
             logger.info("Offer updated : " + id);
             return "Confirm";
