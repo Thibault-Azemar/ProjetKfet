@@ -7,21 +7,15 @@
       <h3>Prix</h3>
     </div>
     <div class="body">
-      <div class="offres-grid"> <!-- v for offres -->
-        <p>Petit déj</p>
-        <p>Description</p>
-        <p>Prix</p>
-        <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
-        <button class="icon-button" @click="showSimplePopUp('12dkzckn 3E', true,2)"><img src="../assets/pictures/trash.svg"></button>
-      </div>
-      <div class="offres-grid">
-        <p>Goûter</p>
-        <p>Description</p>
-        <p>Prix</p>
-        <button class="icon-button"><img src="../assets/pictures/pen.svg"></button>
-        <button class="icon-button" @click="showSimplePopUp('12d,kel 3E',true,2)"><img src="../assets/pictures/trash.svg"></button>
+      <div class="offres-grid" v-for="offer in offers" :key="offer" :id="offer.id"> <!-- v for offres -->
+        <p>{{ offer.name }}</p>
+        <p>{{ offer.description }}</p>
+        <p>{{ offer.price }}</p>
+        <button class="icon-button" @click="updateOffer(offer)"><img src="../assets/pictures/pen.svg"></button>
+        <button class="icon-button" @click="deleteOffer(offer.id, offer.name)"><img
+            src="../assets/pictures/trash.svg"></button>
       </div>
     </div>
   </div>
-  <SimpleModalComponent :del="popUpDelete" :buttons="popUpButtons" :message="popUpMessage"/>
+  <SimpleModalComponent :del="popUpDelete" :buttons="popUpButtons" :message="popUpMessage" />
 </template>
