@@ -12,7 +12,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping(path="/order")
+@CrossOrigin(origins = "*")
+@RequestMapping(path = "/order")
 public class OrderController {
 
     private static final Logger logger = LogManager.getLogger("OrderLogger");
@@ -20,20 +21,18 @@ public class OrderController {
     @Autowired
     private OrderRepository orderRepository;
 
-    //    GET
+    // GET
 
-    @GetMapping(path="/all")
-    public @ResponseBody
-    Iterable<Order> getAllOrders() throws Exception {
+    @GetMapping(path = "/all")
+    public @ResponseBody Iterable<Order> getAllOrders() throws Exception {
         logger.info("All orders");
         return orderRepository.findAll();
     }
 
-    //    POST
+    // POST
 
-    @PostMapping(path="/add")
-    public @ResponseBody
-    UUID addNewOrder() throws Exception {
+    @PostMapping(path = "/add")
+    public @ResponseBody UUID addNewOrder() throws Exception {
         logger.info("New Order");
 
         UUID id = null;
@@ -41,24 +40,20 @@ public class OrderController {
         return id;
     }
 
-    //    UPDATE
+    // UPDATE
 
-    //    DELETE
+    // DELETE
 
     @DeleteMapping()
-    public @ResponseBody
-    String deleteOrder(@RequestParam("id") String id) throws Exception {
+    public @ResponseBody String deleteOrder(@RequestParam("id") String id) throws Exception {
         logger.info("Delete Order");
         Optional<Order> o = orderRepository.findById(UUID.fromString(id));
 
-        if (o.isPresent())
-        {
+        if (o.isPresent()) {
             orderRepository.delete(o.get());
             logger.info("Offer Order : " + id);
             return "Confirm";
-        }
-        else
-        {
+        } else {
             logger.info("No order for this ID");
             throw new Exception("No order for this ID");
         }

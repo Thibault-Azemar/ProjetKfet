@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(path="/productorder")
+@RequestMapping(path = "/productorder")
 public class ProductOrderController {
 
     private static final Logger logger = LogManager.getLogger("OrderLogger");
@@ -16,11 +16,11 @@ public class ProductOrderController {
     @Autowired
     private ProductOrderRepository productOrderRepository;
 
-    //    GET
+    // GET
 
-    //    POST
+    // POST
 
-    //    UPDATE
+    // UPDATE
 
-    //    DELETE
+    // DELETE
 }
