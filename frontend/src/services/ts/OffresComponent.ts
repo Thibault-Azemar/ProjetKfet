@@ -1,7 +1,9 @@
 import OffresComponent from '../../components/OffresComponent.vue'
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue'
 import '../../assets/style/offres.css'
 import SimpleModalComponent from "../../components/SimpleModalComponent.vue";
+import OfferRepository from '../Repository/OfferRepository';
+import Offer from '../Controller/OfferController';
 
 // @ts-ignore
 // @ts-ignore
@@ -19,7 +21,9 @@ export default defineComponent({
         let popUpMessage: String | undefined;
         let popUpButtons: Number | undefined;
         let popUpDelete: Boolean | undefined;
+        const offers: Offer[] = [];
         return {
+            offers,
             popUpMessage,
             popUpButtons,
             popUpDelete
@@ -28,7 +32,7 @@ export default defineComponent({
     methods: {
         showSimplePopUp(idProduit: string, del: boolean, buttons: number) {
             //ajouter id offre à la place de nom produit + passé l'id quelque part dans la modal pour pouvoir supprimer
-            if(del) {
+            if (del) {
                 this.popUpMessage = "Voulez vous supprimer " + idProduit + " ?";
             }
             else {
@@ -40,13 +44,21 @@ export default defineComponent({
             if (modal !== null) {
                 modal.style.display = "block";
             }
-        }
+        },
+        getOffers() {
+            const OfferRepo = new OfferRepository();
+            OfferRepo.getOffers().then((offers: Offer[]) => {
+                this.offers = offers;
+                console.log(offers)
+            }
+            );
+            return this.offers;
+        },
 
-    }
-    /*mounted() {
-        this.name // type: string | undefined
-        this.msg // type: string
-        this.count // type: number
-    }*/
+    },
+    mounted() {
+        this.getOffers();
+    },
+
 
 })
