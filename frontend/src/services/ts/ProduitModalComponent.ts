@@ -44,6 +44,11 @@ export default defineComponent({
             const subcategory = (document.getElementById("sous-cat") as HTMLInputElement).value;
             const image = (document.getElementById("image-produit") as HTMLInputElement).value;
             console.log(image)
+            //rename image
+            const imageSplit = image.split("\\");
+            const imageName = imageSplit[imageSplit.length - 1];
+            const imageRename = name + "_" + imageName;
+            console.log(imageRename)
 
             const stockRepo = new StockRepository();
             stockRepo.addProduct(name, +buyPrice, +sellPrice, +sellPriceMember, subcategory, image).then((response: any) => {
