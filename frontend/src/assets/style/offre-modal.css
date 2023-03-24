@@ -1,0 +1,12 @@
+.offres-modal-grid{
+    display: grid;
+    grid-template-rows: 50px 50px 50px calc(100vh - 390px) 50px 60px;
+}
+
+.ss-cat{
+    margin-left: 20px;
+}
+
+.produit{
+    margin-left: 40px;
+}

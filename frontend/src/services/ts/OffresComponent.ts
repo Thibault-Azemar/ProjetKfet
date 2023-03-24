@@ -5,6 +5,7 @@ import SimpleModalComponent from "../../components/SimpleModalComponent.vue";
 import OfferRepository from '../Repository/OfferRepository';
 import Offer from '../Controller/OfferController';
 
+
 // @ts-ignore
 // @ts-ignore
 export default defineComponent({

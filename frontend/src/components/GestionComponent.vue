@@ -18,5 +18,6 @@
     <UsersComponent @update-user="updateUser" v-if="value==='Users'"/>
     <ProduitModalComponent @unshow-modal="unshowModal" :produit="isProduit"/>
     <UserModalComponent @unshow-modal="unshowModal" :user="isUser"/>
+    <OffreModalComponent @unshow-modal="unshowModal"/>
   </div>
 </template>

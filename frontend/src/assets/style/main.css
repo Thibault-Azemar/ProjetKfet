@@ -40,7 +40,8 @@ p {
 }
 
 button,
-input[type=submit] {
+input[type=submit],
+.a-button {
     border: none;
     color: #FFFFFF;
     border-radius: 10px;
@@ -53,6 +54,7 @@ input[type=submit] {
     margin: 10px 10px;
     padding: 10px;
 }
+
 
 .primary-button {
     background-color: #7A93A3;
@@ -118,7 +120,6 @@ input[type=submit] {
     position: absolute;
     right: -5px;
     top: -5px;
-    padding: 0%;
     background-image: url(../pictures/close.svg);
     background-size: 30px;
     background-repeat: no-repeat;
@@ -131,6 +132,24 @@ input[type=submit] {
     align-items: center;
     justify-content: center;
 }
+
+.plus-button {
+    min-width: 30px;
+    padding: 5px 5px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    margin-left: 0;
+}
+
+.minus-button {
+    min-width: 30px;
+    padding: 5px 5px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    margin-right: 0;
+}
+
+
 
 h1,
 h2,
@@ -164,6 +183,34 @@ select {
 
 input:focus {
     border: 2px solid #a3998b;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.quantity-input {
+    border-radius: 0;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0;
+    width: 50px;
+    min-width: 50px;
+    text-align: center;
+    height: 30px;
+    min-height: 30px;
+}
+
+.quantity-input:focus {
+    border: none;
+    padding: 5px;
 }
 
 .input-label {
@@ -223,6 +270,13 @@ label {
     width: fit-content;
 }
 
+.big-card {
+    width: 100vw;
+    height: 100vh;
+    padding: 10px;
+    background-color: white;
+}
+
 .card h3 {
     margin: 20px;
     margin-top: 30px;
@@ -230,6 +284,12 @@ label {
 
 .card p {
     text-align: center;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+
 }
 
 /*-------------------------|
@@ -414,5 +474,19 @@ label {
 
     .modal {
         left: -70px;
+    }
+
+    .big-card {
+        width: fit-content;
+        height: 90%;
+        padding: 10px;
+        background-color: white;
+        position: absolute;
+        z-index: 3;
+        top: 50vh;
+        left: 50vw;
+        transform: translate(-50%, -50%);
+        border-radius: 20px;
+        box-shadow: 0 0 10px #bbb;
     }
 }
