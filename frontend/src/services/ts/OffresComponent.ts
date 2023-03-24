@@ -48,6 +48,27 @@ export default defineComponent({
         getOffers() {
             const OfferRepo = new OfferRepository();
             OfferRepo.getOffers().then((offers: Offer[]) => {
+                offers.forEach((offer: Offer) => {
+                    let products = ""
+                    if (offer.productIds != null) {
+                        for (let i = 0; i < offer.productIds.length; i++) {
+                            products += offer.productIds[i] + ", "
+                        }
+                    }
+                    let subcats = ""
+                    if (offer.subcatIds != null) {
+                        for (let i = 0; i < offer.subcatIds.length; i++) {
+                            subcats += offer.subcatIds[i] + ", "
+                        }
+                    }
+                    let cats = ""
+                    if (offer.catIds != null) {
+                        for (let i = 0; i < offer.catIds.length; i++) {
+                            cats += offer.catIds[i] + ", "
+                        }
+                    }
+                    offer.description = offer.nbproducts + " parmis " + products + ", " + subcats + ", " + cats;
+                })
                 this.offers = offers;
                 console.log(offers)
             }

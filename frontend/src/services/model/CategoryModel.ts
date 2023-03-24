@@ -15,7 +15,7 @@ export default class Category {
             this.image = image
         }
         else {
-            this.image = "https://via.placeholder.com/150"
+            this.image = "../../assets/pictures/offer.jpg"
         }
     }
 

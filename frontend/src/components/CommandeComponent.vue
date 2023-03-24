@@ -7,15 +7,9 @@
       <button class="icon-button" id="cart"><img src="../assets/pictures/cart-shopping.svg"></button>
     </div>
     <div class="commande-grid">
-      <button class="tertiary-button"></button>
-      <button class="tertiary-button"></button>
-      <button class="tertiary-button"></button>
-      <button class="tertiary-button"></button>
-      <button class="tertiary-button"></button>
-      <button class="tertiary-button"></button>
-      <button class="tertiary-button"></button>
-      <button class="tertiary-button"></button>
-      <button class="tertiary-button"></button>
+      <button class="tertiary-button" v-for="cell in gridCellsContent" :key="cell"
+        @click="clickOnCell(cell.type, cell.id)">
+        {<img :src="cell.image" />} {{ cell.title }}</button>
     </div>
     <div class="commande-footer">
       <div class="commande-resume">
@@ -29,5 +23,4 @@
 
     </div>
   </div>
-
 </template>
