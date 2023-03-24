@@ -72,6 +72,7 @@ input[type=submit] {
 
 .tertiary-button {
     background-color: #FFFFFF;
+    color: #000000;
     /*min-width: 250px;*/
     width: calc(100% - 20px);
     aspect-ratio: 1 / 1;
@@ -193,7 +194,7 @@ option {
     background-color: #F0EBE4;
 }
 
-.options-header{
+.options-header {
     display: flex;
     flex-direction: row;
     align-items: center;

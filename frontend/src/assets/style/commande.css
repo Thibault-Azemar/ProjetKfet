@@ -1,5 +1,4 @@
-
-.commande-header{
+.commande-header {
     height: 70px;
     width: 100%;
     display: flex;
@@ -7,7 +6,7 @@
     align-items: center;
 }
 
-.commande-grid{
+.commande-grid {
     display: grid;
     width: 100%;
     grid-template-columns: 50% 50%;
@@ -16,62 +15,66 @@
     overflow-y: auto;
 }
 
-.commande-footer{
+.commande-footer {
     height: 70px;
     width: 100%;
 }
 
-.commande-checked{
+.commande-checked {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.commande-resume{
+.commande-resume {
     display: none;
 }
 
-#cart{
+#cart {
     position: absolute;
     right: 10px;
 }
 
-#check-cart{
+#check-cart {
     position: absolute;
     right: 0;
 }
 
-@media screen and (min-width: 700px){
-    .commande-grid{
-        grid-template-columns: auto auto auto;
+@media screen and (min-width: 700px) {
+    .commande-grid {
+        grid-template-columns: 33% 33% 33%;
     }
 }
 
-@media screen and (min-width: 1024px){
-    .commande-header{
+@media screen and (min-width: 1024px) {
+    .commande-header {
         width: 100%;
     }
-    .commande-grid{
+
+    .commande-grid {
         width: 80%;
-        grid-template-columns: auto auto auto auto;
+        grid-template-columns: 25% 25% 25% 25%;
     }
-    .commande-footer{
+
+    .commande-footer {
         width: 20%;
         position: absolute;
         right: 0;
         bottom: 0;
         height: 100%;
     }
-    .commande-resume{
+
+    .commande-resume {
         display: block;
         height: calc(100% - 110px);
         padding: 20px;
     }
 
-    .commande-checked{
+    .commande-checked {
         height: 70px;
     }
-    #cart{
+
+    #cart {
         display: none;
     }
 
