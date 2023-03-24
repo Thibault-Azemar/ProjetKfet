@@ -5,6 +5,7 @@ import OffresComponent from "../../components/OffresComponent.vue";
 import UsersComponent from "../../components/UsersComponent.vue";
 import CategoriesComponent from "../../components/CategoriesComponent.vue";
 import StockComponent from "../../components/StockComponent.vue";
+import OffreModalComponent from "../../components/OffreModalComponent.vue";
 import ProduitModalComponent from "../../components/ProduitModalComponent.vue";
 import UserModalComponent from "../../components/UserModalComponent.vue";
 import User from "../Controller/UserController"
@@ -21,7 +22,8 @@ export default defineComponent({
         CategoriesComponent,
         StockComponent,
         ProduitModalComponent,
-        UserModalComponent
+        UserModalComponent,
+        OffreModalComponent
     },
     // type inference enabled
     props: {

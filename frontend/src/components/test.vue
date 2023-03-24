@@ -20,9 +20,9 @@
     <div id="QRCodeImg" ></div>
   </select>
   <div>
-    <button class="secondary-button icon-minus minus-button"></button>
-    <input class="quantity-input" type="number">
-    <button class="secondary-button icon-plus plus-button"></button>
+    <button class="secondary-button icon-minus minus-button" @click="minus('test')"></button>
+    <input class="quantity-input" type="number" id="test">
+    <button class="secondary-button icon-plus plus-button" @click="plus('test')"></button>
   </div>
   <button class="icon-button"><img src="../assets/pictures/user.svg"></button>
 </template>
@@ -39,7 +39,16 @@ export default {
     }
   },
   methods: {
-
+    plus(id) {
+      let value = document.getElementById(id).value
+      value++
+      document.getElementById(id).value = value
+    },
+    minus(id) {
+      let value = document.getElementById(id).value
+      value--
+      document.getElementById(id).value = value
+    }
   },
   created() {
   }
