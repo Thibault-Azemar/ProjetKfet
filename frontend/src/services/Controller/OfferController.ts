@@ -10,9 +10,9 @@ export default class OfferController {
     productIds: number[];
     subcatIds: number[];
     catIds: number[];
-    image: typeof Image;
+    image: string;
 
-    constructor(id: number, name: string, price: number, priceMembers: number, description: string, nbproducts: number, productsID: number[], subcatsID: number[], catsID: number[], image: typeof Image) {
+    constructor(id: number, name: string, price: number, priceMembers: number, description: string, nbproducts: number, productsID: number[], subcatsID: number[], catsID: number[], image: string) {
         this.id = id;
         this.name = name;
         this.price = price;

@@ -4,6 +4,7 @@ import '../../assets/style/commande.css'
 import Category from "../model/CategoryModel";
 import CommandesRepository from "../Repository/CommandesRepository";
 import Subcategory from "../model/SubcategoryModel";
+import Offer from "../Controller/OfferController";
 
 // @ts-ignore
 // @ts-ignore
@@ -56,7 +57,7 @@ export default defineComponent({
               if (category.id == id) {
                 //add to the gridCellsContent
                 category.subcategories.forEach((subcategory: Subcategory) => {
-                  //this.gridCellsContent.push({ id: subcategory.id, title: subcategory.name, image: subcategory.image, type: "subcategory" });
+                  this.gridCellsContent.push({ id: subcategory.id, title: subcategory.name, image: subcategory.image, type: "subcategory" });
                 });
               }
             });
@@ -69,15 +70,22 @@ export default defineComponent({
                 if (subcategory.id == id) {
                   //add to the gridCellsContent
                   subcategory.products.forEach((product) => {
-                    //this.gridCellsContent.push({ id: product.id, title: product.name, image: product.image, type: "product" });
+                    this.gridCellsContent.push({ id: product.id, title: product.name, image: product.image, type: "product" });
                   });
                 }
               });
             });
           });
           break;
-        case "product":
-
+        case "offer":
+          CatRepository.getOffers().then((offers: Offer[]) => {
+            offers.forEach((offer: Offer) => {
+              //add to the gridCellsContent
+              this.gridCellsContent.push({ id: offer.id.toString(), title: offer.name, image: offer.image, type: "offer" });
+            });
+          }
+          );
+          break;
       }
     },
   },
