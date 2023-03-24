@@ -7,14 +7,14 @@ import CategoriesComponent from "../../components/CategoriesComponent.vue";
 import StockComponent from "../../components/StockComponent.vue";
 import ProduitModalComponent from "../../components/ProduitModalComponent.vue";
 import UserModalComponent from "../../components/UserModalComponent.vue";
-import User from "../Crontroller/UserController"
+import User from "../Controller/UserController"
 import Produit from "../model/ProductModel";
 
 // @ts-ignore
 // @ts-ignore
 export default defineComponent({
 
-    components:{
+    components: {
         GestionComponent,
         OffresComponent,
         UsersComponent,
@@ -29,45 +29,45 @@ export default defineComponent({
     },
     data() {
         const value = 'Stock';
-        let isUser : User | undefined;
-        let isProduit : Produit | undefined;
+        let isUser: User | undefined;
+        let isProduit: Produit | undefined;
         return {
             value,
             isUser,
             isProduit
         }
     },
-    methods:{
-        showAddModal(){
+    methods: {
+        showAddModal() {
             let modal;
-            if(this.value === "Stock"){
+            if (this.value === "Stock") {
                 modal = document.getElementById("produitModal");
-                if(modal) modal.style.display = "block";
+                if (modal) modal.style.display = "block";
             }
-            if(this.value === "Offres"){
+            if (this.value === "Offres") {
                 modal = document.getElementById("offreModal");
-                if(modal) modal.style.display = "block";
+                if (modal) modal.style.display = "block";
             }
-            if(this.value === "Categories"){
+            if (this.value === "Categories") {
                 modal = document.getElementById("categorieModal");
-                if(modal) modal.style.display = "block";
+                if (modal) modal.style.display = "block";
             }
-            if(this.value === "Users"){
+            if (this.value === "Users") {
                 modal = document.getElementById("userModal");
-                if(modal) modal.style.display = "block";
+                if (modal) modal.style.display = "block";
             }
         },
-        updateUser(user:User){
+        updateUser(user: User) {
             this.isUser = user;
             this.showAddModal();
         },
-        updateProduct(produit: Produit){
+        updateProduct(produit: Produit) {
             this.isProduit = produit;
             this.showAddModal();
         },
-        unshowModal(idModal : string){
+        unshowModal(idModal: string) {
             const modal = document.getElementById(idModal);
-            if(modal) modal.style.display = "none";
+            if (modal) modal.style.display = "none";
             this.isUser = undefined;
             this.isProduit = undefined;
         }

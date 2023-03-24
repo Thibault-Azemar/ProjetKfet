@@ -1,7 +1,7 @@
 import UsersComponent from '../../components/UsersComponent.vue'
 import { defineComponent } from 'vue'
 import '../../assets/style/users.css'
-import User from '../Crontroller/UserController'
+import User from '../Controller/UserController'
 import UserRepository from '../Repository/UserRepository'
 import SimpleModalComponent from "../../components/SimpleModalComponent.vue";
 // @ts-ignore
@@ -54,12 +54,14 @@ export default defineComponent({
             });
             return this.users;
         },
-        updateUser(user :User){
-            console.log(user)
-            this.$emit('updateUser',user)
+        updateUser(user: User) {
+            this.$emit('updateUser', user)
 
-        }
+        },
+        showModal(user?: User): void {
+            this.$emit('showAddModal', user);
 
+        },
     },
     beforeMount() {
         this.getUsers();

@@ -23,7 +23,7 @@ export default defineComponent({
         const groupToDisplay = "DI5";
         const accounts: Group[] = [];
         const accountsToDisplay: Customers[] = [];
-        let isCustomer : Customers | undefined;
+        let isCustomer: Customers | undefined;
         return {
             groupToDisplay,
             accounts,
@@ -33,7 +33,8 @@ export default defineComponent({
 
     },
     methods: {
-        showAddModal() {
+        showAddModal(customer?: Customers) {
+            console.log(customer)
             const modal = document.getElementById("compteModal");
             if (modal) modal.style.display = "block";
 
@@ -43,17 +44,18 @@ export default defineComponent({
             if (modal) modal.style.display = "none";
         },
         updateSolde() {
+            const accountsRepo = new AccountsRepository();
+            accountsRepo.addAccount("test", "test", 100, "DI5").then((customer: Customers) => {
+                this.accounts.forEach((account: Group) => {
+                    if (account.name === this.groupToDisplay) {
+                        account.addCustomer(customer);
+                    }
+                })
+                this.changeGroup();
+            })
 
         },
-        addCompte() {
-
-        },
-        editCompte(customer : Customers) {
-            this.isCustomer = customer;
-            console.log(customer)
-            this.showAddModal();
-        },
-        deleteCompte( customer : Customers){
+        editCompte() {
 
         },
         getCustomers(): Promise<number> {

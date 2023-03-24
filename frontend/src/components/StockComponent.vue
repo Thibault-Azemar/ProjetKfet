@@ -15,7 +15,7 @@ import Subcategory from '@/services/model/SubcategoryModel';
           <p>{{ Product.sellingPriceMembers }}</p>
           <p>{{ Product.stock }}</p>
           <button class="icon-button" @click="updateProduct(Product)"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button" @click="deleteProduct()"><img src="../assets/pictures/trash.svg"></button>
+          <button class="icon-button" @click="deleteProduct(Product)"><img src="../assets/pictures/trash.svg"></button>
         </div>
       </div>
     </div>

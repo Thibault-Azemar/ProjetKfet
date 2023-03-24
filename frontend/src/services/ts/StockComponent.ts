@@ -4,7 +4,7 @@ import '../../assets/style/stock.css'
 import Category from '../model/CategoryModel';
 import StockRepository from '../Repository/StockRepository'
 import Product from "@/services/model/ProductModel";
-import User from "@/services/Crontroller/UserController";
+import User from "@/services/Controller/UserController";
 
 // @ts-ignore
 // @ts-ignore
@@ -39,11 +39,15 @@ export default defineComponent({
 
             return this.stock;
         },
-        deleteProduct(){
-
+        deleteProduct(product: Product) {
+            const stockRepo = new StockRepository();
+            stockRepo.deleteProduct(product).then(() => {
+                this.getStocks();
+            });
+            this.getStocks();
         },
-        updateProduct(produit : Product){
-            this.$emit('updateProduct',produit)
+        updateProduct(produit: Product) {
+            this.$emit('updateProduct', produit)
 
         }
 
