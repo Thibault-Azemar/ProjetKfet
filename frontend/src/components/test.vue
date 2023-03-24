@@ -19,6 +19,11 @@
     <option value="goldfish">Goldfish</option>
     <div id="QRCodeImg" ></div>
   </select>
+  <div>
+    <button class="secondary-button icon-minus minus-button"></button>
+    <input class="quantity-input" type="number">
+    <button class="secondary-button icon-plus plus-button"></button>
+  </div>
   <button class="icon-button"><img src="../assets/pictures/user.svg"></button>
 </template>
 

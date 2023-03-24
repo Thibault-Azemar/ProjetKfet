@@ -117,7 +117,6 @@ input[type=submit] {
     position: absolute;
     right: -5px;
     top: -5px;
-    padding: 0%;
     background-image: url(../pictures/close.svg);
     background-size: 30px;
     background-repeat: no-repeat;
@@ -129,6 +128,28 @@ input[type=submit] {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.plus-button{
+    min-width: 30px;
+    padding: 8px 10px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    margin-left: 0;
+}
+
+.minus-button{
+    min-width: 30px;
+    padding: 8px 10px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    margin-right: 0;
+}
+
+.quantity-input{
+    border-radius: 0;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 h1,
