@@ -1,7 +1,7 @@
 package com.projetkfet.backend.controller.order;
 
-import com.projetkfet.backend.data.order.OrderRepository;
-import com.projetkfet.backend.model.order.Order;
+import com.projetkfet.backend.data.order.CommandRepository;
+import com.projetkfet.backend.model.order.Command;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +18,15 @@ public class OrderController {
     private static final Logger logger = LogManager.getLogger("OrderLogger");
 
     @Autowired
-    private OrderRepository orderRepository;
+    private CommandRepository commandRepository;
 
     //    GET
 
     @GetMapping(path="/all")
     public @ResponseBody
-    Iterable<Order> getAllOrders() throws Exception {
+    Iterable<Command> getAllOrders() throws Exception {
         logger.info("All orders");
-        return orderRepository.findAll();
+        return commandRepository.findAll();
     }
 
     //    POST
@@ -35,20 +35,16 @@ public class OrderController {
     public @ResponseBody
     UUID addNewOrder(@RequestParam(name="name", required = false) String name, @RequestParam(name="paymentMethod") String paymentMethod, @RequestParam(name="price") String price, @RequestParam(name="isPaid")  String isPaid) throws Exception {
         logger.info("Add new order");
-        Order o = new Order();
+        Command o = new Command();
         if (name != null && !name.isEmpty())
         {
             o.setName(name);
         }
         o.setPaymentMethod(paymentMethod);
         o.setPrice(Float.parseFloat(price));
-        o.setIsPaid(Boolean.parseBoolean(isPaid));
+        o.setIsPaid(isPaid);
 
-        o.setDate(new java.util.Date());
-
-        o.setProducts(null);
-
-        orderRepository.save(o);
+        commandRepository.save(o);
         logger.info("New order : " + o.getId());
 
 
@@ -63,11 +59,11 @@ public class OrderController {
     public @ResponseBody
     String deleteOrder(@RequestParam("id") String id) throws Exception {
         logger.info("Delete Order");
-        Optional<Order> o = orderRepository.findById(UUID.fromString(id));
+        Optional<Command> o = commandRepository.findById(UUID.fromString(id));
 
         if (o.isPresent())
         {
-            orderRepository.delete(o.get());
+            commandRepository.delete(o.get());
             logger.info("Offer Order : " + id);
             return "Confirm";
         }

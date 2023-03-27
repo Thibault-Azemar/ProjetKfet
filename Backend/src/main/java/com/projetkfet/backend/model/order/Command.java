@@ -3,15 +3,12 @@ package com.projetkfet.backend.model.order;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.util.Date;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
-public class Order {
+public class Command {
     @Id
     @GeneratedValue
     @UuidGenerator
@@ -24,15 +21,9 @@ public class Order {
 
     private float price;
 
-    private Boolean isPaid;
+    private String isPaid;
 
     private String state;
-
-    private Date date;
-
-//    Liste de productOrder
-    @OneToMany
-    private Set<ProductOrder> products;
 
     public UUID getId() {
         return id;
@@ -66,11 +57,11 @@ public class Order {
         this.price = price;
     }
 
-    public Boolean getIsPaid() {
+    public String getIsPaid() {
         return isPaid;
     }
 
-    public void setIsPaid(Boolean isPaid) {
+    public void setIsPaid(String isPaid) {
         this.isPaid = isPaid;
     }
 
@@ -80,22 +71,6 @@ public class Order {
 
     public void setState(String state) {
         this.state = state;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Set<ProductOrder> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<ProductOrder> products) {
-        this.products = products;
     }
 
 }
