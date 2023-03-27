@@ -36,6 +36,26 @@ public class SubCategoryController {
         return subCategoryRepository.findAllProjectedBy();
     }
 
+    // Récupère une sous catégorie
+    @GetMapping()
+    public @ResponseBody SubCategory getSubCategory(@RequestParam("id") String id) throws Exception {
+        logger.info("Get subcategory");
+
+        Optional<SubCategory> sc = subCategoryRepository.findById(UUID.fromString(id));
+
+        SubCategory subcategory = null;
+        // if n est non null
+        if (sc.isPresent()) {
+            subcategory = sc.get();
+        }
+        else
+        {
+            logger.info("SubCategory doesn't exist");
+            throw new Exception("SubCategory doesn't exist");
+        }
+        return subcategory;
+    }
+
 //    POST
 
 //    Permet d'ajouter une nouvelle catégorie

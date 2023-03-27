@@ -31,6 +31,25 @@ public class CategoryController {
         return categoryRepository.findAllProjectedBy();
     }
 
+    @GetMapping()
+    public @ResponseBody Category getCategory(@RequestParam("id") String id) throws Exception {
+        logger.info("Get category");
+
+        Optional<Category> c = categoryRepository.findById(UUID.fromString(id));
+
+        Category category = null;
+        // if n est non null
+        if (c.isPresent()) {
+            category = c.get();
+        }
+        else
+        {
+            logger.info("Category doesn't exist");
+            throw new Exception("Category doesn't exist");
+        }
+        return category;
+    }
+
 //    POST
 
 //    Permet d'ajouter une nouvelle catégorie
