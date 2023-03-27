@@ -1,10 +1,13 @@
 package com.projetkfet.backend.model.order;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,13 +20,23 @@ public class Command {
 //    Nom du client
     private String name;
 
+//    Mode de paiement
     private String paymentMethod;
 
+//    Prix total
     private float price;
 
-    private String isPaid;
+//    Est payé
+    private Boolean isPaid;
 
+//    Etat de la commande
     private String state;
+
+//    Date de la commande
+    private Date date;
+
+    @ElementCollection
+    private List<ProductCommand> products;
 
     public UUID getId() {
         return id;
@@ -57,11 +70,11 @@ public class Command {
         this.price = price;
     }
 
-    public String getIsPaid() {
+    public Boolean getIsPaid() {
         return isPaid;
     }
 
-    public void setIsPaid(String isPaid) {
+    public void setIsPaid(Boolean isPaid) {
         this.isPaid = isPaid;
     }
 
@@ -71,6 +84,14 @@ public class Command {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
 }

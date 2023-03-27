@@ -1,23 +1,23 @@
 package com.projetkfet.backend.model.order;
 
-import com.projetkfet.backend.model.stock.Product;
-import jakarta.persistence.*;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.GeneratedValue;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
-@Entity
-public class ProductOrder {
-    @Id
+@Embeddable
+public class ProductCommand {
+
     @GeneratedValue
     @UuidGenerator
     private UUID id;
 
+    private UUID productId;
+
     private String state;
 
-    @OneToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    private String product;
 
     public UUID getId() {
         return id;
@@ -25,6 +25,14 @@ public class ProductOrder {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public UUID getProductId() {
+        return productId;
+    }
+
+    public void setProductId(UUID productId) {
+        this.productId = productId;
     }
 
     public String getState() {
@@ -35,11 +43,11 @@ public class ProductOrder {
         this.state = state;
     }
 
-    public Product getProduct() {
+    public String getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(String product) {
         this.product = product;
     }
 }

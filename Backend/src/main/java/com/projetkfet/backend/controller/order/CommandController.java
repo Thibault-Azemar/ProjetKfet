@@ -12,8 +12,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping(path="/order")
-public class OrderController {
+@RequestMapping(path="/command")
+public class CommandController {
 
     private static final Logger logger = LogManager.getLogger("OrderLogger");
 
@@ -42,11 +42,12 @@ public class OrderController {
         }
         o.setPaymentMethod(paymentMethod);
         o.setPrice(Float.parseFloat(price));
-        o.setIsPaid(isPaid);
+        o.setIsPaid(Boolean.parseBoolean(isPaid));
+
+        o.setDate(new java.util.Date());
 
         commandRepository.save(o);
         logger.info("New order : " + o.getId());
-
 
         return o.getId();
     }
