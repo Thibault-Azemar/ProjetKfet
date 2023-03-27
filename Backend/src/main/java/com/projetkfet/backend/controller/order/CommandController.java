@@ -42,7 +42,7 @@ public class CommandController {
 
         Command o = new Command();
 
-        List<ProductCommand> productCommands = new ArrayList<ProductCommand>();
+        List<ProductCommand> productCommands = new ArrayList<>();
         for (ProductCommandDTO p : products)
         {
             ProductCommand product = new ProductCommand(p.getId(), p.getName());
