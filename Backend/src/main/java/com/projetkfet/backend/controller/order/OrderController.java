@@ -33,12 +33,26 @@ public class OrderController {
 
     @PostMapping(path="/add")
     public @ResponseBody
-    UUID addNewOrder() throws Exception {
-        logger.info("New Order");
+    UUID addNewOrder(@RequestParam(name="name", required = false) String name, @RequestParam(name="paymentMethod") String paymentMethod, @RequestParam(name="price") String price, @RequestParam(name="isPaid")  String isPaid) throws Exception {
+        logger.info("Add new order");
+        Order o = new Order();
+        if (name != null && !name.isEmpty())
+        {
+            o.setName(name);
+        }
+        o.setPaymentMethod(paymentMethod);
+        o.setPrice(Float.parseFloat(price));
+        o.setIsPaid(Boolean.parseBoolean(isPaid));
 
-        UUID id = null;
+        o.setDate(new java.util.Date());
 
-        return id;
+        o.setProducts(null);
+
+        orderRepository.save(o);
+        logger.info("New order : " + o.getId());
+
+
+        return o.getId();
     }
 
     //    UPDATE

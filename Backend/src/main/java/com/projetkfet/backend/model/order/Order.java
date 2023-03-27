@@ -1,10 +1,13 @@
 package com.projetkfet.backend.model.order;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -17,6 +20,8 @@ public class Order {
 //    Nom du client
     private String name;
 
+    private String paymentMethod;
+
     private float price;
 
     private Boolean isPaid;
@@ -27,7 +32,7 @@ public class Order {
 
 //    Liste de productOrder
     @OneToMany
-    private List<ProductOrder> products;
+    private Set<ProductOrder> products;
 
     public UUID getId() {
         return id;
@@ -43,6 +48,14 @@ public class Order {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public float getPrice() {
@@ -77,11 +90,11 @@ public class Order {
         this.date = date;
     }
 
-    public List<ProductOrder> getProducts() {
+    public Set<ProductOrder> getProducts() {
         return products;
     }
 
-    public void setProducts(List<ProductOrder> products) {
+    public void setProducts(Set<ProductOrder> products) {
         this.products = products;
     }
 
