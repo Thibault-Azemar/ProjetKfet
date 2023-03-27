@@ -1,13 +1,17 @@
 package com.projetkfet.backend.controller.order;
 
 import com.projetkfet.backend.data.order.CommandRepository;
+import com.projetkfet.backend.dto.order.ProductCommandDTO;
 import com.projetkfet.backend.model.order.Command;
+import com.projetkfet.backend.model.order.ProductCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -33,9 +37,19 @@ public class CommandController {
 
     @PostMapping(path="/add")
     public @ResponseBody
-    UUID addNewOrder(@RequestParam(name="name", required = false) String name, @RequestParam(name="paymentMethod") String paymentMethod, @RequestParam(name="price") String price, @RequestParam(name="isPaid")  String isPaid) throws Exception {
+    UUID addNewOrder(@RequestParam(name="name", required = false) String name, @RequestParam(name="paymentMethod") String paymentMethod, @RequestParam(name="price") String price, @RequestParam(name="isPaid")  String isPaid, @RequestBody List<ProductCommandDTO> products) throws Exception {
         logger.info("Add new order");
+
         Command o = new Command();
+
+        List<ProductCommand> productCommands = new ArrayList<ProductCommand>();
+        for (ProductCommandDTO p : products)
+        {
+            ProductCommand product = new ProductCommand(p.getId(), p.getName());
+            productCommands.add(product);
+        }
+        o.setProducts(productCommands);
+
         if (name != null && !name.isEmpty())
         {
             o.setName(name);

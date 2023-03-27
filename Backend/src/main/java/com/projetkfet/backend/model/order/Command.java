@@ -94,4 +94,11 @@ public class Command {
         this.date = date;
     }
 
+    public List<ProductCommand> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductCommand> products) {
+        this.products = products;
+    }
 }

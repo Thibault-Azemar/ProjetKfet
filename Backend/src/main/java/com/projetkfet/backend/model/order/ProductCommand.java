@@ -19,6 +19,17 @@ public class ProductCommand {
 
     private String product;
 
+    public ProductCommand(UUID productId, String name) {
+        this.id = UUID.randomUUID();
+        this.product = name;
+        this.state = "Pas commencé";
+        this.productId = productId;
+    }
+
+    public ProductCommand() {
+
+    }
+
     public UUID getId() {
         return id;
     }
