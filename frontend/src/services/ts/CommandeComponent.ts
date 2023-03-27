@@ -88,6 +88,9 @@ export default defineComponent({
           break;
       }
     },
+    payOrder() {
+      
+    }
   },
   mounted() {
     const image = "../../assets/pictures/offer.jpg";

@@ -4,17 +4,27 @@
   <div class="modal" id="offreModal">
     <div class="big-card">
       <header>
-        <h3>Créer une offre</h3>
+        <h3 v-if="!offer">Créer une offre</h3>
+        <h3 v-if="offer">Modifier une offre</h3>
         <button class="icon-button close-button" @click="unshowModal('offreModal')"></button>
       </header>
       <form method="post" class="offres-modal-grid">
         <div>
           <label class="input-label" for="nom-offre">Nom</label>
-          <input name="nom-offre" class="input-field" type="text" id="nom-offre" placeholder="nom offre" required>
+          <input name="nom-offre" class="input-field" type="text" id="nom-offre" :value="offer ? offer.name : ''" placeholder="nom offre" required>
         </div>
         <div>
           <label class="input-label" for="prix-offre">Prix</label>
-          <input name="prix-offre" class="input-field" type="number" id="prix-offre" placeholder="prix offre" required>
+          <input name="prix-offre" class="input-field" type="number" id="prix-offre" :value="offer ? offer.price :''" placeholder="prix offre" required>
+        </div>
+        <div>
+          <label class="input-label" for="prix-offre-membre">Prix K'fetier</label>
+          <input name="prix-offre" class="input-field" type="number" id="prix-offre-membre" :value="offer ? offer.priceMembers :''" placeholder="prix kfetier offre" required>
+        </div>
+        <div>
+          <label class="input-label" for="image-produit">Image</label>
+          <input type="file" id="image-produit" accept=".jpg,.jpeg,.png" size="1000000"
+          :value="offer ? offer.image : ''" >
         </div>
         <h4>Produits</h4>
         <div style="overflow-y: auto">
@@ -48,11 +58,6 @@
               </div>
             </div>
           </div>
-        </div>
-        <div>
-          <label class="input-label" for="image-produit">Image</label>
-          <input type="file" id="image-produit" accept=".jpg,.jpeg,.png" size="1000000"
-                 >
         </div>
         <div class="submit-button">
           <input class="primary-button" value="Créer une offre">

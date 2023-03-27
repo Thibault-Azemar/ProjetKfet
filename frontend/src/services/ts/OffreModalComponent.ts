@@ -1,6 +1,7 @@
 import {defineComponent} from "vue";
 import OffreModalComponent from "@/components/OffreModalComponent.vue";
 import "../../assets/style/offre-modal.css";
+import Offer from '../Controller/OfferController';
 
 
 // @ts-ignore
@@ -11,7 +12,10 @@ export default defineComponent({
         OffreModalComponent,
     },
     props: {
-
+        offer :{
+            type: Offer,
+            required: false
+        }
     },
     data() {
 

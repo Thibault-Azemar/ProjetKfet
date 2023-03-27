@@ -76,6 +76,9 @@ export default defineComponent({
             );
             return this.offers;
         },
+        updateOffer(offer: Offer) {
+            this.$emit('updateOffer', offer);
+        }
 
     },
     mounted() {

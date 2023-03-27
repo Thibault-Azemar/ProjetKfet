@@ -13,11 +13,11 @@
       <button class="icon-button" @click="showAddModal()"><img src="../assets/pictures/plus.svg"></button>
     </div>
     <StockComponent @update-product="updateProduct" v-if="value==='Stock'"/>
-    <OffresComponent v-if="value==='Offres'"/>
+    <OffresComponent @update-offer="updateOffer" v-if="value==='Offres'"/>
     <CategoriesComponent v-if="value==='Categories'"/>
     <UsersComponent @update-user="updateUser" v-if="value==='Users'"/>
     <ProduitModalComponent @unshow-modal="unshowModal" :produit="isProduit"/>
     <UserModalComponent @unshow-modal="unshowModal" :user="isUser"/>
-    <OffreModalComponent @unshow-modal="unshowModal"/>
+    <OffreModalComponent @unshow-modal="unshowModal" :offer="isOffer"/>
   </div>
 </template>

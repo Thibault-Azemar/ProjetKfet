@@ -10,6 +10,7 @@ import ProduitModalComponent from "../../components/ProduitModalComponent.vue";
 import UserModalComponent from "../../components/UserModalComponent.vue";
 import User from "../Controller/UserController"
 import Produit from "../model/ProductModel";
+import Offer from '../Controller/OfferController';
 
 // @ts-ignore
 // @ts-ignore
@@ -33,10 +34,12 @@ export default defineComponent({
         const value = 'Stock';
         let isUser: User | undefined;
         let isProduit: Produit | undefined;
+        let isOffer: Offer | undefined;
         return {
             value,
             isUser,
-            isProduit
+            isProduit,
+            isOffer,
         }
     },
     methods: {
@@ -65,6 +68,10 @@ export default defineComponent({
         },
         updateProduct(produit: Produit) {
             this.isProduit = produit;
+            this.showAddModal();
+        },
+        updateOffer(offer: Offer) {
+            this.isOffer = offer;
             this.showAddModal();
         },
         unshowModal(idModal: string) {

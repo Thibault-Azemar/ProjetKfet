@@ -14,11 +14,12 @@
     <div class="commande-footer">
       <div class="commande-resume">
         <h2>Résumé de la commande :</h2>
+        <div></div>
       </div>
       <div class="commande-checked">
         <p>Total : </p>
         <h2> 10,25 €</h2>
-        <button class="primary-button" id="check-cart">Encaisser</button>
+        <button class="primary-button" id="check-cart" @click="payOrder()">Encaisser</button>
       </div>
 
     </div>
