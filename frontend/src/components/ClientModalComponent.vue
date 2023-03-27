@@ -11,23 +11,26 @@
       <form method="post">
         <div>
           <label class="input-label" for="nom-compte">Nom</label>
-          <input name="nom-compte" class="input-field" type="text" id="nom-compte" :value="customer ? customer.name : ''" placeholder="nom client"
-                 required>
+          <input name="nom-compte" class="input-field" type="text" id="nom-compte" :value="customer ? customer.name : ''"
+            placeholder="nom client" required>
         </div>
         <div>
           <label class="input-label" for="prenom-compte">Prénom</label>
-          <input name="prenom-compte" class="input-field" type="text" id="prenom-compte" :value="customer ? customer.firstname : ''" placeholder="prénom client"
-                 required>
+          <input name="prenom-compte" class="input-field" type="text" id="prenom-compte"
+            :value="customer ? customer.firstname : ''" placeholder="prénom client" required>
         </div>
         <div>
           <label class="input-label" for="groupe">Groupe</label>
           <select name="groupe" class="input-field" id="groupe" required>
-            <option value="" selected disabled>Choisir un groupe</option>
-            <option value="subcat.id" :selected="customer ? customer.group === 'test' : false" > test </option>
+            <option value="" :selected="customer ? false : true" disabled>Choisir un groupe</option>
+            <option v-for="group in groups" :key="group" :value="group.id"
+              :selected="customer ? customer.group.id === group.id : false">
+              {{ group.name }}</option>
           </select>
         </div>
         <div class="submit-button">
-          <input class="primary-button" id="creer-produit" :value="customer ?'Modifier le compte' : 'Créer un compte'" @click="customer ? editCompte() : addCompte()">
+          <input class="primary-button" id="creer-produit" :value="customer ? 'Modifier le compte' : 'Créer un compte'"
+            @click="customer ? editCompte() : addCompte()">
         </div>
       </form>
     </div>

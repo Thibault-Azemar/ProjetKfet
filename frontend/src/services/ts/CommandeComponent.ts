@@ -89,7 +89,7 @@ export default defineComponent({
       }
     },
   },
-  mounted() {
+  beforeMount() {
     const image = "../../assets/pictures/offer.jpg";
     this.gridCellsContent.push({ id: "offer", title: "offre", image: image, type: "offer" });
     this.getCategories();

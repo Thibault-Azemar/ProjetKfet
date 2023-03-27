@@ -1,6 +1,7 @@
 import Offer from '../Controller/OfferController'
 import Config from '../../config';
 export default class OfferRepository {
+
     public getOffers(): Promise<Offer[]> {
         return new Promise((resolve, reject) => {
             fetch(Config.API_URL + 'offer/all')
