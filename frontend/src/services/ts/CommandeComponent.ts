@@ -180,7 +180,10 @@ export default defineComponent({
           });
           break;
       }
-    }
+    },
+    deleteProduct(id:string){
+
+    },
   },
   beforeMount()
   {

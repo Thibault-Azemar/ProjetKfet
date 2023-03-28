@@ -14,7 +14,12 @@
     <div class="commande-footer">
       <div class="commande-resume">
         <h2>Résumé de la commande :</h2>
-        <p v-for="product in command.products" :key="product">{{ product.name }}</p>
+        <div class="command-list">
+          <p class="command-list-grid" v-for="product in command.products" :key="product">
+            {{ product.name }}
+            <button class="icon-button-list" @click="deleteProduct(product.id)"><img src="../assets/pictures/close.svg"></button>
+          </p>
+        </div>
       </div>
       <div class="commande-checked">
         <p>Total : </p>

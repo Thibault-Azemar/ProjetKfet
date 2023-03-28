@@ -28,6 +28,38 @@
     align-items: center;
 }
 
+.command-list{
+    height: calc(100% - 90px);
+    overflow-y: auto;
+}
+
+.command-list-grid{
+    display : grid;
+    grid-template-columns: calc(100% - 50px) 50px;
+    grid-auto-rows: min-content;
+    align-items: center;
+}
+
+.icon-button-list{
+    margin: 0;
+    padding : 0;
+    width: 35px;
+    aspect-ratio: 1 / 1;
+    background: none;
+    box-shadow: none;
+    min-width: 0;
+    opacity: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-button-list img{
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+}
+
 .commande-checked {
     display: flex;
     flex-direction: row;
