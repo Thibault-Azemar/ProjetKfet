@@ -33,7 +33,6 @@ export default defineComponent({
             const input = document.getElementById(id) as HTMLInputElement
             if(!input)return;
             let value : number = parseInt(input.value)
-            if(value === 0) return;
             value--
             input.value = String(value)
         },

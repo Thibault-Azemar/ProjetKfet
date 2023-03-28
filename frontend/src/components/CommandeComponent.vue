@@ -28,11 +28,11 @@
       <div class="commande-checked">
         <p>Total : </p>
         <h2 v-bind="command in command" :key="command">{{ command ? command.total : 0 }} €</h2>
-        <button class="primary-button" id="check-cart" @click="payOrder()">Encaisser</button>
+        <button class="primary-button" id="check-cart" @click="payOrder()"
+          :disabled="command.products.length === 0">Encaisser</button>
       </div>
 
     </div>
     <PayementModalComponent @show-client-name-modal="showClientNameModal" @unshow-modal="unshowModal" />
     <ClientNameModalComponent @unshow-modal="unshowModal" :payement-type="payementType" />
-  </div>
-</template>
+  </div></template>

@@ -2,9 +2,13 @@
     padding-right: 10px;
     padding-left: 10px;
     display: grid;
-    grid-template-columns: 25% auto 15% 15% 40px 40px;
+    grid-template-columns: 20% auto 15% 40px 40px;
     grid-auto-rows: min-content;
     align-items: center;
+}
+
+.ordinateur{
+    display: none;
 }
 
 .header {
@@ -21,5 +25,9 @@
 
     .offres-grid {
         grid-template-columns: 20% auto 10% 10% 50px 50px;
+    }
+
+    .ordinateur{
+        display: block;
     }
 }
