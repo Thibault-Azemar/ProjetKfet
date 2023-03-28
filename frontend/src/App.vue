@@ -21,7 +21,18 @@ export default defineComponent({
     MenuComponent,
     //HelloWorld,
     //test
-  }
+  },
+  beforeMount() {
+    const app = document.getElementById("app")
+    if(app){
+      app.addEventListener("click", () => {
+        const accountPopup = document.getElementById("account-popup")
+        if(accountPopup){
+          accountPopup.style.display = "none"
+        }
+      })
+      }
+    }
 })
 </script>
 

@@ -2,6 +2,7 @@ import MenuComponent from '../../components/MenuComponent.vue'
 import { defineComponent } from 'vue'
 import '../../assets/style/menu.css'
 import { useRouter } from 'vue-router'
+import AccountModalComponent from '../../components/AccountModalComponent.vue'
 const router = useRouter()
 
 function showPopUpRole(): void{
@@ -12,7 +13,8 @@ function showPopUpRole(): void{
 export default defineComponent({
 
     components:{
-        MenuComponent
+        MenuComponent,
+        AccountModalComponent
     },
     // type inference enabled
     /*props: {
@@ -20,15 +22,24 @@ export default defineComponent({
         msg: { type: String, required: true, default:'test'}
     },*/
     data() {
+        const isAccountModalShow : boolean = false
         return {
-            count: 1
+            isAccountModalShow
         }
     },
     methods:{
-        showPopUpRole: function (){
-            showPopUpRole()
+        showAccountModal (){
+            const modal = document.getElementById("account-popup") as HTMLElement
+            if(!this.isAccountModalShow) {
+                this.isAccountModalShow = true;
+                if(modal) modal.style.display = "block";
+            }
+            else {
+                this.isAccountModalShow = false;
+                if(modal) modal.style.display = "none";
+            }
         },
-        }
+    }
     /*mounted() {
         this.name // type: string | undefined
         this.msg // type: string
