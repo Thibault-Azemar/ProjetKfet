@@ -52,19 +52,19 @@ export default defineComponent({
 
   },
   methods: {
-    getCategories() {
+    getCategories(){
       this.currentDisplay = "home";
       this.gridCellsContent = [];
       this.currentCategories = [];
       const image = "../../assets/pictures/offer.jpg";
-      this.gridCellsContent.push({ id: "offer", title: "offre", image: image, type: "offer" });
+      this.gridCellsContent.push({id: "offer", title: "offre", image: image, type: "offer"});
       const CatRepository = new CommandesRepository();
       CatRepository.getCategory().then((categories: Category[]) => {
         categories.forEach((category: Category) => {
           //add to the gridCellsContent
           const image = category.image;
           console.log(image)
-          this.gridCellsContent.push({ id: category.id, title: category.name, image: image, type: "category" });
+          this.gridCellsContent.push({id: category.id, title: category.name, image: image, type: "category"});
           this.currentCategories.push(category);
           console.log(this.gridCellsContent)
         });
@@ -144,8 +144,7 @@ export default defineComponent({
       this.payementType = payementType;
       const modal = document.getElementById("clientNameModal");
       if(modal) modal.style.display = "block";
-    }
-  },
+    },
     previous() {
       const image = "../../assets/pictures/offer.jpg";
       switch (this.currentDisplay) {
