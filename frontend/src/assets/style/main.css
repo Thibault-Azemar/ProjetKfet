@@ -91,6 +91,10 @@ input[type=submit],
     align-items: center;
 }
 
+.tertiary-button:disabled, .primary-button:disabled, .secondary-button:disabled {
+    opacity: 40%;
+}
+
 .tertiary-button img {
     width: 100%;
     height: 100%;
@@ -160,8 +164,8 @@ input[type=submit],
 
 #account-popup {
     position: absolute;
-    bottom: 20px;
-    left: 85px;
+    bottom : 80px;
+    right: 10px;
     width: 200px;
     height: 100px;
     background-color: white;
@@ -569,6 +573,10 @@ label {
     .input-label {
         font-size: 1.2em;
     }
+
+    #account-popup{
+        bottom: 100px;
+    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -599,5 +607,10 @@ label {
     .tertiary-button p{
         font-size: 1.5em;
         right: 10px;
+    }
+
+    #account-popup{
+        bottom: 30px;
+        left: 85px;
     }
 }

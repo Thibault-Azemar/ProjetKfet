@@ -8,7 +8,7 @@
     </div>
     <div class="commande-grid">
       <button class="tertiary-button" v-for="cell in gridCellsContent" :key="cell"
-        @click="clickOnCell(cell.type, cell.id)">
+        @click="clickOnCell(cell.type, cell.id)" >
         <img :src="cell.image" /> <p>{{ cell.title }}</p></button>
     </div>
     <div class="commande-footer">
@@ -24,7 +24,7 @@
       <div class="commande-checked">
         <p>Total : </p>
         <h2 v-bind="command in command" :key="command">{{ command ? command.total : 0 }} €</h2>
-        <button class="primary-button" id="check-cart" @click="payOrder()">Encaisser</button>
+        <button class="primary-button" id="check-cart" @click="payOrder()" :disabled="command.products.length === 0">Encaisser</button>
       </div>
 
     </div>
