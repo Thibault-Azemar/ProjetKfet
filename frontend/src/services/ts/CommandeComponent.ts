@@ -52,19 +52,19 @@ export default defineComponent({
 
   },
   methods: {
-    getCategories(){
+    getCategories() {
       this.currentDisplay = "home";
       this.gridCellsContent = [];
       this.currentCategories = [];
       const image = "../../assets/pictures/offer.jpg";
-      this.gridCellsContent.push({id: "offer", title: "offre", image: image, type: "offer"});
+      this.gridCellsContent.push({ id: "offer", title: "offre", image: image, type: "offer" });
       const CatRepository = new CommandesRepository();
       CatRepository.getCategory().then((categories: Category[]) => {
         categories.forEach((category: Category) => {
           //add to the gridCellsContent
           const image = category.image;
           console.log(image)
-          this.gridCellsContent.push({id: category.id, title: category.name, image: image, type: "category"});
+          this.gridCellsContent.push({ id: category.id, title: category.name, image: image, type: "category" });
           this.currentCategories.push(category);
           console.log(this.gridCellsContent)
         });
@@ -73,7 +73,6 @@ export default defineComponent({
     clickOnCell(type: string, id: string) {
       const CatRepository = new CommandesRepository();
       console.log(type + " " + id)
-      this.gridCellsContent = [];
       switch (type) {
         case "category":
           this.currentDisplay = "category";
@@ -126,24 +125,25 @@ export default defineComponent({
           const product = this.currentProducts.find((product: Product) => product.id == id);
           if (product != undefined)
             this.command.addProduct(product);
+          console.log(this.command.products[0].name)
           this.command.updateTotal();
           console.log(this.command)
           break;
       }
     },
-    payOrder(){
+    payOrder() {
       const modal = document.getElementById("payementModal");
-      if(modal) modal.style.display = "block";
+      if (modal) modal.style.display = "block";
     },
     unshowModal(idModal: string) {
       const modal = document.getElementById(idModal);
       if (modal) modal.style.display = "none";
     },
-    showClientNameModal(payementType: string){
+    showClientNameModal(payementType: string) {
       this.unshowModal("payementModal");
       this.payementType = payementType;
       const modal = document.getElementById("clientNameModal");
-      if(modal) modal.style.display = "block";
+      if (modal) modal.style.display = "block";
     },
     previous() {
       const image = "../../assets/pictures/offer.jpg";
@@ -181,12 +181,11 @@ export default defineComponent({
           break;
       }
     },
-    deleteProduct(id:string){
-
+    deleteProduct(id: number) {
+      this.command.removeProduct(id);
     },
   },
-  beforeMount()
-  {
+  beforeMount() {
     this.getCategories();
   }
 

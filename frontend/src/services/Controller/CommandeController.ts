@@ -7,7 +7,7 @@ export default class Commande {
     total: number;
     totalKfetier: number;
     paymentMethod: string;
-    products: Product[];
+    products: { [id: number]: Product };
     name: string;
     isPaid: boolean;
 
@@ -53,16 +53,25 @@ export default class Commande {
         else
             this.isPaid = false;
     }
-    addProduct(product: Product) {
-        this.products.push(product);
+    addProduct(product: Product): number {
+        if (Object.keys(this.products).length === 0) {
+            this.products[0] = product;
+            return 1;
+        }
+        else {
+            const maxId = Math.max(...Object.keys(this.products).map((id) => parseInt(id)));
+            this.products[maxId + 1] = product;
+            return maxId + 1;
+        }
     }
-    removeProduct(product: Product) {
-        this.products.splice(this.products.indexOf(product), 1);
+    removeProduct(index: number) {
+        delete this.products[index];
+        this.updateTotal();
     }
     updateTotal() {
         this.total = 0;
         this.totalKfetier = 0;
-        this.products.forEach((product) => {
+        Object.values(this.products).forEach((product: Product) => {
             this.total += product.sellingPrice;
             this.totalKfetier += product.sellingPriceMembers;
         });
