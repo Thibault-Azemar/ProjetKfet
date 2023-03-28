@@ -7,6 +7,8 @@ import Subcategory from "../model/SubcategoryModel";
 import Offer from "../Controller/OfferController";
 import PayementModalComponent from "../../components/PayementModalComponent.vue";
 import ClientNameModalComponent from "../../components/ClientNameModalComponent.vue";
+import Commande from "../Controller/CommandeController";
+import Product from "../model/ProductModel";
 
 // @ts-ignore
 // @ts-ignore
@@ -31,16 +33,31 @@ export default defineComponent({
     }
     const image: string = "../../assets/pictures/offer.jpg";
     const gridCellsContent: gridCellContent[] = [];
+    const currentDisplay: string = "home";
+    const command = new Commande();
+    const currentCategories: Category[] = [];
+    const currentSubcategories: Subcategory[] = [];
+    const currentProducts: Product[] = [];
     const payementType: string = "";
     return {
       image,
       gridCellsContent,
-      payementType
+      payementType,
+      command,
+      currentCategories,
+      currentSubcategories,
+      currentProducts,
+      currentDisplay
     }
 
   },
   methods: {
     getCategories() {
+      this.currentDisplay = "home";
+      this.gridCellsContent = [];
+      this.currentCategories = [];
+      const image = "../../assets/pictures/offer.jpg";
+      this.gridCellsContent.push({ id: "offer", title: "offre", image: image, type: "offer" });
       const CatRepository = new CommandesRepository();
       CatRepository.getCategory().then((categories: Category[]) => {
         categories.forEach((category: Category) => {
@@ -48,6 +65,7 @@ export default defineComponent({
           const image = category.image;
           console.log(image)
           this.gridCellsContent.push({ id: category.id, title: category.name, image: image, type: "category" });
+          this.currentCategories.push(category);
           console.log(this.gridCellsContent)
         });
       });
@@ -58,18 +76,25 @@ export default defineComponent({
       this.gridCellsContent = [];
       switch (type) {
         case "category":
+          this.currentDisplay = "category";
+          this.gridCellsContent = [];
+          this.currentSubcategories = [];
           CatRepository.getCategory().then((categories: Category[]) => {
             categories.forEach((category: Category) => {
               if (category.id == id) {
                 //add to the gridCellsContent
                 category.subcategories.forEach((subcategory: Subcategory) => {
                   this.gridCellsContent.push({ id: subcategory.id, title: subcategory.name, image: subcategory.image, type: "subcategory" });
+                  this.currentSubcategories.push(subcategory);
                 });
               }
             });
           });
           break;
         case "subcategory":
+          this.currentDisplay = "subcategory";
+          this.gridCellsContent = [];
+          this.currentProducts = [];
           CatRepository.getCategory().then((categories: Category[]) => {
             categories.forEach((category: Category) => {
               category.subcategories.forEach((subcategory: Subcategory) => {
@@ -77,6 +102,7 @@ export default defineComponent({
                   //add to the gridCellsContent
                   subcategory.products.forEach((product) => {
                     this.gridCellsContent.push({ id: product.id, title: product.name, image: product.image, type: "product" });
+                    this.currentProducts.push(product);
                   });
                 }
               });
@@ -84,6 +110,8 @@ export default defineComponent({
           });
           break;
         case "offer":
+          this.currentDisplay = "offer";
+          this.gridCellsContent = [];
           CatRepository.getOffers().then((offers: Offer[]) => {
             offers.forEach((offer: Offer) => {
               //add to the gridCellsContent
@@ -91,6 +119,15 @@ export default defineComponent({
             });
           }
           );
+          break;
+        case "product":
+          this.currentDisplay = "product";
+          // eslint-disable-next-line no-case-declarations
+          const product = this.currentProducts.find((product: Product) => product.id == id);
+          if (product != undefined)
+            this.command.addProduct(product);
+          this.command.updateTotal();
+          console.log(this.command)
           break;
       }
     },
@@ -109,9 +146,46 @@ export default defineComponent({
       if(modal) modal.style.display = "block";
     }
   },
-  mounted() {
-    const image = "../../assets/pictures/offer.jpg";
-    this.gridCellsContent.push({ id: "offer", title: "offre", image: image, type: "offer" });
-    this.getCategories();
+    previous() {
+      const image = "../../assets/pictures/offer.jpg";
+      switch (this.currentDisplay) {
+        case "category":
+          this.currentDisplay = "home";
+          this.gridCellsContent = [];
+          // eslint-disable-next-line no-case-declarations
+          this.gridCellsContent.push({ id: "offer", title: "offre", image: image, type: "offer" });
+          this.getCategories();
+          break;
+        case "offer":
+          this.currentDisplay = "home";
+          this.gridCellsContent = [];
+          // eslint-disable-next-line no-case-declarations
+
+          this.gridCellsContent.push({ id: "offer", title: "offre", image: image, type: "offer" });
+          this.getCategories();
+          break;
+        case "subcategory":
+          this.currentDisplay = "category";
+          this.gridCellsContent = [];
+          this.currentCategories.forEach((category: Category) => {
+            //add to the gridCellsContent
+            this.gridCellsContent.push({ id: category.id, title: category.name, image: category.image, type: "category" });
+          });
+          break;
+        case "product":
+          this.currentDisplay = "subcategory";
+          this.gridCellsContent = [];
+          this.currentSubcategories.forEach((subcategory: Subcategory) => {
+            //add to the gridCellsContent
+            this.gridCellsContent.push({ id: subcategory.id, title: subcategory.name, image: subcategory.image, type: "subcategory" });
+          });
+          break;
+      }
+    }
   },
+  beforeMount()
+  {
+    this.getCategories();
+  }
+
 })

@@ -4,7 +4,7 @@ import { defineComponent } from 'vue'
 import '../../assets/style/comptes.css'
 import AccountsRepository from '../Repository/AccountsRepository'
 import Group from '../model/GroupModel';
-import Customers from '../model/CustomerModel';
+import Customer from '../model/CustomerModel';
 //import OffresComponent from "../../components/OffresComponent.vue";
 
 
@@ -22,8 +22,8 @@ export default defineComponent({
     data() {
         const groupToDisplay = "DI5";
         const accounts: Group[] = [];
-        const accountsToDisplay: Customers[] = [];
-        let isCustomer: Customers | undefined;
+        const accountsToDisplay: Customer[] = [];
+        let isCustomer: Customer | undefined;
         return {
             groupToDisplay,
             accounts,
@@ -33,8 +33,9 @@ export default defineComponent({
 
     },
     methods: {
-        showAddModal(customer?: Customers) {
+        showAddModal(customer?: Customer) {
             console.log(customer)
+            this.isCustomer = customer;
             const modal = document.getElementById("compteModal");
             if (modal) modal.style.display = "block";
 
@@ -45,7 +46,7 @@ export default defineComponent({
         },
         updateSolde() {
             const accountsRepo = new AccountsRepository();
-            accountsRepo.addAccount("test", "test", 100, "DI5").then((customer: Customers) => {
+            accountsRepo.addAccount("test", "test", 100, "DI5").then((customer: Customer) => {
                 this.accounts.forEach((account: Group) => {
                     if (account.name === this.groupToDisplay) {
                         account.addCustomer(customer);
@@ -77,9 +78,14 @@ export default defineComponent({
                     this.accountsToDisplay = account.customers;
                 }
             })
-        }
+        },
+        updateCustomer(customer: Customer) {
+            this.isCustomer = customer;
+            this.showAddModal();
+
+        },
     },
-    mounted() {
+    beforeMount() {
         this.getCustomers().then((response: number) => {
             if (response === 0) {
                 this.changeGroup();

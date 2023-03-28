@@ -10,6 +10,7 @@ import ProduitModalComponent from "../../components/ProduitModalComponent.vue";
 import UserModalComponent from "../../components/UserModalComponent.vue";
 import User from "../Controller/UserController"
 import Produit from "../model/ProductModel";
+import Customer from '../model/CustomerModel';
 import Offer from '../Controller/OfferController';
 
 // @ts-ignore
