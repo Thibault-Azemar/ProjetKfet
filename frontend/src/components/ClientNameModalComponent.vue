@@ -11,7 +11,7 @@
         <input type="hidden" :value="payementType">
         <input type="text" id="clientName" name="clientName" placeholder="Nom du client">
         <div class="submit-button">
-          <input type="submit" class="primary-button" id="check-cart" @click="sendCommande()" value="Valider la commande">
+          <input type="submit" class="primary-button" id="pay-cart" @click="sendCommande()" value="Valider la commande">
         </div>
       </form>
     </div>
@@ -58,7 +58,7 @@
           </div>
         </div>
         <div class="submit-button">
-          <input type="submit" class="primary-button" id="check-cart-account" @click="sendCommande()" value="Valider la commande">
+          <input type="submit" class="primary-button" id="pay-cart-account" @click="sendCommande()" value="Valider la commande">
         </div>
       </form>
     </div>

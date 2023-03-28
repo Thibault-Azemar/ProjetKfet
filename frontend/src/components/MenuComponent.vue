@@ -9,6 +9,7 @@
       <router-link to="/comptes" class="router-menu"><img src="../assets/pictures/user.svg"></router-link>
       <router-link to="/gestion" class="router-menu"><img src="../assets/pictures/settings.svg"></router-link>
     </div>
-    <div id="roles" @click="showPopUpRole()"></div>
+    <div id="roles" @click="showAccountModal()"></div>
   </div>
+  <AccountModalComponent/>
 </template>

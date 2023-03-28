@@ -7,7 +7,7 @@
         <button class="icon-button close-button" @click="unshowModal('updateMoney')"></button>
       </header>
       <form class="flex">
-        Argent sur le compte : {{ customer.money }} €
+        Argent sur le compte : {{ customer ? customer.money : 0}} €
         <div>
           <a class="a-button secondary-button icon-minus minus-button" @click="minus('money')"></a>
           <input class="quantity-input" type="number" id="money" value="0">
