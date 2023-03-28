@@ -45,22 +45,40 @@ public class CommandController {
         logger.info("All day orders");
 
         // On récupère la date d'aujourd'hui
-        Date date = new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        Date dateStart = cal.getTime();
+        Date today = new Date();
 
-        return commandRepository.findByDate(dateStart);
+        Iterable<Command> allCommands = commandRepository.findAll();
+
+        // Filtrer les commandes pour ne garder que celles avec la date d'aujourd'hui
+        List<Command> todayCommands = new ArrayList<>();
+        for (Command command : allCommands) {
+            // TODO : changer le fonctionnement car le code est déprécié
+            if (command.getDate().getDay() == today.getDay() && command.getDate().getMonth() == today.getMonth()
+                    && command.getDate().getYear() == today.getYear()) {
+                todayCommands.add(command);
+            }
+        }
+
+        return todayCommands;
     }
 
     @GetMapping(path = "/week")
     public @ResponseBody Iterable<Command> getWeekCommands() throws Exception {
         logger.info("All week orders");
-        return commandRepository.findAll();
+
+        Date today = new Date();
+
+        Iterable<Command> allCommands = commandRepository.findAll();
+
+        List<Command> weekCommands = new ArrayList<>();
+        for (Command command : allCommands) {
+            // TODO : changer le fonctionnement car le code est déprécié
+            if (command.getDate().getDay() >= today.getDay() - 7 && command.getDate().getMonth() == today.getMonth()
+                    && command.getDate().getYear() == today.getYear()) {
+                weekCommands.add(command);
+            }
+        }
+        return weekCommands;
     }
 
     // POST
@@ -135,7 +153,7 @@ public class CommandController {
         // On ajoute les autres champs à la commande
         o.setPaymentMethod(paymentMethod);
         o.setPrice(priceOrder);
-        o.setIsPaid(true);
+        o.setIsPaid(Boolean.parseBoolean(isPaid));
         o.setState("Non commencée");
 
         o.setDate(new java.util.Date());
