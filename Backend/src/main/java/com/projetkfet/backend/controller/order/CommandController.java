@@ -144,22 +144,49 @@ public class CommandController {
     @PatchMapping()
     public @ResponseBody
     String UpdateStateCommand(@RequestParam("id") String id, @RequestParam("state") String state) throws Exception {
-        logger.info("Update state order");
+        logger.info("Update state command");
         Optional<Command> o = commandRepository.findById(UUID.fromString(id));
 
         if (o.isPresent())
         {
             o.get().setState(state);
             commandRepository.save(o.get());
-            logger.info("Update state order : " + id);
+            logger.info("Update state command : " + id);
             return "Confirm";
         }
         else
         {
+            logger.info("No command for this ID");
+            throw new Exception("No command for this ID");
+        }
+
+    }
+
+    @PatchMapping("/product")
+    public @ResponseBody
+    String UpdateStateProductCommand(@RequestParam("id") String id, @RequestParam("idproduct") String idproduct, @RequestParam("state") String state) throws Exception {
+        logger.info("Update state product command");
+        Optional<Command> o = commandRepository.findById(UUID.fromString(id));
+
+        if (o.isPresent())
+        {
+            List<ProductCommand> listproduct = o.get().getProducts();
+            for (ProductCommand p : listproduct)
+            {
+                if (p.getId().equals(UUID.fromString(idproduct)))
+                {
+                    p.setState(state);
+                    return "Confirm";
+                }
+            }
+            logger.info("ID product not found");
+            throw new Exception("ID product not found");
+
+        }
+        else {
             logger.info("No order for this ID");
             throw new Exception("No order for this ID");
         }
-
     }
 
     //    DELETE
