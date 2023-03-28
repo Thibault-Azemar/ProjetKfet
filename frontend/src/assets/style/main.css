@@ -32,6 +32,13 @@ body {
     grid-template-rows: 80px auto;
 }
 
+.flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 p {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -240,7 +247,6 @@ input[type=number] {
 
 .quantity-input:focus {
     border: none;
-    padding: 5px;
 }
 
 .input-label {
