@@ -141,6 +141,27 @@ public class CommandController {
 
     //    UPDATE
 
+    @PatchMapping()
+    public @ResponseBody
+    String UpdateStateCommand(@RequestParam("id") String id, @RequestParam("state") String state) throws Exception {
+        logger.info("Update state order");
+        Optional<Command> o = commandRepository.findById(UUID.fromString(id));
+
+        if (o.isPresent())
+        {
+            o.get().setState(state);
+            commandRepository.save(o.get());
+            logger.info("Update state order : " + id);
+            return "Confirm";
+        }
+        else
+        {
+            logger.info("No order for this ID");
+            throw new Exception("No order for this ID");
+        }
+
+    }
+
     //    DELETE
 
     @DeleteMapping()
