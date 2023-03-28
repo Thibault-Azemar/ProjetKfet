@@ -57,7 +57,7 @@ input[type=submit],
     height: fit-content;
     min-width: 70px;
     font-size: 1.2em;
-    box-shadow: 0px 0px 7px #A3998B;
+    box-shadow: 0 0 7px #A3998B;
     margin: 10px 10px;
     padding: 10px;
 }
@@ -113,7 +113,7 @@ input[type=submit],
 }
 
 .tertiary-button:hover {
-    box-shadow: 0px 5px 15px 5px #857c6f;
+    box-shadow: 0 5px 15px 5px #857c6f;
 }
 
 .delete-button {
@@ -144,7 +144,7 @@ input[type=submit],
 }
 
 .icon-button:hover {
-    box-shadow: 0px 0px 7px #A3998B;
+    box-shadow: 0 0 7px #A3998B;
 }
 
 
@@ -200,7 +200,7 @@ input[type=submit],
 
 #account-popup button:first-of-type {
     top: -75px;
-    border-radius: 10px 10px 0 0px;
+    border-radius: 10px 10px 0 0;
 }
 
 #account-popup button:last-of-type {
@@ -309,8 +309,8 @@ input[type=number] {
 
 .quantity-input {
     border-radius: 0;
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: 0;
+    margin-right: 0;
     padding: 0;
     width: 50px;
     min-width: 50px;
@@ -334,7 +334,7 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    box-shadow: 0px 0px 7px #A3998B;
+    box-shadow: 0 0 7px #A3998B;
     border-radius: 10px;
     min-width: 240px;
     min-height: 40px;
@@ -388,8 +388,7 @@ label {
 }
 
 .card h3 {
-    margin: 20px;
-    margin-top: 30px;
+    margin: 30px 20px 20px;
 }
 
 .card p {
@@ -399,7 +398,6 @@ label {
 .flex-row {
     display: flex;
     flex-direction: row;
-
 }
 
 /*-------------------------|
@@ -499,7 +497,7 @@ label {
     background-color: #22d788;
     position: absolute;
     z-index: 2;
-    bottom: 0px;
+    bottom: 0;
     opacity: 0;
     left: 50%;
     max-width: calc(100vw - 60px);
@@ -540,7 +538,7 @@ label {
 @keyframes snackbar {
     0% {
         opacity: 0;
-        bottom: 0px;
+        bottom: 0;
     }
 
     20% {
@@ -555,7 +553,7 @@ label {
 
     100% {
         opacity: 0;
-        bottom: 0px;
+        bottom: 0;
     }
 }
 

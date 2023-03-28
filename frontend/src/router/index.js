@@ -16,7 +16,7 @@ const router = createRouter({
         },
         {
             path: "/suivi",
-            component: () => import("../components/test.vue"),
+            component: () => import("../components/CommandeListComponent.vue"),
         }
         ,
         {

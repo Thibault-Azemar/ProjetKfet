@@ -1,0 +1,47 @@
+.ordinateur{
+    display : none;
+}
+
+.commandes-grid{
+    display: grid;
+    grid-template-columns: 35% 20% 15% 30%;
+
+}
+
+.command-button{
+    background: none;
+    border: none;
+    border-radius: 10px;
+    box-shadow: none;
+    width: 100%;
+    margin: 0;
+    color: black;
+    padding: 5px;
+    text-align: left;
+}
+
+.command-button:hover{
+    background: rgba(163, 153, 139, 0.48);
+}
+
+.content-commande{
+    height: 100%;
+    overflow-y: auto;
+}
+
+@media screen and (min-width: 700px) {
+
+}
+
+@media screen and (min-width: 1024px) {
+    .ordinateur{
+        display : flex;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .commandes-grid{
+        grid-template-columns: 30% 10% 10% 20% 30%;
+    }
+}
