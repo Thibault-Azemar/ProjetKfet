@@ -34,5 +34,6 @@
 
     </div>
     <PayementModalComponent @show-client-name-modal="showClientNameModal" @unshow-modal="unshowModal" />
-    <ClientNameModalComponent @unshow-modal="unshowModal" :payement-type="payementType" />
-  </div></template>
+    <ClientNameModalComponent @unshow-modal="unshowModal" :command="command" :payement-type="payementType" />
+  </div>
+</template>

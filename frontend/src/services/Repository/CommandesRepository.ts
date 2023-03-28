@@ -5,8 +5,90 @@ import Product from '../model/ProductModel';
 import Offer from '../Controller/OfferController';
 import OfferRepository from './OfferRepository';
 import StockRepository from './StockRepository';
+import Commande from '../Controller/CommandeController';
 
 export default class CommandesRepository {
+    getCommandes(): Promise<Commande[]> {
+        const url = Config.API_URL + 'command/day';
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return fetch(url, {
+            method: 'GET',
+            headers,
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                const commandes: Commande[] = [];
+                json.forEach((commande: any) => {
+                    const products: Product[] = [];
+                    commande.products.forEach((product: any) => {
+                        products.push(new Product(product.id, product.name, product.price, product.stock, product.idCategory, product.idSubcategory, product.image));
+                    });
+                    commandes.push(new Commande(commande.id, commande.date, commande.total, commande.paid, products, commande.customer, commande.totalKfetier));
+                });
+                return new Promise((resolve, reject) => {
+                    resolve(commandes);
+                });
+            }
+            );
+    }
+    addCommande(command: Commande, paymentMethod: string, name?: string): Promise<Commande> {
+        const params = new URLSearchParams();
+        if (paymentMethod === "Account") {
+            params.append('paymentMethod', "Account");
+            params.append('idcutomer', command.customer.id)
+            if (command.customer.group == "kfetier") {
+                params.append('value', command.totalKfetier.toString())
+            }
+            else {
+                params.append('value', command.total.toString())
+            }
+        } else {
+            params.append('paymentMethod', paymentMethod);
+            if (name)
+                params.append('name', name);
+            params.append('price', command.total.toString())
+        }
+        params.append('idPaid', true.toString())
+        const body: any[] = [];
+        const productBody: any = {};
+        Object.values(command.products).forEach((product) => {
+            const name = product.name;
+            const id = product.id;
+
+            // eslint-disable-next-line no-debugger
+            debugger;
+            const productBody = {
+                id,
+                name,
+            };
+            body.push(productBody);
+        });
+
+        // eslint-disable-next-line no-debugger
+        debugger;
+        const url = Config.API_URL + 'command/add/' + params.toString();
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        headers.append('Access-Control-Allow-Origin', '127.0.0.1:8080');
+        headers.append('Access-Control-Allow-Credentials', 'true');
+        headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        headers.append('Access-Control-Allow-Headers', 'Content-Type, Accept, X-Requested-With, remember-me');
+
+        const options = {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(body),
+        };
+        return fetch(url, options).then((response) => {
+            if (response.status === 200) {
+                return response.json();
+            }
+            return response.json();
+        });
+    }
 
     public getOffers(): Promise<Offer[]> {
         const OfferRepo = new OfferRepository();

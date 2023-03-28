@@ -7,8 +7,8 @@
         <h3>Entrez le nom du client</h3>
         <button class="icon-button close-button" @click="unshowModal('clientNameModal')"></button>
       </header>
-      <form >
-        <input type="hidden" :value="payementType">
+      <form>
+        <input type="hidden" id="paymentMethod" :value="payementType">
         <input type="text" id="clientName" name="clientName" placeholder="Nom du client">
         <div class="submit-button">
           <input type="submit" class="primary-button" id="pay-cart" @click="sendCommande()" value="Valider la commande">
@@ -21,7 +21,7 @@
         <button class="icon-button close-button" @click="unshowModal('clientNameModal')"></button>
       </header>
       <form>
-        <input type="hidden" :value="payementType">
+        <input type="hidden" id="paymentMethod" :value="payementType">
         <select style="width: fit-content">
           <option>DI5</option>
           <option>DI4</option>
@@ -30,7 +30,7 @@
         <div class="client-account">
           <div>
             <input type="radio" id="client1" name="account" value="client1">
-            <label  for="client1">Client 1</label>
+            <label for="client1">Client 1</label>
           </div>
           <div>
             <input type="radio" id="client2" name="account" value="client2">
@@ -58,7 +58,8 @@
           </div>
         </div>
         <div class="submit-button">
-          <input type="submit" class="primary-button" id="pay-cart-account" @click="sendCommande()" value="Valider la commande">
+          <input type="submit" class="primary-button" id="pay-cart-account" @click="sendCommande()"
+            value="Valider la commande">
         </div>
       </form>
     </div>

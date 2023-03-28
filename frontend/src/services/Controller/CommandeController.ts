@@ -1,3 +1,4 @@
+import Customer from "../model/CustomerModel";
 import Product from "../model/ProductModel";
 
 export default class Commande {
@@ -8,10 +9,11 @@ export default class Commande {
     totalKfetier: number;
     paymentMethod: string;
     products: { [id: number]: Product };
+    customer: Customer;
     name: string;
     isPaid: boolean;
 
-    constructor(date?: Date, total?: number, isPaid?: boolean, paymentMethod?: string, products?: Product[], name?: string, id?: string, totalKfetier?: number) {
+    constructor(date?: Date, total?: number, isPaid?: boolean, paymentMethod?: string, products?: Product[], name?: string, id?: string, totalKfetier?: number, customer?: Customer) {
         if (id) {
             this.id = id;
         }
@@ -52,6 +54,11 @@ export default class Commande {
         }
         else
             this.isPaid = false;
+        if (customer) {
+            this.customer = customer;
+        }
+        else
+            this.customer = new Customer();
     }
     addProduct(product: Product): number {
         if (Object.keys(this.products).length === 0) {
