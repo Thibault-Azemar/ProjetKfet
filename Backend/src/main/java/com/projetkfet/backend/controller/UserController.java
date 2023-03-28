@@ -12,7 +12,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 // Classe contrôlleur des requêtes pour la classe User
-@CrossOrigin(origins = "*")
 @Controller
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "/user")

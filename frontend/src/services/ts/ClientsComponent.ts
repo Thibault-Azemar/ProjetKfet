@@ -46,22 +46,18 @@ export default defineComponent({
             const modal = document.getElementById(idModal);
             if (modal) modal.style.display = "none";
         },
-        updateSolde(customer?: Customer) {
+        updateSolde(customer: Customer) {
             this.customerMoney = customer;
-            console.log(customer?.money)
             const modal = document.getElementById("updateMoney");
             if (modal) modal.style.display = "block";
-            /*
-            const accountsRepo = new AccountsRepository();
-            accountsRepo.addAccount("test", "test", 100, "DI5").then((customer: Customer) => {
-                this.accounts.forEach((account: Group) => {
-                    if (account.name === this.groupToDisplay) {
-                        account.addCustomer(customer);
-                    }
-                })
-                this.changeGroup();
-            })*/
-
+        },
+        updateAccount(customer: Customer) {
+            console.log("cc")
+            this.accountsToDisplay.forEach((account: Customer) => {
+                if (account.id === customer.id) {
+                    account.money = customer.money;
+                }
+            })
         },
         deleteCompte() {
 

@@ -98,9 +98,9 @@ export default class AccountsRepository {
     public updateSolde(id: string, money: number): Promise<Customer> {
         const API_URL = Config.API_URL;
         const moneyStr = money.toString();
-        const params = { money: moneyStr }
-        return fetch(API_URL + 'customer/' + id + '?' + new URLSearchParams(params), {
-            method: 'PUT',
+        const params = { id: id, money: moneyStr }
+        return fetch(API_URL + 'customer?' + new URLSearchParams(params), {
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },

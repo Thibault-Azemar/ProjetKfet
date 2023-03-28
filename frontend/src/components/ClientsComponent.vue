@@ -20,7 +20,8 @@
           <!-- v for clients-->
           <p>{{ customer.name }}</p>
           <p>{{ customer.firstname }}</p>
-          <button class="invisible-button" :class="customer.money < 0 ? 'red' : 'green'" @click="updateSolde(customer)"> {{ customer.money }}</button>
+          <button class="invisible-button" :class="customer.money < 0 ? 'red' : 'green'" @click="updateSolde(customer)">
+            {{ parseFloat(customer.money).toFixed(2) }}</button>
           <button class="icon-button" @click="showAddModal(customer)"><img src="../assets/pictures/pen.svg"></button>
           <button class="icon-button" @click="deleteCompte(customer)"><img src="../assets/pictures/trash.svg"></button>
 

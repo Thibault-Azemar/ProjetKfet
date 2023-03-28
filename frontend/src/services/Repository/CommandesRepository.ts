@@ -23,9 +23,10 @@ export default class CommandesRepository {
                 json.forEach((commande: any) => {
                     const products: Product[] = [];
                     commande.products.forEach((product: any) => {
-                        products.push(new Product(product.id, product.name, product.price, product.stock, product.idCategory, product.idSubcategory, product.image));
+                        products.push(new Product(product.id, product.product));
                     });
-                    commandes.push(new Commande(commande.id, commande.date, commande.total, commande.paid, products, commande.customer, commande.totalKfetier));
+                    const date = new Date(commande.date);
+                    commandes.push(new Commande(date, commande.price, commande.isPaid, commande.paymentMethod, products, commande.name, commande.id));
                 });
                 return new Promise((resolve, reject) => {
                     resolve(commandes);
