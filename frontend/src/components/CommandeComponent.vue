@@ -9,7 +9,7 @@
     <div class="commande-grid">
       <button class="tertiary-button" v-for="cell in gridCellsContent" :key="cell"
         @click="clickOnCell(cell.type, cell.id)">
-        {<img :src="cell.image" />} {{ cell.title }}</button>
+        <img :src="cell.image" /> <p>{{ cell.title }}</p></button>
     </div>
     <div class="commande-footer">
       <div class="commande-resume">
@@ -21,7 +21,8 @@
         <h2> 10,25 €</h2>
         <button class="primary-button" id="check-cart" @click="payOrder()">Encaisser</button>
       </div>
-
     </div>
+    <PayementModalComponent @show-client-name-modal="showClientNameModal" @unshow-modal="unshowModal"/>
+    <ClientNameModalComponent @unshow-modal="unshowModal" :payement-type="payementType"/>
   </div>
 </template>

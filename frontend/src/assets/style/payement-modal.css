@@ -1,0 +1,15 @@
+.payement-grid{
+    display: grid;
+    grid-template-columns: 120px 120px;
+}
+@media screen and (min-width: 700px) {
+    .payement-grid {
+        grid-template-columns: 200px 200px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .payement-grid {
+        grid-template-columns: 200px 200px;
+    }
+}

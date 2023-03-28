@@ -5,13 +5,17 @@ import Category from "../model/CategoryModel";
 import CommandesRepository from "../Repository/CommandesRepository";
 import Subcategory from "../model/SubcategoryModel";
 import Offer from "../Controller/OfferController";
+import PayementModalComponent from "../../components/PayementModalComponent.vue";
+import ClientNameModalComponent from "../../components/ClientNameModalComponent.vue";
 
 // @ts-ignore
 // @ts-ignore
 export default defineComponent({
 
   components: {
-    CommandeComponent
+    CommandeComponent,
+    PayementModalComponent,
+    ClientNameModalComponent
   },
   // type inference enabled
   props: {
@@ -27,9 +31,11 @@ export default defineComponent({
     }
     const image: string = "../../assets/pictures/offer.jpg";
     const gridCellsContent: gridCellContent[] = [];
+    const payementType: string = "";
     return {
       image,
       gridCellsContent,
+      payementType
     }
 
   },
@@ -88,8 +94,19 @@ export default defineComponent({
           break;
       }
     },
-    payOrder() {
-      
+    payOrder(){
+      const modal = document.getElementById("payementModal");
+      if(modal) modal.style.display = "block";
+    },
+    unshowModal(idModal: string) {
+      const modal = document.getElementById(idModal);
+      if (modal) modal.style.display = "none";
+    },
+    showClientNameModal(payementType: string){
+      this.unshowModal("payementModal");
+      this.payementType = payementType;
+      const modal = document.getElementById("clientNameModal");
+      if(modal) modal.style.display = "block";
     }
   },
   mounted() {
