@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @RequestMapping(path="/command")
@@ -40,6 +37,31 @@ public class CommandController {
     public @ResponseBody
     Iterable<Command> getAllCommands() throws Exception {
         logger.info("All orders");
+        return commandRepository.findAll();
+    }
+
+    @GetMapping(path="/day")
+    public @ResponseBody
+    Iterable<Command> getDayCommands() throws Exception {
+        logger.info("All day orders");
+
+        // On récupère la date d'aujourd'hui
+        Date date = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        Date dateStart = cal.getTime();
+
+        return commandRepository.findByDate(dateStart);
+    }
+
+    @GetMapping(path="/week")
+    public @ResponseBody
+    Iterable<Command> getWeekCommands() throws Exception {
+        logger.info("All week orders");
         return commandRepository.findAll();
     }
 
@@ -176,6 +198,7 @@ public class CommandController {
                 if (p.getId().equals(UUID.fromString(idproduct)))
                 {
                     p.setState(state);
+                    commandRepository.save(o.get());
                     return "Confirm";
                 }
             }
