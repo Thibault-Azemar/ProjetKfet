@@ -1,9 +1,13 @@
 package com.projetkfet.backend.controller.order;
 
+import com.projetkfet.backend.data.customer.CustomerRepository;
 import com.projetkfet.backend.data.order.CommandRepository;
+import com.projetkfet.backend.data.stock.ProductRepository;
 import com.projetkfet.backend.dto.order.ProductCommandDTO;
+import com.projetkfet.backend.model.customer.Customer;
 import com.projetkfet.backend.model.order.Command;
 import com.projetkfet.backend.model.order.ProductCommand;
+import com.projetkfet.backend.model.stock.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +28,17 @@ public class CommandController {
     @Autowired
     private CommandRepository commandRepository;
 
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
     //    GET
 
     @GetMapping(path="/all")
     public @ResponseBody
-    Iterable<Command> getAllOrders() throws Exception {
+    Iterable<Command> getAllCommands() throws Exception {
         logger.info("All orders");
         return commandRepository.findAll();
     }
@@ -37,31 +47,93 @@ public class CommandController {
 
     @PostMapping(path="/add")
     public @ResponseBody
-    UUID addNewOrder(@RequestParam(name="name", required = false) String name, @RequestParam(name="paymentMethod") String paymentMethod, @RequestParam(name="price") String price, @RequestParam(name="isPaid")  String isPaid, @RequestBody List<ProductCommandDTO> products) throws Exception {
-        logger.info("Add new order");
+    UUID addNewCommand(@RequestParam(name="name", required = false) String name, @RequestParam(name="idcustomer", required = false) UUID idcustomer, @RequestParam(name="paymentMethod") String paymentMethod, @RequestParam(name="price") String price, @RequestParam(name="isPaid", required = false)  String isPaid, @RequestBody List<ProductCommandDTO> products) throws Exception {
+        logger.info("Add new command");
 
         Command o = new Command();
 
-        List<ProductCommand> productCommands = new ArrayList<>();
-        for (ProductCommandDTO p : products)
+        float priceOrder = Float.parseFloat(price);
+
+        String nameAccount = "Commande sans nom";
+
+//        On enlève le prix à l'utilisateur
+        if (paymentMethod.equals("Account"))
         {
-            ProductCommand product = new ProductCommand(p.getId(), p.getName());
-            productCommands.add(product);
+            Optional<Customer> customer = customerRepository.findById(idcustomer);
+            if (customer.isPresent())
+            {
+                nameAccount = customer.get().getName() + " " + customer.get().getFirstname();
+
+                // TODO : fixer selon la limite de crédit
+                float customerMoney = customer.get().getMoney();
+                if (customerMoney != 10000)
+                {
+                    customer.get().setMoney(customerMoney - priceOrder);
+                    customerRepository.save(customer.get());
+                }
+                else
+                {
+                    logger.info("Not enough money");
+                    throw new Exception("Not enough money");
+                }
+            }
+            else
+            {
+                logger.info("No customer for this ID");
+                throw new Exception("No customer for this ID");
+            }
         }
-        o.setProducts(productCommands);
 
         if (name != null && !name.isEmpty())
         {
             o.setName(name);
         }
+        else
+        {
+            o.setName(nameAccount);
+        }
+
+//        On ajoute les produits à la commande
+        List<ProductCommand> productCommands = new ArrayList<>();
+        for (ProductCommandDTO p : products)
+        {
+            //        On supprime 1 du stock pour chaque produit
+            Optional<Product> productStock = productRepository.findById(p.getId());
+            // if n est non null
+            if (productStock.isPresent()) {
+                Product stock = productStock.get();
+
+                Integer nbstock = stock.getStock();
+                if (nbstock > 0)
+                {
+                    stock.setStock(nbstock - 1);
+                    productRepository.save(stock);
+                }
+                else
+                {
+                    logger.info("Not enough stock product :" + stock.getId());
+                    throw new Exception("Not enough stock product :" + stock.getId());
+                }
+            }
+            else
+            {
+                logger.info("No product for this ID");
+                throw new Exception("No product for this ID");
+            }
+            ProductCommand product = new ProductCommand(p.getId(), p.getName());
+            productCommands.add(product);
+        }
+        o.setProducts(productCommands);
+
+//        On ajoute les autres champs à la commande
         o.setPaymentMethod(paymentMethod);
-        o.setPrice(Float.parseFloat(price));
-        o.setIsPaid(Boolean.parseBoolean(isPaid));
+        o.setPrice(priceOrder);
+        o.setIsPaid(true);
 
         o.setDate(new java.util.Date());
 
         commandRepository.save(o);
-        logger.info("New order : " + o.getId());
+        logger.info("New command : " + o.getId());
 
         return o.getId();
     }
@@ -72,7 +144,7 @@ public class CommandController {
 
     @DeleteMapping()
     public @ResponseBody
-    String deleteOrder(@RequestParam("id") String id) throws Exception {
+    String deleteCommand(@RequestParam("id") String id) throws Exception {
         logger.info("Delete Order");
         Optional<Command> o = commandRepository.findById(UUID.fromString(id));
 
