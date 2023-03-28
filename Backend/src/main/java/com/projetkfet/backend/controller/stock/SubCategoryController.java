@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
+@CrossOrigin(origins = "*")
 @RequestMapping(path="/subcategory")
 public class SubCategoryController {
 

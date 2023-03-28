@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
+@CrossOrigin(origins = "*")
 @RequestMapping(path="/offer")
 public class OfferController {
 
