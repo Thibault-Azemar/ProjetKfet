@@ -1,6 +1,6 @@
 .offres-modal-grid{
     display: grid;
-    grid-template-rows: 50px 50px 50px 50px 50px calc(100vh - 440px) 60px;
+    grid-template-rows: 15px 60px 15px 60px 15px 60px 15px 60px 50px calc(100vh - 480px) 60px;
 }
 
 .ss-cat{
@@ -9,4 +9,9 @@
 
 .produit{
     margin-left: 40px;
+}
+
+.right{
+    position: absolute;
+    right: 15px;
 }

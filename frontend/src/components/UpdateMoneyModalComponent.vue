@@ -12,7 +12,6 @@
           <a class="a-button secondary-button icon-minus minus-button" @click="minus('money')"></a>
           <input class="quantity-input" type="number" id="money" value="0">
           <a class="a-button secondary-button icon-plus plus-button" @click="plus('money')"></a>
-
         </div>
         <div class="submit-button">
           <input class="primary-button" id="update-money" value="Modifier" @click="updateMoney(customer.id)">

@@ -9,25 +9,23 @@
         <button class="icon-button close-button" @click="unshowModal('compteModal')"></button>
       </header>
       <form method="post">
-        <div>
-          <label class="input-label" for="nom-compte">Nom</label>
-          <input name="nom-compte" class="input-field" type="text" id="nom-compte" :value="customer ? customer.name : ''"
+
+        <label class="input-label" for="nom-compte">Nom</label>
+        <input name="nom-compte" class="input-field" type="text" id="nom-compte" :value="customer ? customer.name : ''"
             placeholder="nom client" required>
-        </div>
-        <div>
-          <label class="input-label" for="prenom-compte">Prénom</label>
-          <input name="prenom-compte" class="input-field" type="text" id="prenom-compte"
+
+        <label class="input-label" for="prenom-compte">Prénom</label>
+        <input name="prenom-compte" class="input-field" type="text" id="prenom-compte"
             :value="customer ? customer.firstname : ''" placeholder="prénom client" required>
-        </div>
-        <div>
-          <label class="input-label" for="groupe">Groupe</label>
-          <select name="groupe" class="input-field" id="groupe" required>
-            <option value="" :selected="customer ? false : true" disabled>Choisir un groupe</option>
+
+        <label class="input-label" for="groupe">Groupe</label>
+        <select name="groupe" class="input-field" id="groupe" required>
+            <option value="" :selected="!customer" disabled>Choisir un groupe</option>
             <option v-for="group in groups" :key="group" :value="group.id"
               :selected="customer ? customer.group === group.name : false">
               {{ group.name }}</option>
-          </select>
-        </div>
+        </select>
+
         <div class="submit-button">
           <input class="primary-button" id="creer-produit" :value="customer ? 'Modifier le compte' : 'Créer un compte'"
             @click="customer ? editCompte() : addCompte()">

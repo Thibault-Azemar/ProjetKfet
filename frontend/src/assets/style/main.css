@@ -360,9 +360,9 @@ option {
     max-height: 80px;
 }
 
-label {
+/*label {
     font-size: 1.2em;
-}
+}*/
 
 .row-align {
     display: flex;
@@ -386,7 +386,7 @@ label {
 .big-card {
     width: 100vw;
     height: 100vh;
-    padding: 10px;
+    /*padding: 10px;*/
     background-color: white;
 }
 
@@ -462,7 +462,7 @@ label {
     display: none;
 }
 
-.modal .card,.simple-modal .card {
+.modal .card,.simple-modal .card, .modal .big-card {
     position: absolute;
     z-index: 3;
     top: 50vh;
@@ -470,11 +470,17 @@ label {
     transform: translate(-50%, -50%);
 }
 
-.modal .card form ,.simple-modal .card form {
+.modal .card form ,.simple-modal .card form{
+    margin: 0 10px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal .big-card form {
     margin: 0 10px 10px;
 }
 
-.modal .card form .main ,.simple-modal .card form .main {
+.modal .card form .main ,.simple-modal .card form .main,.modal .big-card form .main {
     padding: 0 10px;
     max-height: calc(80vh - 120px);
     overflow-y: auto;
@@ -569,10 +575,6 @@ label {
 
     .icon-button {
         width: 45px;
-    }
-
-    .input-label {
-        font-size: 1.2em;
     }
 
     #account-popup{
