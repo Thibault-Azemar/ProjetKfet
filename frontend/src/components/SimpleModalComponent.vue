@@ -1,7 +1,7 @@
 <script lang="ts" src="../services/ts/SimpleModalComponent.ts"></script>
 
 <template>
-  <div class="modal index" id="simple-modal">
+  <div class="simple-modal index" id="simple-modal">
     <div class="card">
       <header>
         <h3>Suppression</h3>
@@ -22,7 +22,7 @@
         <p>{{ message }}</p>
         <div class="row-align">
           <button class="secondary-button" @click="unshowModal('simple-modal')">Annuler</button>
-          <button class="delete-button">Supprimer</button>
+          <button class="delete-button" @click="deleteObjet()">Supprimer</button>
         </div>
       </div>
       <div v-if="buttons === 3 ">

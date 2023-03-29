@@ -9,13 +9,13 @@
       </select>
       <button class="icon-button" @click="showAddModal()"><img src="../assets/pictures/plus.svg"></button>
     </div>
-    <div class="content">
+    <div class="content-compte">
       <div class="comptes-grid header ">
         <h3>Nom</h3>
         <h3>Prénom</h3>
         <h3>Solde</h3>
       </div>
-      <div class="body">
+      <div class="body-compte">
         <div class="comptes-grid " v-for="customer in accountsToDisplay" :key="customer" :id="customer.id">
           <!-- v for clients-->
           <p>{{ customer.name }}</p>
@@ -32,4 +32,5 @@
     <ClientModalComponent @unshow-modal="unshowModal" :customer="isCustomer" />
     <UpdateMoneyModalComponent @unshow-modal="unshowModal" :customer="customerMoney" />
   </div>
+  <SimpleModalComponent :objet="objet" :type="type" :del="del" :buttons="buttons" :message="message" />
 </template>

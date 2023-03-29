@@ -30,8 +30,33 @@
     background-color: rgba(142, 234, 142, 0.69);
 }
 
+.content-compte {
+    height: calc(100vh - 100px);
+    display: grid;
+    grid-template-rows: 60px auto;
+}
+
+.body-compte{
+    overflow-y: auto;
+    height: calc(100% - 40px);
+}
+
 @media screen and (min-width: 700px) {
     .comptes-grid{
         grid-template-columns: calc(40% - 50px) auto 20% 50px 50px;
+    }
+
+    .content-compte{
+        height: calc(100vh - 120px);
+    }
+}
+
+@media screen and (min-width: 1000px) {
+
+    .body-compte{
+        height: 100%;
+    }
+    .content-compte{
+        height: calc(100vh - 90px);
     }
 }

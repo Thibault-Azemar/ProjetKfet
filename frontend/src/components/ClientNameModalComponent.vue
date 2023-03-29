@@ -17,7 +17,7 @@
     </div>
     <div v-if="payementType === 'Account'" class="card">
       <header>
-        <h3>Entrez le nom du client</h3>
+        <h3>Choisir le compte client</h3>
         <button class="icon-button close-button" @click="unshowModal('clientNameModal')"></button>
       </header>
       <form>

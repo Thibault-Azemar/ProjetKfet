@@ -9,15 +9,16 @@
         <option value="Categories">Catégories</option>
         <option value="Users">Utilisateurs</option>
       </select>
-      <button v-if="value==='Stock'" class="primary-button" id="entry-stock">Entrée de Stock</button>
+      <button v-if="value==='Stock'" class="primary-button" id="entry-stock">Entrée Stock</button>
       <button class="icon-button" @click="showAddModal()"><img src="../assets/pictures/plus.svg"></button>
     </div>
-    <StockComponent @update-product="updateProduct" v-if="value==='Stock'"/>
-    <OffresComponent @update-offer="updateOffer" v-if="value==='Offres'"/>
-    <CategoriesComponent v-if="value==='Categories'"/>
-    <UsersComponent @update-user="updateUser" v-if="value==='Users'"/>
+    <StockComponent @delete-objet="deleteObjet" @update-product="updateProduct" v-if="value==='Stock'"/>
+    <OffresComponent @delete-objet="deleteObjet" @update-offer="updateOffer" v-if="value==='Offres'"/>
+    <CategoriesComponent @delete-objet="deleteObjet" v-if="value==='Categories'"/>
+    <UsersComponent @delete-objet="deleteObjet" @update-user="updateUser" v-if="value==='Users'"/>
     <ProduitModalComponent @unshow-modal="unshowModal" :produit="isProduit"/>
     <UserModalComponent @unshow-modal="unshowModal" :user="isUser"/>
     <OffreModalComponent @unshow-modal="unshowModal" :offer="isOffer"/>
   </div>
+  <SimpleModalComponent :objet="deleteObj" :type="objetType" :del="popUpDelete" :buttons="popUpButtons" :message="popUpMessage" />
 </template>

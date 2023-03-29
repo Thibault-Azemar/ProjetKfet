@@ -290,7 +290,8 @@ input[type=radio] {
     height: 20px;
     border-radius: 50%;
     border: 2px solid #a3998b;
-    margin: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
     padding: 0;
     box-shadow: none;
     min-width: 30px;
@@ -345,6 +346,7 @@ select {
     width: fit-content;
     min-height: 30px;
     min-width: 150px;
+    margin-right: 0;
 }
 
 option {
@@ -365,6 +367,7 @@ label {
 .row-align {
     display: flex;
     flex-direction: row;
+    justify-content: right;
 }
 
 /*-------------------------|
@@ -448,7 +451,7 @@ label {
 |           Modal          |
 |-------------------------*/
 
-.modal {
+.modal,.simple-modal {
     position: absolute;
     top: 0;
     left: 0;
@@ -459,7 +462,7 @@ label {
     display: none;
 }
 
-.modal .card {
+.modal .card,.simple-modal .card {
     position: absolute;
     z-index: 3;
     top: 50vh;
@@ -467,11 +470,11 @@ label {
     transform: translate(-50%, -50%);
 }
 
-.modal .card form {
+.modal .card form ,.simple-modal .card form {
     margin: 0 10px 10px;
 }
 
-.modal .card form .main {
+.modal .card form .main ,.simple-modal .card form .main {
     padding: 0 10px;
     max-height: calc(80vh - 120px);
     overflow-y: auto;

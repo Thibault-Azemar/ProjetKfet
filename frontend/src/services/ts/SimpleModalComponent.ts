@@ -21,6 +21,14 @@ export default defineComponent({
         del: {
             type: Boolean,
             value: false
+        },
+        objet:{
+            type: Object,
+            require : true
+        },
+        type:{
+            type: String,
+            require : true
         }
     },
     data() {
@@ -30,6 +38,9 @@ export default defineComponent({
         unshowModal(popUpId: string) {
             const modal = document.getElementById(popUpId);
             if (modal) modal.style.display = "none";
+        },
+        deleteObjet() {
+            console.log(this.type);
         }
     }
     /*mounted() {

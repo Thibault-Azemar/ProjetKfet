@@ -6,6 +6,7 @@ import AccountsRepository from '../Repository/AccountsRepository'
 import Group from '../model/GroupModel';
 import Customer from '../model/CustomerModel';
 import UpdateMoneyModalComponent from '../../components/UpdateMoneyModalComponent.vue'
+import SimpleModalComponent from '../../components/SimpleModalComponent.vue'
 
 
 // @ts-ignore
@@ -15,7 +16,8 @@ export default defineComponent({
     components: {
         ClientsComponent,
         ClientModalComponent,
-        UpdateMoneyModalComponent
+        UpdateMoneyModalComponent,
+        SimpleModalComponent
     },
     // type inference enabled
     props: {
@@ -26,12 +28,22 @@ export default defineComponent({
         const accountsToDisplay: Customer[] = [];
         let customerMoney: Customer | undefined;
         let isCustomer: Customer | undefined;
+        let message: String | undefined;
+        let buttons: Number | undefined;
+        let del: Boolean | undefined;
+        let type: String | undefined;
+        let objet : any;
         return {
             groupToDisplay,
             accounts,
             accountsToDisplay,
             isCustomer,
-            customerMoney
+            customerMoney,
+            message,
+            buttons,
+            del,
+            type,
+            objet
         }
 
     },
@@ -59,8 +71,16 @@ export default defineComponent({
                 }
             })
         },
-        deleteCompte() {
-
+        deleteCompte(objet: Customer) {
+            this.message = "Voulez-vous vraiment supprimer le compte " + objet.name + " " + objet.firstname +" ?";
+            this.type = "account";
+            this.buttons = 2;
+            this.del = true;
+            this.objet = objet;
+            const modal = document.getElementById("simple-modal");
+            if (modal !== null) {
+                modal.style.display = "block";
+            }
         },
         getCustomers(): Promise<number> {
             const accountsRepo = new AccountsRepository();

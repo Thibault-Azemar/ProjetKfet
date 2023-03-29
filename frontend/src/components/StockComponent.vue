@@ -5,7 +5,6 @@ import Subcategory from '@/services/model/SubcategoryModel';
 <template>
   <div class="content">
     <div v-for="category in stock" :key="category" :id="category.id"> <!-- v for catégories-->
-      <!-- <h3>{{ category.name }}</h3> -->
       <div v-for="Subcategory in category.subcategories" :key="Subcategory" :id="Subcategory.id">
         <!-- v for sous catégories-->
         <h3>{{ Subcategory.name }}</h3>

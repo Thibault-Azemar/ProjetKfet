@@ -19,7 +19,6 @@ export default defineComponent({
         }
     },
     data() {
-
     },
     methods: {
         addUser() {

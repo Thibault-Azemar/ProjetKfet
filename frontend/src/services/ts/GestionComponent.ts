@@ -10,8 +10,8 @@ import ProduitModalComponent from "../../components/ProduitModalComponent.vue";
 import UserModalComponent from "../../components/UserModalComponent.vue";
 import User from "../Controller/UserController"
 import Produit from "../model/ProductModel";
-import Customer from '../model/CustomerModel';
 import Offer from '../Controller/OfferController';
+import SimpleModalComponent from "../../components/SimpleModalComponent.vue";
 
 // @ts-ignore
 // @ts-ignore
@@ -25,7 +25,8 @@ export default defineComponent({
         StockComponent,
         ProduitModalComponent,
         UserModalComponent,
-        OffreModalComponent
+        OffreModalComponent,
+        SimpleModalComponent
     },
     // type inference enabled
     props: {
@@ -36,11 +37,21 @@ export default defineComponent({
         let isUser: User | undefined;
         let isProduit: Produit | undefined;
         let isOffer: Offer | undefined;
+        let popUpMessage: String | undefined;
+        let popUpButtons: Number | undefined;
+        let popUpDelete: Boolean | undefined;
+        let objetType: String | undefined;
+        let deleteObj : any;
         return {
             value,
             isUser,
             isProduit,
             isOffer,
+            popUpMessage,
+            popUpButtons,
+            popUpDelete,
+            deleteObj,
+            objetType
         }
     },
     methods: {
@@ -80,6 +91,17 @@ export default defineComponent({
             if (modal) modal.style.display = "none";
             this.isUser = undefined;
             this.isProduit = undefined;
+        },
+        deleteObjet(objet: any, message: string, type: string) {
+            this.popUpMessage = message;
+            this.popUpButtons = 2;
+            this.popUpDelete = true;
+            this.objetType = type;
+            this.deleteObj = objet;
+            const modal = document.getElementById("simple-modal");
+            if (modal !== null) {
+                modal.style.display = "block";
+            }
         }
     }
     /*mounted() {

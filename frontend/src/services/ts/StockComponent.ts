@@ -20,12 +20,14 @@ export default defineComponent({
     data() {
         const stock: Category[] = [];
         return {
-            stock
+            stock,
         }
     },
     methods: {
-        showModalProduit() {
-
+        deleteProduct(objet: Product) {
+            const message = "Voulez-vous vraiment supprimer le produit " + objet.name + " ?";
+            const type = "product";
+            this.$emit('deleteObjet', objet, message, type );
         },
         unshowModal(idModal: string) {
             const modal = document.getElementById(idModal);
@@ -38,13 +40,6 @@ export default defineComponent({
             });
 
             return this.stock;
-        },
-        deleteProduct(product: Product) {
-            const stockRepo = new StockRepository();
-            stockRepo.deleteProduct(product).then(() => {
-                this.getStocks();
-            });
-            this.getStocks();
         },
         updateProduct(produit: Product) {
             this.$emit('updateProduct', produit)

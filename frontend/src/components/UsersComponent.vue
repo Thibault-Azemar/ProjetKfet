@@ -12,11 +12,10 @@
         <p>{{ user.firstname }}</p>
         <p>{{ user.role }}</p>
         <button class="icon-button" @click="updateUser(user)"><img src="../assets/pictures/pen.svg"></button>
-        <button class="icon-button" @click="deleteUser(user.id, user.firstname, user.name)"><img
+        <button class="icon-button" @click="deleteUser(user)"><img
             src="../assets/pictures/trash.svg"></button>
       </div>
 
     </div>
   </div>
-  <SimpleModalComponent :del="popUpDelete" :buttons="popUpButtons" :message="popUpMessage" />
 </template>

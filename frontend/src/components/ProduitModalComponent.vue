@@ -43,7 +43,7 @@
             :value="produit ? produit.image : ''">
         </div>
         <div class="submit-button">
-          <input class="primary-button" id="creer-produit" :value="produit ? 'Modifer produit' : 'Créer produit'"
+          <input class="primary-button" id="creer-produit" :value="produit ? 'Modifier produit' : 'Créer produit'"
             @click="produit ? editProduct(produit) : addProduct()">
         </div>
       </form>

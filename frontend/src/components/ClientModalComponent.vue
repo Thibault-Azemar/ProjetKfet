@@ -24,7 +24,7 @@
           <select name="groupe" class="input-field" id="groupe" required>
             <option value="" :selected="customer ? false : true" disabled>Choisir un groupe</option>
             <option v-for="group in groups" :key="group" :value="group.id"
-              :selected="customer ? customer.group.id === group.id : false">
+              :selected="customer ? customer.group === group.name : false">
               {{ group.name }}</option>
           </select>
         </div>

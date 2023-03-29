@@ -17,35 +17,17 @@ export default defineComponent({
         //value: String ,
     },
     data() {
-        let popUpMessage: String | undefined;
-        let popUpButtons: Number | undefined;
-        let popUpDelete: Boolean | undefined;
         const users: User[] = [];
         return {
-            popUpMessage,
-            popUpButtons,
-            popUpDelete,
-            users
+            users,
+
         }
     },
     methods: {
-        updateFromModal(popUpMessage: String, popUpButtons: Number, popUpDelete: Boolean) {
-            this.popUpMessage = popUpMessage;
-            this.popUpButtons = popUpButtons;
-            this.popUpDelete = popUpDelete;
-            const modal = document.getElementById("simple-modal");
-            if (modal !== null) {
-                modal.style.display = "block";
-            }
-        },
-        deleteUser(id: string, firstname: string, name: string) {
-            this.popUpMessage = "Voulez vous supprimer " + firstname + " " + name + " ?";
-            this.popUpButtons = 2;
-            this.popUpDelete = true;
-            const modal = document.getElementById("simple-modal");
-            if (modal !== null) {
-                modal.style.display = "block";
-            }
+        deleteUser(objet: User) {
+            const message = "Voulez-vous vraiment supprimer l'utilisateur " + objet.name +" " + objet.firstname + " ?";
+            const type = "user";
+            this.$emit('deleteObjet', objet, message, type );
         },
         getUsers(): User[] {
             const userRepo = new UserRepository();
@@ -67,12 +49,7 @@ export default defineComponent({
         this.getUsers();
     },
     mounted() {
-        // if (this.$root !== null) {
-        //     this.$root.$on('messageFromModal', (popUpMessage: String, popUpButtons: Number, popUpDelete: Boolean) => {
-        //         this.updateFromModal(popUpMessage, popUpButtons, popUpDelete);
-        //     }
-        //     )
-        // }
+
     }
     /*mounted() {
         this.name // type: string | undefined
