@@ -184,6 +184,11 @@ export default defineComponent({
     deleteProduct(id: number) {
       this.command.removeProduct(id);
     },
+    showCart(){
+        const modal = document.getElementById("cartModal");
+        if (modal && modal.style.display === "block" ) modal.style.display = "none";
+        else if (modal) modal.style.display = "block";
+    }
   },
   beforeMount() {
     this.getCategories();
