@@ -142,4 +142,65 @@ export default class AccountsRepository {
             }
             );
     }
+    public addGroup(name: string): Promise<Group> {
+        const API_URL = Config.API_URL;
+        const params = { name: name }
+        return fetch(API_URL + 'group/add?' + new URLSearchParams(params), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                const group = new Group(name, data.id);
+                return Promise.resolve(group);
+            }
+            )
+            .catch(error => {
+                console.error('Error:', error);
+                return Promise.reject(error);
+            }
+            );
+    }
+    public deleteGroup(id: string): Promise<number> {
+        const API_URL = Config.API_URL;
+        const params = { id: id }
+        return fetch(API_URL + 'group?' + new URLSearchParams(params), {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then((response) => {
+                if (response.status == 200) {
+                    return Promise.resolve(200);
+                }
+                else {
+                    return Promise.reject(500);
+                }
+            }
+            );
+    }
+    public editGroup(id: string, name: string): Promise<number> {
+        const API_URL = Config.API_URL;
+        const params = { id: id, name: name }
+        return fetch(API_URL + 'group?' + new URLSearchParams(params), {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then((response) => {
+                if (response.status == 200) {
+                    return Promise.resolve(200);
+                }
+                else {
+                    return Promise.reject(500);
+                }
+            }
+            );
+    }
+
+
 }

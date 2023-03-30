@@ -134,6 +134,15 @@ export default defineComponent({
                 }
             })
         },
+        deleteGroupFromList(id: string) {
+            this.unshowModal("simple-modal");
+            const accountComp = this.$refs.GroupModalComponent as typeof GroupModalComponent;
+            accountComp.groups.forEach((group: Group) => {
+                if (group.id === id) {
+                    accountComp.groups.splice(accountComp.groups.indexOf(group), 1);
+                }
+            })
+        }
     },
     beforeMount() {
         this.getCustomers().then((response: number) => {

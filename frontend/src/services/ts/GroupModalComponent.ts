@@ -1,6 +1,7 @@
 import { defineComponent } from 'vue'
 import GroupModalComponent from '../../components/GroupModalComponent.vue'
 import Group from "@/services/model/GroupModel";
+import AccountsRepository from '../Repository/AccountsRepository';
 
 
 // @ts-ignore
@@ -13,9 +14,11 @@ export default defineComponent({
 
     },
     data() {
+        const groups = new Array<Group>();
         let isGroup: Group | undefined;
         return {
-            isGroup
+            isGroup,
+            groups
         }
     },
     methods: {
@@ -29,16 +32,50 @@ export default defineComponent({
         unshowModal(idModal: string) {
             this.$emit('unshowModal', idModal);
         },
-        deleteGroup(group : Group){
+        deleteGroup(group: Group) {
             this.$emit('deleteGroup', group);
         },
-        editGroup(group : Group){
-
+        editGroup(group: Group) {
+            const name = document.getElementById("name") as HTMLInputElement;
+            const AccountRepo = new AccountsRepository();
+            AccountRepo.editGroup(group.id, name.value).then((response) => {
+                this.$emit('editGroup', response);
+                this.groups.forEach((groupFromList: Group) => {
+                    if (group.id === groupFromList.id) {
+                        groupFromList.name = name.value;
+                    }
+                })
+                this.unshowModal("groupEditModal");
+            }
+            ).catch((error) => {
+                console.log(error);
+            });
         },
-        addGroup(){
-
+        addGroup() {
+            const name = document.getElementById("name") as HTMLInputElement;
+            const AccountRepo = new AccountsRepository();
+            AccountRepo.addGroup(name.value).then((response) => {
+                this.$emit('addGroup', response);
+                this.unshowModal("groupEditModal");
+            }
+            ).catch((error) => {
+                console.log(error);
+            });
+        },
+        getGroup() {
+            const AccountRepo = new AccountsRepository();
+            AccountRepo.getGroups().then((response) => {
+                this.groups = response;
+                console.log(this.groups)
+            }
+            ).catch((error) => {
+                console.log(error);
+            }
+            );
         }
-
+    },
+    mounted() {
+        this.getGroup();
     }
 
 })

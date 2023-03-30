@@ -8,40 +8,12 @@
         <button class="icon-button close-button" @click="unshowModal('groupModal')"></button>
       </header>
       <div class="content-group">
-        <div class="group-grid"> <!-- v for groups -->
-          <p>Nom groupe</p>
-          <button class="icon-button little-icon" @click="showEditModal(group)"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button little-icon" @click="deleteGroup(group)"><img src="../assets/pictures/trash.svg"></button>
-          <p>Nom groupe</p>
-          <button class="icon-button little-icon" @click="showEditModal(group)"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button little-icon" @click="deleteGroup(group)"><img src="../assets/pictures/trash.svg"></button>
-          <p>Nom groupe</p>
-          <button class="icon-button little-icon" @click="showEditModal(group)"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button little-icon" @click="deleteGroup(group)"><img src="../assets/pictures/trash.svg"></button>
-          <p>Nom groupe</p>
-          <button class="icon-button little-icon" @click="showEditModal(group)"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button little-icon" @click="deleteGroup(group)"><img src="../assets/pictures/trash.svg"></button>
-          <p>Nom groupe</p>
-          <button class="icon-button little-icon" @click="showEditModal(group)"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button little-icon" @click="deleteGroup(group)"><img src="../assets/pictures/trash.svg"></button>
-          <p>Nom groupe</p>
-          <button class="icon-button little-icon" @click="showEditModal(group)"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button little-icon" @click="deleteGroup(group)"><img src="../assets/pictures/trash.svg"></button>
-          <p>Nom groupe</p>
-          <button class="icon-button little-icon" @click="showEditModal(group)"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button little-icon" @click="deleteGroup(group)"><img src="../assets/pictures/trash.svg"></button>
-          <p>Nom groupe</p>
-          <button class="icon-button little-icon" @click="showEditModal(group)"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button little-icon" @click="deleteGroup(group)"><img src="../assets/pictures/trash.svg"></button>
-          <p>Nom groupe</p>
-          <button class="icon-button little-icon" @click="showEditModal(group)"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button little-icon" @click="deleteGroup(group)"><img src="../assets/pictures/trash.svg"></button>
-          <p>Nom groupe</p>
-          <button class="icon-button little-icon" @click="showEditModal(group)"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button little-icon" @click="deleteGroup(group)"><img src="../assets/pictures/trash.svg"></button>
-          <p>Nom groupe</p>
-          <button class="icon-button little-icon" @click="showEditModal(group)"><img src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button little-icon" @click="deleteGroup(group)"><img src="../assets/pictures/trash.svg"></button>
+        <div class="group-grid" v-for="group in groups" :key="group.id"> <!-- v for groups -->
+          <p>{{ group.name }}</p>
+          <button class="icon-button little-icon" @click="showEditModal(group)"><img
+              src="../assets/pictures/pen.svg"></button>
+          <button class="icon-button little-icon" @click="deleteGroup(group)"><img
+              src="../assets/pictures/trash.svg"></button>
         </div>
       </div>
       <div style="display:flex; justify-content: center">
@@ -58,10 +30,10 @@
       </header>
       <form>
         <label for="nom">Nom du groupe</label>
-        <input type="text" id="nom" :value="isGroup ? isGroup.name : ''" placeholder="Entrer le nom du groupe">
+        <input type="text" id="name" :value="isGroup ? isGroup.name : ''" placeholder="Entrer le nom du groupe">
         <div class="submit-button">
           <input class="primary-button" id="creer-produit" :value="isGroup ? 'Modifier le groupe' : 'Créer un groupe'"
-                 @click="isGroup ? editGroup(isGroup) : addGroup()">
+            @click="isGroup ? editGroup(isGroup) : addGroup()">
         </div>
       </form>
     </div>

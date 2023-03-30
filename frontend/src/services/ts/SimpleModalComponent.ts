@@ -82,6 +82,15 @@ export default defineComponent({
                             if (this.objet)
                                 this.$emit("deleteAccount", this.objet.id);
                         });
+                    break;
+                case "group":
+                    // eslint-disable-next-line no-case-declarations
+                    const groupRepo = new AccountsRepository();
+                    if (this.objet)
+                        groupRepo.deleteGroup(this.objet.id).then(() => {
+                            if (this.objet)
+                                this.$emit("deleteGroup", this.objet.id);
+                        });
             }
         }
         /*mounted() {
