@@ -41,9 +41,39 @@
     height: calc(100% - 40px);
 }
 
+#group-gestion{
+    position: absolute;
+    right: 0;
+}
+
+.group-grid{
+    display: grid;
+    grid-template-columns: calc(100% - 75px) 35px 35px;
+}
+
+.group-grid .icon-button img{
+    width: 20px;
+    height: 20px;
+}
+
+.content-group{
+    max-height: 300px;
+    min-width: 250px;
+    overflow-y: auto;
+}
+
+.little-icon{
+    margin:0;
+}
+
 @media screen and (min-width: 700px) {
     .comptes-grid{
-        grid-template-columns: calc(40% - 50px) auto 20% 50px 50px;
+        grid-template-columns: calc(40% - 60px) auto 20% 20px 20px;
+    }
+
+    .group-grid{
+        display: grid;
+        grid-template-columns: calc(100% - 85px) 40px 40px;
     }
 
     .content-compte{

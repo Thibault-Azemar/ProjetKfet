@@ -7,6 +7,7 @@ import Group from '../model/GroupModel';
 import Customer from '../model/CustomerModel';
 import UpdateMoneyModalComponent from '../../components/UpdateMoneyModalComponent.vue'
 import SimpleModalComponent from '../../components/SimpleModalComponent.vue'
+import GroupModalComponent from '../../components/GroupModalComponent.vue'
 
 
 // @ts-ignore
@@ -17,7 +18,8 @@ export default defineComponent({
         ClientsComponent,
         ClientModalComponent,
         UpdateMoneyModalComponent,
-        SimpleModalComponent
+        SimpleModalComponent,
+        GroupModalComponent
     },
     // type inference enabled
     props: {
@@ -54,6 +56,10 @@ export default defineComponent({
             if (modal) modal.style.display = "block";
 
         },
+        showGroupModal(){
+            const modal = document.getElementById("groupModal");
+            if (modal) modal.style.display = "block";
+        },
         unshowModal(idModal: string) {
             const modal = document.getElementById(idModal);
             if (modal) modal.style.display = "none";
@@ -74,6 +80,17 @@ export default defineComponent({
         deleteCompte(objet: Customer) {
             this.message = "Voulez-vous vraiment supprimer le compte " + objet.name + " " + objet.firstname +" ?";
             this.type = "account";
+            this.buttons = 2;
+            this.del = true;
+            this.objet = objet;
+            const modal = document.getElementById("simple-modal");
+            if (modal !== null) {
+                modal.style.display = "block";
+            }
+        },
+        deleteGroup(objet: Group) {
+            this.message = "Voulez-vous vraiment supprimer le groupe " + objet.name + " ?";
+            this.type = "group";
             this.buttons = 2;
             this.del = true;
             this.objet = objet;
