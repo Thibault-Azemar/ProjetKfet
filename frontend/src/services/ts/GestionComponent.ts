@@ -12,6 +12,8 @@ import User from "../Controller/UserController"
 import Produit from "../model/ProductModel";
 import Offer from '../Controller/OfferController';
 import SimpleModalComponent from "../../components/SimpleModalComponent.vue";
+import Category from '../model/CategoryModel';
+import Subcategory from '../model/SubcategoryModel';
 
 // @ts-ignore
 // @ts-ignore
@@ -26,7 +28,7 @@ export default defineComponent({
         ProduitModalComponent,
         UserModalComponent,
         OffreModalComponent,
-        SimpleModalComponent
+        SimpleModalComponent,
     },
     // type inference enabled
     props: {
@@ -41,7 +43,7 @@ export default defineComponent({
         let popUpButtons: Number | undefined;
         let popUpDelete: Boolean | undefined;
         let objetType: String | undefined;
-        let deleteObj : any;
+        let deleteObj: any;
         return {
             value,
             isUser,
@@ -51,7 +53,7 @@ export default defineComponent({
             popUpButtons,
             popUpDelete,
             deleteObj,
-            objetType
+            objetType,
         }
     },
     methods: {
@@ -102,6 +104,41 @@ export default defineComponent({
             if (modal !== null) {
                 modal.style.display = "block";
             }
+        },
+        deleteProduct(id: string) {
+            this.unshowModal("simple-modal");
+            const stockComp = this.$refs.StockComponent as typeof StockComponent;
+            stockComp.stock.forEach((category: Category) => {
+                category.subcategories.forEach((subcategory: Subcategory) => {
+                    subcategory.products.forEach((product: Produit) => {
+                        if (product.id === id) {
+                            subcategory.products.splice(subcategory.products.indexOf(product), 1);
+                        }
+                    })
+                })
+            })
+        },
+        deleteOffer(id: string) {
+            this.unshowModal("simple-modal");
+            const offreComp = this.$refs.OffresComponent as typeof OffresComponent;
+            offreComp.offers.forEach((offer: Offer) => {
+                if (offer.id === id) {
+                    offreComp.offers.splice(offreComp.offers.indexOf(offer), 1);
+                }
+            })
+        },
+        deleteUser(id: string) {
+            this.unshowModal("simple-modal");
+            const userComp = this.$refs.UsersComponent as typeof UsersComponent;
+            userComp.users.forEach((user: User) => {
+                if (user.id === id) {
+                    userComp.users.splice(userComp.users.indexOf(user), 1);
+                }
+            })
+        },
+        addUser(user: User) {
+            const userComp = this.$refs.UsersComponent as typeof UsersComponent;
+            userComp.users.push(user);
         }
     }
     /*mounted() {

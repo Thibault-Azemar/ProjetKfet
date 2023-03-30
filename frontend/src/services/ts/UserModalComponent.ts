@@ -36,7 +36,7 @@ export default defineComponent({
                 }
             } else {
                 userRepo.addUser(name, firstname, email, password, role).then(() => {
-                    console.log("user added")
+                    this.$emit('addUser', new User(name, firstname, email, password, role));
                 })
             }
             this.unshowModal("userModal");

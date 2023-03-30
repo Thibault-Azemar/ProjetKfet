@@ -56,20 +56,20 @@ export default class AccountsRepository {
     }
     public deleteAccount(id: string): Promise<number> {
         const API_URL = Config.API_URL;
-        return fetch(API_URL + 'customer/' + id, {
+        const params = { id: id }
+        return fetch(API_URL + 'customer?' + new URLSearchParams(params), {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             },
         })
-            .then(response => response.json())
-            .then(data => {
-                return Promise.resolve(data);
-            }
-            )
-            .catch(error => {
-                console.error('Error:', error);
-                return Promise.reject(error);
+            .then((response) => {
+                if (response.status == 200) {
+                    return Promise.resolve(200);
+                }
+                else {
+                    return Promise.reject(500);
+                }
             }
             );
     }

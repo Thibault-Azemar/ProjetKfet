@@ -48,7 +48,8 @@ export default class OfferRepository {
     }
     public deleteOffer(id: string): Promise<number> {
         return new Promise((resolve, reject) => {
-            fetch(Config.API_URL + 'offer/' + id, {
+            const params = { id: id }
+            fetch(Config.API_URL + 'offer?' + new URLSearchParams(params), {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

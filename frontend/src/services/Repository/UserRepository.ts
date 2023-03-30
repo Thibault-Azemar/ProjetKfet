@@ -56,7 +56,8 @@ export default class UserRepository {
 
     public deleteUser(id: string): Promise<number> {
         const API_URL = Config.API_URL;
-        return fetch(API_URL + 'user/' + id, {
+        const params = { id: id }
+        return fetch(API_URL + 'user?' + new URLSearchParams(params), {
 
             method: 'DELETE',
             headers: {

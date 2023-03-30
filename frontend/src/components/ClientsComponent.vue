@@ -32,5 +32,6 @@
     <UpdateMoneyModalComponent @unshow-modal="unshowModal" :customer="customerMoney" />
     <GroupModalComponent @delete-group="deleteGroup" @unshow-modal="unshowModal" />
   </div>
-  <SimpleModalComponent :objet="objet" :type="type" :del="del" :buttons="buttons" :message="message" />
+  <SimpleModalComponent @delete-account="deleteAccount" :objet="objet" :type="type" :del="del" :buttons="buttons"
+    :message="message" />
 </template>

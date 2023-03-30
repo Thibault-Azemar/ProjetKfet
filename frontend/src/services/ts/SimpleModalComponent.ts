@@ -1,5 +1,9 @@
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 import SimpleModalComponent from "@/components/SimpleModalComponent.vue";
+import StockRepository from "../Repository/StockRepository";
+import OfferRepository from "../Repository/OfferRepository";
+import UserRepository from "../Repository/UserRepository";
+import AccountsRepository from "../Repository/AccountsRepository";
 
 // @ts-ignore
 // @ts-ignore
@@ -22,13 +26,13 @@ export default defineComponent({
             type: Boolean,
             value: false
         },
-        objet:{
+        objet: {
             type: Object,
-            require : true
+            require: true
         },
-        type:{
+        type: {
             type: String,
-            require : true
+            require: true
         }
     },
     data() {
@@ -41,11 +45,49 @@ export default defineComponent({
         },
         deleteObjet() {
             console.log(this.type);
+            switch (this.type) {
+                case "product":
+                    // eslint-disable-next-line no-case-declarations
+                    const productRepo = new StockRepository();
+                    if (this.objet)
+                        productRepo.deleteProduct(this.objet.id).then(() => {
+                            if (this.objet)
+                                this.$emit("deleteProduct", this.objet.id);
+                        });
+
+                    break;
+                case "offer":
+                    // eslint-disable-next-line no-case-declarations
+                    const offerRepo = new OfferRepository();
+                    if (this.objet)
+                        offerRepo.deleteOffer(this.objet.id).then(() => {
+                            if (this.objet)
+                                this.$emit("deleteOffer", this.objet.id);
+                        });
+                    break;
+                case "user":
+                    // eslint-disable-next-line no-case-declarations
+                    const userRepo = new UserRepository();
+                    if (this.objet)
+                        userRepo.deleteUser(this.objet.id).then(() => {
+                            if (this.objet)
+                                this.$emit("deleteUser", this.objet.id);
+                        });
+                    break;
+                case "account":
+                    // eslint-disable-next-line no-case-declarations
+                    const accountRepo = new AccountsRepository();
+                    if (this.objet)
+                        accountRepo.deleteAccount(this.objet.id).then(() => {
+                            if (this.objet)
+                                this.$emit("deleteAccount", this.objet.id);
+                        });
+            }
         }
+        /*mounted() {
+            this.name // type: string | undefined
+            this.msg // type: string
+            this.count // type: number
+        }*/
     }
-    /*mounted() {
-        this.name // type: string | undefined
-        this.msg // type: string
-        this.count // type: number
-    }*/
 })

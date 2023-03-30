@@ -1,7 +1,7 @@
 import OfferRepository from '../Repository/OfferRepository';
 
 export default class OfferController {
-    id: number;
+    id: string;
     name: string;
     price: number;
     priceMembers: number;
@@ -12,7 +12,7 @@ export default class OfferController {
     catIds: number[];
     image: string;
 
-    constructor(id: number, name: string, price: number, priceMembers: number, description: string, nbproducts: number, productsID: number[], subcatsID: number[], catsID: number[], image: string) {
+    constructor(id: string, name: string, price: number, priceMembers: number, description: string, nbproducts: number, productsID: number[], subcatsID: number[], catsID: number[], image: string) {
         this.id = id;
         this.name = name;
         this.price = price;

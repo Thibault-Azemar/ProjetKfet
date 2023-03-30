@@ -123,18 +123,17 @@ export default class StockRepository {
             );
     }
 
-    public deleteProduct(product: Product): Promise<Product> {
+    public deleteProduct(id: string): Promise<number> {
         const API_URL = Config.API_URL;
-        const params = { id: product.id }
+        const params = { id: id }
         return fetch(API_URL + 'product?' + new URLSearchParams(params), {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             },
         })
-            .then(response => response.json())
-            .then(data => {
-                return Promise.resolve(data);
+            .then((response) => {
+                return Promise.resolve(200);
             }
             )
             .catch(error => {

@@ -34,7 +34,7 @@ export default defineComponent({
         let buttons: Number | undefined;
         let del: Boolean | undefined;
         let type: String | undefined;
-        let objet : any;
+        let objet: any;
         return {
             groupToDisplay,
             accounts,
@@ -56,7 +56,7 @@ export default defineComponent({
             if (modal) modal.style.display = "block";
 
         },
-        showGroupModal(){
+        showGroupModal() {
             const modal = document.getElementById("groupModal");
             if (modal) modal.style.display = "block";
         },
@@ -78,7 +78,7 @@ export default defineComponent({
             })
         },
         deleteCompte(objet: Customer) {
-            this.message = "Voulez-vous vraiment supprimer le compte " + objet.name + " " + objet.firstname +" ?";
+            this.message = "Voulez-vous vraiment supprimer le compte " + objet.name + " " + objet.firstname + " ?";
             this.type = "account";
             this.buttons = 2;
             this.del = true;
@@ -116,6 +116,21 @@ export default defineComponent({
             this.accounts.forEach((account: Group) => {
                 if (account.name === this.groupToDisplay) {
                     this.accountsToDisplay = account.customers;
+                }
+            })
+        },
+        deleteAccount(id: string) {
+            this.unshowModal("simple-modal");
+            this.accounts.forEach((account: Group) => {
+                account.customers.forEach((customer: Customer) => {
+                    if (customer.id === id) {
+                        account.customers.splice(account.customers.indexOf(customer), 1);
+                    }
+                })
+            })
+            this.accountsToDisplay.forEach((customer: Customer) => {
+                if (customer.id === id) {
+                    this.accountsToDisplay.splice(this.accountsToDisplay.indexOf(customer), 1);
                 }
             })
         },
