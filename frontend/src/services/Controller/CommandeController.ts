@@ -12,8 +12,9 @@ export default class Commande {
     customer: Customer;
     name: string;
     isPaid: boolean;
+    state: string;
 
-    constructor(date?: Date, total?: number, isPaid?: boolean, paymentMethod?: string, products?: Product[], name?: string, id?: string, totalKfetier?: number, customer?: Customer) {
+    constructor(date?: Date, total?: number, isPaid?: boolean, paymentMethod?: string, products?: Product[], name?: string, id?: string, totalKfetier?: number, customer?: Customer, state?: string) {
         if (id) {
             this.id = id;
         }
@@ -59,6 +60,11 @@ export default class Commande {
         }
         else
             this.customer = new Customer();
+        if (state) {
+            this.state = state;
+        }
+        else
+            this.state = "";
     }
     addProduct(product: Product): number {
         if (Object.keys(this.products).length === 0) {
