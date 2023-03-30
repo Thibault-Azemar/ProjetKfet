@@ -12,17 +12,27 @@ export default class OfferController {
     catIds: number[];
     image: string;
 
-    constructor(id: string, name: string, price: number, priceMembers: number, description: string, nbproducts: number, productsID: number[], subcatsID: number[], catsID: number[], image: string) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.priceMembers = priceMembers;
-        this.description = description;
-        this.nbproducts = nbproducts;
-        this.productIds = productsID;
-        this.subcatIds = subcatsID;
-        this.catIds = catsID;
-        this.image = image;
+    constructor(id?: string, name?: string, price?: number, priceMembers?: number, description?: string, nbproducts?: number, productsID?: number[], subcatsID?: number[], catsID?: number[], image?: string) {
+        if (id) this.id = id
+        else this.id = ''
+        if (name) this.name = name
+        else this.name = ''
+        if (price) this.price = price
+        else this.price = 0
+        if (priceMembers) this.priceMembers = priceMembers
+        else this.priceMembers = 0
+        if (description) this.description = description
+        else this.description = ''
+        if (nbproducts) this.nbproducts = nbproducts
+        else this.nbproducts = 0
+        if (productsID) this.productIds = productsID
+        else this.productIds = []
+        if (subcatsID) this.subcatIds = subcatsID
+        else this.subcatIds = []
+        if (catsID) this.catIds = catsID
+        else this.catIds = []
+        if (image) this.image = image
+        else this.image = ''
     }
 
     setDescription(description: string) {
