@@ -7,11 +7,12 @@ export default class Product {
     stock: number;
     image: string;
     subcategory: string;
+    state: string
 
     /**
      * constructor
         */
-    public constructor(id?: string, name?: string, purchasePrice?: number, selllingPrice?: number, sellingPriceMember?: number, stock?: number, subcategory?: string, image?: string) {
+    public constructor(id?: string, name?: string, purchasePrice?: number, selllingPrice?: number, sellingPriceMember?: number, stock?: number, subcategory?: string, image?: string, state?: string) {
         if (id) {
             this.id = id;
         }
@@ -59,6 +60,12 @@ export default class Product {
         }
         else {
             this.image = "./src/assets/pictures/product/default_meal.jpg"
+        }
+        if (state) {
+            this.state= state
+        }
+        else {
+            this.state= ""
         }
     }
 

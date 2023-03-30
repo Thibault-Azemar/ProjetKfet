@@ -21,8 +21,8 @@
             <div class="ordinateur flex-row">
               <p v-for="produit in commande.products" :key="produit.id">{{ produit.name }},</p>
             </div>
-
       </button>
     </div>
+    <EditCommandModalComponent :commande="isCommande" />
   </div>
 </template>

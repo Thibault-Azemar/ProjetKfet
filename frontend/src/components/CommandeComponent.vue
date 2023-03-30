@@ -4,7 +4,7 @@
   <div class="page">
     <div class="commande-header">
       <button class="icon-button" @click="previous()"><img src="../assets/pictures/arrow-left.svg"></button>
-      <button class="icon-button" id="cart"><img src="../assets/pictures/cart-shopping.svg"></button>
+      <button class="icon-button" id="cart" @click="showCart()"><img src="../assets/pictures/cart-shopping.svg"></button>
     </div>
     <div class="commande-grid">
       <button class="tertiary-button" v-for="cell in gridCellsContent" :key="cell"
@@ -14,8 +14,8 @@
       </button>
     </div>
     <div class="commande-footer">
-      <div class="commande-resume">
-        <h2>Résumé de la commande :</h2>
+      <div class="commande-resume" id="cartModal">
+        <h2>Panier :</h2>
         <div class="command-list">
           <p class="command-list-grid" v-for="product in command.products" :id="command.products.indexOf(product)"
             :key="product">

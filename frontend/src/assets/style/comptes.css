@@ -68,7 +68,7 @@
 
 @media screen and (min-width: 700px) {
     .comptes-grid{
-        grid-template-columns: calc(40% - 60px) auto 20% 20px 20px;
+        grid-template-columns: calc(40% - 60px) auto 20% 50px 20px;
     }
 
     .group-grid{
