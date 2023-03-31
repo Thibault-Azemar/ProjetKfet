@@ -9,18 +9,19 @@ import java.util.UUID;
 @Embeddable
 public class ProductCommand {
 
+    // IdProductInList
     @GeneratedValue
     @UuidGenerator
-    private UUID idProductInList;
-
+    private UUID id;
+//    Id du produit
     private UUID productId;
-
+//    Etat du produit dans la commande
     private String state;
-
+//    Nom du produit
     private String product;
 
     public ProductCommand(UUID productId, String name) {
-        this.idProductInList = UUID.randomUUID();
+        this.id = UUID.randomUUID();
         this.product = name;
         this.state = "En attente";
         this.productId = productId;
@@ -31,11 +32,11 @@ public class ProductCommand {
     }
 
     public UUID getId() {
-        return idProductInList;
+        return id;
     }
 
     public void setId(UUID id) {
-        this.idProductInList = id;
+        this.id = id;
     }
 
     public UUID getProductId() {
