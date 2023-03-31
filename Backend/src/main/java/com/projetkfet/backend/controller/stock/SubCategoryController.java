@@ -80,20 +80,14 @@ public class SubCategoryController {
             c.setCategory(cat.get());
             subCategoryRepository.save(c);
 
-            Optional<SubCategory> sc = subCategoryRepository.findByName(name);
-
-            if (sc.isPresent())
+            idsubcat = c.getId();
+            if (idsubcat == null)
             {
-                SubCategory subcategory = sc.get();
-                idsubcat = subcategory.getId();
-                logger.info("Id subcategory : "+ idsubcat);
-            }
-            else
-            {
-                logger.info("Error create SubCategory");
-                throw new Exception("Error create SubCategory");
+                logger.info("Error id SubCategory");
+                throw new Exception("Error id SubCategory");
             }
 
+            logger.info("New SubCategory : " + idsubcat);
             return idsubcat;
         }
         logger.info("Error id Category");

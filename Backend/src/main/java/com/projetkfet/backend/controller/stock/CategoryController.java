@@ -69,20 +69,13 @@ public class CategoryController {
         }
         categoryRepository.save(c);
 
-        Optional<Category> cat = categoryRepository.findByName(name);
-
-        if (cat.isPresent())
+        id = c.getId();
+        if (id == null)
         {
-            Category category = cat.get();
-            id = category.getId();
-            logger.info("Id category : "+ id);
+            logger.info("Category not added");
+            throw new Exception("Category not added");
         }
-        else
-        {
-            logger.info("Error create Category");
-            throw new Exception("Error create Category");
-        }
-
+        logger.info("Category added : " + id);
         return id;
     }
 

@@ -58,13 +58,11 @@ public class CustomerController {
 
             customerRepository.save(c);
 
-            Optional<Customer> cus = customerRepository.findByName(name);
-
-            if (cus.isPresent())
+            if (c.getId() != null)
             {
-                Customer customer = cus.get();
-                id = customer.getId();
+                id = c.getId();
                 logger.info("Id Customer : "+ id);
+                return id;
             }
             else
             {
@@ -72,7 +70,11 @@ public class CustomerController {
                 throw new Exception("Error create Customer");
             }
         }
-        return id;
+        else
+        {
+            logger.info("Error get Customer group");
+            throw new Exception("Error get Customer group");
+        }
     }
 
     //    UPDATE

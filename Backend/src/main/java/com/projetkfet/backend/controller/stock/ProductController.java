@@ -92,26 +92,20 @@ public class ProductController {
             }
             productRepository.save(p);
 
-            Optional<Product> product = productRepository.findByName(name);
-
-            if (product.isPresent())
+            idproduct = p.getId();
+            if (idproduct == null)
             {
-                Product prod = product.get();
-                idproduct = prod.getId();
-                logger.info("Id category : "+ idproduct);
+                logger.info("Error New Product");
+                throw new Exception("Error New Product");
             }
-            else
-            {
-                logger.info("Error create Product");
-                throw new Exception("Error create Product");
-            }
+            logger.info("New Product successful: " + idproduct);
+            return idproduct;
         }
         else
         {
             logger.info("Error id SubCategory");
             throw new Exception("Error id SubCategory");
         }
-        return idproduct;
     }
 
 //    UPDATE

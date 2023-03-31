@@ -45,21 +45,17 @@ public class GroupController {
 
         groupRepository.save(g);
 
-        Optional<Group> gr = groupRepository.findByName(name);
-
-        if (gr.isPresent())
+        if (g.getId() != null)
         {
-            Group group = gr.get();
-            id = group.getId();
+            id = g.getId();
             logger.info("Id Group : "+ id);
+            return id;
         }
         else
         {
             logger.info("Error create Group");
             throw new Exception("Error create Group");
         }
-
-        return id;
     }
 
     //    UPDATE

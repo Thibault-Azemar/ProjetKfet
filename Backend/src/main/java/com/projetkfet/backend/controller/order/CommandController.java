@@ -174,6 +174,12 @@ public class CommandController {
         o.setDate(new java.util.Date());
 
         commandRepository.save(o);
+
+        if (o.getId() == null)
+        {
+            logger.info("Error add new command");
+            throw new Exception("Error add new command");
+        }
         logger.info("New command : " + o.getId());
 
         return o.getId();
