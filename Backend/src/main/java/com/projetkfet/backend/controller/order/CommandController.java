@@ -203,7 +203,7 @@ public class CommandController {
 
     @PatchMapping("/product")
     public @ResponseBody
-    String UpdateStateProductCommand(@RequestParam("id") String id, @RequestParam("idproduct") String idproduct, @RequestParam("state") String state) throws Exception {
+    String UpdateStateProductCommand(@RequestParam("idCommand") String id, @RequestParam("idProductInList") String idproduct, @RequestParam("state") String state) throws Exception {
         logger.info("Update state product command");
         Optional<Command> o = commandRepository.findById(UUID.fromString(id));
 

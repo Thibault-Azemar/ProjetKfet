@@ -11,7 +11,7 @@ public class ProductCommand {
 
     @GeneratedValue
     @UuidGenerator
-    private UUID id;
+    private UUID idProductInList;
 
     private UUID productId;
 
@@ -20,7 +20,7 @@ public class ProductCommand {
     private String product;
 
     public ProductCommand(UUID productId, String name) {
-        this.id = UUID.randomUUID();
+        this.idProductInList = UUID.randomUUID();
         this.product = name;
         this.state = "En attente";
         this.productId = productId;
@@ -31,11 +31,11 @@ public class ProductCommand {
     }
 
     public UUID getId() {
-        return id;
+        return idProductInList;
     }
 
     public void setId(UUID id) {
-        this.id = id;
+        this.idProductInList = id;
     }
 
     public UUID getProductId() {
