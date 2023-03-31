@@ -168,7 +168,7 @@ public class CommandController {
         o.setPaymentMethod(paymentMethod);
         o.setPrice(priceOrder);
         o.setIsPaid(Boolean.parseBoolean(isPaid));
-        o.setState("Non commencée");
+        o.setState("En attente");
 
         o.setDate(new java.util.Date());
 
