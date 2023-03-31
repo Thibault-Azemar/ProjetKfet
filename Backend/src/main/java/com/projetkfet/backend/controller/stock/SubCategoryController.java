@@ -2,6 +2,7 @@ package com.projetkfet.backend.controller.stock;
 
 import com.projetkfet.backend.data.stock.CategoryRepository;
 import com.projetkfet.backend.data.stock.SubCategoryRepository;
+import com.projetkfet.backend.dto.ImageDTO;
 import com.projetkfet.backend.projection.stock.SubCategoryProjection;
 import com.projetkfet.backend.model.stock.Category;
 import com.projetkfet.backend.model.stock.SubCategory;
@@ -62,7 +63,7 @@ public class SubCategoryController {
 //    Permet d'ajouter une nouvelle catégorie
     @PostMapping(path="/add")
     public @ResponseBody
-    UUID addNewSubCategory (@RequestParam("name") String name, @RequestParam(required = false, name = "image") String image, @RequestParam("idCategory") String id) throws Exception {
+    UUID addNewSubCategory (@RequestParam("name") String name, @RequestBody(required = false) ImageDTO image, @RequestParam("idCategory") String id) throws Exception {
         logger.info("New SubCategorie : "+ name);
 
         UUID idsubcat = null;
@@ -73,8 +74,8 @@ public class SubCategoryController {
         {
             SubCategory c = new SubCategory();
             c.setName(name);
-            if (image != null && !image.equals("")) {
-                c.setImage(image);
+            if (image != null && image.getImage() != null) {
+                c.setImage(image.getImage());
             }
             c.setCategory(cat.get());
             subCategoryRepository.save(c);

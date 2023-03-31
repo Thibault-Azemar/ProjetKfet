@@ -22,6 +22,8 @@ public class Offer {
 
     private Integer nbproducts;
 
+    private String image;
+
     @ElementCollection
     @CollectionTable(name = "offer_product")
     private List<UUID> productIds = new ArrayList<>();
@@ -72,6 +74,14 @@ public class Offer {
 
     public void setNbproducts(Integer nbproducts) {
         this.nbproducts = nbproducts;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public List<UUID> getProductIds() {

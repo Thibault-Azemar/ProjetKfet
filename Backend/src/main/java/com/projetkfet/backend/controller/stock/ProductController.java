@@ -2,6 +2,7 @@ package com.projetkfet.backend.controller.stock;
 
 import com.projetkfet.backend.data.stock.ProductRepository;
 import com.projetkfet.backend.data.stock.SubCategoryRepository;
+import com.projetkfet.backend.dto.ImageDTO;
 import com.projetkfet.backend.model.stock.Product;
 import com.projetkfet.backend.model.stock.SubCategory;
 import org.apache.logging.log4j.LogManager;
@@ -60,7 +61,7 @@ public class ProductController {
 //    Permet d'ajouter une nouvelle catégorie
     @PostMapping(path="/add")
     public @ResponseBody
-    UUID addNewProduct (@RequestParam("name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestParam(required = false, name = "image") String image , @RequestParam("idSubCategory") String id) throws Exception {
+    UUID addNewProduct (@RequestParam("name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestBody(required = false) ImageDTO image , @RequestParam("idSubCategory") String id) throws Exception {
         logger.info("New Product");
 
         UUID idproduct = null;
@@ -86,8 +87,8 @@ public class ProductController {
                 float price = Float.parseFloat(sellingPriceMembers);
                 p.setSellingPriceMembers(price);
             }
-            if (image != null && !image.equals("")) {
-                p.setImage(image);
+            if (image != null && image.getImage() != null) {
+                p.setImage(image.getImage());
             }
             productRepository.save(p);
 
@@ -116,7 +117,7 @@ public class ProductController {
 //    UPDATE
     @PatchMapping()
     public @ResponseBody
-    String UpdateProduct(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestParam(required = false, name = "stock") String stock, @RequestParam(required = false, name = "image") String image, @RequestParam(required = false, name = "idsubcat") String idsubcat) throws Exception {
+    String UpdateProduct(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestParam(required = false, name = "stock") String stock, @RequestBody(required = false) ImageDTO image, @RequestParam(required = false, name = "idsubcat") String idsubcat) throws Exception {
         logger.info("Update Product : " + id);
 
         Optional<Product> p = productRepository.findById(UUID.fromString(id));
@@ -143,8 +144,8 @@ public class ProductController {
                 Integer amount = Integer.parseInt(stock);
                 product.setStock(amount);
             }
-            if (image != null && !image.equals("")) {
-                product.setImage(image);
+            if (image != null && image.getImage() != null) {
+                product.setImage(image.getImage());
             }
             if (idsubcat != null && !idsubcat.equals("")) {
                 Optional<SubCategory> subCat = subCategoryRepository.findById(UUID.fromString(idsubcat));
