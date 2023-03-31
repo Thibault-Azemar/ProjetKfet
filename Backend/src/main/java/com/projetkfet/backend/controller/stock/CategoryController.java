@@ -88,6 +88,32 @@ public class CategoryController {
 
 //    UPDATE
 
+    @PutMapping()
+    public @ResponseBody
+    String updateCategory(@RequestParam("id") String id, @RequestParam(required = false, name="name") String name, @RequestBody(required = false)ImageDTO image) throws Exception {
+        logger.info("Update Category");
+
+        Optional<Category> c = categoryRepository.findById(UUID.fromString(id));
+
+        if (c.isPresent())
+        {
+            Category category = c.get();
+            if (name != null && !name.isEmpty())
+                category.setName(name);
+            if (image != null && image.getImage() != null) {
+                category.setImage(image.getImage());
+            }
+            categoryRepository.save(category);
+            logger.info("Category updated : " + id);
+            return "Confirm";
+        }
+        else
+        {
+            logger.info("No category for this ID");
+            throw new Exception("No category for this ID");
+        }
+    }
+
 //    DELETE
 
     @DeleteMapping()

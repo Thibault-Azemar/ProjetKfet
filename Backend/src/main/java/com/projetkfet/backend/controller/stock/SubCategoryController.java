@@ -102,6 +102,32 @@ public class SubCategoryController {
 
 //    UPDATE
 
+    @PutMapping()
+    public @ResponseBody
+    String updateSubCategory(@RequestParam("id") String id, @RequestParam(required = false, name="name") String name, @RequestBody(required = false) ImageDTO image) throws Exception {
+        logger.info("Update SubCategory");
+
+        Optional<SubCategory> sc = subCategoryRepository.findById(UUID.fromString(id));
+
+        if (sc.isPresent())
+        {
+            SubCategory subcategory = sc.get();
+            if (name != null && !name.isEmpty())
+                subcategory.setName(name);
+            if (image != null && image.getImage() != null)
+                subcategory.setImage(image.getImage());
+
+            subCategoryRepository.save(subcategory);
+            logger.info("SubCategory updated : " + id);
+            return "Confirm";
+        }
+        else
+        {
+            logger.info("No subcategory for this ID");
+            throw new Exception("No subcategory for this ID");
+        }
+    }
+
 //    DELETE
 
     @DeleteMapping()
