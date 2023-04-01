@@ -33,6 +33,7 @@ export default class CommandesRepository {
                     console.log(commandes)
                 });
                 return new Promise((resolve, reject) => {
+                    commandes.sort((a, b) => a.date.getTime() - b.date.getTime());
                     resolve(commandes);
                 });
             }

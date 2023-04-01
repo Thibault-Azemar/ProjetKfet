@@ -23,6 +23,7 @@ export default class AccountsRepository {
                     })
                     customers.push(group);
                 })
+                customers.sort((a, b) => a.name.localeCompare(b.name));
                 return Promise.resolve(customers);
             }
             )
@@ -133,6 +134,7 @@ export default class AccountsRepository {
                     const group = new Group(data.name, data.id);
                     groups.push(group);
                 })
+                groups.sort()
                 return Promise.resolve(groups);
             }
             )

@@ -14,6 +14,7 @@ export default class OfferRepository {
                     }
                 })
                 .then((offers) => {
+                    offers.sort((a: any, b: any) => a.name.localeCompare(b.name));
                     resolve(offers);
                 })
                 .catch((error) => {

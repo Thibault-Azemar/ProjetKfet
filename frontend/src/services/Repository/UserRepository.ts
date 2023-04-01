@@ -20,6 +20,7 @@ export default class UserRepository {
                 })
             )
             .then(() => {
+                users.sort((a, b) => a.name.localeCompare(b.name));
                 return Promise.resolve(users);
             }
             )
