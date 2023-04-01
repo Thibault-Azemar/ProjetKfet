@@ -1,6 +1,8 @@
 import { defineComponent } from 'vue'
 import EditCommandModalComponent from '../../components/EditCommandModalComponent.vue'
 import Commande from "@/services/Controller/CommandeController";
+import Product from '../model/ProductModel';
+import CommandesRepository from '../Repository/CommandesRepository';
 
 // @ts-ignore
 // @ts-ignore
@@ -18,11 +20,22 @@ export default defineComponent({
 
     },
     methods: {
-        unshowModal(idModal : string) {
+        unshowModal(idModal: string) {
             const modal = document.getElementById(idModal);
             if (modal) modal.style.display = "none";
         },
-        editProductState(){
+        editProductState(id: string, product: Product, event: any) {
+            const state = event.target.value;
+            console.log(product)
+            const commandesRepo = new CommandesRepository();
+            commandesRepo.editProductState(id, product.id, state).then((response: any) => {
+                if (response.status === 200) {
+                    console.log(response)
+                    product.setState(state);
+                }
+            })
+                ;
+
 
         }
     }

@@ -51,30 +51,42 @@ export default defineComponent({
             console.log(imageRename)
 
             const stockRepo = new StockRepository();
+            const productToAdd = new Product("", name, +buyPrice, +sellPrice, +sellPriceMember, 0, subcategory, imageRename);
             stockRepo.addProduct(name, +buyPrice, +sellPrice, +sellPriceMember, subcategory, image).then((response: any) => {
-                //location.reload();
+                this.$emit('productAdded', productToAdd);
             });
 
         },
         editProduct(produit: Produit) {
-            console.log(produit)
             const id = produit.id;
             const name = (document.getElementById("nom-produit") as HTMLInputElement).value;
             const buyPrice = (document.getElementById("prix-achat") as HTMLInputElement).value;
             const sellPrice = (document.getElementById("prix-vente") as HTMLInputElement).value;
             const sellPriceMember = (document.getElementById("prix-vente-member") as HTMLInputElement).value;
             const subcategory = (document.getElementById("sous-cat") as HTMLInputElement).value;
-            const image = (document.getElementById("image-produit") as HTMLInputElement).value;
-            console.log(image)
+            let image = (document.getElementById("image-produit") as HTMLInputElement).value;
+            if (image == "")
+                image = "";
+            console.log(name
+                + buyPrice + sellPrice + sellPriceMember + subcategory + image)
+            produit.name = name;
+            produit.purchasePrice = +buyPrice;
+            produit.sellingPrice = +sellPrice;
+            produit.sellingPriceMembers = +sellPriceMember;
+            produit.subcategory = subcategory;
+            if (image != "")
+                produit.image = image;
 
             const stockRepo = new StockRepository();
             stockRepo.editProduct(id, name, +buyPrice, +sellPrice, +sellPriceMember, subcategory, image).then((response: any) => {
-                //location.reload();
+                this.unshowModal("produitModal");
             });
-        }
+        },
     },
 
-    beforeMount() {
+    mounted() {
+
         this.getSubcategories();
     },
+
 })

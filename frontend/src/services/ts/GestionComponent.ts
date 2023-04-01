@@ -14,6 +14,7 @@ import Offer from '../Controller/OfferController';
 import SimpleModalComponent from "../../components/SimpleModalComponent.vue";
 import Category from '../model/CategoryModel';
 import Subcategory from '../model/SubcategoryModel';
+import StockRepository from '../Repository/StockRepository';
 
 // @ts-ignore
 // @ts-ignore
@@ -44,6 +45,7 @@ export default defineComponent({
         let popUpDelete: Boolean | undefined;
         let objetType: String | undefined;
         let deleteObj: any;
+        const categories: Category[] = [];
         return {
             value,
             isUser,
@@ -54,6 +56,7 @@ export default defineComponent({
             popUpDelete,
             deleteObj,
             objetType,
+            categories
         }
     },
     methods: {
@@ -93,8 +96,12 @@ export default defineComponent({
             if (modal) modal.style.display = "none";
             this.isUser = undefined;
             this.isProduit = undefined;
+            this.isOffer = undefined;
         },
         deleteObjet(objet: any, message: string, type: string) {
+            console.log(objet + " " + message + " " + type)
+            console.log(objet)
+
             this.popUpMessage = message;
             this.popUpButtons = 2;
             this.popUpDelete = true;
@@ -139,8 +146,36 @@ export default defineComponent({
         addUser(user: User) {
             const userComp = this.$refs.UsersComponent as typeof UsersComponent;
             userComp.users.push(user);
+        },
+        getCategories() {
+            const stockRepo = new StockRepository()
+            stockRepo.getStocks().then((response) => {
+                this.categories = response
+                console.log(this.categories)
+                this.$emit('categories', this.categories)
+            })
+        },
+        offerAdded(offer: Offer) {
+            this.unshowModal("offreModal");
+            const offreComp = this.$refs.OffresComponent as typeof OffresComponent;
+            offreComp.offers.push(offer);
+        },
+        productAdded(product: Produit) {
+            this.unshowModal("produitModal");
+            const stockComp = this.$refs.StockComponent as typeof StockComponent;
+            stockComp.stock.forEach((category: Category) => {
+                category.subcategories.forEach((subcategory: Subcategory) => {
+                    if (subcategory.id === product.subcategory) {
+                        subcategory.products.push(product);
+                    }
+                })
+            })
         }
-    }
+    },
+    created() {
+        this.getCategories()
+        console.log(this.categories)
+    },
     /*mounted() {
         this.name // type: string | undefined
         this.msg // type: string
