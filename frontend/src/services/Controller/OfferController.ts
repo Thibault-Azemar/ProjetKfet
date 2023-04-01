@@ -7,12 +7,15 @@ export default class OfferController {
     priceMembers: number;
     description: string;
     nbproducts: number;
-    productIds: number[];
-    subcatIds: number[];
-    catIds: number[];
+    productIds: string[];
+    subcatIds: string[];
+    catIds: string[];
     image: string;
+    public categoryOccurences: { key: string, value: number }[] = [];
+    public subcategoryOccurences: { key: string, value: number }[] = [];
+    public productOccurences: { key: string, value: number }[] = [];
 
-    constructor(id?: string, name?: string, price?: number, priceMembers?: number, description?: string, nbproducts?: number, productsID?: number[], subcatsID?: number[], catsID?: number[], image?: string) {
+    constructor(id?: string, name?: string, price?: number, priceMembers?: number, description?: string, nbproducts?: number, productsID?: string[], subcatsID?: string[], catsID?: string[], image?: string) {
         if (id) this.id = id
         else this.id = ''
         if (name) this.name = name

@@ -14,7 +14,7 @@ export default class Commande {
     isPaid: boolean;
     state: string;
 
-    constructor(date?: Date, total?: number, isPaid?: boolean, paymentMethod?: string, products?: Product[], name?: string, id?: string, totalKfetier?: number, customer?: Customer, state?: string) {
+    constructor(date?: Date, total?: number, isPaid?: boolean, paymentMethod?: string, products?: Product[], name?: string, id?: string, state?: string, totalKfetier?: number, customer?: Customer) {
         if (id) {
             this.id = id;
         }

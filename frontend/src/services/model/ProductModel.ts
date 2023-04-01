@@ -62,11 +62,15 @@ export default class Product {
             this.image = "./src/assets/pictures/product/default_meal.jpg"
         }
         if (state) {
-            this.state= state
+            this.state = state
         }
         else {
-            this.state= ""
+            this.state = ""
         }
+    }
+
+    setState(state: string) {
+        this.state = state
     }
 
 }
