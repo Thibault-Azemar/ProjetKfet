@@ -16,13 +16,12 @@ export default defineComponent({
     },
     // type inference enabled
     props: {
-        //mettre la liste d'objet
+        stock: {
+            type: Array as () => Category[],
+            required: true
+        },
     },
     data() {
-        const stock: Category[] = [];
-        return {
-            stock,
-        }
     },
     methods: {
         deleteProduct(objet: Product) {
@@ -35,20 +34,11 @@ export default defineComponent({
             const modal = document.getElementById(idModal);
             if (modal) modal.style.display = "none";
         },
-        getStocks(): Category[] {
-            const stockRepo = new StockRepository();
-            stockRepo.getStocks().then((stock: Category[]) => {
-                this.stock = stock;
-                console.log(this.stock)
-            });
-            return this.stock;
-        },
         updateProduct(produit: Product) {
             this.$emit('updateProduct', produit)
 
         },
     },
     beforeMount() {
-        this.getStocks();
     },
 })

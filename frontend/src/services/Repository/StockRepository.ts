@@ -4,7 +4,6 @@ import Subcategory from '../model/SubcategoryModel';
 import Product from '../model/ProductModel';
 
 export default class StockRepository {
-
     public getStocks(): Promise<Category[]> {
         const API_URL = Config.API_URL;
         const stock: Category[] = [];
@@ -24,9 +23,12 @@ export default class StockRepository {
                             const product = new Product(data.id, data.name, data.purchasePrice, data.sellingPrice, data.sellingPriceMembers, data.stock, subcategory.name, data.image);
                             subcategory.addProduct(product);
                         })
+                        subcategory.products.sort((a, b) => a.name.localeCompare(b.name));
                         category.addSubcategory(subcategory);
                     })
+                    category.subcategories.sort((a, b) => a.name.localeCompare(b.name));
                     stock.push(category);
+                    stock.sort((a, b) => a.name.localeCompare(b.name));
                 })
             )
             .then(() => {
@@ -125,6 +127,26 @@ export default class StockRepository {
         const params = { id: id }
         return fetch(API_URL + 'product?' + new URLSearchParams(params), {
             method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then((response) => {
+                return Promise.resolve(200);
+            }
+            )
+            .catch(error => {
+                console.error('Error:', error);
+                return Promise.reject(error);
+            }
+            );
+    }
+    public updateStock(product: Product) {
+        console.log('cc')
+        const API_URL = Config.API_URL;
+        const params = { id: product.id, stock: product.stock.toString() }
+        return fetch(API_URL + 'product?' + new URLSearchParams(params), {
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
