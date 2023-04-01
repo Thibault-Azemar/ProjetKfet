@@ -38,13 +38,14 @@ export default defineComponent({
 
     },
     methods:{
-        showModal(idModal: string){
+        updateCatgory(category: Category){
             //ajouter category en parametre
             //this.isCategory = category;
-            const modal = document.getElementById(idModal);
-            if(modal){
-                modal.style.display = "block";
-            }
+            this.$emit('updateCategory',category);
+        },
+        updateSubcategory(){
+            const modal = document.getElementById("subcategoryModal");
+            if(modal){ modal.style.display = "block";}
         },
         deleteObjet(objet:any,message: String, type: String){
             this.message = message;

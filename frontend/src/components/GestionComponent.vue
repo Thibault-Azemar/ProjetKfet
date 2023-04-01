@@ -16,11 +16,12 @@
       v-if="value === 'Stock'" />
     <OffresComponent ref="OffresComponent" @delete-objet="deleteObjet" @update-offer="updateOffer"
       v-if="value === 'Offres'" />
-    <CategoriesComponent ref="CategoriesComponent" @delete-objet="deleteObjet" v-if="value === 'Categories'" />
+    <CategoriesComponent ref="CategoriesComponent" @update-category="updateCategory" @delete-objet="deleteObjet" v-if="value === 'Categories'" />
     <UsersComponent ref="UsersComponent" @delete-objet="deleteObjet" @update-user="updateUser" v-if="value === 'Users'" />
     <ProduitModalComponent @unshow-modal="unshowModal" :produit="isProduit" />
     <UserModalComponent @addUser="addUser" @unshow-modal="unshowModal" :user="isUser" />
     <OffreModalComponent @unshow-modal="unshowModal" :offer="isOffer" />
+    <CategoryModalComponent @delete-category="deleteObjet" :category="isCategory" />
   </div>
   <SimpleModalComponent @delete-product="deleteProduct" @delete-offer="deleteOffer" @delete-user="deleteUser"
     :objet="deleteObj" :type="objetType" :del="popUpDelete" :buttons="popUpButtons" :message="popUpMessage" />
