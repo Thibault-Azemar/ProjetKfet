@@ -15,6 +15,9 @@ import SimpleModalComponent from "../../components/SimpleModalComponent.vue";
 import Category from '../model/CategoryModel';
 import Subcategory from '../model/SubcategoryModel';
 import StockRepository from '../Repository/StockRepository';
+import CategoryModalComponent from "../../components/CategoryModalComponent.vue";
+import StockEntranceModalComponent from "../../components/StockEntranceModalComponent.vue";
+
 
 // @ts-ignore
 // @ts-ignore
@@ -30,6 +33,8 @@ export default defineComponent({
         UserModalComponent,
         OffreModalComponent,
         SimpleModalComponent,
+        CategoryModalComponent,
+        StockEntranceModalComponent
     },
     // type inference enabled
     props: {
@@ -40,6 +45,7 @@ export default defineComponent({
         let isUser: User | undefined;
         let isProduit: Produit | undefined;
         let isOffer: Offer | undefined;
+        let isCategory: Category | undefined;
         let popUpMessage: String | undefined;
         let popUpButtons: Number | undefined;
         let popUpDelete: Boolean | undefined;
@@ -56,7 +62,9 @@ export default defineComponent({
             popUpDelete,
             deleteObj,
             objetType,
-            categories
+            categories,
+            isCategory,
+            StockEntranceModalComponent
         }
     },
     methods: {
@@ -71,7 +79,7 @@ export default defineComponent({
                 if (modal) modal.style.display = "block";
             }
             if (this.value === "Categories") {
-                modal = document.getElementById("categorieModal");
+                modal = document.getElementById("categoryModal");
                 if (modal) modal.style.display = "block";
             }
             if (this.value === "Users") {
@@ -89,6 +97,10 @@ export default defineComponent({
         },
         updateOffer(offer: Offer) {
             this.isOffer = offer;
+            this.showAddModal();
+        },
+        updateCategory(category: Category) {
+            this.isCategory = category;
             this.showAddModal();
         },
         unshowModal(idModal: string) {
@@ -170,6 +182,10 @@ export default defineComponent({
                     }
                 })
             })
+        },
+        showEntranceModal() {
+            const modal = document.getElementById("stockEntranceModal");
+            if (modal) modal.style.display = "block";
         }
     },
     created() {
