@@ -28,14 +28,14 @@
         <h3 v-if="!isGroup">Créer un groupe</h3>
         <button class="icon-button close-button" @click="unshowModal('groupEditModal')"></button>
       </header>
-      <form>
+      <div class="form">
         <label for="nom">Nom du groupe</label>
         <input type="text" id="name" :value="isGroup ? isGroup.name : ''" placeholder="Entrer le nom du groupe">
         <div class="submit-button">
           <input class="primary-button" id="creer-produit" :value="isGroup ? 'Modifier le groupe' : 'Créer un groupe'"
             @click="isGroup ? editGroup(isGroup) : addGroup()">
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>

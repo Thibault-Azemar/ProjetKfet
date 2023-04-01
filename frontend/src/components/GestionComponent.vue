@@ -14,13 +14,15 @@
     </div>
     <StockComponent ref="StockComponent" @delete-objet="deleteObjet" @update-product="updateProduct"
       v-if="value === 'Stock'" />
-    <OffresComponent ref="OffresComponent" @delete-objet="deleteObjet" @update-offer="updateOffer"
-      v-if="value === 'Offres'" />
-    <CategoriesComponent ref="CategoriesComponent" @delete-objet="deleteObjet" v-if="value === 'Categories'" />
+    <OffresComponent ref="OffresComponent" :categories="categories" @delete-objet="deleteObjet"
+      @update-offer="updateOffer" v-if="value === 'Offres'" />
+    <CategoriesComponent ref="CategoriesComponent" :categories="categories" @delete-objet="deleteObjet"
+      v-if="value === 'Categories'" />
     <UsersComponent ref="UsersComponent" @delete-objet="deleteObjet" @update-user="updateUser" v-if="value === 'Users'" />
-    <ProduitModalComponent @unshow-modal="unshowModal" :produit="isProduit" />
+    <ProduitModalComponent @product-added="productAdded" @unshow-modal="unshowModal" :produit="isProduit" />
     <UserModalComponent @addUser="addUser" @unshow-modal="unshowModal" :user="isUser" />
-    <OffreModalComponent @unshow-modal="unshowModal" :offer="isOffer" />
+    <OffreModalComponent ref @offer-added="offerAdded" @unshow-modal="unshowModal" :categories="categories"
+      :offer="isOffer" />
   </div>
   <SimpleModalComponent @delete-product="deleteProduct" @delete-offer="deleteOffer" @delete-user="deleteUser"
     :objet="deleteObj" :type="objetType" :del="popUpDelete" :buttons="popUpButtons" :message="popUpMessage" />

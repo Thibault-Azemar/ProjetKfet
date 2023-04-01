@@ -14,8 +14,7 @@
         <p>{{ offer.price }}</p>
         <p class="ordinateur">{{ offer.priceMembers }}</p>
         <button class="icon-button" @click="updateOffer(offer)"><img src="../assets/pictures/pen.svg"></button>
-        <button class="icon-button" @click="deleteOffer(offer)"><img
-            src="../assets/pictures/trash.svg"></button>
+        <button class="icon-button" @click="deleteOffer(offer)"><img src="../assets/pictures/trash.svg"></button>
       </div>
     </div>
   </div>

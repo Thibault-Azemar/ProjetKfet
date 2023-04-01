@@ -8,7 +8,7 @@
         <h3 v-if="offer">Modifier une offre</h3>
         <button class="icon-button close-button" @click="unshowModal('offreModal')"></button>
       </header>
-      <form method="post" class="offres-modal-grid">
+      <div method="post" class="offres-modal-grid">
         <label class="input-label" for="nom-offre">Nom</label>
         <input name="nom-offre" class="input-field" type="text" id="nom-offre" :value="offer ? offer.name : ''"
           placeholder="nom offre" required>
@@ -31,7 +31,8 @@
               <p>{{ category.name }}</p>
               <div class="right">
                 <a class="a-button secondary-button icon-minus minus-button" @click="minus(category.id)"></a>
-                <input class="quantity-input" type="number" :id="category.id" value="0" min="0">
+                <input class="quantity-input" type="number" :id="category.id"
+                  :value="offer ? countOccurences(offer.categoryOccurences, category.id) : 0" min="0">
                 <a class="a-button secondary-button icon-plus plus-button" @click="plus(category.id)"></a>
               </div>
             </div>
@@ -40,7 +41,8 @@
                 <p>{{ subcategory.name }}</p>
                 <div class="right">
                   <a class="a-button secondary-button icon-minus minus-button" @click="minus(subcategory.id)"></a>
-                  <input class="quantity-input" type="number" :id="subcategory.id" value="0" min="0">
+                  <input class="quantity-input" type="number" :id="subcategory.id"
+                    :value="offer ? countOccurences(offer.subcategoryOccurences, subcategory.id) : 0" min="0">
                   <a class="a-button secondary-button icon-plus plus-button" @click="plus(subcategory.id)"></a>
                 </div>
               </div>
@@ -49,7 +51,8 @@
                   <p>{{ product.name }}</p>
                   <div class="right">
                     <a class="a-button secondary-button icon-minus minus-button" @click="minus(product.id)"></a>
-                    <input class="quantity-input" type="number" :id="product.id" value="0" min="0">
+                    <input class="quantity-input" type="number" :id="product.id"
+                      :value="offer ? countOccurences(offer.productOccurences, product.id) : 0" min="0">
                     <a class="a-button secondary-button icon-plus plus-button" @click="plus(product.id)"></a>
                   </div>
                 </div>
@@ -58,9 +61,9 @@
           </div>
         </div>
         <div class="submit-button">
-          <input class="primary-button" value="Créer une offre">
+          <input class="primary-button" @click="addOffer()" value="Créer une offre">
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>

@@ -7,20 +7,20 @@
         <h3>Entrez le nom du client</h3>
         <button class="icon-button close-button" @click="unshowModal('clientNameModal')"></button>
       </header>
-      <form>
+      <div class="form">
         <input type="hidden" id="paymentMethod" :value="payementType">
         <input type="text" id="clientName" name="clientName" placeholder="Nom du client">
         <div class="submit-button">
           <input type="submit" class="primary-button" id="pay-cart" @click="sendCommande()" value="Valider la commande">
         </div>
-      </form>
+      </div>
     </div>
     <div v-if="payementType === 'Account'" class="card">
       <header>
         <h3>Choisir le compte client</h3>
         <button class="icon-button close-button" @click="unshowModal('clientNameModal')"></button>
       </header>
-      <form>
+      <div class="form">
         <input type="hidden" id="paymentMethod" :value="payementType">
         <select style="width: fit-content">
           <option>DI5</option>
@@ -61,7 +61,7 @@
           <input type="submit" class="primary-button" id="pay-cart-account" @click="sendCommande()"
             value="Valider la commande">
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
