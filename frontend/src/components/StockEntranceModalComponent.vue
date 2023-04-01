@@ -7,7 +7,7 @@
         <h3>Entrée de stock</h3>
         <button class="icon-button close-button" @click="unshowModal('stockEntranceModal')"></button>
       </header>
-      <form class="formproduct">
+      <div class="form formproduct">
         <div style="max-height: calc(100% - 50px);overflow-y: auto"><!--v-for sous categorie-->
           <h3 style="margin-left: 0">Sous-catégorie</h3>
           <div class="grid-product"> <!--v-for produit-->
@@ -20,11 +20,9 @@
           </div>
         </div>
         <div class="submit-button">
-          <input class="primary-button" id="entry-stock" value="Valider"
-                 @click="stockEntrance()">
+          <input class="primary-button" id="entry-stock" value="Valider" @click="stockEntrance()">
         </div>
-      </form>
+      </div>
     </div>
   </div>
-
 </template>
