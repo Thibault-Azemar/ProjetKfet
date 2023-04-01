@@ -32,7 +32,7 @@ body {
     grid-template-rows: 80px auto;
 }
 
-.flex{
+.flex {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -91,7 +91,9 @@ input[type=submit],
     align-items: center;
 }
 
-.tertiary-button:disabled, .primary-button:disabled, .secondary-button:disabled {
+.tertiary-button:disabled,
+.primary-button:disabled,
+.secondary-button:disabled {
     opacity: 40%;
 }
 
@@ -148,13 +150,13 @@ input[type=submit],
 }
 
 
-.icon-text-button{
+.icon-text-button {
     padding: 0 12px 0 0;
     display: flex;
     flex-direction: row;
 }
 
-.icon-text-button img{
+.icon-text-button img {
     width: 30px;
     transform: translateY(40%);
     filter: invert(1);
@@ -164,7 +166,7 @@ input[type=submit],
 
 #account-popup {
     position: absolute;
-    bottom : 80px;
+    bottom: 80px;
     right: 10px;
     width: 200px;
     height: 100px;
@@ -181,8 +183,9 @@ input[type=submit],
     border-radius: 0;
     text-align: left;
     background-color: white;
-    margin:0;
+    margin: 0;
 }
+
 #account-popup .icon-text-button:hover {
     background-color: #eee;
 }
@@ -452,7 +455,8 @@ option {
 |           Modal          |
 |-------------------------*/
 
-.modal,.simple-modal {
+.modal,
+.simple-modal {
     position: absolute;
     top: 0;
     left: 0;
@@ -463,7 +467,9 @@ option {
     display: none;
 }
 
-.modal .card,.simple-modal .card, .modal .big-card {
+.modal .card,
+.simple-modal .card,
+.modal .big-card {
     position: absolute;
     z-index: 3;
     top: 50vh;
@@ -471,17 +477,20 @@ option {
     transform: translate(-50%, -50%);
 }
 
-.modal .card form ,.simple-modal .card form{
+.modal .card .form,
+.simple-modal .card .form {
     margin: 0 10px 10px;
     display: flex;
     flex-direction: column;
 }
 
-.modal .big-card form {
+.modal .big-card .form {
     margin: 0 10px 10px;
 }
 
-.modal .card form .main ,.simple-modal .card form .main,.modal .big-card form .main {
+.modal .card .form .main,
+.simple-modal .card .form .main,
+.modal .big-card .form .main {
     padding: 0 10px;
     max-height: calc(80vh - 120px);
     overflow-y: auto;
@@ -578,7 +587,7 @@ option {
         width: 45px;
     }
 
-    #account-popup{
+    #account-popup {
         bottom: 100px;
     }
 }
@@ -608,12 +617,12 @@ option {
         box-shadow: 0 0 10px #bbb;
     }
 
-    .tertiary-button p{
+    .tertiary-button p {
         font-size: 1.5em;
         right: 10px;
     }
 
-    #account-popup{
+    #account-popup {
         bottom: 30px;
         left: 85px;
     }
