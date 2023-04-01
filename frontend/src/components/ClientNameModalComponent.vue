@@ -21,41 +21,17 @@
         <button class="icon-button close-button" @click="unshowModal('clientNameModal')"></button>
       </header>
       <div class="form">
-        <input type="hidden" id="paymentMethod" :value="payementType">
-        <select style="width: fit-content">
-          <option>DI5</option>
-          <option>DI4</option>
-          <option>DI3</option>
+        <input type="hidden" id="paymentMethod" :value="payementType">{{ groupToDisplay }}
+        <select name="groupe" id="groupe-select" style="width: fit-content" v-model="groupToDisplay"
+          @change="changeGroup()">
+          <option v-for="group in accounts" :key="group.id" :value="group.name">{{ group.name }}</option>
         </select>
-        <div class="client-account">
+        <div v-for="account in accountsToDisplay" :key="account" class="client-account">
           <div>
-            <input type="radio" id="client1" name="account" value="client1">
-            <label for="client1">Client 1</label>
+            <input v-model="selectedAccount" type="radio" :id="account.id" name="account" :value="account.id">
+            <label :for="account.id">{{ account.name }}</label>
           </div>
-          <div>
-            <input type="radio" id="client2" name="account" value="client2">
-            <label for="client2">Client 2</label>
-          </div>
-          <div>
-            <input type="radio" id="client3" name="account" value="client3">
-            <label for="client3">Client 3</label>
-          </div>
-          <div>
-            <input type="radio" id="client4" name="account" value="client4">
-            <label for="client4">Client 4</label>
-          </div>
-          <div>
-            <input type="radio" id="client5" name="account" value="client5">
-            <label for="client5">Client 5</label>
-          </div>
-          <div>
-            <input type="radio" id="client6" name="account" value="client6">
-            <label for="client6">Client 6</label>
-          </div>
-          <div>
-            <input type="radio" id="client7" name="account" value="client7">
-            <label for="client7">Client 7</label>
-          </div>
+
         </div>
         <div class="submit-button">
           <input type="submit" class="primary-button" id="pay-cart-account" @click="sendCommande()"

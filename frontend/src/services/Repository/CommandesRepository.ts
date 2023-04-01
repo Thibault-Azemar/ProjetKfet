@@ -39,16 +39,16 @@ export default class CommandesRepository {
             }
             );
     }
-    addCommande(command: Commande, paymentMethod: string, name?: string): Promise<Commande> {
+    addCommande(command: Commande, paymentMethod: string, name: string, kfet?: boolean): Promise<Commande> {
         const params = new URLSearchParams();
         if (paymentMethod === "Account") {
             params.append('paymentMethod', "Account");
-            params.append('idcutomer', command.customer.id)
-            if (command.customer.group == "kfetier") {
-                params.append('value', command.totalKfetier.toString())
+            params.append('idcustomer', name)
+            if (kfet) {
+                params.append('price', command.totalKfetier.toString())
             }
             else {
-                params.append('value', command.total.toString())
+                params.append('price', command.total.toString())
             }
         } else {
             params.append('paymentMethod', paymentMethod);

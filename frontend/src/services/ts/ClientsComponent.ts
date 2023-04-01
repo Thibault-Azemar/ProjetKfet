@@ -25,7 +25,7 @@ export default defineComponent({
     props: {
     },
     data() {
-        const groupToDisplay = "DI5";
+        const groupToDisplay = "";
         const accounts: Group[] = [];
         const accountsToDisplay: Customer[] = [];
         let customerMoney: Customer | undefined;
@@ -35,7 +35,6 @@ export default defineComponent({
         let del: Boolean | undefined;
         let type: String | undefined;
         let objet: any;
-        let selected: string | undefined;
         return {
             groupToDisplay,
             accounts,
@@ -47,7 +46,6 @@ export default defineComponent({
             del,
             type,
             objet,
-            selected
         }
 
     },
