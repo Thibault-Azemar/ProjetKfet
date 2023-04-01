@@ -1,6 +1,12 @@
 .offres-modal-grid{
     display: grid;
     grid-template-rows: 15px 60px 15px 60px 15px 60px 15px 60px 50px calc(100vh - 515px) 60px;
+    margin-left: 10px;
+}
+
+.grid-offer{
+    display: grid;
+    grid-template-columns: calc(100% - 130px) 130px;
 }
 
 .ss-cat{
@@ -9,21 +15,4 @@
 
 .produit{
     margin-left: 40px;
-}
-
-.right{
-    position: absolute;
-    right: 15px;
-}
-
-.wait{
-    background-color: rgba(234, 142, 142, 0.69);
-}
-
-.loading{
-    background-color: rgba(234, 191, 142, 0.69);
-}
-
-.end{
-    background-color: rgba(142, 234, 142, 0.69);
 }

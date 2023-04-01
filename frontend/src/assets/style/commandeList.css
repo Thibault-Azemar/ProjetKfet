@@ -29,6 +29,18 @@
     overflow-y: auto;
 }
 
+.wait{
+    background-color: rgba(234, 142, 142, 0.69);
+}
+
+.loading{
+    background-color: rgba(234, 191, 142, 0.69);
+}
+
+.end{
+    background-color: rgba(142, 234, 142, 0.69);
+}
+
 .input-status{
     width: min-content;
     min-width: 100px;
@@ -56,4 +68,5 @@
     .commandes-grid{
         grid-template-columns: 30% 10% 10% 20% 30%;
     }
+
 }

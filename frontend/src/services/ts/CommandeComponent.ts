@@ -188,10 +188,22 @@ export default defineComponent({
         const modal = document.getElementById("cartModal");
         if (modal && modal.style.display === "block" ) modal.style.display = "none";
         else if (modal) modal.style.display = "block";
-    }
+    },
+
   },
   beforeMount() {
     this.getCategories();
   }
 
 })
+
+window.onresize = function (){
+    if (window.innerWidth > 1024) {
+      const cart = document.getElementById("cartModal");
+        if (cart) cart.style.display = "block";
+    }
+    if(window.innerWidth < 1024){
+      const cart = document.getElementById("cartModal");
+        if (cart) cart.style.display = "none";
+    }
+}
