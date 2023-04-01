@@ -23,10 +23,14 @@ export default class CommandesRepository {
                 json.forEach((commande: any) => {
                     const products: Product[] = [];
                     commande.products.forEach((product: any) => {
-                        products.push(new Product(product.id, product.product));
+                        console.log(product)
+                        const productToAdd = new Product(product.id, product.product);
+                        productToAdd.setState(product.state);
+                        products.push(productToAdd);
                     });
                     const date = new Date(commande.date);
-                    commandes.push(new Commande(date, commande.price, commande.isPaid, commande.paymentMethod, products, commande.name, commande.id));
+                    commandes.push(new Commande(date, commande.price, commande.isPaid, commande.paymentMethod, products, commande.name, commande.id, commande.state));
+                    console.log(commandes)
                 });
                 return new Promise((resolve, reject) => {
                     resolve(commandes);
@@ -58,8 +62,6 @@ export default class CommandesRepository {
             const name = product.name;
             const id = product.id;
 
-            // eslint-disable-next-line no-debugger
-            debugger;
             const productBody = {
                 id,
                 name,
@@ -67,9 +69,7 @@ export default class CommandesRepository {
             body.push(productBody);
         });
 
-        // eslint-disable-next-line no-debugger
-        debugger;
-        const url = Config.API_URL + 'command/add/' + params.toString();
+        const url = Config.API_URL + 'command/add?' + params.toString();
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
@@ -105,6 +105,22 @@ export default class CommandesRepository {
             console.error('Error:', error);
             reject(error);
         }));
+    }
+    editProductState(idCommand: string, idProduct: string, state: string): Promise<number> {
+        const params = { idCommand: idCommand, idProductInList: idProduct, state: state }
+        const url = Config.API_URL + 'command/product?' + new URLSearchParams(params).toString();
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return fetch(url, {
+            method: 'PATCH',
+            headers,
+        })
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.json();
+                }
+                return response.json();
+            });
     }
 
 }

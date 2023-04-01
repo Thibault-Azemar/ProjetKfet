@@ -93,7 +93,7 @@ export default class StockRepository {
             );
     }
 
-    public editProduct(id: string, name: string, buyPrice: number, sellPrice: number, sellPriceMember: number, subcategory: string, image?: string): Promise<Product> {
+    public editProduct(id: string, name: string, buyPrice: number, sellPrice: number, sellPriceMember: number, subcategory: string, image?: string): Promise<number> {
         const API_URL = Config.API_URL;
         let imageParam = image ? image : '';
         const buyPriceParam = buyPrice.toString();
@@ -109,14 +109,11 @@ export default class StockRepository {
                 'Content-Type': 'application/json'
             },
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log("ccbis")
-                return Promise.resolve(data);
+            .then((response) => {
+                return Promise.resolve(200);
             }
             )
             .catch(error => {
-                console.log("cc")
                 console.error('Error:', error);
                 return Promise.reject(error);
             }
