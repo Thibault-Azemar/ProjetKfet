@@ -81,7 +81,7 @@ public class CategoryController {
 
 //    UPDATE
 
-    @PutMapping()
+    @PatchMapping()
     public @ResponseBody
     String updateCategory(@RequestParam("id") String id, @RequestParam(required = false, name="name") String name, @RequestBody(required = false)ImageDTO image) throws Exception {
         logger.info("Update Category");
