@@ -15,6 +15,7 @@ import SimpleModalComponent from "../../components/SimpleModalComponent.vue";
 import Category from '../model/CategoryModel';
 import Subcategory from '../model/SubcategoryModel';
 import CategoryModalComponent from "../../components/CategoryModalComponent.vue";
+import StockEntranceModalComponent from "../../components/StockEntranceModalComponent.vue";
 
 
 // @ts-ignore
@@ -31,7 +32,8 @@ export default defineComponent({
         UserModalComponent,
         OffreModalComponent,
         SimpleModalComponent,
-        CategoryModalComponent
+        CategoryModalComponent,
+        StockEntranceModalComponent
     },
     // type inference enabled
     props: {
@@ -58,7 +60,8 @@ export default defineComponent({
             popUpDelete,
             deleteObj,
             objetType,
-            isCategory
+            isCategory,
+            StockEntranceModalComponent
         }
     },
     methods: {
@@ -148,6 +151,10 @@ export default defineComponent({
         addUser(user: User) {
             const userComp = this.$refs.UsersComponent as typeof UsersComponent;
             userComp.users.push(user);
+        },
+        showEntranceModal() {
+            const modal = document.getElementById("stockEntranceModal");
+            if (modal) modal.style.display = "block";
         }
     }
     /*mounted() {

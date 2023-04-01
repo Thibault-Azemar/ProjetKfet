@@ -32,7 +32,7 @@
         <input v-if="!user" type="password" name="password-user" id="password-user" required>
 
         <div class="submit-button">
-          <input class="primary-button" id="creer-produit" :value="user ? 'Modifier utilisateur' : 'Créer utilisateur'"
+          <input class="primary-button" id="creer-user" :value="user ? 'Modifier utilisateur' : 'Créer utilisateur'"
             @click="user ? editUser(user) : addUser()">
         </div>
       </form>

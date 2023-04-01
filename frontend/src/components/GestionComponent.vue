@@ -9,7 +9,7 @@
         <option value="Categories">Catégories</option>
         <option value="Users">Utilisateurs</option>
       </select>
-      <button v-if="value === 'Stock'" class="primary-button" id="entry-stock">Entrée Stock</button>
+      <button v-if="value === 'Stock'" class="primary-button" id="entry-stock" @click="showEntranceModal()">Entrée Stock</button>
       <button class="icon-button" @click="showAddModal()"><img src="../assets/pictures/plus.svg"></button>
     </div>
     <StockComponent ref="StockComponent" @delete-objet="deleteObjet" @update-product="updateProduct"
@@ -22,6 +22,7 @@
     <UserModalComponent @addUser="addUser" @unshow-modal="unshowModal" :user="isUser" />
     <OffreModalComponent @unshow-modal="unshowModal" :offer="isOffer" />
     <CategoryModalComponent @delete-category="deleteObjet" :category="isCategory" />
+    <StockEntranceModalComponent/>
   </div>
   <SimpleModalComponent @delete-product="deleteProduct" @delete-offer="deleteOffer" @delete-user="deleteUser"
     :objet="deleteObj" :type="objetType" :del="popUpDelete" :buttons="popUpButtons" :message="popUpMessage" />
