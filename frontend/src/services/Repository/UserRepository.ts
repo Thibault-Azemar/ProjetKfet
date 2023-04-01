@@ -67,7 +67,6 @@ export default class UserRepository {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 return 200
             }
             )
@@ -90,10 +89,8 @@ export default class UserRepository {
             body: JSON.stringify(params)
         })
             .then(response => {
-                console.log(response)
             })
             .then(data => {
-                console.log(data);
                 return 200
             }
             )

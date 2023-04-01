@@ -60,12 +60,10 @@ export default defineComponent({
             const subcategoriesOffer: Subcategory[] = []
             const productsOffer: Product[] = []
             let nbProducts = 0
-            console.log(this.categories)
             this.categories.forEach((category) => {
                 const catInput = document.getElementById(category.id) as HTMLInputElement
                 if (+ catInput.value > 0) {
                     for (let i = 0; i < +catInput.value; i++) {
-                        console.log("cc")
                         categoriesOffer.push(category)
                     }
                     nbProducts += +catInput.value
@@ -73,7 +71,6 @@ export default defineComponent({
                         const subcatInput = document.getElementById(subcategory.id) as HTMLInputElement
                         if (+subcatInput.value > 0) {
                             for (let i = 0; i < +subcatInput.value; i++) {
-                                console.log("cc")
                                 subcategoriesOffer.push(subcategory)
                             }
                             nbProducts += +subcatInput.value
@@ -81,7 +78,6 @@ export default defineComponent({
                                 const prodInput = document.getElementById(product.id) as HTMLInputElement
                                 if (+prodInput.value > 0) {
                                     for (let i = 0; i < +prodInput.value; i++) {
-                                        console.log("cc")
                                         productsOffer.push(product)
                                     }
                                     nbProducts += +prodInput.value
@@ -95,17 +91,14 @@ export default defineComponent({
                 const commandId = response
                 categoriesOffer.forEach((category) => {
                     offerRepo.addCategoryToOffer(commandId, category.id).then((response) => {
-                        console.log(response)
                     })
                 })
                 subcategoriesOffer.forEach((subcategory) => {
                     offerRepo.addSubCategoryToOffer(commandId, subcategory.id).then((response) => {
-                        console.log(response)
                     })
                 })
                 productsOffer.forEach((product) => {
                     offerRepo.addProductToOffer(commandId, product.id).then((response) => {
-                        console.log(response)
                     })
                 })
                 const nameProducts: string[] = []
@@ -132,7 +125,6 @@ export default defineComponent({
         },
         countOccurences(array: { key: string, value: number }[], id: string) {
             let count = 0;
-            console.log(array)
             if (array)
                 array.forEach((element) => {
                     if (element.key === id) {

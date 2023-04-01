@@ -111,9 +111,6 @@ export default defineComponent({
             this.isOffer = undefined;
         },
         deleteObjet(objet: any, message: string, type: string) {
-            console.log(objet + " " + message + " " + type)
-            console.log(objet)
-
             this.popUpMessage = message;
             this.popUpButtons = 2;
             this.popUpDelete = true;
@@ -163,7 +160,6 @@ export default defineComponent({
             const stockRepo = new StockRepository()
             stockRepo.getStocks().then((response) => {
                 this.categories = response
-                console.log(this.categories)
                 this.$emit('categories', this.categories)
             })
         },
@@ -190,7 +186,6 @@ export default defineComponent({
     },
     created() {
         this.getCategories()
-        console.log(this.categories)
     },
     /*mounted() {
         this.name // type: string | undefined

@@ -5,14 +5,13 @@ import { useRouter } from 'vue-router'
 import AccountModalComponent from '../../components/AccountModalComponent.vue'
 const router = useRouter()
 
-function showPopUpRole(): void{
-    console.log("test")
+function showPopUpRole(): void {
 }
 
 //@ts-ignore
 export default defineComponent({
 
-    components:{
+    components: {
         MenuComponent,
         AccountModalComponent
     },
@@ -22,21 +21,21 @@ export default defineComponent({
         msg: { type: String, required: true, default:'test'}
     },*/
     data() {
-        const isAccountModalShow : boolean = false
+        const isAccountModalShow: boolean = false
         return {
             isAccountModalShow
         }
     },
-    methods:{
-        showAccountModal (){
+    methods: {
+        showAccountModal() {
             const modal = document.getElementById("account-popup") as HTMLElement
-            if(!this.isAccountModalShow) {
+            if (!this.isAccountModalShow) {
                 this.isAccountModalShow = true;
-                if(modal) modal.style.display = "block";
+                if (modal) modal.style.display = "block";
             }
             else {
                 this.isAccountModalShow = false;
-                if(modal) modal.style.display = "none";
+                if (modal) modal.style.display = "none";
             }
         },
     }

@@ -31,7 +31,6 @@ export default defineComponent({
             const accountsRepo = new AccountsRepository();
             accountsRepo.getGroups().then((groups: Group[]) => {
                 this.groups = groups;
-                console.log(this.groups)
             });
         },
         unshowModal(idModal: string) {

@@ -39,7 +39,6 @@ export default defineComponent({
             if (modal) modal.style.display = "none";
         },
         sendCommande() {
-            console.log(this.$props.command)
             const paymentMethod = document.getElementById("paymentMethod") as HTMLInputElement;
             const name = document.getElementById("clientName") as HTMLInputElement;
             if (paymentMethod.value != "Account") {
@@ -54,9 +53,7 @@ export default defineComponent({
 
             }
             else {
-                console.log(this.selectedAccount)
                 const CommandRepo = new CommandesRepository
-                console.log(this.groupToDisplay)
                 const kfet: boolean = this.groupToDisplay === "Kfet"
                 CommandRepo.addCommande(this.$props.command, paymentMethod.value, this.selectedAccount, kfet).then((commande: Commande) => {
                     this.unshowModal("payementModal");

@@ -23,14 +23,13 @@ export default class CommandesRepository {
                 json.forEach((commande: any) => {
                     const products: Product[] = [];
                     commande.products.forEach((product: any) => {
-                        console.log(product)
                         const productToAdd = new Product(product.id, product.product);
                         productToAdd.setState(product.state);
                         products.push(productToAdd);
                     });
                     const date = new Date(commande.date);
                     commandes.push(new Commande(date, commande.price, commande.isPaid, commande.paymentMethod, products, commande.name, commande.id, commande.state));
-                    console.log(commandes)
+
                 });
                 return new Promise((resolve, reject) => {
                     commandes.sort((a, b) => a.date.getTime() - b.date.getTime());
@@ -100,10 +99,8 @@ export default class CommandesRepository {
     public getCategory(): Promise<Category[]> {
         const CatRepository = new StockRepository();
         return new Promise((resolve, reject) => CatRepository.getStocks().then((categories) => {
-            console.log('Success:', categories);
             resolve(categories);
         }).catch((error) => {   // Error handling
-            console.error('Error:', error);
             reject(error);
         }));
     }

@@ -17,7 +17,7 @@ export default defineComponent({
     },
     data() {
         const commandes: Commande[] = [];
-        let isCommande : Commande | undefined;
+        let isCommande: Commande | undefined;
         return {
             commandes,
             isCommande
@@ -28,10 +28,9 @@ export default defineComponent({
             const CommandRepo = new CommandesRepository();
             CommandRepo.getCommandes().then((commandes) => {
                 this.commandes = commandes;
-                console.log(this.commandes)
             })
         },
-        editCommand(commande : Commande) {
+        editCommand(commande: Commande) {
             this.isCommande = commande;
             const modal = document.getElementById("editCommandModal");
             if (modal) modal.style.display = "block";

@@ -44,7 +44,6 @@ export default defineComponent({
             if (modal) modal.style.display = "none";
         },
         deleteObjet() {
-            console.log(this.type);
             switch (this.type) {
                 case "product":
                     // eslint-disable-next-line no-case-declarations

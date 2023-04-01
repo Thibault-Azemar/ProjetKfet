@@ -26,11 +26,9 @@ export default defineComponent({
         },
         editProductState(id: string, product: Product, event: any) {
             const state = event.target.value;
-            console.log(product)
             const commandesRepo = new CommandesRepository();
             commandesRepo.editProductState(id, product.id, state).then((response: any) => {
                 if (response.status === 200) {
-                    console.log(response)
                     product.setState(state);
                 }
             })

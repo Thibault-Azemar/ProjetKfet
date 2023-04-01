@@ -142,7 +142,6 @@ export default class StockRepository {
             );
     }
     public updateStock(product: Product) {
-        console.log('cc')
         const API_URL = Config.API_URL;
         const params = { id: product.id, stock: product.stock.toString() }
         return fetch(API_URL + 'product?' + new URLSearchParams(params), {

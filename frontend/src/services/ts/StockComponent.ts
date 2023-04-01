@@ -26,7 +26,6 @@ export default defineComponent({
     methods: {
         deleteProduct(objet: Product) {
             const message = "Voulez-vous vraiment supprimer le produit " + objet.name + " ?";
-            console.log(this)
             const type = "product";
             this.$emit('deleteObjet', objet, message, type);
         },

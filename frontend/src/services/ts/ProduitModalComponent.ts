@@ -43,12 +43,10 @@ export default defineComponent({
             const sellPriceMember = (document.getElementById("prix-vente-member") as HTMLInputElement).value;
             const subcategory = (document.getElementById("sous-cat") as HTMLInputElement).value;
             const image = (document.getElementById("image-produit") as HTMLInputElement).value;
-            console.log(image)
             //rename image
             const imageSplit = image.split("\\");
             const imageName = imageSplit[imageSplit.length - 1];
             const imageRename = name + "_" + imageName;
-            console.log(imageRename)
 
             const stockRepo = new StockRepository();
             const productToAdd = new Product("", name, +buyPrice, +sellPrice, +sellPriceMember, 0, subcategory, imageRename);
@@ -67,8 +65,6 @@ export default defineComponent({
             let image = (document.getElementById("image-produit") as HTMLInputElement).value;
             if (image == "")
                 image = "";
-            console.log(name
-                + buyPrice + sellPrice + sellPriceMember + subcategory + image)
             produit.name = name;
             produit.purchasePrice = +buyPrice;
             produit.sellingPrice = +sellPrice;

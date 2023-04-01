@@ -48,14 +48,12 @@ export default defineComponent({
             input.value = String(value)
         },
         stockEntrance() {
-            console.log('cc')
             const productToUpdate: Product[] = []
             const StockRepo = new StockRepository()
             for (let i = 0; i < this.subcategories.length; i++) {
                 for (let j = 0; j < this.subcategories[i].products.length; j++) {
                     const productInput = document.getElementById('input' + this.subcategories[i].products[j].id) as HTMLInputElement
                     if (+productInput.value != 0) {
-                        console.log(productInput)
                         this.subcategories[i].products[j].stock += +productInput.value
                         StockRepo.updateStock(this.subcategories[i].products[j]).then((res) => {
                             productToUpdate.push(this.subcategories[i].products[j])
@@ -66,7 +64,6 @@ export default defineComponent({
             this.unshowModal('stockEntranceModal')
         },
         createSubcategoriesArray() {
-            console.log(this.categories)
             const subcategories: any[] = []
             for (let i = 0; i < this.categories.length; i++) {
                 const category = this.categories[i] as Category

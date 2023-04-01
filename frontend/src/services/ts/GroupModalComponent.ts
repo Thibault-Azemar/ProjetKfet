@@ -66,7 +66,6 @@ export default defineComponent({
             const AccountRepo = new AccountsRepository();
             AccountRepo.getGroups().then((response) => {
                 this.groups = response;
-                console.log(this.groups)
             }
             ).catch((error) => {
                 console.log(error);

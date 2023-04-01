@@ -70,7 +70,6 @@ export default defineComponent({
             if (modal) modal.style.display = "block";
         },
         updateAccount(customer: Customer) {
-            console.log("cc")
             this.accountsToDisplay.forEach((account: Customer) => {
                 if (account.id === customer.id) {
                     account.money = customer.money;

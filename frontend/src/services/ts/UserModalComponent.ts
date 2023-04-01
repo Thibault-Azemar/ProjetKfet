@@ -29,8 +29,6 @@ export default defineComponent({
             const role = (document.getElementById("role-user") as HTMLInputElement).value;
             const userRepo = new UserRepository();
             if (email.search(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
-                console.log("email not valid")
-                console.log(this.$emit('messageFromModal', "L'email n'est pas valide", 1, false))
                 if (this.$root !== null) {
                     this.$root.$emit('messageFromModal', "L'email n'est pas valide", 1, false);
                 }
@@ -52,7 +50,6 @@ export default defineComponent({
                 user.firstname = firstname;
                 user.email = email;
                 user.role = role;
-                console.log("user edited")
             }, (error) => {
                 console.log(error)
             })

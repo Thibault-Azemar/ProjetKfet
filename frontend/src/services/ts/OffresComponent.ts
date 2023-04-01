@@ -38,7 +38,6 @@ export default defineComponent({
 
             const message = "Voulez-vous vraiment supprimer l'offre " + objet.name + " ?";
             const type = "offer";
-            console.log(objet)
             this.$emit('deleteObjet', objet, message, type);
         },
         getOffers() {
