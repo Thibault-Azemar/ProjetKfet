@@ -13,7 +13,7 @@
         Stock</button>
       <button class="icon-button" @click="showAddModal()"><img src="../assets/pictures/plus.svg"></button>
     </div>
-    <StockComponent ref="StockComponent" @delete-objet="deleteObjet" @update-product="updateProduct"
+    <StockComponent ref="StockComponent" :stock="categories" @delete-objet="deleteObjet" @update-product="updateProduct"
       v-if="value === 'Stock'" />
     <OffresComponent ref="OffresComponent" :categories="categories" @delete-objet="deleteObjet"
       @update-offer="updateOffer" v-if="value === 'Offres'" />
@@ -25,7 +25,7 @@
     <OffreModalComponent ref @offer-added="offerAdded" @unshow-modal="unshowModal" :categories="categories"
       :offer="isOffer" />
     <CategoryModalComponent @delete-category="deleteObjet" :category="isCategory" />
-    <StockEntranceModalComponent />
+    <StockEntranceModalComponent :categories="categories" />
   </div>
   <SimpleModalComponent @delete-product="deleteProduct" @delete-offer="deleteOffer" @delete-user="deleteUser"
     :objet="deleteObj" :type="objetType" :del="popUpDelete" :buttons="popUpButtons" :message="popUpMessage" />
