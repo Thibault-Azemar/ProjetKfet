@@ -35,6 +35,7 @@ export default defineComponent({
         let del: Boolean | undefined;
         let type: String | undefined;
         let objet: any;
+        let selected: string | undefined;
         return {
             groupToDisplay,
             accounts,
@@ -45,7 +46,8 @@ export default defineComponent({
             buttons,
             del,
             type,
-            objet
+            objet,
+            selected
         }
 
     },
@@ -112,12 +114,15 @@ export default defineComponent({
                 );
             return Promise.resolve(1);
         },
-        changeGroup() {
-            this.accounts.forEach((account: Group) => {
-                if (account.name === this.groupToDisplay) {
-                    this.accountsToDisplay = account.customers;
+        changeGroup(init?: boolean) {
+            for (let i = 0; i < this.accounts.length; i++) {
+                if (i === 0 && init) {
+                    this.groupToDisplay = this.accounts[i].name;
                 }
-            })
+                if (this.accounts[i].name === this.groupToDisplay) {
+                    this.accountsToDisplay = this.accounts[i].customers;
+                }
+            }
         },
         deleteAccount(id: string) {
             this.unshowModal("simple-modal");
@@ -144,14 +149,14 @@ export default defineComponent({
             })
         }
     },
-    beforeMount() {
+    created() {
         this.getCustomers().then((response: number) => {
             if (response === 0) {
-                this.changeGroup();
+                this.changeGroup(true);
             }
             else {
                 setTimeout(() => {
-                    this.changeGroup();
+                    this.changeGroup(true);
                 }, 100)
             }
         })
