@@ -8,7 +8,7 @@
       <h3 class="ordinateur">Prix Kfet</h3>
     </div>
     <div class="body">
-      <div class="offres-grid" v-for="offer in offers" :key="offer" :id="offer.id"> <!-- v for offres -->
+      <div class="offres-grid nthchild" v-for="offer in offers" :key="offer" :id="offer.id"> <!-- v for offres -->
         <p>{{ offer.name }}</p>
         <p>{{ offer.description }} </p>
         <p>{{ offer.price }}</p>
