@@ -19,6 +19,7 @@ export default class AccountsRepository {
                     const group = new Group(data.name, data.id);
                     data.customers.forEach((data: any) => {
                         const customer = new Customer(data.name, data.firstname, data.money, data.id, group.name);
+                        console.log(customer)
                         group.addCustomer(customer);
                     })
                     customers.push(group);
@@ -74,20 +75,20 @@ export default class AccountsRepository {
             }
             );
     }
-    public updateAccount(id: string, name: string, firstname: string, money: number, group: string): Promise<Customer> {
+    public updateAccount(id: string, name: string, firstname: string, money: number, group: string): Promise<number> {
+        console.log("updateAccount")
         const API_URL = Config.API_URL;
         const moneyStr = money.toString();
-        const params = { name: name, firstname: firstname, money: moneyStr, group: group }
-        return fetch(API_URL + 'customer/' + id + '?' + new URLSearchParams(params), {
-            method: 'PUT',
+        const params = { id: id, name: name, firstname: firstname, money: moneyStr, group: group }
+        console.log(params)
+        return fetch(API_URL + 'customer?' + new URLSearchParams(params), {
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
         })
-            .then(response => response.json())
-            .then(data => {
-                const customer = new Customer(name, firstname, money, data.id, group);
-                return Promise.resolve(customer);
+            .then(response => {
+                return Promise.resolve(200);
             }
             )
             .catch(error => {

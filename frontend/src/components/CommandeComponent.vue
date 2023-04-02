@@ -8,8 +8,9 @@
     </div>
     <div class="commande-grid">
       <button class="tertiary-button" v-for="cell in gridCellsContent" :key="cell"
-        @click="clickOnCell(cell.type, cell.id)">
-        <img :src="cell.image" />
+        @click="clickOnCell(cell.type, cell.id)"
+        :disabled="currentDisplay == 'subcategory' ? cell.stock <= 0 ? true : false : false">
+
         <p>{{ cell.title }}</p>
       </button>
     </div>
@@ -17,11 +18,17 @@
       <div class="commande-resume" id="cartModal">
         <h2>Panier :</h2>
         <div class="command-list">
+          <p class="command-list-grid" v-for="offer in command.offers" :id="command.offers.indexOf(offer)" :key="offer">
+            {{ offer ? offer.name : null }}
+            <button v-if="offer && offer.sellingPrice != 0" class="icon-button-list"
+              @click="deleteOffer(command.offers.indexOf(offer))"><img src="../assets/pictures/close.svg"></button>
+          </p>
           <p class="command-list-grid" v-for="product in command.products" :id="command.products.indexOf(product)"
             :key="product">
-            {{ product ? product.name : null }}
-            <button v-if="product" class="icon-button-list" @click="deleteProduct(command.products.indexOf(product))"><img
-                src="../assets/pictures/close.svg"></button>
+            {{ product ? product.sellingPrice == 0 ? '&nbsp;&nbsp;&nbsp;' : null : null }}{{ product ? product.name : null
+            }}
+            <button v-if="product && product.sellingPrice != 0" class="icon-button-list"
+              @click="deleteProduct(command.products.indexOf(product))"><img src="../assets/pictures/close.svg"></button>
           </p>
         </div>
       </div>
@@ -34,6 +41,7 @@
 
     </div>
     <PayementModalComponent @show-client-name-modal="showClientNameModal" @unshow-modal="unshowModal" />
-    <ClientNameModalComponent @unshow-modal="unshowModal" :command="command" :payement-type="payementType" />
+    <ClientNameModalComponent @unshow-modal="unshowModal" @commande-added="refresh" :command="command"
+      :payement-type="payementType" />
   </div>
 </template>

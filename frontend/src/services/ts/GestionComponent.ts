@@ -113,6 +113,7 @@ export default defineComponent({
             this.isProduit = undefined;
             this.isOffer = undefined;
             this.isCategory = undefined;
+            console.log(this.isProduit)
         },
         deleteObjet(objet: any, message: string, type: string) {
             console.log('slt')

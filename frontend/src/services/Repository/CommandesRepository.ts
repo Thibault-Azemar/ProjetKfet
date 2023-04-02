@@ -99,6 +99,7 @@ export default class CommandesRepository {
     public getCategory(): Promise<Category[]> {
         const CatRepository = new StockRepository();
         return new Promise((resolve, reject) => CatRepository.getStocks().then((categories) => {
+            categories.sort((a, b) => a.name.localeCompare(b.name));
             resolve(categories);
         }).catch((error) => {   // Error handling
             reject(error);

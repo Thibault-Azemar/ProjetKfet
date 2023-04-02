@@ -29,7 +29,8 @@ export default defineComponent({
       id: string,
       title: string,
       image: string,
-      type: string
+      type: string,
+      stock: number
     }
     const image: string = "../../assets/pictures/offer.jpg";
     const gridCellsContent: gridCellContent[] = [];
@@ -40,8 +41,9 @@ export default defineComponent({
     const currentProducts: Product[] = [];
     const payementType: string = "";
     const currentOffer: Offer = new Offer();
-    const stepOffer: any[] = []; //help me stepOffer i'm stuck
     const step: number = 0;
+    const isOffer: boolean = false;
+    const init = true
     return {
       image,
       gridCellsContent,
@@ -52,8 +54,9 @@ export default defineComponent({
       currentProducts,
       currentDisplay,
       currentOffer,
-      stepOffer,
-      step
+      step,
+      isOffer,
+      init
     }
 
   },
@@ -63,18 +66,18 @@ export default defineComponent({
       this.gridCellsContent = [];
       this.currentCategories = [];
       const image = "../../assets/pictures/offer.jpg";
-      this.gridCellsContent.push({ id: "offer", title: "offre", image: image, type: "offer" });
+      this.gridCellsContent.push({ id: "offer", title: "offre", image: image, type: "offer", stock: 1 });
       const CatRepository = new CommandesRepository();
       CatRepository.getCategory().then((categories: Category[]) => {
         categories.forEach((category: Category) => {
           //add to the gridCellsContent
           const image = category.image;
-          this.gridCellsContent.push({ id: category.id, title: category.name, image: image, type: "category" });
+          this.gridCellsContent.push({ id: category.id, title: category.name, image: image, type: "category", stock: 1 });
           this.currentCategories.push(category);
         });
       });
     },
-    clickOnCell(type: string, id: string) {
+    clickOnCell(type: string, id: string,) {
       const CatRepository = new CommandesRepository();
       switch (type) {
         case "category":
@@ -86,7 +89,7 @@ export default defineComponent({
               if (category.id == id) {
                 //add to the gridCellsContent
                 category.subcategories.forEach((subcategory: Subcategory) => {
-                  this.gridCellsContent.push({ id: subcategory.id, title: subcategory.name, image: subcategory.image, type: "subcategory" });
+                  this.gridCellsContent.push({ id: subcategory.id, title: subcategory.name, image: subcategory.image, type: "subcategory", stock: 1 });
                   this.currentSubcategories.push(subcategory);
                 });
               }
@@ -103,7 +106,7 @@ export default defineComponent({
                 if (subcategory.id == id) {
                   //add to the gridCellsContent
                   subcategory.products.forEach((product) => {
-                    this.gridCellsContent.push({ id: product.id, title: product.name, image: product.image, type: "product" });
+                    this.gridCellsContent.push({ id: product.id, title: product.name, image: product.image, type: "product", stock: product.stock });
                     this.currentProducts.push(product);
                   });
                 }
@@ -117,81 +120,65 @@ export default defineComponent({
           CatRepository.getOffers().then((offers: Offer[]) => {
             offers.forEach((offer: Offer) => {
               //add to the gridCellsContent
-              this.gridCellsContent.push({ id: offer.id.toString(), title: offer.name, image: offer.image, type: "insideOffer" });
+              this.gridCellsContent.push({ id: offer.id.toString(), title: offer.name, image: offer.image, type: "insideOffer", stock: 1 });
+
             });
           }
           );
+
           break;
         case "insideOffer":
+          this.isOffer = true;
+          // eslint-disable-next-line no-case-declarations
+          let i = 0
           this.currentDisplay = "insideOffer";
           this.gridCellsContent = [];
           CatRepository.getOffers().then((offers: Offer[]) => {
             offers.forEach((offer: Offer) => {
               if (offer.id == id) {
                 this.currentOffer = offer;
+                if (this.init) {
+                  this.command.addOffer(offer);
+                  this.command.updateTotal();
+                  this.init = false
+                }
               }
             });
-          }
-          ).then(() => {
-            console.log(this.currentOffer)
-            if (this.currentOffer.catIds != undefined) {
-              this.currentOffer.catIds.forEach((catId: string) => {
-                CatRepository.getCategory().then((categories: Category[]) => {
-                  categories.forEach((category: Category) => {
-                    if (category.id == catId) {
-                      this.stepOffer.push(category);
-                    }
-                  });
-                }
-                );
-              });
-            }
-            if (this.currentOffer.subcatIds != undefined) {
-              this.currentOffer.subcatIds.forEach((subcatId: string) => {
-                CatRepository.getCategory().then((categories: Category[]) => {
-                  categories.forEach((category: Category) => {
-                    category.subcategories.forEach((subcategory: Subcategory) => {
-                      if (subcategory.id == subcatId) {
-                        this.stepOffer.push(subcategory);
+            this.currentOffer.catIds.forEach((cat: string) => {
+              console.log(cat)
+              CatRepository.getCategory().then((categories: Category[]) => {
+                if (this.step < categories.length) {
+                  if (i == this.step) {
+                    categories.forEach((category: Category) => {
+                      console.log(category)
+                      if (category.id == cat) {
+                        this.currentCategories.push(category);
+                        this.gridCellsContent.push({ id: category.id, title: category.name, image: category.image, type: "category", stock: 1 });
+                        console.log(this.step)
                       }
                     });
-                  });
+                    i++
+                  }
+                  else {
+                    i++;
+                  }
                 }
-                );
-              });
-            }
-            if (this.currentOffer.productIds != undefined) {
-              this.currentOffer.productIds.forEach((productId: string) => {
-                CatRepository.getCategory().then((categories: Category[]) => {
-                  categories.forEach((category: Category) => {
-                    category.subcategories.forEach((subcategory: Subcategory) => {
-                      subcategory.products.forEach((product: Product) => {
-                        if (product.id == productId) {
-                          this.stepOffer.push(product);
-                        }
-                      });
-                    });
-                  });
-                }
-                );
-              });
-            }
-          }).then(() => {
-            console.log(this.stepOffer);
-            for (let i = 0; i < this.stepOffer.length; i++) {
-              console.log(this.step)
-              this.gridCellsContent.push({ id: this.stepOffer[this.step].id, title: this.stepOffer[this.step].name, image: this.stepOffer[this.step].image, type: "insideOffer" });
-              this.step++;
-            }
+              }
+              );
+            });
           });
           break;
         case "product":
-          this.currentDisplay = "product";
+          this.currentDisplay = "subcategory";
           // eslint-disable-next-line no-case-declarations
           const product = this.currentProducts.find((product: Product) => product.id == id);
           if (product != undefined)
-            this.command.addProduct(product);
+            this.command.addProduct(product, true);
           this.command.updateTotal();
+          if (this.isOffer) {
+            this.step++;
+            this.clickOnCell("insideOffer", this.currentOffer.id.toString());
+          }
           break;
       }
     },
@@ -215,13 +202,13 @@ export default defineComponent({
         case "category":
           this.currentDisplay = "home";
           this.gridCellsContent = [];
-          this.gridCellsContent.push({ id: "offer", title: "offre", image: image, type: "offer" });
+          this.gridCellsContent.push({ id: "offer", title: "offre", image: image, type: "offer", stock: 1 });
           this.getCategories();
           break;
         case "offer":
           this.currentDisplay = "home";
           this.gridCellsContent = [];
-          this.gridCellsContent.push({ id: "offer", title: "offre", image: image, type: "offer" });
+          this.gridCellsContent.push({ id: "offer", title: "offre", image: image, type: "offer", stock: 1 });
           this.getCategories();
           break;
         case "subcategory":
@@ -229,7 +216,7 @@ export default defineComponent({
           this.gridCellsContent = [];
           this.currentCategories.forEach((category: Category) => {
             //add to the gridCellsContent
-            this.gridCellsContent.push({ id: category.id, title: category.name, image: category.image, type: "category" });
+            this.gridCellsContent.push({ id: category.id, title: category.name, image: category.image, type: "category", stock: 1 });
           });
           break;
         case "product":
@@ -237,7 +224,7 @@ export default defineComponent({
           this.gridCellsContent = [];
           this.currentSubcategories.forEach((subcategory: Subcategory) => {
             //add to the gridCellsContent
-            this.gridCellsContent.push({ id: subcategory.id, title: subcategory.name, image: subcategory.image, type: "subcategory" });
+            this.gridCellsContent.push({ id: subcategory.id, title: subcategory.name, image: subcategory.image, type: "subcategory", stock: 1 });
           });
           break;
       }
@@ -250,7 +237,9 @@ export default defineComponent({
       if (modal && modal.style.display === "block") modal.style.display = "none";
       else if (modal) modal.style.display = "block";
     },
-
+    refresh() {
+      location.reload();
+    },
   },
   beforeMount() {
     this.getCategories();

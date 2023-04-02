@@ -42,16 +42,31 @@ export default defineComponent({
             const sellPrice = (document.getElementById("prix-vente") as HTMLInputElement).value;
             const sellPriceMember = (document.getElementById("prix-vente-member") as HTMLInputElement).value;
             const subcategory = (document.getElementById("sous-cat") as HTMLInputElement).value;
-            const image = (document.getElementById("image-produit") as HTMLInputElement).value;
-            //rename image
-            const imageSplit = image.split("\\");
-            const imageName = imageSplit[imageSplit.length - 1];
-            const imageRename = name + "_" + imageName;
-
+            const imageInput = (document.getElementById("image-produit") as HTMLInputElement);
+            let image: File = new File([""], "default.png");
+            if (imageInput.files != null) {
+                image = imageInput.files[0]
+            }
+            console.log(image)
+            //convert to base64
+            const reader = new FileReader();
+            let imageb64 = "";
+            if (image != null) {
+                reader.readAsDataURL(image);
+                reader.onload = () => {
+                    console.log(reader.result)
+                    imageb64 = reader.result as string;
+                };
+                reader.onerror = (error) => {
+                    console.log('Error: ', error);
+                };
+            }
+            console.log(imageb64)
             const stockRepo = new StockRepository();
-            const productToAdd = new Product("", name, +buyPrice, +sellPrice, +sellPriceMember, 0, subcategory, imageRename);
-            stockRepo.addProduct(name, +buyPrice, +sellPrice, +sellPriceMember, subcategory, image).then((response: any) => {
-                this.$emit('productAdded', productToAdd);
+            const productToAdd = new Product("", name, +buyPrice, +sellPrice, +sellPriceMember, 0, subcategory, imageb64);
+            stockRepo.addProduct(name, +buyPrice, +sellPrice, +sellPriceMember, subcategory, imageb64).then((response: any) => {
+                //this.$emit('productAdded', productToAdd);
+                location.reload();
             });
 
         },
@@ -75,7 +90,8 @@ export default defineComponent({
 
             const stockRepo = new StockRepository();
             stockRepo.editProduct(id, name, +buyPrice, +sellPrice, +sellPriceMember, subcategory, image).then((response: any) => {
-                this.unshowModal("produitModal");
+                //this.unshowModal("produitModal");
+                location.reload();
             });
         },
     },

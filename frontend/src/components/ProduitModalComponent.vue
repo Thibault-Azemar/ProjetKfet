@@ -8,7 +8,6 @@
         <button class="icon-button close-button" @click="unshowModal('produitModal')"></button>
       </header>
       <div class="form">
-
         <label class="input-label" for="nom-produit">Nom</label>
         <input name="nom-produit" class="input-field" type="text" :value="produit ? produit.name : ''"
           placeholder="nom du produit" id="nom-produit" required>

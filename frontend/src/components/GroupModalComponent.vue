@@ -32,8 +32,9 @@
         <label for="nom">Nom du groupe</label>
         <input type="text" id="name" :value="isGroup ? isGroup.name : ''" placeholder="Entrer le nom du groupe">
         <div class="submit-button">
-          <input class="primary-button" id="creer-produit" :value="isGroup ? 'Modifier le groupe' : 'Créer un groupe'"
-            @click="isGroup ? editGroup(isGroup) : addGroup()">
+          <button class="primary-button" id="creer-group" @click="isGroup ? editGroup(isGroup) : addGroup()">{{ isGroup ?
+            'Modifier le groupe' : 'Créer un groupe' }}</button>
+
         </div>
       </div>
     </div>

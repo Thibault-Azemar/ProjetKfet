@@ -12,8 +12,7 @@ import Subcategory from '@/services/model/SubcategoryModel';
       </header>
       <div class="form formproduct">
         <div style="max-height: calc(100% - 50px);overflow-y: auto">
-          <div v-for="subcategory in subcategories" :key="subcategory"
-          ><!--v-for sous categorie-->
+          <div v-for="subcategory in subcategories" :key="subcategory"><!--v-for sous categorie-->
             <h3 style="margin-left: 0">{{ subcategory.name }}</h3>
             <div v-for="product in subcategory.products" :key="product" class="grid-product"> <!--v-for produit-->
               <div style="display: flex;align-items: center">{{ product.name }}</div>
@@ -24,7 +23,7 @@ import Subcategory from '@/services/model/SubcategoryModel';
               </div>
             </div>
           </div>
-          </div>
+        </div>
         <div class="submit-button">
           <button class="primary-button" @click="stockEntrance()">Valider</button>
         </div>

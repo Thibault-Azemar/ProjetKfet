@@ -46,7 +46,7 @@ export default defineComponent({
                 CommandRepo.addCommande(this.$props.command, paymentMethod.value, name.value).then((commande: Commande) => {
                     this.unshowModal("payementModal");
                     this.unshowModal("clientNameModal");
-                    this.$emit("commandeAdded", commande);
+                    this.$emit("commande-added", commande);
                 }).catch((error: any) => {
                     console.log(error);
                 })
@@ -58,7 +58,7 @@ export default defineComponent({
                 CommandRepo.addCommande(this.$props.command, paymentMethod.value, this.selectedAccount, kfet).then((commande: Commande) => {
                     this.unshowModal("payementModal");
                     this.unshowModal("clientNameModal");
-                    this.$emit("commandeAdded", commande);
+                    this.$emit("commande-added", commande);
                 }).catch((error: any) => {
                     console.log(error);
                 })

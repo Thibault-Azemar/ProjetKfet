@@ -45,7 +45,15 @@ export default defineComponent({
                 //location.reload();
             });
         },
-        editCompte() {
+        editCompte(customer: Customer) {
+            const name = (document.getElementById("nom-compte") as HTMLInputElement).value;
+            const firstname = (document.getElementById("prenom-compte") as HTMLInputElement).value;
+            const group = (document.getElementById("groupe") as HTMLInputElement).value;
+            const accountsRepo = new AccountsRepository();
+            accountsRepo.updateAccount(customer.id, name, firstname, customer.money, group).then((response) => {
+                //location.reload();
+            }
+            );
 
         }
     },

@@ -27,7 +27,7 @@
         </select>
 
         <div class="submit-button">
-          <button class="primary-button" id="creer-user" @click="customer ? editCompte() : addCompte()">
+          <button class="primary-button" id="creer-user" @click="customer ? editCompte(customer) : addCompte()">
             {{ customer ? 'Modifier le compte' : 'Créer un compte' }}</button>
         </div>
       </div>

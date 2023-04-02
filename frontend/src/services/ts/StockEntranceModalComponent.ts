@@ -57,6 +57,7 @@ export default defineComponent({
                         this.subcategories[i].products[j].stock += +productInput.value
                         StockRepo.updateStock(this.subcategories[i].products[j]).then((res) => {
                             productToUpdate.push(this.subcategories[i].products[j])
+                            location.reload()
                         })
                     }
                 }

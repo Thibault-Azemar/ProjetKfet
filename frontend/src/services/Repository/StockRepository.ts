@@ -72,10 +72,12 @@ export default class StockRepository {
         let imageParam = image ? image : '';
         const buyPriceParam = buyPrice.toString();
         const sellPriceParam = sellPrice.toString();
+        console.log(subcategory)
         const sellPriceMemberParam = sellPriceMember.toString();
         if (image) {
             imageParam = image;
         }
+        console.log(imageParam)
         const params = { name: name, purchasePrice: buyPriceParam, sellingPrice: sellPriceParam, sellingPriceMembers: sellPriceMemberParam, idSubCategory: subcategory, image: imageParam }
         return fetch(API_URL + 'product/add?' + new URLSearchParams(params), {
             method: 'POST',
@@ -99,6 +101,7 @@ export default class StockRepository {
         const API_URL = Config.API_URL;
         let imageParam = image ? image : '';
         const buyPriceParam = buyPrice.toString();
+        console.log(subcategory)
         const sellPriceParam = sellPrice.toString();
         const sellPriceMemberParam = sellPriceMember.toString();
         if (image) {
