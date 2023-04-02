@@ -25,6 +25,7 @@ public class Product {
 //  Prix d'achat'
     private float purchasePrice;
 //  Image du produit
+    @Column(columnDefinition="TEXT")
     private String image;
 //  Stock de l'item
     private Integer stock;
