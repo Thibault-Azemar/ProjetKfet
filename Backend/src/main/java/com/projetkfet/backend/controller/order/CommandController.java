@@ -153,12 +153,19 @@ public class CommandController {
         // On ajoute les autres champs à la commande
         o.setPaymentMethod(paymentMethod);
         o.setPrice(priceOrder);
-        o.setIsPaid(Boolean.parseBoolean(isPaid));
+        // TODO : Boolean.parseBoolean(isPaid). Utile lorsque cela sera implémenté en
+        // front
+        o.setIsPaid(true);
         o.setState("En attente");
 
         o.setDate(new java.util.Date());
 
         commandRepository.save(o);
+
+        if (o.getId() == null) {
+            logger.info("Error add new command");
+            throw new Exception("Error add new command");
+        }
         logger.info("New command : " + o.getId());
 
         return o.getId();
@@ -191,16 +198,51 @@ public class CommandController {
         Optional<Command> o = commandRepository.findById(UUID.fromString(id));
 
         if (o.isPresent()) {
-            List<ProductCommand> listproduct = o.get().getProducts();
+            Command command = o.get();
+            List<ProductCommand> listproduct = command.getProducts();
+            Boolean isProductInList = false;
             for (ProductCommand p : listproduct) {
                 if (p.getId().equals(UUID.fromString(idproduct))) {
                     p.setState(state);
-                    commandRepository.save(o.get());
-                    return "Confirm";
+                    isProductInList = true;
+                    logger.info("Update productlist ok");
                 }
             }
-            logger.info("ID product not found");
-            throw new Exception("ID product not found");
+
+            if (isProductInList) {
+                // Si tous les champs state sont à "Terminé", on passe la commande à "Terminé".
+                // Sinon, on passe à "En cours". Si tous les champs sont
+                // à "En attente", on passe à "En attente"
+                int nbProductTerminated = 0;
+                int nbProductInProgress = 0;
+                int nbProductWaiting = 0;
+
+                for (ProductCommand p : listproduct) {
+                    if (p.getState().equals("Terminé")) {
+                        nbProductTerminated++;
+                    } else if (p.getState().equals("En cours")) {
+                        nbProductInProgress++;
+                    } else if (p.getState().equals("En attente")) {
+                        nbProductWaiting++;
+                    }
+                }
+
+                if (nbProductTerminated == listproduct.size()) {
+                    command.setState("Terminé");
+                } else if (nbProductInProgress > 0) {
+                    command.setState("En cours");
+                } else if (nbProductWaiting == listproduct.size()) {
+                    command.setState("En attente");
+                }
+
+                commandRepository.save(o.get());
+                logger.info("Update productlist ok");
+
+                return "Confirm";
+            } else {
+                logger.info("No product for this ID");
+                throw new Exception("No product for this ID");
+            }
 
         } else {
             logger.info("No order for this ID");

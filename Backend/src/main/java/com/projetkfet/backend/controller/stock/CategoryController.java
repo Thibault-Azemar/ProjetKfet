@@ -1,6 +1,7 @@
 package com.projetkfet.backend.controller.stock;
 
 import com.projetkfet.backend.data.stock.CategoryRepository;
+import com.projetkfet.backend.dto.ImageDTO;
 import com.projetkfet.backend.projection.stock.CategoryProjection;
 import com.projetkfet.backend.model.stock.Category;
 import org.apache.logging.log4j.LogManager;
@@ -53,33 +54,52 @@ public class CategoryController {
     // Permet d'ajouter une nouvelle catégorie
     @PostMapping(path = "/add")
     public @ResponseBody UUID addNewCategory(@RequestParam("name") String name,
-            @RequestParam(required = false, name = "image") String image) throws Exception {
+            @RequestBody(required = false) ImageDTO image) throws Exception {
         logger.info("New Categorie : " + name);
 
         UUID id = null;
 
         Category c = new Category();
         c.setName(name);
-        if (image != null && !image.equals("")) {
-            c.setImage(image);
+        if (image != null && image.getImage() != null) {
+            c.setImage(image.getImage());
         }
         categoryRepository.save(c);
 
-        Optional<Category> cat = categoryRepository.findByName(name);
-
-        if (cat.isPresent()) {
-            Category category = cat.get();
-            id = category.getId();
-            logger.info("Id category : " + id);
-        } else {
-            logger.info("Error create Category");
-            throw new Exception("Error create Category");
+        id = c.getId();
+        if (id == null) {
+            logger.info("Category not added");
+            throw new Exception("Category not added");
         }
-
+        logger.info("Category added : " + id);
         return id;
     }
 
     // UPDATE
+
+    @PatchMapping()
+    public @ResponseBody String updateCategory(@RequestParam("id") String id,
+            @RequestParam(required = false, name = "name") String name, @RequestBody(required = false) ImageDTO image)
+            throws Exception {
+        logger.info("Update Category");
+
+        Optional<Category> c = categoryRepository.findById(UUID.fromString(id));
+
+        if (c.isPresent()) {
+            Category category = c.get();
+            if (name != null && !name.isEmpty())
+                category.setName(name);
+            if (image != null && image.getImage() != null) {
+                category.setImage(image.getImage());
+            }
+            categoryRepository.save(category);
+            logger.info("Category updated : " + id);
+            return "Confirm";
+        } else {
+            logger.info("No category for this ID");
+            throw new Exception("No category for this ID");
+        }
+    }
 
     // DELETE
 

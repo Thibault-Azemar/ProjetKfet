@@ -2,6 +2,7 @@ package com.projetkfet.backend.controller.stock;
 
 import com.projetkfet.backend.data.stock.CategoryRepository;
 import com.projetkfet.backend.data.stock.SubCategoryRepository;
+import com.projetkfet.backend.dto.ImageDTO;
 import com.projetkfet.backend.projection.stock.SubCategoryProjection;
 import com.projetkfet.backend.model.stock.Category;
 import com.projetkfet.backend.model.stock.SubCategory;
@@ -59,8 +60,7 @@ public class SubCategoryController {
     // Permet d'ajouter une nouvelle catégorie
     @PostMapping(path = "/add")
     public @ResponseBody UUID addNewSubCategory(@RequestParam("name") String name,
-            @RequestParam(required = false, name = "image") String image, @RequestParam("idCategory") String id)
-            throws Exception {
+            @RequestBody(required = false) ImageDTO image, @RequestParam("idCategory") String id) throws Exception {
         logger.info("New SubCategorie : " + name);
 
         UUID idsubcat = null;
@@ -70,23 +70,19 @@ public class SubCategoryController {
         if (cat.isPresent()) {
             SubCategory c = new SubCategory();
             c.setName(name);
-            if (image != null && !image.equals("")) {
-                c.setImage(image);
+            if (image != null && image.getImage() != null) {
+                c.setImage(image.getImage());
             }
             c.setCategory(cat.get());
             subCategoryRepository.save(c);
 
-            Optional<SubCategory> sc = subCategoryRepository.findByName(name);
-
-            if (sc.isPresent()) {
-                SubCategory subcategory = sc.get();
-                idsubcat = subcategory.getId();
-                logger.info("Id subcategory : " + idsubcat);
-            } else {
-                logger.info("Error create SubCategory");
-                throw new Exception("Error create SubCategory");
+            idsubcat = c.getId();
+            if (idsubcat == null) {
+                logger.info("Error id SubCategory");
+                throw new Exception("Error id SubCategory");
             }
 
+            logger.info("New SubCategory : " + idsubcat);
             return idsubcat;
         }
         logger.info("Error id Category");
@@ -94,6 +90,30 @@ public class SubCategoryController {
     }
 
     // UPDATE
+
+    @PatchMapping()
+    public @ResponseBody String updateSubCategory(@RequestParam("id") String id,
+            @RequestParam(required = false, name = "name") String name, @RequestBody(required = false) ImageDTO image)
+            throws Exception {
+        logger.info("Update SubCategory");
+
+        Optional<SubCategory> sc = subCategoryRepository.findById(UUID.fromString(id));
+
+        if (sc.isPresent()) {
+            SubCategory subcategory = sc.get();
+            if (name != null && !name.isEmpty())
+                subcategory.setName(name);
+            if (image != null && image.getImage() != null)
+                subcategory.setImage(image.getImage());
+
+            subCategoryRepository.save(subcategory);
+            logger.info("SubCategory updated : " + id);
+            return "Confirm";
+        } else {
+            logger.info("No subcategory for this ID");
+            throw new Exception("No subcategory for this ID");
+        }
+    }
 
     // DELETE
 

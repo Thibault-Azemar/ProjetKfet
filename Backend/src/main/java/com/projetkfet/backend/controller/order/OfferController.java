@@ -1,6 +1,7 @@
 package com.projetkfet.backend.controller.order;
 
 import com.projetkfet.backend.data.order.OfferRepository;
+import com.projetkfet.backend.dto.ImageDTO;
 import com.projetkfet.backend.model.order.Offer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,7 +35,7 @@ public class OfferController {
 
     @PostMapping(path="/add")
     public @ResponseBody
-    UUID addNewOffer(@RequestParam("name") String name, @RequestParam("price") String price, @RequestParam("priceMember") String priceMember, @RequestParam("nbProducts") String nbproducts) throws Exception {
+    UUID addNewOffer(@RequestParam("name") String name, @RequestParam("price") String price, @RequestParam("priceMember") String priceMember, @RequestParam("nbProducts") String nbproducts, @RequestBody(required = false) ImageDTO image) throws Exception {
         logger.info("New Offer : " + name);
 
         UUID id = null;
@@ -46,23 +47,24 @@ public class OfferController {
         offer.setPriceMembers(Float.parseFloat(priceMember));
         offer.setNbproducts(Integer.parseInt(nbproducts));
 
+        if (image != null && image.getImage() != null)
+        {
+            offer.setImage(image.getImage());
+        }
+
         offerRepository.save(offer);
 
-        Optional<Offer> off = offerRepository.findByName(name);
-
-        if (off.isPresent())
+        if (offer.getId() != null)
         {
-            Offer o = off.get();
-            id = o.getId();
+            id = offer.getId();
             logger.info("Id Offer : "+ id);
+            return id;
         }
         else
         {
             logger.info("Error create Offre");
             throw new Exception("Error create Offer");
         }
-
-        return id;
     }
 
     //    UPDATE
@@ -201,7 +203,7 @@ public class OfferController {
 
     @PatchMapping()
     public @ResponseBody
-    String updateOffer(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "price") String price, @RequestParam(required = false, name = "priceMember") String priceMember, @RequestParam(required = false, name = "nbProducts") String nbproducts) throws Exception {
+    String updateOffer(@RequestParam("id") String id, @RequestParam(required = false, name = "name") String name, @RequestParam(required = false, name = "price") String price, @RequestParam(required = false, name = "priceMember") String priceMember, @RequestParam(required = false, name = "nbProducts") String nbproducts, @RequestBody(required = false) ImageDTO image) throws Exception {
         logger.info("Update Offer : " + id);
 
         Optional<Offer> o = offerRepository.findById(UUID.fromString(id));
@@ -217,6 +219,8 @@ public class OfferController {
                 offer.setPriceMembers(Float.parseFloat(priceMember));
             if (nbproducts != null && !nbproducts.isEmpty())
                 offer.setNbproducts(Integer.parseInt(nbproducts));
+            if (image != null && image.getImage() != null)
+                offer.setImage(image.getImage());
 
             offerRepository.save(offer);
             logger.info("Offer updated : " + id);

@@ -58,18 +58,18 @@ public class CustomerController {
 
             customerRepository.save(c);
 
-            Optional<Customer> cus = customerRepository.findByName(name);
-
-            if (cus.isPresent()) {
-                Customer customer = cus.get();
-                id = customer.getId();
+            if (c.getId() != null) {
+                id = c.getId();
                 logger.info("Id Customer : " + id);
+                return id;
             } else {
                 logger.info("Error create Customer");
                 throw new Exception("Error create Customer");
             }
+        } else {
+            logger.info("Error get Customer group");
+            throw new Exception("Error get Customer group");
         }
-        return id;
     }
 
     // UPDATE

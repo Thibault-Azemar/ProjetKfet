@@ -2,6 +2,7 @@ package com.projetkfet.backend.controller.stock;
 
 import com.projetkfet.backend.data.stock.ProductRepository;
 import com.projetkfet.backend.data.stock.SubCategoryRepository;
+import com.projetkfet.backend.dto.ImageDTO;
 import com.projetkfet.backend.model.stock.Product;
 import com.projetkfet.backend.model.stock.SubCategory;
 import org.apache.logging.log4j.LogManager;
@@ -59,8 +60,7 @@ public class ProductController {
             @RequestParam(required = false, name = "purchasePrice") String purchasePrice,
             @RequestParam(required = false, name = "sellingPrice") String sellingPrice,
             @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers,
-            @RequestParam(required = false, name = "image") String image, @RequestParam("idSubCategory") String id)
-            throws Exception {
+            @RequestBody(required = false) ImageDTO image, @RequestParam("idSubCategory") String id) throws Exception {
         logger.info("New Product");
 
         UUID idproduct = null;
@@ -85,26 +85,22 @@ public class ProductController {
                 float price = Float.parseFloat(sellingPriceMembers);
                 p.setSellingPriceMembers(price);
             }
-            if (image != null && !image.equals("")) {
-                p.setImage(image);
+            if (image != null && image.getImage() != null) {
+                p.setImage(image.getImage());
             }
             productRepository.save(p);
 
-            Optional<Product> product = productRepository.findByName(name);
-
-            if (product.isPresent()) {
-                Product prod = product.get();
-                idproduct = prod.getId();
-                logger.info("Id category : " + idproduct);
-            } else {
-                logger.info("Error create Product");
-                throw new Exception("Error create Product");
+            idproduct = p.getId();
+            if (idproduct == null) {
+                logger.info("Error New Product");
+                throw new Exception("Error New Product");
             }
+            logger.info("New Product successful: " + idproduct);
+            return idproduct;
         } else {
             logger.info("Error id SubCategory");
             throw new Exception("Error id SubCategory");
         }
-        return idproduct;
     }
 
     // UPDATE
@@ -114,8 +110,7 @@ public class ProductController {
             @RequestParam(required = false, name = "purchasePrice") String purchasePrice,
             @RequestParam(required = false, name = "sellingPrice") String sellingPrice,
             @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers,
-            @RequestParam(required = false, name = "stock") String stock,
-            @RequestParam(required = false, name = "image") String image,
+            @RequestParam(required = false, name = "stock") String stock, @RequestBody(required = false) ImageDTO image,
             @RequestParam(required = false, name = "idsubcat") String idsubcat) throws Exception {
         logger.info("Update Product : " + id);
 
@@ -143,8 +138,8 @@ public class ProductController {
                 Integer amount = Integer.parseInt(stock);
                 product.setStock(amount);
             }
-            if (image != null && !image.equals("")) {
-                product.setImage(image);
+            if (image != null && image.getImage() != null) {
+                product.setImage(image.getImage());
             }
             if (idsubcat != null && !idsubcat.equals("")) {
                 Optional<SubCategory> subCat = subCategoryRepository.findById(UUID.fromString(idsubcat));
