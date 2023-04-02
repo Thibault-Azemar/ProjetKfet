@@ -39,6 +39,9 @@ export default defineComponent({
     const currentSubcategories: Subcategory[] = [];
     const currentProducts: Product[] = [];
     const payementType: string = "";
+    const currentOffer: Offer = new Offer();
+    const stepOffer: any[] = []; //help me stepOffer i'm stuck
+    const step: number = 0;
     return {
       image,
       gridCellsContent,
@@ -47,7 +50,10 @@ export default defineComponent({
       currentCategories,
       currentSubcategories,
       currentProducts,
-      currentDisplay
+      currentDisplay,
+      currentOffer,
+      stepOffer,
+      step
     }
 
   },
@@ -63,16 +69,13 @@ export default defineComponent({
         categories.forEach((category: Category) => {
           //add to the gridCellsContent
           const image = category.image;
-          console.log(image)
           this.gridCellsContent.push({ id: category.id, title: category.name, image: image, type: "category" });
           this.currentCategories.push(category);
-          console.log(this.gridCellsContent)
         });
       });
     },
     clickOnCell(type: string, id: string) {
       const CatRepository = new CommandesRepository();
-      console.log(type + " " + id)
       switch (type) {
         case "category":
           this.currentDisplay = "category";
@@ -114,10 +117,73 @@ export default defineComponent({
           CatRepository.getOffers().then((offers: Offer[]) => {
             offers.forEach((offer: Offer) => {
               //add to the gridCellsContent
-              this.gridCellsContent.push({ id: offer.id.toString(), title: offer.name, image: offer.image, type: "offer" });
+              this.gridCellsContent.push({ id: offer.id.toString(), title: offer.name, image: offer.image, type: "insideOffer" });
             });
           }
           );
+          break;
+        case "insideOffer":
+          this.currentDisplay = "insideOffer";
+          this.gridCellsContent = [];
+          CatRepository.getOffers().then((offers: Offer[]) => {
+            offers.forEach((offer: Offer) => {
+              if (offer.id == id) {
+                this.currentOffer = offer;
+              }
+            });
+          }
+          ).then(() => {
+            console.log(this.currentOffer)
+            if (this.currentOffer.catIds != undefined) {
+              this.currentOffer.catIds.forEach((catId: string) => {
+                CatRepository.getCategory().then((categories: Category[]) => {
+                  categories.forEach((category: Category) => {
+                    if (category.id == catId) {
+                      this.stepOffer.push(category);
+                    }
+                  });
+                }
+                );
+              });
+            }
+            if (this.currentOffer.subcatIds != undefined) {
+              this.currentOffer.subcatIds.forEach((subcatId: string) => {
+                CatRepository.getCategory().then((categories: Category[]) => {
+                  categories.forEach((category: Category) => {
+                    category.subcategories.forEach((subcategory: Subcategory) => {
+                      if (subcategory.id == subcatId) {
+                        this.stepOffer.push(subcategory);
+                      }
+                    });
+                  });
+                }
+                );
+              });
+            }
+            if (this.currentOffer.productIds != undefined) {
+              this.currentOffer.productIds.forEach((productId: string) => {
+                CatRepository.getCategory().then((categories: Category[]) => {
+                  categories.forEach((category: Category) => {
+                    category.subcategories.forEach((subcategory: Subcategory) => {
+                      subcategory.products.forEach((product: Product) => {
+                        if (product.id == productId) {
+                          this.stepOffer.push(product);
+                        }
+                      });
+                    });
+                  });
+                }
+                );
+              });
+            }
+          }).then(() => {
+            console.log(this.stepOffer);
+            for (let i = 0; i < this.stepOffer.length; i++) {
+              console.log(this.step)
+              this.gridCellsContent.push({ id: this.stepOffer[this.step].id, title: this.stepOffer[this.step].name, image: this.stepOffer[this.step].image, type: "insideOffer" });
+              this.step++;
+            }
+          });
           break;
         case "product":
           this.currentDisplay = "product";
@@ -125,9 +191,7 @@ export default defineComponent({
           const product = this.currentProducts.find((product: Product) => product.id == id);
           if (product != undefined)
             this.command.addProduct(product);
-          console.log(this.command.products[0].name)
           this.command.updateTotal();
-          console.log(this.command)
           break;
       }
     },
@@ -151,15 +215,12 @@ export default defineComponent({
         case "category":
           this.currentDisplay = "home";
           this.gridCellsContent = [];
-          // eslint-disable-next-line no-case-declarations
           this.gridCellsContent.push({ id: "offer", title: "offre", image: image, type: "offer" });
           this.getCategories();
           break;
         case "offer":
           this.currentDisplay = "home";
           this.gridCellsContent = [];
-          // eslint-disable-next-line no-case-declarations
-
           this.gridCellsContent.push({ id: "offer", title: "offre", image: image, type: "offer" });
           this.getCategories();
           break;
@@ -184,10 +245,10 @@ export default defineComponent({
     deleteProduct(id: number) {
       this.command.removeProduct(id);
     },
-    showCart(){
-        const modal = document.getElementById("cartModal");
-        if (modal && modal.style.display === "block" ) modal.style.display = "none";
-        else if (modal) modal.style.display = "block";
+    showCart() {
+      const modal = document.getElementById("cartModal");
+      if (modal && modal.style.display === "block") modal.style.display = "none";
+      else if (modal) modal.style.display = "block";
     }
   },
   beforeMount() {
