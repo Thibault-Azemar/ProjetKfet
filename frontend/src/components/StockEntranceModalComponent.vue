@@ -14,7 +14,7 @@ import Subcategory from '@/services/model/SubcategoryModel';
         <div style="max-height: calc(100% - 50px);overflow-y: auto">
           <div v-for="subcategory in subcategories" :key="subcategory"
           ><!--v-for sous categorie-->
-            <h3 style="margin-left: 0">{{ subcategory.name }}</h3>
+            <h3 style="margin-left: 0" v-if="subcategory.products.length > 0">{{ subcategory.name }}</h3>
             <div v-for="product in subcategory.products" :key="product" class="grid-product"> <!--v-for produit-->
               <div style="display: flex;align-items: center">{{ product.name }}</div>
               <div>
