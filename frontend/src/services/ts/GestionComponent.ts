@@ -112,6 +112,7 @@ export default defineComponent({
             this.isOffer = undefined;
         },
         deleteObjet(objet: any, message: string, type: string) {
+            console.log('slt')
             this.popUpMessage = message;
             this.popUpButtons = 2;
             this.popUpDelete = true;

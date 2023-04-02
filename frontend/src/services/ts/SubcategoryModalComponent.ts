@@ -38,9 +38,8 @@ export default defineComponent({
             }
         },
         deleteSubcategory(objet: Subcategory) {
-            const message = "Voulez-vous vraiment supprimer la sous category " + objet.name + " ?";
-            const type = "subcategory";
-            this.$emit('deleteObjet', objet, message, type);
+            console.log('cc')
+            this.$emit('delete-subcategory', objet);
         },
         editSscat(sscategory: Subcategory) {
             const stockRepo = new StockRepository();
@@ -52,6 +51,7 @@ export default defineComponent({
             })
         },
         addSscat(id: string) {
+            console.log(id)
             const stockRepo = new StockRepository();
             const name = document.getElementById("subcatName") as HTMLInputElement;
             stockRepo.addSubCategory(name.value, id).then((response) => {

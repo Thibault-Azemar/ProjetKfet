@@ -30,6 +30,7 @@
       </table>
     </div>
   </div>
-  <SubcategoryModalComponent @delete-subcategory="deleteObjet" :category="isCategory" />
-  <SimpleModalComponent :objet="deleteObj" :type="type" :del="del" :buttons="buttons" :message="message" />
+  <SubcategoryModalComponent @delete-subcategory="deleteSubcategory" :category="isCategory" />
+<!-- <SimpleModalComponent @delete-category="deleteObjet" objet="deleteObj" :type="type" :del="del" :buttons="buttons"
+              :message="message" /> -->
 </template>

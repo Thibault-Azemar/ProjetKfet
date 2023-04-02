@@ -44,6 +44,7 @@ export default defineComponent({
             if (modal) modal.style.display = "none";
         },
         deleteObjet() {
+            console.log(this.type)
             switch (this.type) {
                 case "product":
                     // eslint-disable-next-line no-case-declarations
@@ -53,7 +54,6 @@ export default defineComponent({
                             if (this.objet)
                                 this.$emit("deleteProduct", this.objet.id);
                         });
-
                     break;
                 case "offer":
                     // eslint-disable-next-line no-case-declarations
@@ -90,6 +90,27 @@ export default defineComponent({
                             if (this.objet)
                                 this.$emit("deleteGroup", this.objet.id);
                         });
+                    break;
+                case "category":
+                    // eslint-disable-next-line no-case-declarations
+                    const categoryRepo = new StockRepository();
+                    if (this.objet)
+                        categoryRepo.deleteCategory(this.objet.id).then(() => {
+                            if (this.objet)
+                                this.$emit("deleteCategory", this.objet.id);
+                        });
+                    break;
+                case "subcategory":
+                    // eslint-disable-next-line no-case-declarations
+                    const subcategoryRepo = new StockRepository();
+                    if (this.objet)
+                        subcategoryRepo
+                            .deleteSubcategory(this.objet.id)
+                            .then(() => {
+                                if (this.objet)
+                                    this.$emit("deleteSubcategory", this.objet.id);
+                            });
+                    break;
             }
         }
         /*mounted() {

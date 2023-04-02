@@ -3,6 +3,7 @@ import CategoryModalComponent from '../../components/CategoryModalComponent.vue'
 import Category from "@/services/model/CategoryModel";
 import StockComponent from './StockComponent';
 import StockRepository from '../Repository/StockRepository';
+import Subcategory from '../model/SubcategoryModel';
 
 // @ts-ignore
 // @ts-ignore
@@ -55,9 +56,16 @@ export default defineComponent({
             )
         },
         deleteCategory(objet: Category) {
+            console.log('cc')
             const message = "Voulez-vous vraiment supprimer la category " + objet.name + " ?";
             const type = "category";
-            this.$emit('deleteObjet', objet, message, type);
+            this.$emit('delete-category', objet, message, type);
+        },
+        deleteSubcategory(objet: Subcategory) {
+            console.log('cc')
+            const message = "Voulez-vous vraiment supprimer la sous category " + objet.name + " ?";
+            const type = "subcategory";
+            this.$emit('delete-subcategory', objet, message, type);
         }
     }
 })

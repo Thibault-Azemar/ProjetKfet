@@ -37,7 +37,7 @@ import Subcategory from '@/services/model/SubcategoryModel';
         <input type="text" id="subcatName" :value="isSubCat ? isSubCat.name : ''" placeholder="Nom de la sous catégorie">
         <div class="submit-button">
           <input class="primary-button" id="creer-produit" :value="isSubCat ? 'Modifier' : 'Créer'"
-            @click="isSubCat ? editSscat(isSubCat) : addSscat()">
+            @click="isSubCat ? editSscat(isSubCat) : addSscat(category.id)">
         </div>
       </div>
     </div>

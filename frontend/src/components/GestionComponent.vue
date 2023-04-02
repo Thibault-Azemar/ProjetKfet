@@ -18,7 +18,7 @@
     <OffresComponent ref="OffresComponent" :categories="categories" @delete-objet="deleteObjet"
       @update-offer="updateOffer" v-if="value === 'Offres'" />
     <CategoriesComponent ref="CategoriesComponent" :categories="categories" @update-category="updateCategory"
-      @delete-objet="deleteObjet" v-if="value === 'Categories'" />
+      @delete-subcategory="deleteObjet" v-if="value === 'Categories'" />
     <UsersComponent ref="UsersComponent" @delete-objet="deleteObjet" @update-user="updateUser" v-if="value === 'Users'" />
     <ProduitModalComponent @product-added="productAdded" @unshow-modal="unshowModal" :produit="isProduit" />
     <UserModalComponent @addUser="addUser" @unshow-modal="unshowModal" :user="isUser" />

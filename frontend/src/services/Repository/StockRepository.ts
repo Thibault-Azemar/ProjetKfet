@@ -239,9 +239,47 @@ export default class StockRepository {
         if (image) {
             imageParam = image;
         }
-        const params = { name: name, idCategory: category }
+        const params = { name: name, id: category }
         return fetch(API_URL + 'subcategory?' + new URLSearchParams(params), {
             method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then((response) => {
+                return Promise.resolve(200);
+            }
+            )
+            .catch(error => {
+                console.error('Error:', error);
+                return Promise.reject(error);
+            }
+            );
+    }
+    public deleteSubcategory(id: string): Promise<number> {
+        const API_URL = Config.API_URL;
+        const params = { id: id }
+        return fetch(API_URL + 'subcategory?' + new URLSearchParams(params), {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then((response) => {
+                return Promise.resolve(200);
+            }
+            )
+            .catch(error => {
+                console.error('Error:', error);
+                return Promise.reject(error);
+            }
+            );
+    }
+    public deleteCategory(id: string): Promise<number> {
+        const API_URL = Config.API_URL;
+        const params = { id: id }
+        return fetch(API_URL + 'category?' + new URLSearchParams(params), {
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             },
