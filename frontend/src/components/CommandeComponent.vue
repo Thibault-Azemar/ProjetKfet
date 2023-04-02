@@ -36,7 +36,7 @@
         <p>Total : </p>
         <h2 v-bind="command in command" :key="command">{{ command ? command.total : 0 }} €</h2>
         <button class="primary-button" id="check-cart" @click="payOrder()"
-          :disabled="command.products.length === 0">Encaisser</button>
+          :disabled="(command.products.length === 0)||(command.total === 0)">Encaisser</button>
       </div>
 
     </div>

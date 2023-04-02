@@ -7,7 +7,7 @@ import Subcategory from '@/services/model/SubcategoryModel';
     <div v-for="category in stock" :key="category" :id="category.id"> <!-- v for catégories-->
       <div v-for="Subcategory in category.subcategories" :key="Subcategory" :id="Subcategory.id">
         <!-- v for sous catégories-->
-        <h3>{{ Subcategory.name }}</h3>
+        <h3 v-if="Subcategory.products.length >0">{{ Subcategory.name }}</h3>
         <div v-for="Product in Subcategory.products" :key="Product" :id="Product.id" class="stock"> <!-- v for produits-->
           <p>{{ Product.name }}</p>
           <p>{{ Product.sellingPrice }}</p>

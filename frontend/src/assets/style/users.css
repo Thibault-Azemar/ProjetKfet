@@ -7,6 +7,10 @@
     align-items: center;
 }
 
+.nthchild:nth-child(2n){
+    background-color: #f2f2f2;
+}
+
 @media screen and (min-width: 700px) {
     .users-grid{
         grid-template-columns: calc(40% - 50px) calc(40% - 50px) 20% 50px 50px;

@@ -16,8 +16,7 @@
         <h3>Solde</h3>
       </div>
       <div class="body-compte">
-        <div class="comptes-grid " v-for="customer in accountsToDisplay" :key="customer" :id="customer.id">
-          <!-- v for clients-->
+        <div class="comptes-grid nthchild " v-for="customer in accountsToDisplay" :key="customer" :id="customer.id">
           <p>{{ customer.name }}</p>
           <p>{{ customer.firstname }}</p>
           <button class="invisible-button" :class="customer.money < 0 ? 'red' : 'green'" @click="updateSolde(customer)">

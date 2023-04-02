@@ -19,7 +19,9 @@
     padding: 5px;
     text-align: left;
 }
-
+.command-button:nth-child(2n){
+    background-color: #f2f2f2;
+}
 .command-button:hover{
     background: rgba(163, 153, 139, 0.48);
 }
@@ -54,7 +56,9 @@
 }
 
 @media screen and (min-width: 700px) {
-
+    .ordinateur{
+        display: none;
+    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -66,7 +70,7 @@
     }
 
     .commandes-grid{
-        grid-template-columns: 30% 10% 10% 20% 30%;
+        grid-template-columns: 30% 10% 10% 10% 40%;
     }
 
 }
