@@ -10,7 +10,7 @@ import SimpleModalComponent from "@/components/SimpleModalComponent.vue";
 // @ts-ignore
 export default defineComponent({
 
-    components:{
+    components: {
         CategoriesComponent,
         CategoryModalComponent,
         SubcategoryModalComponent,
@@ -19,14 +19,18 @@ export default defineComponent({
     // type inference enabled
     props: {
         //value: String ,
+        categories: {
+            type: Array as () => Category[],
+            required: true
+        },
     },
     data() {
-        let isCategory: Category | undefined;
+        const isCategory: Category = new Category();
         let message: String | undefined;
         let buttons: Number | undefined;
         let del: Boolean | undefined;
         let type: String | undefined;
-        let deleteObj : any;
+        let deleteObj: any;
         return {
             isCategory,
             message,
@@ -37,24 +41,26 @@ export default defineComponent({
         }
 
     },
-    methods:{
-        updateCatgory(category: Category){
+    methods: {
+        updateCategory(category: Category) {
+            console.log("updateCategory")
             //ajouter category en parametre
             //this.isCategory = category;
-            this.$emit('updateCategory',category);
+            this.$emit('updateCategory', category);
         },
-        updateSubcategory(){
+        updateSubcategory(category: Category) {
+            this.isCategory = category;
             const modal = document.getElementById("subcategoryModal");
-            if(modal){ modal.style.display = "block";}
+            if (modal) { modal.style.display = "block"; }
         },
-        deleteObjet(objet:any,message: String, type: String){
+        deleteObjet(objet: any, message: String, type: String) {
             this.message = message;
             this.buttons = 2;
             this.del = true;
             this.type = type;
             this.deleteObj = objet;
             const modal = document.getElementById("simpleModal");
-            if(modal){
+            if (modal) {
                 modal.style.display = "block";
             }
         }

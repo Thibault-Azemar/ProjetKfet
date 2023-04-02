@@ -70,6 +70,7 @@ export default defineComponent({
     methods: {
         showAddModal() {
             let modal;
+            console.log(this.value)
             if (this.value === "Stock") {
                 modal = document.getElementById("produitModal");
                 if (modal) modal.style.display = "block";

@@ -160,4 +160,100 @@ export default class StockRepository {
             }
             );
     }
+    public addCategory(name: string, image?: string): Promise<number> {
+        const API_URL = Config.API_URL;
+        let imageParam = image ? image : '';
+        if (image) {
+            imageParam = image;
+        }
+        const params = { name: name }
+        return fetch(API_URL + 'category/add?' + new URLSearchParams(params), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                return Promise.resolve(data);
+            }
+            )
+            .catch(error => {
+                console.error('Error:', error);
+                return Promise.reject(error);
+            }
+            );
+    }
+    public editCategory(id: string, name: string, image?: string): Promise<number> {
+        const API_URL = Config.API_URL;
+        let imageParam = image ? image : '';
+        if (image) {
+            imageParam = image;
+        }
+        const params = { id: id, name: name }
+        return fetch(API_URL + 'category?' + new URLSearchParams(params), {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then((response) => {
+                return Promise.resolve(200);
+            }
+            )
+            .catch(error => {
+                console.error('Error:', error);
+                return Promise.reject(error);
+            }
+            );
+    }
+    public addSubCategory(name: string, category: string, image?: string): Promise<number> {
+        const API_URL = Config.API_URL;
+        let imageParam = image ? image : '';
+        if (image) {
+            imageParam = image;
+        }
+        const params = { name: name, idCategory: category }
+        return fetch(API_URL + 'subcategory/add?' + new URLSearchParams(params), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                return Promise.resolve(data);
+            }
+            )
+            .catch(error => {
+                console.error('Error:', error);
+                return Promise.reject(error);
+            }
+            );
+    }
+    public editSubCategory(name: string, category: string, image?: string): Promise<number> {
+        const API_URL = Config.API_URL;
+        let imageParam = image ? image : '';
+        if (image) {
+            imageParam = image;
+        }
+        const params = { name: name, idCategory: category }
+        return fetch(API_URL + 'subcategory?' + new URLSearchParams(params), {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then((response) => {
+                return Promise.resolve(200);
+            }
+            )
+            .catch(error => {
+                console.error('Error:', error);
+                return Promise.reject(error);
+            }
+            );
+    }
 }

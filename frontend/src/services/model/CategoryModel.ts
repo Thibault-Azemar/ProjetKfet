@@ -8,8 +8,10 @@ export default class Category {
     /**
      * constructor
     */
-    public constructor(id: string, name: string, image?: string) {
+    public constructor(id?: string, name?: string, image?: string) {
+        if (!id) id = ""
         this.id = id
+        if (!name) name = ""
         this.name = name
         if (image) {
             this.image = image

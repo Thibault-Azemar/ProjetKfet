@@ -1,18 +1,22 @@
+
+import Subcategory from '@/services/model/SubcategoryModel';
+
 <script lang="ts" src="../services/ts/SubcategoryModalComponent.ts"></script>
 
 <template>
   <div class="modal" id="subcategoryModal">
     <div class="card">
       <header>
-        <h3>{{ category.name }}</h3>
+        <h3 v-if="category">{{ category.name }}</h3>
         <button class="icon-button close-button" @click="unshowModal('subcategoryModal')"></button>
       </header>
       <div class="content-group">
-        <div class="group-grid"> <!-- v for ss category -->
-          <p>Nom groupe</p>
-          <button class="icon-button little-icon" @click="showEditModal(sscat)"><img
+        <div class="group-grid" v-for="subcategory in category.subcategories" :key="subcategory">
+          <!-- v for ss category -->
+          <p>{{ subcategory.name }}</p>
+          <button class="icon-button little-icon" @click="showEditModal(subcategory)"><img
               src="../assets/pictures/pen.svg"></button>
-          <button class="icon-button little-icon" @click="deleteSubcategory(sscat)"><img
+          <button class="icon-button little-icon" @click="deleteSubcategory(subcategory)"><img
               src="../assets/pictures/trash.svg"></button>
         </div>
       </div>
@@ -30,7 +34,7 @@
       </header>
       <div class="form">
         <label for="nom">Nom de la sous catégorie</label>
-        <input type="text" id="nom" :value="isSubCat ? isSubCat.name : ''" placeholder="Nom de la sous catégorie">
+        <input type="text" id="subcatName" :value="isSubCat ? isSubCat.name : ''" placeholder="Nom de la sous catégorie">
         <div class="submit-button">
           <input class="primary-button" id="creer-produit" :value="isSubCat ? 'Modifier' : 'Créer'"
             @click="isSubCat ? editSscat(isSubCat) : addSscat()">
