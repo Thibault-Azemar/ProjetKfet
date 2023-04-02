@@ -55,7 +55,7 @@ export default class CommandesRepository {
                 params.append('name', name);
             params.append('price', command.total.toString())
         }
-        params.append('idPaid', true.toString())
+        params.append('isPaid', true.toString())
         const body: any[] = [];
         const productBody: any = {};
         Object.values(command.products).forEach((product) => {
