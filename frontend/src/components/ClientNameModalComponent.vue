@@ -21,13 +21,13 @@
         <button class="icon-button close-button" @click="unshowModal('clientNameModal')"></button>
       </header>
       <div class="form">
-        <input type="hidden" id="paymentMethod" :value="payementType">{{ groupToDisplay }}
+        <input type="hidden" id="paymentMethod" :value="payementType">
         <select name="groupe" id="groupe-select" style="width: fit-content" v-model="groupToDisplay"
           @change="changeGroup()">
           <option v-for="group in accounts" :key="group.id" :value="group.name">{{ group.name }}</option>
         </select>
-        <div v-for="account in accountsToDisplay" :key="account" class="client-account">
-          <div>
+        <div class="client-account">
+          <div  v-for="account in accountsToDisplay" :key="account" >
             <input v-model="selectedAccount" type="radio" :id="account.id" name="account" :value="account.id">
             <label :for="account.id">{{ account.name }}</label>
           </div>

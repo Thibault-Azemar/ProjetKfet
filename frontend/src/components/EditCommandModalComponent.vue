@@ -20,7 +20,7 @@
               <div style="display: grid; grid-template-columns: 120px 120px; align-items: center;"
                 v-for="produit in commande.products" :key="produit.id">
                 {{ produit.name }}
-                <select class="input-status" :class="produit.state === 'En attente' ? 'wait' : (produit.state === 'En cours' ? 'loading' : (produit.state === 'Terminé' ?'end' : ''))" id="state" @change="editProductState(commande.id, produit, $event)">
+                <select class="input-status" :class="produit.state === 'En attente' ? 'wait' : (produit.state === 'En cours' ? 'loading' : (produit.state === 'Terminé' ?'end' : 'wait'))" id="state" @change="editProductState(commande.id, produit, $event)">
                   <option :selected="produit.state === 'En attente' ? true : false" value="En attente">En attente</option>
                   <option :selected="produit.state === 'En cours' ? true : false" value="En cours">En cours</option>
                   <option :selected="produit.state === 'Terminé' ? true : false" value="Terminé">Terminé</option>
