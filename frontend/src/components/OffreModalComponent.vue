@@ -3,7 +3,7 @@
 <template>
   <div class="modal" id="offreModal">
     <div class="big-card">
-      <header>
+      <header style="margin-left: 10px">
         <h3 v-if="!offer">Créer une offre</h3>
         <h3 v-if="offer">Modifier une offre</h3>
         <button class="icon-button close-button" @click="unshowModal('offreModal')"></button>
@@ -27,7 +27,7 @@
         <h4>Produits</h4>
         <div style="overflow-y: auto">
           <div v-for="category in categories" :key="category.id"><!-- v-for catégories-->
-            <div class="flex-row">
+            <div class="grid-offer">
               <p>{{ category.name }}</p>
               <div class="right">
                 <a class="a-button secondary-button icon-minus minus-button" @click="minus(category.id)"></a>
@@ -37,7 +37,7 @@
               </div>
             </div>
             <div v-for="subcategory in category.subcategories" :key="subcategory.id"><!-- v-for ss catégories-->
-              <div class="flex-row ss-cat">
+              <div class="grid-offer ss-cat">
                 <p>{{ subcategory.name }}</p>
                 <div class="right">
                   <a class="a-button secondary-button icon-minus minus-button" @click="minus(subcategory.id)"></a>
@@ -47,7 +47,7 @@
                 </div>
               </div>
               <div v-for="product in subcategory.products" :key="product.id"> <!-- v-for produit -->
-                <div class="flex-row produit">
+                <div class="grid-offer produit">
                   <p>{{ product.name }}</p>
                   <div class="right">
                     <a class="a-button secondary-button icon-minus minus-button" @click="minus(product.id)"></a>

@@ -17,7 +17,7 @@
         <p>{{ commande.date.getHours() < 10 ? '0' + commande.date.getHours() : commande.date.getHours() }}:{{
           commande.date.getMinutes() < 10 ? '0' + commande.date.getMinutes() : commande.date.getMinutes() }}</p>
             <p>{{ commande.total }}</p>
-            <p>{{ commande.state }}</p>
+            <p :class="commande.state === 'En attente' ? 'wait' : (commande.state === 'En cours' ? 'loading' : (commande.state === 'Terminée' ?'end' : ''))">{{ commande.state }}</p>
             <div class="ordinateur flex-row">
               <p v-for="produit in commande.products" :key="produit.id">{{ produit.name }},</p>
             </div>
