@@ -24,7 +24,7 @@
     <UserModalComponent @addUser="addUser" @unshow-modal="unshowModal" :user="isUser" />
     <OffreModalComponent ref @offer-added="offerAdded" @unshow-modal="unshowModal" :categories="categories"
       :offer="isOffer" />
-    <CategoryModalComponent @delete-category="deleteObjet" :category="isCategory" />
+    <CategoryModalComponent @delete-category="deleteObjet" @unshow-modal="unshowModal" :category="isCategory" />
     <StockEntranceModalComponent :categories="categories" />
   </div>
   <SimpleModalComponent @delete-product="deleteProduct" @delete-offer="deleteOffer" @delete-user="deleteUser"

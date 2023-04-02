@@ -12,8 +12,8 @@
         <label for="nom">Nom du groupe</label>
         <input type="text" id="nameCategory" :value="category ? category.name : ''" placeholder="Nom de la catégorie">
         <div class="submit-button">
-          <input class="primary-button" id="creer-produit" :value="category ? 'Modifier' : 'Créer'"
-            @click="category ? editCat(category) : addCat()">
+          <button class="primary-button" id="creer-produit" :value="category ? 'Modifier' : 'Créer'"
+            @click="category ? editCat(category) : addCat()">{{ category ? 'Modifier' : 'Créer' }}</button>
         </div>
       </div>
       <button v-if="category" class="delete-button" @click="deleteCategory(category)">Supprimer</button>

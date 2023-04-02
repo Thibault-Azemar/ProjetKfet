@@ -23,10 +23,7 @@ export default defineComponent({
     },
     methods: {
         unshowModal(idModal: string) {
-            const modal = document.getElementById(idModal);
-            if (modal) {
-                modal.style.display = "none";
-            }
+            this.$emit('unshowModal', idModal);
         },
         editCat(category: Category) {
             const StockRepo = new StockRepository();

@@ -80,6 +80,7 @@ export default defineComponent({
                 if (modal) modal.style.display = "block";
             }
             if (this.value === "Categories") {
+                console.log(this.isCategory)
                 modal = document.getElementById("categoryModal");
                 if (modal) modal.style.display = "block";
             }
@@ -105,11 +106,13 @@ export default defineComponent({
             this.showAddModal();
         },
         unshowModal(idModal: string) {
+            console.log('slt')
             const modal = document.getElementById(idModal);
             if (modal) modal.style.display = "none";
             this.isUser = undefined;
             this.isProduit = undefined;
             this.isOffer = undefined;
+            this.isCategory = undefined;
         },
         deleteObjet(objet: any, message: string, type: string) {
             console.log('slt')
