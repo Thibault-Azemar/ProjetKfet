@@ -25,7 +25,7 @@ export default class UserRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -49,7 +49,7 @@ export default class UserRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -71,7 +71,7 @@ export default class UserRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return 500;
             }
             );
@@ -95,7 +95,7 @@ export default class UserRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return 500;
             }
             );

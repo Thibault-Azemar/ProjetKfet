@@ -36,7 +36,7 @@ export default class StockRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -61,7 +61,7 @@ export default class StockRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -91,7 +91,7 @@ export default class StockRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -119,7 +119,7 @@ export default class StockRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -139,7 +139,7 @@ export default class StockRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -158,7 +158,7 @@ export default class StockRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -183,7 +183,7 @@ export default class StockRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -206,7 +206,7 @@ export default class StockRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -231,7 +231,7 @@ export default class StockRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -254,7 +254,7 @@ export default class StockRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -273,7 +273,7 @@ export default class StockRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -292,7 +292,7 @@ export default class StockRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );

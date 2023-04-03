@@ -18,6 +18,7 @@ export default class OfferRepository {
                     resolve(offers);
                 })
                 .catch((error) => {
+                    alert(error)
                     reject(error);
                 })
         })
@@ -43,6 +44,7 @@ export default class OfferRepository {
                     resolve(offer);
                 })
                 .catch((error) => {
+                    alert(error)
                     reject(error);
                 })
         })
@@ -65,6 +67,7 @@ export default class OfferRepository {
                     }
                 })
                 .catch((error) => {
+                    alert(error)
                     reject(error);
                 })
         })
@@ -87,6 +90,7 @@ export default class OfferRepository {
                     }
                 })
                 .catch((error) => {
+                    alert(error)
                     reject(error);
                 })
         })
@@ -110,6 +114,7 @@ export default class OfferRepository {
                     }
                 })
                 .catch((error) => {
+                    alert(error)
                     reject(error);
                 })
         })
@@ -132,6 +137,7 @@ export default class OfferRepository {
                     }
                 })
                 .catch((error) => {
+                    alert(error)
                     reject(error);
                 })
         })
@@ -154,6 +160,7 @@ export default class OfferRepository {
                     }
                 })
                 .catch((error) => {
+                    alert(error)
                     reject(error);
                 })
         })

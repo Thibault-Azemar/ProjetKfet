@@ -105,7 +105,7 @@ export default defineComponent({
                 return Promise.resolve(0);
             })
                 .catch(error => {
-                    console.error('Error:', error);
+                    alert(error)
                     return Promise.reject(error);
                 }
                 );

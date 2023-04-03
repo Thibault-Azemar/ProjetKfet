@@ -48,7 +48,7 @@ export default defineComponent({
                 this.unshowModal("groupEditModal");
             }
             ).catch((error) => {
-                console.log(error);
+                alert(error)
             });
         },
         addGroup() {
@@ -59,7 +59,7 @@ export default defineComponent({
                 this.unshowModal("groupEditModal");
             }
             ).catch((error) => {
-                console.log(error);
+                alert(error)
             });
         },
         getGroup() {
@@ -68,7 +68,7 @@ export default defineComponent({
                 this.groups = response;
             }
             ).catch((error) => {
-                console.log(error);
+                alert(error)
             }
             );
         }

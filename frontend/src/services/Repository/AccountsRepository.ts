@@ -29,7 +29,7 @@ export default class AccountsRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -51,7 +51,7 @@ export default class AccountsRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -92,7 +92,7 @@ export default class AccountsRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -114,7 +114,7 @@ export default class AccountsRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -140,7 +140,7 @@ export default class AccountsRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );
@@ -161,7 +161,7 @@ export default class AccountsRepository {
             }
             )
             .catch(error => {
-                console.error('Error:', error);
+                alert(error)
                 return Promise.reject(error);
             }
             );

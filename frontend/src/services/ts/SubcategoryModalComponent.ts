@@ -47,7 +47,7 @@ export default defineComponent({
             stockRepo.editSubCategory(name.value, sscategory.id).then((response) => {
                 this.$emit('updateSubcategories');
             }).catch((error) => {
-                console.log(error);
+                alert(error)
             })
         },
         addSscat(id: string) {
@@ -57,7 +57,7 @@ export default defineComponent({
             stockRepo.addSubCategory(name.value, id).then((response) => {
                 this.$emit('updateSubcategories');
             }).catch((error) => {
-                console.log(error);
+                alert(error)
             })
         }
 

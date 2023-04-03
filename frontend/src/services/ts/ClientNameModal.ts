@@ -48,7 +48,7 @@ export default defineComponent({
                     this.unshowModal("clientNameModal");
                     this.$emit("commande-added", commande);
                 }).catch((error: any) => {
-                    console.log(error);
+                    alert(error)
                 })
 
             }
@@ -60,7 +60,7 @@ export default defineComponent({
                     this.unshowModal("clientNameModal");
                     this.$emit("commande-added", commande);
                 }).catch((error: any) => {
-                    console.log(error);
+                    alert(error)
                 })
             }
         },
@@ -71,7 +71,7 @@ export default defineComponent({
                 return Promise.resolve(0);
             })
                 .catch(error => {
-                    console.error('Error:', error);
+                    alert(error)
                     return Promise.reject(error);
                 }
                 );

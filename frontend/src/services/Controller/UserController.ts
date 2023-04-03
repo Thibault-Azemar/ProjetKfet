@@ -27,7 +27,7 @@ export default class User {
             this.users.push(user);
         })
             .catch((error: any) => {
-                console.error(error);
+                alert(error)
             });
     }
 

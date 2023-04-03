@@ -102,6 +102,7 @@ export default class CommandesRepository {
             categories.sort((a, b) => a.name.localeCompare(b.name));
             resolve(categories);
         }).catch((error) => {   // Error handling
+            alert(error)
             reject(error);
         }));
     }
