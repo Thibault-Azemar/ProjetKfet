@@ -91,7 +91,7 @@ public class CustomerController {
                 customer.setName(name);
             }
             if (firstname != null && !firstname.equals("")) {
-                customer.setFirstname(name);
+                customer.setFirstname(firstname);
             }
             if (money != null && !money.equals("")) {
                 float price = Float.parseFloat(money);
