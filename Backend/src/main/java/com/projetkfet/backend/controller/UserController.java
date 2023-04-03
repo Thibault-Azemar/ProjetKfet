@@ -33,7 +33,6 @@ public class UserController {
     @GetMapping()
     public @ResponseBody
     User getUser(@RequestParam("id") String id) throws Exception {
-        logger.info("Get User : " + id);
 
         Optional<User> u = userRepository.findById(UUID.fromString(id));
 
@@ -44,8 +43,8 @@ public class UserController {
         }
         else
         {
-            logger.info("No existing account for this ID");
-            throw new Exception("No existing account for this ID");
+            logger.info("No existing account for this ID : " + id);
+            throw new Exception("No existing account for this ID : " + id);
         }
         return user;
     }
@@ -116,7 +115,7 @@ public class UserController {
             }
         }
         else {
-            throw new Exception("Email already used");
+            throw new Exception("Email already used : " + email);
         }
         return id;
     }
@@ -154,8 +153,8 @@ public class UserController {
             return "Confirm";
         }
         else {
-            logger.info("No account for this ID");
-            throw new Exception("No account for this ID");
+            logger.info("No account for this ID : " + id);
+            throw new Exception("No account for this ID : " + id);
         }
     }
 
@@ -175,8 +174,8 @@ public class UserController {
         }
         else
         {
-            logger.info("No account for this ID");
-            throw new Exception("No account for this ID");
+            logger.info("No account for this ID : " + id);
+            throw new Exception("No account for this ID : " + id);
         }
 
     }

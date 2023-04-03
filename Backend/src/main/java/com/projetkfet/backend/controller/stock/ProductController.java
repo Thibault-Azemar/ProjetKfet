@@ -33,13 +33,11 @@ public class ProductController {
     public @ResponseBody
     Iterable<Product> getAllProducts()
     {
-        logger.info("All Products");
         return productRepository.findAll();
     }
 
     @GetMapping()
     public @ResponseBody Product getProduct(@RequestParam("id") String id) throws Exception {
-        logger.info("Get product");
 
         Optional<Product> p = productRepository.findById(UUID.fromString(id));
 
@@ -50,8 +48,8 @@ public class ProductController {
         }
         else
         {
-            logger.info("Product doesn't exist");
-            throw new Exception("Product doesn't exist");
+            logger.info("Product doesn't exist : " + id);
+            throw new Exception("Product doesn't exist : " + id);
         }
         return product;
     }
@@ -62,7 +60,7 @@ public class ProductController {
     @PostMapping(path="/add")
     public @ResponseBody
     UUID addNewProduct (@RequestParam("name") String name, @RequestParam(required = false, name = "purchasePrice") String purchasePrice, @RequestParam(required = false, name = "sellingPrice") String sellingPrice, @RequestParam(required = false, name = "sellingPriceMembers") String sellingPriceMembers, @RequestBody(required = false) ImageDTO image , @RequestParam("idSubCategory") String id) throws Exception {
-        logger.info("New Product");
+        logger.info("New Product : " + name);
 
         UUID idproduct = null;
 
@@ -103,8 +101,8 @@ public class ProductController {
         }
         else
         {
-            logger.info("Error id SubCategory");
-            throw new Exception("Error id SubCategory");
+            logger.info("Error id SubCategory : " + id);
+            throw new Exception("Error id SubCategory : " + id);
         }
     }
 

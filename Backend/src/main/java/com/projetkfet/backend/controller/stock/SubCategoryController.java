@@ -41,7 +41,7 @@ public class SubCategoryController {
     // Récupère une sous catégorie
     @GetMapping()
     public @ResponseBody SubCategory getSubCategory(@RequestParam("id") String id) throws Exception {
-        logger.info("Get subcategory");
+        logger.info("Get subcategory : " + id);
 
         Optional<SubCategory> sc = subCategoryRepository.findById(UUID.fromString(id));
 
@@ -99,7 +99,7 @@ public class SubCategoryController {
     @PatchMapping()
     public @ResponseBody
     String updateSubCategory(@RequestParam("id") String id, @RequestParam(required = false, name="name") String name, @RequestBody(required = false) ImageDTO image) throws Exception {
-        logger.info("Update SubCategory");
+        logger.info("Update SubCategory : " + id);
 
         Optional<SubCategory> sc = subCategoryRepository.findById(UUID.fromString(id));
 
@@ -127,12 +127,12 @@ public class SubCategoryController {
     @DeleteMapping()
     public @ResponseBody
     String deleteSubCategory(@RequestParam("id") String id) throws Exception {
-        logger.info("Delete User");
+        logger.info("Delete Subcategory : " + id);
         Optional<SubCategory> sc = subCategoryRepository.findById(UUID.fromString(id));
 
         if (sc.isPresent())
         {
-            logger.info("SubCategory deleted : " + id);
+            logger.info("SubCategory deleted");
             subCategoryRepository.delete(sc.get());
             return "Confirm";
         }

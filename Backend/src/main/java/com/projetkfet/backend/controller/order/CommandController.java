@@ -37,14 +37,12 @@ public class CommandController {
     @GetMapping(path="/all")
     public @ResponseBody
     Iterable<Command> getAllCommands() throws Exception {
-        logger.info("All orders");
         return commandRepository.findAll();
     }
 
     @GetMapping(path="/day")
     public @ResponseBody
     Iterable<Command> getDayCommands() throws Exception {
-        logger.info("All day orders");
 
         // On récupère la date d'aujourd'hui
         Date today = new Date();
@@ -66,7 +64,6 @@ public class CommandController {
     @GetMapping(path="/week")
     public @ResponseBody
     Iterable<Command> getWeekCommands() throws Exception {
-        logger.info("All week orders");
 
         Date today = new Date();
 
@@ -120,8 +117,8 @@ public class CommandController {
             }
             else
             {
-                logger.info("No customer for this ID");
-                throw new Exception("No customer for this ID");
+                logger.info("No customer for this ID : " + idcustomer);
+                throw new Exception("No customer for this ID : " + idcustomer);
             }
         }
 
@@ -195,7 +192,7 @@ public class CommandController {
     @PatchMapping()
     public @ResponseBody
     String UpdateStateCommand(@RequestParam("id") String id, @RequestParam("state") String state) throws Exception {
-        logger.info("Update state command");
+        logger.info("Update state command : " + id + " to state : " + state + "");
         Optional<Command> o = commandRepository.findById(UUID.fromString(id));
 
         if (o.isPresent())
@@ -216,7 +213,7 @@ public class CommandController {
     @PatchMapping("/product")
     public @ResponseBody
     String UpdateStateProductCommand(@RequestParam("idCommand") String id, @RequestParam("idProductInList") String idproduct, @RequestParam("state") String state) throws Exception {
-        logger.info("Update state product command");
+        logger.info("Update state product command : " + idproduct + " in command : " + id + " to state : " + state);
         Optional<Command> o = commandRepository.findById(UUID.fromString(id));
 
         if (o.isPresent())

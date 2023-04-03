@@ -27,7 +27,6 @@ public class GroupController {
     @GetMapping(path="/all")
     public @ResponseBody
     Iterable<Group> getAllGroups() {
-        logger.info("All groups");
         return groupRepository.findAll();
     }
 
@@ -90,12 +89,12 @@ public class GroupController {
     @DeleteMapping()
     public @ResponseBody
     String deleteUser(@RequestParam("id") String id) throws Exception {
-        logger.info("Delete Group");
+        logger.info("Delete Group : " + id);
         Optional<Group> g = groupRepository.findById(UUID.fromString(id));
 
         if (g.isPresent())
         {
-            logger.info("Group deleted : " + id);
+            logger.info("Group deleted");
             groupRepository.delete(g.get());
             return "Confirm";
         }

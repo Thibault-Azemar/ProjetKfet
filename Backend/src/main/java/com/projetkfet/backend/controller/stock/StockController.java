@@ -39,7 +39,6 @@ public class StockController {
     public @ResponseBody
     Iterable<Category> getAllStockByCategories()
     {
-        logger.info("All Stock by Category");
         return categoryRepository.findAll();
     }
 
@@ -48,7 +47,6 @@ public class StockController {
     public @ResponseBody
     Iterable<SubCategory> getAllStockBySubCategories()
     {
-        logger.info("All Stock by SubCategory");
         return subCategoryRepository.findAll();
     }
 

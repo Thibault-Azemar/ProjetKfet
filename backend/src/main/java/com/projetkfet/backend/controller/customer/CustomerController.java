@@ -32,7 +32,6 @@ public class CustomerController {
     @GetMapping(path="/all")
     public @ResponseBody
     Iterable<Customer> getAllCustomers() {
-        logger.info("All customers");
         return customerRepository.findAll();
     }
 
@@ -126,7 +125,7 @@ public class CustomerController {
     @DeleteMapping()
     public @ResponseBody
     String deleteUser(@RequestParam("id") String id) throws Exception {
-        logger.info("Delete Customer");
+        logger.info("Delete Customer : " + id);
         Optional<Customer> c = customerRepository.findById(UUID.fromString(id));
 
         if (c.isPresent())

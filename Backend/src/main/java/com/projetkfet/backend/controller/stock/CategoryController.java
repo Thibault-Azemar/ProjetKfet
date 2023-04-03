@@ -35,7 +35,6 @@ public class CategoryController {
 
     @GetMapping()
     public @ResponseBody Category getCategory(@RequestParam("id") String id) throws Exception {
-        logger.info("Get category");
 
         Optional<Category> c = categoryRepository.findById(UUID.fromString(id));
 
@@ -46,8 +45,8 @@ public class CategoryController {
         }
         else
         {
-            logger.info("Category doesn't exist");
-            throw new Exception("Category doesn't exist");
+            logger.info("Category doesn't exist : " + id);
+            throw new Exception("Category doesn't exist : " + id);
         }
         return category;
     }
@@ -84,7 +83,7 @@ public class CategoryController {
     @PatchMapping()
     public @ResponseBody
     String updateCategory(@RequestParam("id") String id, @RequestParam(required = false, name="name") String name, @RequestBody(required = false)ImageDTO image) throws Exception {
-        logger.info("Update Category");
+        logger.info("Update Category : " + id);
 
         Optional<Category> c = categoryRepository.findById(UUID.fromString(id));
 
@@ -112,7 +111,7 @@ public class CategoryController {
     @DeleteMapping()
     public @ResponseBody
     String deleteCategory(@RequestParam("id") String id) throws Exception {
-        logger.info("Delete User");
+        logger.info("Delete Category");
         Optional<Category> c = categoryRepository.findById(UUID.fromString(id));
 
         if (c.isPresent())
@@ -123,8 +122,8 @@ public class CategoryController {
         }
         else
         {
-            logger.info("No category for this ID");
-            throw new Exception("No category for this ID");
+            logger.info("No category for this ID : " + id);
+            throw new Exception("No category for this ID : " + id);
         }
 
     }

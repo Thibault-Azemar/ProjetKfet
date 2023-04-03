@@ -27,7 +27,6 @@ public class OfferController {
     @GetMapping(path="/all")
     public @ResponseBody
     Iterable<Offer> getAllOffers() throws Exception {
-        logger.info("All offers");
         return offerRepository.findAll();
     }
 
