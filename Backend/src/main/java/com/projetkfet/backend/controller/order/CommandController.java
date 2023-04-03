@@ -87,7 +87,7 @@ public class CommandController {
     @PostMapping(path="/add")
     public @ResponseBody
     UUID addNewCommand(@RequestParam(name="name", required = false) String name, @RequestParam(name="idcustomer", required = false) UUID idcustomer, @RequestParam(name="paymentMethod") String paymentMethod, @RequestParam(name="price") String price, @RequestParam(name="isPaid", required = false)  String isPaid, @RequestBody List<ProductCommandDTO> products) throws Exception {
-        logger.info("Add new command");
+        logger.info("Add new command. PaymentMethod : " + paymentMethod + ", Price : " + price);
 
         Command o = new Command();
 
@@ -105,9 +105,11 @@ public class CommandController {
 
                 // TODO : fixer selon la limite de crédit
                 float customerMoney = customer.get().getMoney();
+                logger.info("Customer money before : " + customerMoney);
                 if (customerMoney != 10000)
                 {
                     customer.get().setMoney(customerMoney - priceOrder);
+                    logger.info("Customer money after : " + customer.get().getMoney());
                     customerRepository.save(customer.get());
                 }
                 else
@@ -132,6 +134,8 @@ public class CommandController {
             o.setName(nameAccount);
         }
 
+        logger.info("Command to : " + o.getName());
+
 //        On ajoute les produits à la commande
         List<ProductCommand> productCommands = new ArrayList<>();
         for (ProductCommandDTO p : products)
@@ -146,6 +150,7 @@ public class CommandController {
                 if (nbstock > 0)
                 {
                     stock.setStock(nbstock - 1);
+                    logger.info("Stock product :" + stock.getId() + " : " + stock.getStock());
                     productRepository.save(stock);
                 }
                 else
