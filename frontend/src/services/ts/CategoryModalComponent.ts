@@ -53,13 +53,11 @@ export default defineComponent({
             )
         },
         deleteCategory(objet: Category) {
-            console.log('cc')
             const message = "Voulez-vous vraiment supprimer la category " + objet.name + " ?";
             const type = "category";
             this.$emit('delete-category', objet, message, type);
         },
         deleteSubcategory(objet: Subcategory) {
-            console.log('cc')
             const message = "Voulez-vous vraiment supprimer la sous category " + objet.name + " ?";
             const type = "subcategory";
             this.$emit('delete-subcategory', objet, message, type);

@@ -44,7 +44,6 @@ export default defineComponent({
     },
     methods: {
         updateCategory(category: Category) {
-            console.log("updateCategory")
             //ajouter category en parametre
             //this.isCategory = category;
             this.$emit('updateCategory', category);
@@ -55,7 +54,6 @@ export default defineComponent({
             if (modal) { modal.style.display = "block"; }
         },
         deleteSubcategory(subcategory: Subcategory) {
-            console.log('cc')
             const message = "Voulez-vous vraiment supprimer la sous category " + subcategory.name + " ?";
             const type = "subcategory";
             this.$emit('delete-subcategory', subcategory, message, type);

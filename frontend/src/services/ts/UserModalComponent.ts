@@ -51,7 +51,7 @@ export default defineComponent({
                 user.email = email;
                 user.role = role;
             }, (error) => {
-                console.log(error)
+                alert(error)
             })
             this.unshowModal("userModal");
         },

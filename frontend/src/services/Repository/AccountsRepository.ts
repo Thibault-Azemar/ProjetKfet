@@ -19,7 +19,6 @@ export default class AccountsRepository {
                     const group = new Group(data.name, data.id);
                     data.customers.forEach((data: any) => {
                         const customer = new Customer(data.name, data.firstname, data.money, data.id, group.name);
-                        console.log(customer)
                         group.addCustomer(customer);
                     })
                     customers.push(group);
@@ -76,11 +75,9 @@ export default class AccountsRepository {
             );
     }
     public updateAccount(id: string, name: string, firstname: string, money: number, group: string): Promise<number> {
-        console.log("updateAccount")
         const API_URL = Config.API_URL;
         const moneyStr = money.toString();
         const params = { id: id, name: name, firstname: firstname, money: moneyStr, idgroup: group }
-        console.log(params)
         return fetch(API_URL + 'customer?' + new URLSearchParams(params), {
             method: 'PATCH',
             headers: {

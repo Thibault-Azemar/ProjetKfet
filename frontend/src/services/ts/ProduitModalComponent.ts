@@ -47,21 +47,18 @@ export default defineComponent({
             if (imageInput.files != null) {
                 image = imageInput.files[0]
             }
-            console.log(image)
             //convert to base64
             const reader = new FileReader();
             let imageb64 = "";
             if (image != null) {
                 reader.readAsDataURL(image);
                 reader.onload = () => {
-                    console.log(reader.result)
                     imageb64 = reader.result as string;
                 };
                 reader.onerror = (error) => {
-                    console.log('Error: ', error);
+                    alert("Error: " + error)
                 };
             }
-            console.log(imageb64)
             const stockRepo = new StockRepository();
             const productToAdd = new Product("", name, +buyPrice, +sellPrice, +sellPriceMember, 0, subcategory, imageb64);
             stockRepo.addProduct(name, +buyPrice, +sellPrice, +sellPriceMember, subcategory, imageb64).then((response: any) => {
