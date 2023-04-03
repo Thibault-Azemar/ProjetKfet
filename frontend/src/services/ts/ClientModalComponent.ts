@@ -42,7 +42,7 @@ export default defineComponent({
             const group = (document.getElementById("groupe") as HTMLInputElement).value;
             const accountsRepo = new AccountsRepository();
             accountsRepo.addAccount(name, firstname, 0, group).then((customer: Customer) => {
-                //location.reload();
+                location.reload();
             });
         },
         editCompte(customer: Customer) {
@@ -51,7 +51,7 @@ export default defineComponent({
             const group = (document.getElementById("groupe") as HTMLInputElement).value;
             const accountsRepo = new AccountsRepository();
             accountsRepo.updateAccount(customer.id, name, firstname, customer.money, group).then((response) => {
-                //location.reload();
+                location.reload();
             }
             );
 

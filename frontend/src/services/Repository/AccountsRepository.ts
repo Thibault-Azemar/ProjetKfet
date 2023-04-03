@@ -79,7 +79,7 @@ export default class AccountsRepository {
         console.log("updateAccount")
         const API_URL = Config.API_URL;
         const moneyStr = money.toString();
-        const params = { id: id, name: name, firstname: firstname, money: moneyStr, group: group }
+        const params = { id: id, name: name, firstname: firstname, money: moneyStr, idgroup: group }
         console.log(params)
         return fetch(API_URL + 'customer?' + new URLSearchParams(params), {
             method: 'PATCH',

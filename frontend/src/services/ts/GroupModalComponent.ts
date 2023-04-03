@@ -46,6 +46,7 @@ export default defineComponent({
                     }
                 })
                 this.unshowModal("groupEditModal");
+                location.reload();
             }
             ).catch((error) => {
                 alert(error)
@@ -57,6 +58,7 @@ export default defineComponent({
             AccountRepo.addGroup(name.value).then((response) => {
                 this.$emit('addGroup', response);
                 this.unshowModal("groupEditModal");
+                location.reload();
             }
             ).catch((error) => {
                 alert(error)

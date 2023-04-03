@@ -80,6 +80,7 @@ export default defineComponent({
                         accountRepo.deleteAccount(this.objet.id).then(() => {
                             if (this.objet)
                                 this.$emit("deleteAccount", this.objet.id);
+                            location.reload();
                         });
                     break;
                 case "group":
@@ -89,6 +90,7 @@ export default defineComponent({
                         groupRepo.deleteGroup(this.objet.id).then(() => {
                             if (this.objet)
                                 this.$emit("deleteGroup", this.objet.id);
+                            location.reload();
                         });
                     break;
                 case "category":
