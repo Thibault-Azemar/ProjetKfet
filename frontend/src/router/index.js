@@ -4,15 +4,15 @@ const router = createRouter({
     routes: [
         {
             path: "/",
-            component: () => import("../components/HelloWorld.vue"),
+            component: () => import("../components/CommandeListComponent.vue"),
         },
         {
-            path:"/commande",
-            component: ()=> import("../components/CommandeComponent.vue")
+            path: "/commande",
+            component: () => import("../components/CommandeComponent.vue")
         },
         {
-            path:"/gestion",
-            component: ()=> import("../components/GestionComponent.vue")
+            path: "/gestion",
+            component: () => import("../components/GestionComponent.vue")
         },
         {
             path: "/suivi",
