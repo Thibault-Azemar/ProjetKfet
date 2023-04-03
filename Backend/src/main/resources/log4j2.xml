@@ -9,8 +9,7 @@
         <Console name="Console" target="SYSTEM_OUT" follow="true">
             <PatternLayout disableAnsi="false" pattern="%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} %highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=green bold, TRACE=blue} %style{}{magenta} [%M] %style{%40C}{cyan} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%xEx}" />
         </Console>
-        <RollingFile name="UserAppender" fileName="logs/users/users.log"
-                     filePattern="logs/users/users-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="UserAppender" filePattern="logs/users/users-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="INFO"/>
             <PatternLayout>
                 <Pattern>${LOG_PATTERN}</Pattern>
@@ -20,8 +19,7 @@
                 <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
         </RollingFile>
-        <RollingFile name="ProductAppender" fileName="logs/products/products.log"
-                     filePattern="logs/products/products-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="ProductAppender" filePattern="logs/products/products-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="INFO"/>
             <PatternLayout>
                 <Pattern>${LOG_PATTERN}</Pattern>
@@ -31,8 +29,7 @@
                 <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
         </RollingFile>
-        <RollingFile name="CustomerAppender" fileName="logs/customers/customers.log"
-                     filePattern="logs/customers/customers-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="CustomerAppender" filePattern="logs/customers/customers-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="INFO"/>
             <PatternLayout>
                 <Pattern>${LOG_PATTERN}</Pattern>
@@ -42,8 +39,7 @@
                 <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
         </RollingFile>
-        <RollingFile name="OrderAppender" fileName="logs/orders/orders.log"
-                     filePattern="logs/orders/orders-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="OrderAppender" filePattern="logs/orders/orders-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="INFO"/>
             <PatternLayout>
                 <Pattern>${LOG_PATTERN}</Pattern>
