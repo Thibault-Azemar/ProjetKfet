@@ -18,15 +18,21 @@
       <div class="commande-resume" id="cartModal">
         <h2>Panier :</h2>
         <div class="command-list">
-          <p class="command-list-grid" v-for="offer in command.offers" :id="command.offers.indexOf(offer)" :key="offer">
-            {{ offer ? offer.name : null }}
-            <button v-if="offer && offer.sellingPrice != 0" class="icon-button-list"
-              @click="deleteOffer(command.offers.indexOf(offer))"><img src="../assets/pictures/close.svg"></button>
-          </p>
+          <div v-if="command.offers.length > 0">
+            <p class="command-list-grid" v-for="offer in command.offers" :id="offer.id" :key="offer">
+              {{ offer.offer.name }}{{ offer.products.length }}
+              <button v-if="offer" class="icon-button-list" @click="deleteOffer(command.offers.indexOf(offer))"><img
+                  src="../assets/pictures/close.svg"></button>
+            </p>
+            <div v-for="offer in command.offers" :key="offer">
+              <p class="command-list-grid" v-for="product in offer.products" :id="product.id" :key="product"> {{ product
+                ?
+                '&nbsp;&nbsp;&nbsp;' : null }}{{ product ? product.name : null }}</p>
+            </div>
+          </div>
           <p class="command-list-grid" v-for="product in command.products" :id="command.products.indexOf(product)"
             :key="product">
-            {{ product ? product.sellingPrice == 0 ? '&nbsp;&nbsp;&nbsp;' : null : null }}{{ product ? product.name : null
-            }}
+            {{ product ? product.name : null }}
             <button v-if="product && product.sellingPrice != 0" class="icon-button-list"
               @click="deleteProduct(command.products.indexOf(product))"><img src="../assets/pictures/close.svg"></button>
           </p>
@@ -36,7 +42,7 @@
         <p>Total : </p>
         <h2 v-bind="command in command" :key="command">{{ command ? command.total : 0 }} €</h2>
         <button class="primary-button" id="check-cart" @click="payOrder()"
-          :disabled="(command.products.length === 0)||(command.total === 0)">Encaisser</button>
+          :disabled="(command.total === 0)">Encaisser</button>
       </div>
 
     </div>

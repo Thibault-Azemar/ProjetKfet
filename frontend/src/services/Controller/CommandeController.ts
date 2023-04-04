@@ -10,13 +10,17 @@ export default class Commande {
     totalKfetier: number;
     paymentMethod: string;
     products: { [id: number]: Product };
-    offers: { [id: number]: Offer };
+    offers: {
+        id: number,
+        offer: Offer,
+        products: Product[]
+    }[] = [];
     customer: Customer;
     name: string;
     isPaid: boolean;
     state: string;
 
-    constructor(date?: Date, total?: number, isPaid?: boolean, paymentMethod?: string, products?: Product[], name?: string, id?: string, state?: string, totalKfetier?: number, customer?: Customer, offers?: Offer[]) {
+    constructor(date?: Date, total?: number, isPaid?: boolean, paymentMethod?: string, products?: Product[], name?: string, id?: string, state?: string, totalKfetier?: number, customer?: Customer, offer?: Offer) {
         if (id) {
             this.id = id;
         }
@@ -67,68 +71,55 @@ export default class Commande {
         }
         else
             this.state = "";
-        if (offers) {
-            this.offers = offers;
+        if (offer) {
+            const products: Product[] = [];
+            this.offers.push({ id: 0, offer, products })
         }
-        else
-            this.offers = [];
     }
     addProduct(product: Product, isOffer?: boolean): number {
-        console.log(isOffer)
-        if (Object.keys(this.products).length === 0) {
-            this.products[0] = product;
-            if (isOffer) {
-                this.products[0].sellingPrice = 0;
-                console.log(this.products[0].sellingPrice);
-                this.products[0].sellingPriceMembers = 0;
-            }
-            return 1;
+        if (isOffer) {
+            this.offers[this.offers.length - 1].products.push(product);
+            console.log(this.offers)
+            return this.offers.length - 1;
         }
         else {
-            const maxId = Math.max(...Object.keys(this.products).map((id) => parseInt(id)));
-            this.products[maxId + 1] = product;
-            if (isOffer) {
-                this.products[maxId + 1].sellingPrice = 0;
-                console.log(this.products[maxId + 1].sellingPrice);
-                this.products[maxId + 1].sellingPriceMembers = 0;
+            if (Object.keys(this.products).length === 0) {
+                if (!isOffer)
+                    this.products[0] = product;
+                return 1;
             }
-            return maxId + 1;
+            else {
+                const maxId = Math.max(...Object.keys(this.products).map((id) => parseInt(id)));
+                if (!isOffer)
+                    this.products[maxId + 1] = product;
+                return maxId + 1;
+            }
         }
     }
     removeProduct(index: number) {
         delete this.products[index];
         this.updateTotal();
     }
+    removeOffer(index: number) {
+        this.offers.splice(index, 1);
+        this.updateTotal();
+    }
     updateTotal() {
         this.total = 0;
         this.totalKfetier = 0;
-        console.log(this.products)
-        console.log(this.offers)
         Object.values(this.products).forEach((product: Product) => {
             this.total += product.sellingPrice;
             this.totalKfetier += product.sellingPriceMembers;
         });
-        Object.values(this.offers).forEach((offer: Offer) => {
-            this.total += offer.price;
-            console.log(offer.price);
-            this.totalKfetier += offer.priceMembers;
+        for (let i = 0; i < this.offers.length; i++) {
+            if (this.offers[i].offer) {
+                this.total += this.offers[i].offer.price;
+                this.totalKfetier += this.offers[i].offer.priceMembers;
+            }
         }
-        );
-        console.log(this.total);
     }
     addOffer(offer: Offer) {
-        console.log(offer)
-        if (Object.keys(this.offers).length === 0) {
-            console.log('cc')
-            this.offers[0] = offer;
-            return 1;
-        }
-        else {
-            console.log('cc2')
-            const maxId = Math.max(...Object.keys(this.offers).map((id) => parseInt(id)));
-            this.offers[maxId + 1] = offer;
-            return maxId + 1;
-        }
+        this.offers.push({ id: this.offers.length, offer, products: [] })
         console.log(this.offers)
     }
 

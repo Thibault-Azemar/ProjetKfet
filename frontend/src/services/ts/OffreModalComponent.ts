@@ -123,6 +123,78 @@ export default defineComponent({
             }
             )
         },
+        updateOffer(offer: Offer) {
+            console.log(offer)
+            const offerRepo = new OfferRepository()
+            const name = document.getElementById('nom-offre') as HTMLInputElement
+            const price = document.getElementById('prix-offre') as HTMLInputElement
+            const priceMember = document.getElementById('prix-offre-membre') as HTMLInputElement
+            const image = document.getElementById('image-offre') as HTMLInputElement
+            const categoriesOffer: Category[] = []
+            const subcategoriesOffer: Subcategory[] = []
+            const productsOffer: Product[] = []
+            let nbProducts = 0
+            this.categories.forEach((category) => {
+                const catInput = document.getElementById(category.id) as HTMLInputElement
+                if (+ catInput.value > 0) {
+                    for (let i = 0; i < +catInput.value; i++) {
+                        categoriesOffer.push(category)
+                    }
+                    nbProducts += +catInput.value
+                    category.subcategories.forEach((subcategory) => {
+                        const subcatInput = document.getElementById(subcategory.id) as HTMLInputElement
+                        if (+subcatInput.value > 0) {
+                            for (let i = 0; i < +subcatInput.value; i++) {
+                                subcategoriesOffer.push(subcategory)
+                            }
+                            nbProducts += +subcatInput.value
+                            subcategory.products.forEach((product) => {
+                                const prodInput = document.getElementById(product.id) as HTMLInputElement
+                                if (+prodInput.value > 0) {
+                                    for (let i = 0; i < +prodInput.value; i++) {
+                                        productsOffer.push(product)
+                                    }
+                                    nbProducts += +prodInput.value
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+            offerRepo.editOffer(offer.id, name.value, +price.value, +priceMember.value, nbProducts).then((response) => {
+                categoriesOffer.forEach((category) => {
+                    offerRepo.addCategoryToOffer(offer.id, category.id).then((response) => {
+                    })
+                })
+                subcategoriesOffer.forEach((subcategory) => {
+                    offerRepo.addSubCategoryToOffer(offer.id, subcategory.id).then((response) => {
+                    })
+                })
+                productsOffer.forEach((product) => {
+                    offerRepo.addProductToOffer(offer.id, product.id).then((response) => {
+                    })
+                })
+                const nameProducts: string[] = []
+                const catIds: string[] = []
+                const subcatIds: string[] = []
+                const prodIds: string[] = []
+                categoriesOffer.forEach((category) => {
+                    nameProducts.push(category.name)
+                    catIds.push(category.id)
+                })
+                subcategoriesOffer.forEach((subcategory) => {
+                    nameProducts.push(subcategory.name)
+                    subcatIds.push(subcategory.id)
+                })
+                productsOffer.forEach((product) => {
+                    nameProducts.push(product.name)
+                    prodIds.push(product.id)
+                })
+                const description = nbProducts + " produits parmis : " + nameProducts.join(", ")
+                this.$emit("offerUpdated", offer)
+            }
+            )
+        },
         countOccurences(array: { key: string, value: number }[], id: string) {
             let count = 0;
             if (array)

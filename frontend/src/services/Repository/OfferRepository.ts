@@ -72,14 +72,14 @@ export default class OfferRepository {
                 })
         })
     }
-    public editOffer(id: string, name: string, description: string, price: number, image: string): Promise<number> {
+    public editOffer(id: string, name: string, price: number, priceMember: number, nbProducts: number): Promise<number> {
         return new Promise((resolve, reject) => {
-            fetch(Config.API_URL + 'offer/' + id, {
+            const params = { id: id, name: name, price: price.toString(), priceMember: priceMember.toString(), nbProducts: nbProducts.toString() }
+            fetch(Config.API_URL + 'offer?' + new URLSearchParams(params), {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name: name, description: description, price: price, image: image })
             })
                 .then((response) => {
                     if (response.ok) {

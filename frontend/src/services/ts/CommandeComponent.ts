@@ -121,7 +121,6 @@ export default defineComponent({
             offers.forEach((offer: Offer) => {
               //add to the gridCellsContent
               this.gridCellsContent.push({ id: offer.id.toString(), title: offer.name, image: offer.image, type: "insideOffer", stock: 1 });
-
             });
           }
           );
@@ -145,23 +144,31 @@ export default defineComponent({
               }
             });
             this.currentOffer.catIds.forEach((cat: string) => {
-              console.log(cat)
               CatRepository.getCategory().then((categories: Category[]) => {
-                if (this.step < categories.length) {
-                  if (i == this.step) {
-                    categories.forEach((category: Category) => {
-                      console.log(category)
-                      if (category.id == cat) {
-                        this.currentCategories.push(category);
-                        this.gridCellsContent.push({ id: category.id, title: category.name, image: category.image, type: "category", stock: 1 });
-                        console.log(this.step)
-                      }
-                    });
-                    i++
+                if (this.step < this.currentOffer.nbproducts) {
+                  if (this.step < categories.length) {
+                    if (i == this.step) {
+                      categories.forEach((category: Category) => {
+                        if (category.id == cat) {
+                          this.currentCategories.push(category);
+                          this.gridCellsContent.push({ id: category.id, title: category.name, image: category.image, type: "category", stock: 1 });
+                        }
+                      });
+                      i++
+                    }
+                    else {
+                      i++;
+                    }
                   }
-                  else {
-                    i++;
-                  }
+                }
+                else {
+                  this.isOffer = false;
+                  this.step = 0;
+                  this.init = true
+                  this.currentDisplay = "home";
+                  this.gridCellsContent = [];
+                  this.gridCellsContent.push({ id: "offer", title: "offre", image: "", type: "offer", stock: 1 });
+                  this.getCategories();
                 }
               }
               );
@@ -173,7 +180,7 @@ export default defineComponent({
           // eslint-disable-next-line no-case-declarations
           const product = this.currentProducts.find((product: Product) => product.id == id);
           if (product != undefined)
-            this.command.addProduct(product, true);
+            this.command.addProduct(product, this.isOffer);
           this.command.updateTotal();
           if (this.isOffer) {
             this.step++;
@@ -231,6 +238,10 @@ export default defineComponent({
     },
     deleteProduct(id: number) {
       this.command.removeProduct(id);
+    },
+    deleteOffer(id: number) {
+      this.command.removeOffer(id);
+
     },
     showCart() {
       const modal = document.getElementById("cartModal");

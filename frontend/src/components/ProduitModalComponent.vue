@@ -32,10 +32,10 @@
             :selected="produit ? produit.subcategory === subcat.name : false">{{ subcat.name }}</option>
         </select>
 
-
-        <label class="input-label" for="image-produit">Image</label>
+        <!--DECOMMENTER QUAND IMAGES IMPLEMENTE-->
+      <!-- <label class="input-label" for="image-produit">Image</label>
         <input type="file" id="image-produit" accept=".jpg,.jpeg,.png" size="1000000"
-          :value="produit ? produit.image : ''">
+            :value="produit ? produit.image : ''"> -->
 
         <div class="submit-button">
           <button class="primary-button" id="creer-user" @click="produit ? editProduct(produit) : addProduct()">

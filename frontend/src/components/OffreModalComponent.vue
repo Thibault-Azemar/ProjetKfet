@@ -21,8 +21,11 @@
         <input name="prix-offre" class="input-field" type="number" id="prix-offre-membre"
           :value="offer ? offer.priceMembers : ''" placeholder="prix kfetier offre" required>
 
+
+        <!--ENABLED QUAND IMAGES IMPLEMENTE-->
         <label class="input-label" for="image-produit">Image</label>
-        <input type="file" id="image-offre" accept=".jpg,.jpeg,.png" size="1000000" :value="offer ? offer.image : ''">
+        <input type="file" id="image-offre" accept=".jpg,.jpeg,.png" size="1000000" :value="offer ? offer.image : ''"
+          disabled>
 
         <h4>Produits</h4>
         <div style="overflow-y: auto">
@@ -36,32 +39,40 @@
                 <a class="a-button secondary-button icon-plus plus-button" @click="plus(category.id)"></a>
               </div>
             </div>
-            <div v-for="subcategory in category.subcategories" :key="subcategory.id"><!-- v-for ss catégories-->
-              <div class="grid-offer ss-cat">
-                <p>{{ subcategory.name }}</p>
-                <div class="right">
-                  <a class="a-button secondary-button icon-minus minus-button" @click="minus(subcategory.id)"></a>
-                  <input class="quantity-input" type="number" :id="subcategory.id"
-                    :value="offer ? countOccurences(offer.subcategoryOccurences, subcategory.id) : 0" min="0">
-                  <a class="a-button secondary-button icon-plus plus-button" @click="plus(subcategory.id)"></a>
-                </div>
-              </div>
-              <div v-for="product in subcategory.products" :key="product.id"> <!-- v-for produit -->
-                <div class="grid-offer produit">
-                  <p>{{ product.name }}</p>
-                  <div class="right">
-                    <a class="a-button secondary-button icon-minus minus-button" @click="minus(product.id)"></a>
-                    <input class="quantity-input" type="number" :id="product.id"
-                      :value="offer ? countOccurences(offer.productOccurences, product.id) : 0" min="0">
-                    <a class="a-button secondary-button icon-plus plus-button" @click="plus(product.id)"></a>
-                  </div>
-                </div>
+
+            <!--BLOC UTILISE POUR AJOUTER SOUS CATEGORIES ET PRODUITS DANS OFFRE-->
+            <!--NON IMPLEMENTE DANS LES COMMANDES DONC DESAFFICHE-->
+            <!--NE PAS SURPPRIMER MAIS REPARER COMMANDES SVP-->
+
+
+
+          <!-- <div v-for="subcategory in category.subcategories" :key="subcategory.id">
+            <div class="grid-offer ss-cat">
+              <p>{{ subcategory.name }}</p>
+              <div class="right">
+                <a class="a-button secondary-button icon-minus minus-button" @click="minus(subcategory.id)"></a>
+                <input class="quantity-input" type="number" :id="subcategory.id"
+                  :value="offer ? countOccurences(offer.subcategoryOccurences, subcategory.id) : 0" min="0">
+                <a class="a-button secondary-button icon-plus plus-button" @click="plus(subcategory.id)"></a>
               </div>
             </div>
+            <div v-for="product in subcategory.products" :key="product.id">
+              <div class="grid-offer produit">
+                <p>{{ product.name }}</p>
+                <div class="right">
+                  <a class="a-button secondary-button icon-minus minus-button" @click="minus(product.id)"></a>
+                  <input class="quantity-input" type="number" :id="product.id"
+                    :value="offer ? countOccurences(offer.productOccurences, product.id) : 0" min="0">
+                  <a class="a-button secondary-button icon-plus plus-button" @click="plus(product.id)"></a>
+                </div>
+              </div>
+                                                </div>
+                                               -->
           </div>
         </div>
         <div class="submit-button">
-          <input class="primary-button" @click="addOffer()" value="Créer une offre">
+          <button class="primary-button" @@click="offer ? updateOffer(offer) : addOffer()">
+            {{ offer ? 'Modifier une offre' : 'Créer une offre' }}</button>
         </div>
       </div>
     </div>

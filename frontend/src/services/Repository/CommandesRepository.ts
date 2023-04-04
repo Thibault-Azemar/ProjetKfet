@@ -9,7 +9,7 @@ import Commande from '../Controller/CommandeController';
 
 export default class CommandesRepository {
     getCommandes(): Promise<Commande[]> {
-        const url = Config.API_URL + 'command/all'; //TODO : change url to command/day
+        const url = Config.API_URL + 'command/day'; //TODO : change url to command/day
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
